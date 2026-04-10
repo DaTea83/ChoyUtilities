@@ -1,8 +1,24 @@
 # Changelog
 
-## [0.2.0] - 2026-04-10
+## [1.0.0] - 2026-04-10
 
+After a while I finally uploaded this to Github, which from this point onwards version increment will not as frequent as before.
+But update in chnagelog will stays the same. Given will be download to plenty of projects, there are some issue needs to solve.
+As much I like it, but most team projects I'm in don't use DOTS, for that section needs to be seperated. This includes other Unity packages like: Localization and Spline, those need to separated into their own directory.
 
+## Changed
+* Directory split into 3, Default, Entities and Misc
+* Each new directory will come in its own asmdef, where Entities and Misc need default package to work
+* All EugeneC namespace replaced with ChoyUtilities
+* FPSCounter reverted back to use normal string
+
+## Removed
+* Removed Obsolete folder from the package, moved to Assets/Sandbox
+* Removed Entities/UI from the package, moved to Assets/Sandbox
+* Removed MultiInput from the package, moved to Assets/Sandbox
+* Deleted BasicAttributes
+* Deleted ParticleAttributes
+* Deleted DialogueAttributes
 
 ## [0.1.16] - 2026-04-06
 
