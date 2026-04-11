@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+#if UNITY_2023_1_OR_NEWER
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -109,3 +110,4 @@ namespace ChoyUtilities {
         }
     }
 }
+#endif
