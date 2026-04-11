@@ -46,7 +46,7 @@ namespace ChoyUtilities {
         public Floater(Stack<float> value) : this(value.ToArray()) { }
         public Floater(Queue<float> value) : this(value.ToArray()) { }
         public Floater(NativeArray<float> value) : this(value.ToArray()) { }
-        public Floater(NativeList<float> value) : this(value.ToArray(allocator: Allocator.Temp)) { }
+        public Floater(NativeList<float> value) : this(value.ToArray(Allocator.Temp)) { }
         public Floater(byte value) : this(new int[] { value }) { }
 
         public Floater(byte[] value) {
@@ -84,9 +84,7 @@ namespace ChoyUtilities {
 
         public Floater(bool[] value) {
             var set = new float[value.Length];
-            for (var i = 0; i < value.Length; i++) {
-                set[i] = value[i] ? 1f : 0f;
-            }
+            for (var i = 0; i < value.Length; i++) set[i] = value[i] ? 1f : 0f;
 
             values = set;
         }
@@ -159,9 +157,7 @@ namespace ChoyUtilities {
 
         public Floater(Enum[] value) {
             var set = new float[value.Length];
-            for (var i = 0; i < value.Length; i++) {
-                set[i] = (int)Convert.ToUInt32(value[i]);
-            }
+            for (var i = 0; i < value.Length; i++) set[i] = (int)Convert.ToUInt32(value[i]);
 
             values = set;
         }
@@ -182,11 +178,11 @@ namespace ChoyUtilities {
         public Floater(string value) : this(value.ToCharArray()) { }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="value">
-        /// For Transform, it will convert quaternion to euler angles before storing.
-        /// To convert FloatsSerialize back to Transform use <see cref="HelperCollection.FloatsSerializeToTransform"/> extension
+        ///     For Transform, it will convert quaternion to euler angles before storing.
+        ///     To convert FloatsSerialize back to Transform use <see cref="HelperCollection.FloatsSerializeToTransform" />
+        ///     extension
         /// </param>
         public Floater(Transform value) {
             var set = new float[9];
@@ -207,9 +203,11 @@ namespace ChoyUtilities {
 
         #region Casting
 
-        public static implicit operator float(Floater value) => value.values[0];
-        public static implicit operator float[](Floater value) => value.values;
-        public static implicit operator List<float>(Floater value) => new(value.values);
+        public static implicit operator float(Floater value) { return value.values[0]; }
+
+        public static implicit operator float[](Floater value) { return value.values; }
+
+        public static implicit operator List<float>(Floater value) { return new List<float>(value.values); }
 
         public static implicit operator int[](Floater value) {
             if (value.values == null || value.values.Length == 0) throw new FloaterException("Empty Floater found");
@@ -226,9 +224,7 @@ namespace ChoyUtilities {
         public static implicit operator Enum[](Floater value) {
             if (value.values == null || value.values.Length == 0) return Array.Empty<Enum>();
             var set = new Enum[value.values.Length];
-            for (var i = 0; i < value.values.Length; i++) {
-                set[i] = (Enum)Enum.ToObject(typeof(Enum), value.values[i]);
-            }
+            for (var i = 0; i < value.values.Length; i++) set[i] = (Enum)Enum.ToObject(typeof(Enum), value.values[i]);
             return set;
         }
 
@@ -292,8 +288,9 @@ namespace ChoyUtilities {
             return set;
         }
 
-        public static implicit operator NativeArray<float>(Floater value) =>
-            new NativeArray<float>(value.values, Allocator.Temp);
+        public static implicit operator NativeArray<float>(Floater value) {
+            return new NativeArray<float>(value.values, Allocator.Temp);
+        }
 
         #endregion
 
@@ -335,14 +332,13 @@ namespace ChoyUtilities {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="value">
-        /// Value to remove.
+        ///     Value to remove.
         /// </param>
         /// <param name="removeAllEqual">
-        /// If true, will remove all values that are equal to <paramref name="value"/>,
-        /// otherwise will remove only the first value that is equal to <paramref name="value"/>.
+        ///     If true, will remove all values that are equal to <paramref name="value" />,
+        ///     otherwise will remove only the first value that is equal to <paramref name="value" />.
         /// </param>
         /// <returns></returns>
         public Floater Remove(float value, bool removeAllEqual = false) {
@@ -352,10 +348,9 @@ namespace ChoyUtilities {
             if (removeAllEqual) {
                 var keepCount = 0;
 
-                foreach (var t in values) {
+                foreach (var t in values)
                     if (math.abs(t - value) >= epsilon)
                         keepCount++;
-                }
 
                 if (keepCount == values.Length) return this;
                 if (keepCount == 0) return new Floater(Array.Empty<float>());
@@ -394,14 +389,13 @@ namespace ChoyUtilities {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="value">
-        /// Value to remove.
+        ///     Value to remove.
         /// </param>
         /// <param name="removeAllEqual">
-        /// If true, will remove all values that <paramref name="value"/> contains,
-        /// otherwise will remove only the first value that in <paramref name="value"/>.
+        ///     If true, will remove all values that <paramref name="value" /> contains,
+        ///     otherwise will remove only the first value that in <paramref name="value" />.
         /// </param>
         /// <returns></returns>
         public Floater Remove(float[] value, bool removeAllEqual = false) {
@@ -409,14 +403,13 @@ namespace ChoyUtilities {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="value">
-        /// Value to remove.
+        ///     Value to remove.
         /// </param>
         /// <param name="removeAllEqual">
-        /// If true, will remove all values that <paramref name="value"/> contains,
-        /// otherwise will remove only the first value that in <paramref name="value"/>.
+        ///     If true, will remove all values that <paramref name="value" /> contains,
+        ///     otherwise will remove only the first value that in <paramref name="value" />.
         /// </param>
         /// <returns></returns>
         public Floater Remove(Floater value, bool removeAllEqual = false) {
@@ -521,7 +514,7 @@ namespace ChoyUtilities {
 
         public bool Equals(Floater other) { return Equals(values, other.values); }
         public override bool Equals(object obj) { return obj is Floater other && Equals(other); }
-        public override int GetHashCode() { return (values is not null ? values.GetHashCode() : 0); }
+        public override int GetHashCode() { return values is not null ? values.GetHashCode() : 0; }
 
         #endregion
 
@@ -530,13 +523,9 @@ namespace ChoyUtilities {
         public int CompareTo(Floater other) {
             float selfV = 0;
             float otherV = 0;
-            foreach (var f in values) {
-                selfV += f;
-            }
+            foreach (var f in values) selfV += f;
 
-            foreach (var f in other.values) {
-                otherV += f;
-            }
+            foreach (var f in other.values) otherV += f;
 
             return selfV.CompareTo(otherV);
         }

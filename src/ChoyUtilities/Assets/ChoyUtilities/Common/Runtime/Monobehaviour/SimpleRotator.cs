@@ -2,7 +2,6 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
     [AddComponentMenu("Eugene/Simple Rotater")]
     [DisallowMultipleComponent]
     public class SimpleRotator : MonoBehaviour {
@@ -22,7 +21,7 @@ namespace ChoyUtilities {
                 _rotateDirection.z = 1f;
 
             if (rotateAxis == EAxis.None)
-                this.enabled = false;
+                enabled = false;
         }
 
         private void Update() { transform.Rotate(_rotateDirection * (rotateSpeed * Time.deltaTime)); }

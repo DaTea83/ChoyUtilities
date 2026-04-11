@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using EugeneC.Utilities;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -9,9 +8,6 @@ namespace ChoyUtilities {
     public abstract class GenericSpawnManager<TEnum, TMono> : GenericPoolingManager<TEnum, Component, TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
-        
-        
-        
         private List<(Component obj, TEnum id)> _spawnedObjects;
 
         protected virtual void OnEnable() { _spawnedObjects = ListPool<(Component, TEnum)>.Get(); }

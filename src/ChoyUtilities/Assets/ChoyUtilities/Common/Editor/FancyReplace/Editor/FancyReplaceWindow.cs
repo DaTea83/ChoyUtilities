@@ -18,10 +18,8 @@ namespace ChoyUtilities.Editor {
 
         private void OnGUI() {
             GUILayout.Space(BUTTON_PADDING);
-            var matColor = EditorGUILayout.ColorField("Global Tint Color", FancyReplaceEditor.Asset.color, new[] {
-                GUILayout.Width(position.width),
-                GUILayout.Height(HEAD_BUTTON_HEIGHT),
-            });
+            var matColor = EditorGUILayout.ColorField("Global Tint Color", FancyReplaceEditor.Asset.color,
+                GUILayout.Width(position.width), GUILayout.Height(HEAD_BUTTON_HEIGHT));
             GUILayout.Space(BUTTON_PADDING);
             FancyReplaceEditor.Asset.color = new Floater(matColor);
 
@@ -77,7 +75,7 @@ namespace ChoyUtilities.Editor {
 
                         if (GUILayout.Button(tex, GUILayout.Width(width), GUILayout.Height(BUTTON_HEIGHT))) {
                             TryRemove();
-                            var newEntry = new MenuItemSerialize() {
+                            var newEntry = new MenuItemSerialize {
                                 idPath = _assetPath,
                                 texturePath = texPath,
                                 idType = new Floater(_replaceType)

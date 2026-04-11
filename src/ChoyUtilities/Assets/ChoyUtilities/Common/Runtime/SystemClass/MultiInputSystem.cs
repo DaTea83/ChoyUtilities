@@ -1,6 +1,5 @@
 #if ENABLE_INPUT_SYSTEM
 using System;
-using EugeneC.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;

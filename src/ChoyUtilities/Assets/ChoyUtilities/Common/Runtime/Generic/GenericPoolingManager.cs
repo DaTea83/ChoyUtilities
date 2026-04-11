@@ -8,23 +8,6 @@ namespace ChoyUtilities {
         where TEnum : struct, Enum
         where TObj : Component
         where TMono : MonoBehaviour {
-        public abstract class PoolingAttributes : ScriptableObject {
-            public InitialPoolSerialize[] poolPrefabs;
-
-            [Serializable]
-            public struct InitialPoolSerialize {
-                public TObj prefab;
-                public TEnum id;
-            }
-        }
-
-        [Serializable]
-        public struct RuntimePoolSerialize {
-            public TObj[] spawn;
-            public int currentIndex;
-            public int previousIndex;
-        }
-
         [SerializeField] protected PoolingAttributes poolAttributes;
         [SerializeField] protected byte poolCount = 32;
         protected List<int> PauseIndexes;
@@ -63,7 +46,7 @@ namespace ChoyUtilities {
                     }
                 }
             }
-            catch{
+            catch {
                 CancelTask();
             }
         }
@@ -106,6 +89,23 @@ namespace ChoyUtilities {
             );
 
             return pool;
+        }
+
+        public abstract class PoolingAttributes : ScriptableObject {
+            public InitialPoolSerialize[] poolPrefabs;
+
+            [Serializable]
+            public struct InitialPoolSerialize {
+                public TObj prefab;
+                public TEnum id;
+            }
+        }
+
+        [Serializable]
+        public struct RuntimePoolSerialize {
+            public TObj[] spawn;
+            public int currentIndex;
+            public int previousIndex;
         }
     }
 }

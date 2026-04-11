@@ -12,8 +12,6 @@ namespace EugeneC.Utilities {
 
         private float FPS => _frames / _time;
 
-        private void OnValidate() { displayText ??= GetComponent<TMP_Text>(); }
-
         private void Start() {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 500;
@@ -30,9 +28,11 @@ namespace EugeneC.Utilities {
             _time = 0;
         }
 
+        private void OnValidate() { displayText ??= GetComponent<TMP_Text>(); }
+
         private void UpdateText() {
             if (displayText is null) return;
-            displayText.text = ($"{FPS:F1}");
+            displayText.text = $"{FPS:F1}";
         }
     }
 }

@@ -36,7 +36,7 @@ namespace EugeneC.ObsoleteV2 {
                 idBuilder[0] = idToByte;
 
                 ref var pathArr = ref pathwayBuilder[p].Path;
-                var splineBuilder = builder.Allocate<SplineVectorBlob>(ref pathArr, pathCount);
+                var splineBuilder = builder.Allocate(ref pathArr, pathCount);
 
                 // For each path available in the pathway
                 for (var i = 0; i < pathCount; i++) {

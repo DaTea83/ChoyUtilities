@@ -9,7 +9,7 @@ namespace ChoyUtilities.Editor {
     internal static partial class FancyReplaceEditor {
         internal static AssetModificationSerialize Asset;
 
-        private static AssetModificationSerialize DefaultAsset => new AssetModificationSerialize() {
+        private static AssetModificationSerialize DefaultAsset => new() {
             assetModified = Array.Empty<MenuItemSerialize>(),
             color = new Floater(Color.white)
         };

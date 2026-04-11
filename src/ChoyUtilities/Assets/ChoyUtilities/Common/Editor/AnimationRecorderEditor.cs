@@ -1,6 +1,4 @@
 #if UNITY_EDITOR
-using ChoyUtilities;
-using EugeneC.Utilities;
 using UnityEditor.Animations;
 using UnityEngine;
 

@@ -1,5 +1,4 @@
-﻿using ChoyUtilities;
-using UnityEditor;
+﻿using UnityEditor;
 
 // ReSharper disable CheckNamespace
 

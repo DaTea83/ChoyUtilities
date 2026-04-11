@@ -1,5 +1,4 @@
-﻿using EugeneC.Utilities;
-using Unity.Burst;
+﻿using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;

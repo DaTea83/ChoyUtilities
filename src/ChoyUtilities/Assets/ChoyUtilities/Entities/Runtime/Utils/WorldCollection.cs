@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Unity.Entities;
 using UnityEngine;
 
@@ -41,7 +42,7 @@ namespace ChoyUtilities {
                 await Awaitable.NextFrameAsync(token);
             }
 
-            return !validSingleton ? throw new System.Exception("Singleton not found") : singleton;
+            return !validSingleton ? throw new Exception("Singleton not found") : singleton;
         }
 
         public static async Awaitable<DynamicBuffer<TBuffer>> GetSingletonBuffer<TBuffer>(this CancellationToken token,
@@ -64,7 +65,7 @@ namespace ChoyUtilities {
                 await Awaitable.NextFrameAsync(token);
             }
 
-            return !validSingleton ? throw new System.Exception("Buffer not found") : buffer;
+            return !validSingleton ? throw new Exception("Buffer not found") : buffer;
         }
     }
 }

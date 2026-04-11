@@ -1,4 +1,3 @@
-using EugeneC.Utilities;
 using UnityEngine;
 
 namespace ChoyUtilities {

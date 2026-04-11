@@ -28,24 +28,6 @@ namespace ChoyUtilities {
             Music = 1 << 2
         }
 
-        public abstract class PoolingAttributes : ScriptableObject {
-            public AudioResourceSerialize[] audioResource;
-
-            [Serializable]
-            public struct AudioResourceSerialize {
-                public AudioResource audio;
-                public TEnum id;
-            }
-        }
-
-        [Serializable]
-        public struct AudioMixerSerialize {
-            public AudioMixer mixer;
-            public AnimationCurve volumeCurve;
-            public string mixerName;
-            [Range(-80f, 20f)] public float defaultVolume, focusedVolume, unfocusedVolume;
-        }
-
         [SerializeField] protected PoolingAttributes poolAttributes;
         [SerializeField] protected AudioSource audioSourcePrefab;
         [SerializeField] protected byte poolCount = 32;
@@ -56,13 +38,13 @@ namespace ChoyUtilities {
         protected AudioMixerSerialize masterAudioMixerGroup = new() { mixerName = "Master" };
 
         [SerializeField] protected AudioMixerSerialize sfxMixerGroup, narrationMixerGroup, musicMixerGroup;
+        private byte _currentIndex;
 
-        protected ObjectPool<AudioSource> Pool;
+        private byte _previousIndex;
         protected AudioSource[] AudioSources;
         protected List<int> PauseIndexes;
 
-        private byte _previousIndex;
-        private byte _currentIndex;
+        protected ObjectPool<AudioSource> Pool;
 
         protected virtual async void Start() {
             try {
@@ -267,6 +249,24 @@ namespace ChoyUtilities {
             ListPool<int>.Release(PauseIndexes);
 
             return true;
+        }
+
+        public abstract class PoolingAttributes : ScriptableObject {
+            public AudioResourceSerialize[] audioResource;
+
+            [Serializable]
+            public struct AudioResourceSerialize {
+                public AudioResource audio;
+                public TEnum id;
+            }
+        }
+
+        [Serializable]
+        public struct AudioMixerSerialize {
+            public AudioMixer mixer;
+            public AnimationCurve volumeCurve;
+            public string mixerName;
+            [Range(-80f, 20f)] public float defaultVolume, focusedVolume, unfocusedVolume;
         }
     }
 }

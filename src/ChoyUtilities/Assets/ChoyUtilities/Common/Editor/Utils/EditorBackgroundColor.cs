@@ -16,8 +16,8 @@ namespace ChoyUtilities.Editor {
         internal static readonly Color HoverLightColor = new(0.698f, 0.698f, 0.698f);
         internal static readonly Color HoverDarkColor = new(0.2706f, 0.2706f, 0.2706f);
 
-        internal static readonly Color ProjectLightColor = new Color(0.745098f, 0.745098f, 0.745098f);
-        internal static readonly Color ProjectDarkColor = new Color(0.2f, 0.2f, 0.2f);
+        internal static readonly Color ProjectLightColor = new(0.745098f, 0.745098f, 0.745098f);
+        internal static readonly Color ProjectDarkColor = new(0.2f, 0.2f, 0.2f);
 
         internal static Color GetHierarchyColor(bool isSelected, bool isHovered, bool isWindowsFocused) {
             if (isSelected) {
