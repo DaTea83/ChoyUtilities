@@ -1,7 +1,7 @@
 {
   "name": "com.datea83.choyutilities.entities",
-  "displayName": "ChoyUtilities.Entities",
   "version": "1.0.0",
+  "displayName": "ChoyUtilities.Entities",
   "unity": "2022.3",
   "unityRelease": "1f1",
   "description": "Eugene Choy's Personal Unity Library",
