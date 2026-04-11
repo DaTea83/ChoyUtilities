@@ -2,15 +2,19 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
+#if UNITY_2023_1_OR_NEWER
 using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
+    
     [BurstCompile(CompileSynchronously = true)]
     [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct VoxelTransformISystem : ISystem {
-        public void OnCreate(ref SystemState state) { state.RequireForUpdate<VoxelizerISingleton>(); }
+        public void OnCreate(ref SystemState state) {
+            state.RequireForUpdate<VoxelizerISingleton>();
+        }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -60,3 +64,4 @@ namespace ChoyUtilities.Entities {
         }
     }
 }
+#endif

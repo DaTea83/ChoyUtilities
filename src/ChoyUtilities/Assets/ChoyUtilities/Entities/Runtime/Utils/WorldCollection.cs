@@ -4,6 +4,7 @@ using Unity.Entities;
 using UnityEngine;
 
 namespace ChoyUtilities {
+#if UNITY_2023_1_OR_NEWER    
     public static partial class EntitiesCollection {
         private const ushort MAX_FRAME = 200;
 
@@ -68,4 +69,5 @@ namespace ChoyUtilities {
             return !validSingleton ? throw new Exception("Buffer not found") : buffer;
         }
     }
+#endif    
 }
