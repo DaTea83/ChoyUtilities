@@ -91,8 +91,9 @@ So someting like:
 
 ```
 
-These types of convertion is now possible
+These types of convertion is now possible  
 Why? I do because I can
 
 ## Entities Package
-TODO
+
+// TODO
