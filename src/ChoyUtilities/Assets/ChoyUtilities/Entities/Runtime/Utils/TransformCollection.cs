@@ -24,5 +24,49 @@ namespace ChoyUtilities.Entities {
                 Scale = fs.values[6]
             };
         }
+        
+        public static bool GetDistanceAndDot(this LocalTransform player,
+            LocalTransform target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = target.Position - player.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward(), math.normalize(dir));
+
+            return dot >= 0f;
+        }
+
+        public static bool GetDistanceAndDot(this LocalToWorld player,
+            LocalToWorld target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = target.Position - player.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward, math.normalize(dir));
+
+            return dot >= 0f;
+        }
+
+        public static bool GetDistanceAndDot(this LocalTransform player,
+            LocalToWorld target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = target.Position - player.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward(), math.normalize(dir));
+
+            return dot >= 0f;
+        }
+
+        public static bool GetDistanceAndDot(this LocalToWorld player,
+            LocalTransform target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = target.Position - player.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward, math.normalize(dir));
+
+            return dot >= 0f;
+        }
     }
 }

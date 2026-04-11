@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_2023_1_OR_NEWER
 using System.Threading;
 using JetBrains.Annotations;
 using TMPro;
@@ -85,3 +86,4 @@ namespace ChoyUtilities {
         }
     }
 }
+#endif

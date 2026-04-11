@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+#if UNITY_2023_1_OR_NEWER
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
+    
     public abstract class GenericLegacyUIManager<TEnum, TMono> : GenericPoolingManager<TEnum, UiHelper, TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
@@ -147,3 +149,4 @@ namespace ChoyUtilities {
         }
     }
 }
+#endif
