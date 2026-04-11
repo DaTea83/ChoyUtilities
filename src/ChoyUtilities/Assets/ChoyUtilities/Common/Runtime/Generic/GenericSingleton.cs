@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using Unity.Entities;
 using UnityEngine;
 
 namespace ChoyUtilities {
