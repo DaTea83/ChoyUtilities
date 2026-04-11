@@ -1,4 +1,5 @@
 ﻿using System;
+#if UNITY_2023_1_OR_NEWER
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -59,3 +60,4 @@ namespace ChoyUtilities {
         }
     }
 }
+#endif
