@@ -21,6 +21,9 @@ namespace ChoyUtilities.Editor {
         }
 
         private static async Task LoadOrCreate() {
+            if (!Directory.Exists(FullSavePath)) {
+                Directory.CreateDirectory($"Assets/{DEFAULT_NAME}");
+            }
             if (!File.Exists(FullSavePath)) {
                 Asset = DefaultAsset;
                 await SaveData();

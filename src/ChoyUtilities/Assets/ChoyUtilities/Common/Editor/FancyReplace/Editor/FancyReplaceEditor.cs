@@ -14,26 +14,16 @@ namespace ChoyUtilities.Editor {
 
     internal static partial class FancyReplaceEditor {
         internal const string DEFAULT_NAME = "FancyReplace";
-        private const string TEXTURES = "Textures";
         private const string EDITOR = "Editor";
-        private const string SAVE = "Save";
 
         private static string ScriptPath => $"{EDITOR}/{DEFAULT_NAME}{EDITOR}.cs";
-
-        private static string FullSavePath {
-            get {
-                var name = EditorCollection.FindPathByName(DEFAULT_NAME + EDITOR);
-                return name != string.Empty
-                    ? name.Replace(ScriptPath, $"{SAVE}/{EditorCollection.ProjectFolderName}_{SAVE}.json")
-                    : string.Empty;
-            }
-        }
+        private static string FullSavePath => $"Assets/{DEFAULT_NAME}/{EditorCollection.ProjectFolderName}_Save.json";
 
         internal static string FullTexturePath {
             get {
                 var name = EditorCollection.FindPathByName(DEFAULT_NAME + EDITOR);
                 return name != string.Empty
-                    ? name.Replace(ScriptPath, $"{TEXTURES}/All")
+                    ? name.Replace(ScriptPath, $"Textures/All")
                     : string.Empty;
             }
         }
