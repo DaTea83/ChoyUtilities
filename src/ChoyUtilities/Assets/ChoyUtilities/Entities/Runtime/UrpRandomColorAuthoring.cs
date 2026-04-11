@@ -1,6 +1,7 @@
 ﻿using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
+#if UNITY_2023_1_OR_NEWER
 using Unity.Rendering;
 using UnityEngine;
 
@@ -56,3 +57,4 @@ namespace ChoyUtilities.Entities {
         }
     }
 }
+#endif
