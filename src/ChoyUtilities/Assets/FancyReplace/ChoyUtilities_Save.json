@@ -8,6 +8,15 @@
             },
             "idPath": "Assets/FancyReplace",
             "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_limited_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+        },
+        {
+            "idType": {
+                "values": [
+                    7.0
+                ]
+            },
+            "idPath": "Assets/FancyReplace/ChoyUtilities_Save.json",
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/All/docs_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         }
     ],
     "color": {
