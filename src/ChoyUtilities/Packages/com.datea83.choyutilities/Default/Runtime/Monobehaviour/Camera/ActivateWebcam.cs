@@ -9,9 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChoyUtilities {
-
     public class ActivateWebcam : MonoBehaviour {
-
         [SerializeField] private RawImage screen;
         [SerializeField] private int width = 1280;
         [SerializeField] private int height = 720;
@@ -85,7 +83,5 @@ namespace ChoyUtilities {
             screen.rectTransform.sizeDelta = new float2(width, height);
             screen.texture = _webCamTexture;
         }
-
     }
-
 }

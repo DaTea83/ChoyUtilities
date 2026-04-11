@@ -5,11 +5,9 @@ using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace ChoyUtilities.Entities {
-
     [BurstCompile]
     [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct AgentMoveISystem : ISystem {
-
         private const float DistanceThreshold = 0.1f;
         private const float DotThreshold = 0.95f;
 
@@ -24,7 +22,6 @@ namespace ChoyUtilities.Entities {
 
         [BurstCompile]
         public partial struct AgentMoveIJob : IJobEntity {
-
             [ReadOnly] public BufferLookup<ConnectedNodeIBuffer> NodeLookup;
             [ReadOnly] public ComponentLookup<LocalToWorld> LtwLookup;
             public float Time;
@@ -66,9 +63,6 @@ namespace ChoyUtilities.Entities {
                     move.CurrentNode = nextNode;
                 }
             }
-
         }
-
     }
-
 }

@@ -3,13 +3,11 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     /// <summary>
     ///     Add required components to the entity
     /// </summary>
     [UpdateInGroup(typeof(EuCSpawnSystemGroup), OrderLast = true)]
     public partial struct InitializeObjectAnimatorISystem : ISystem {
-
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
@@ -40,7 +38,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

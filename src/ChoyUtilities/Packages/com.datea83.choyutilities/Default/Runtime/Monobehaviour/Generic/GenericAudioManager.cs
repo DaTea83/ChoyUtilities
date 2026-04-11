@@ -6,13 +6,10 @@ using UnityEngine.Audio;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
-
     public abstract class GenericAudioManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
-
         public enum EAudioPriority : byte {
-
             Highest = 0,
             UltraHigh = 1 << 0,
             VeryHigh = 1 << 1,
@@ -23,37 +20,30 @@ namespace ChoyUtilities {
             Low = 1 << 6,
             VeryLow = 1 << 7,
             Lowest = byte.MaxValue
-
         }
 
         public enum EMixerType : byte {
-
             Sfx = 1,
             Narration = 1 << 1,
             Music = 1 << 2
-
         }
 
         public abstract class PoolingAttributes : ScriptableObject {
-            
             public AudioResourceSerialize[] audioResource;
+
             [Serializable]
             public struct AudioResourceSerialize {
-
                 public AudioResource audio;
                 public TEnum id;
-
             }
         }
 
         [Serializable]
         public struct AudioMixerSerialize {
-
             public AudioMixer mixer;
             public AnimationCurve volumeCurve;
             public string mixerName;
             [Range(-80f, 20f)] public float defaultVolume, focusedVolume, unfocusedVolume;
-
         }
 
         [SerializeField] protected PoolingAttributes poolAttributes;
@@ -70,10 +60,10 @@ namespace ChoyUtilities {
         protected ObjectPool<AudioSource> Pool;
         protected AudioSource[] AudioSources;
         protected List<int> PauseIndexes;
-        
+
         private byte _previousIndex;
         private byte _currentIndex;
-        
+
         protected virtual async void Start() {
             try {
                 await Awaitable.NextFrameAsync(Token);
@@ -89,7 +79,7 @@ namespace ChoyUtilities {
                     false,
                     poolCount,
                     poolCount << 1);
-                
+
                 for (var i = 0; i < poolCount; i++) {
                     var spawnAudio = Pool.Get();
                     spawnAudio.gameObject.transform.SetSiblingIndex(i);
@@ -110,9 +100,7 @@ namespace ChoyUtilities {
             }
         }
 
-        protected virtual void OnEnable() {
-            PauseIndexes = ListPool<int>.Get();
-        }
+        protected virtual void OnEnable() { PauseIndexes = ListPool<int>.Get(); }
 
         protected override void OnDisable() {
             ListPool<int>.Release(PauseIndexes);
@@ -135,7 +123,9 @@ namespace ChoyUtilities {
             return PlayClipAtPos(resource, pos, masterAudioMixerGroup.mixer.outputAudioMixerGroup, audioPriority);
         }
 
-        public virtual float PlayClipAtPos(AudioResource resource, float3 pos, AudioMixerGroup channel = null,
+        public virtual float PlayClipAtPos(AudioResource resource,
+            float3 pos,
+            AudioMixerGroup channel = null,
             byte audioPriority = (byte)EAudioPriority.Average) {
             var currentSource = AudioSources[_currentIndex];
 
@@ -154,7 +144,9 @@ namespace ChoyUtilities {
             return lengthSeconds;
         }
 
-        public virtual float PlayClipAtPos(TEnum id, float3 pos, EMixerType mixerType,
+        public virtual float PlayClipAtPos(TEnum id,
+            float3 pos,
+            EMixerType mixerType,
             byte audioPriority = (byte)EAudioPriority.Average) {
             var index = GetPoolIndex(id);
 
@@ -174,7 +166,9 @@ namespace ChoyUtilities {
             };
         }
 
-        public virtual float PlayClipAtPos(AudioResource resource, float3 pos, EMixerType mixerType,
+        public virtual float PlayClipAtPos(AudioResource resource,
+            float3 pos,
+            EMixerType mixerType,
             byte audioPriority = (byte)EAudioPriority.Average) {
             var channel = GetMixerType(mixerType).mixer;
             var currentSource = AudioSources[_currentIndex];
@@ -194,7 +188,9 @@ namespace ChoyUtilities {
             return lengthSeconds;
         }
 
-        public virtual async Awaitable<float> PlayFocusClip(TEnum id, float3 pos, EMixerType mixerType,
+        public virtual async Awaitable<float> PlayFocusClip(TEnum id,
+            float3 pos,
+            EMixerType mixerType,
             byte audioPriority = (byte)EAudioPriority.Average) {
             var index = GetPoolIndex(id);
 
@@ -227,7 +223,9 @@ namespace ChoyUtilities {
                 audioPriority);
         }
 
-        public virtual async Awaitable<float> PlayClip(TEnum id, float3 pos, EMixerType mixerType,
+        public virtual async Awaitable<float> PlayClip(TEnum id,
+            float3 pos,
+            EMixerType mixerType,
             byte audioPriority = (byte)EAudioPriority.Average) {
             return await PlayFocusClip(id, pos, mixerType, audioPriority);
         }
@@ -270,7 +268,5 @@ namespace ChoyUtilities {
 
             return true;
         }
-
     }
-
 }

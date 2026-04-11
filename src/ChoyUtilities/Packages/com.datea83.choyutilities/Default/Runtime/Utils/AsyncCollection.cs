@@ -7,9 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChoyUtilities {
-
     public static partial class HelperCollection {
-
         private const string TaskCancellationMessage = "Task was cancelled";
 
         public static async Awaitable AwaitableUntil(this CancellationToken cancellationToken, Func<bool> condition) {
@@ -221,10 +219,8 @@ namespace ChoyUtilities {
         #region Fade Screen Async
 
         public enum EFadeType : byte {
-
             FadeIn = 0,
             FadeOut = 1
-
         }
 
         public static async Awaitable FadeScreenAsync(this CancellationToken token,
@@ -522,8 +518,6 @@ namespace ChoyUtilities {
         }
 
         #endregion
-
     }
-
 }
 #endif

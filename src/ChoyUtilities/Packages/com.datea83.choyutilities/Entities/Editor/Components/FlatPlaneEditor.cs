@@ -4,10 +4,8 @@ using UnityEngine;
 // ReSharper disable CheckNamespace
 
 namespace ChoyUtilities.Entities.Editor {
-
     [CustomEditor(typeof(FlatPlaneAuthoring))]
     public class FLatPlaneEditor : UnityEditor.Editor {
-
         public override void OnInspectorGUI() {
             var authoring = (FlatPlaneAuthoring)target;
 
@@ -22,7 +20,5 @@ namespace ChoyUtilities.Entities.Editor {
 
             serializedObject.ApplyModifiedProperties();
         }
-
     }
-
 }

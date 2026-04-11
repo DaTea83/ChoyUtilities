@@ -6,26 +6,21 @@ using UnityEngine;
 using ERotationOrder = Unity.Mathematics.math.RotationOrder;
 
 namespace ChoyUtilities.Entities {
-
     public struct RotatorIData : IComponentData {
-
         /// <summary>
         ///     Order the euler axes will be applied when converting to a quaternion before applying the rotation.
         /// </summary>
         public ERotationOrder RotationOrder;
 
         public float3 EulerRadiansPerSecond;
-
     }
 
     [DisallowMultipleComponent]
     public sealed class RotatorAuthoring : MonoBehaviour {
-
         public ERotationOrder rotationOrder;
         public float3 eulerRadiansPerSecond;
 
         private class RotatorBaker : Baker<RotatorAuthoring> {
-
             public override void Bake(RotatorAuthoring authoring) {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
 
@@ -34,15 +29,12 @@ namespace ChoyUtilities.Entities {
                     EulerRadiansPerSecond = authoring.eulerRadiansPerSecond
                 });
             }
-
         }
-
     }
 
     [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     [BurstCompile]
     public partial struct RotatorISystem : ISystem {
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var deltaTime = SystemAPI.Time.DeltaTime;
@@ -53,7 +45,5 @@ namespace ChoyUtilities.Entities {
                 transform.ValueRW = transform.ValueRW.Rotate(rotationThisFrame);
             }
         }
-
     }
-
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 namespace EugeneC.ObsoleteV2 {
-
 #if UNITY_2023_2_OR_NEWER
 
     // For audio randomization use the Unity new Random Audio Container, hence why there's a version requirement
@@ -14,9 +13,7 @@ namespace EugeneC.ObsoleteV2 {
     public abstract class GenericAudioManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : Enum
         where TMono : MonoBehaviour {
-
         public enum EAudioPriority : byte {
-
             Highest = 0,
             UltraHigh = 1 << 0,
             VeryHigh = 1 << 1,
@@ -27,15 +24,12 @@ namespace EugeneC.ObsoleteV2 {
             Low = 1 << 6,
             VeryLow = 1 << 7,
             Lowest = byte.MaxValue
-
         }
 
         public enum EMixerType : byte {
-
             Sfx = 1,
             Narration = 1 << 1,
             Music = 1 << 2
-
         }
 
         [SerializeField] protected AudioResourceSerialize[] audioResource;
@@ -232,24 +226,18 @@ namespace EugeneC.ObsoleteV2 {
 
         [Serializable]
         public struct AudioResourceSerialize {
-
             public AudioResource audio;
             public TEnum id;
-
         }
 
         [Serializable]
         public struct AudioMixerSerialize {
-
             public AudioMixerGroup mixerGroup;
             public AnimationCurve volumeCurve;
             public string mixerName;
             [Range(-80f, 20f)] public float defaultVolume, focusedVolume, unfocusedVolume;
-
         }
-
     }
 
 #endif
-
 }

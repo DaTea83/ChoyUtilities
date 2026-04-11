@@ -4,12 +4,11 @@ using Unity.Transforms;
 
 // Purpose of these is to help encapsulates custom define systems and organize them
 namespace ChoyUtilities.Entities {
-
     [UpdateInGroup(typeof(SimulationSystemGroup))]
     [UpdateAfter(typeof(TransformSystemGroup))]
     [WorldSystemFilter(WorldSystemFilterFlags.Editor, WorldSystemFilterFlags.Editor)]
     public partial class EuCEditorSystemGroup : ComponentSystemGroup { }
-    
+
     /// <summary>
     ///     System group containing systems related to initialization logic that should be executed towards the beginning of
     ///     the frame.
@@ -20,10 +19,10 @@ namespace ChoyUtilities.Entities {
 
     [UpdateInGroup(typeof(EuCInitializationSystemGroup))]
     public partial class EuCSpawnSystemGroup : ComponentSystemGroup { }
-    
+
     [UpdateInGroup(typeof(EuCInitializationSystemGroup), OrderFirst = true)]
     public partial class EuCManagedComponentSystem : ComponentSystemGroup { }
-    
+
     /// <summary>
     ///     System group containing systems that deal with physics such as scheduling collision/trigger event jobs and
     ///     executing physics overlap queries.

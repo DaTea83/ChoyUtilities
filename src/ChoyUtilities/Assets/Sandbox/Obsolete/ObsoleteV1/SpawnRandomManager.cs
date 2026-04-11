@@ -5,11 +5,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace EugeneC.Obsolete {
-
     [Obsolete]
     //Combined method of AudioManager and SpawnManager
     public class SpawnRandomManager : GenericSingleton<SpawnRandomManager> {
-
         public SpawnTerrain[] terrainPrefab;
         public List<GameObject> spawnedObstacles = new();
         private readonly Dictionary<TerrainType, SpawnTerrain> _terrainDictionary = new();
@@ -40,21 +38,17 @@ namespace EugeneC.Obsolete {
         public void RemoveAllTerrain() {
             foreach (var objects in spawnedObstacles.ToArray()) RemoveThisPrefab(objects);
         }
-
     }
 
     [Obsolete]
     [Serializable]
     public class SpawnTerrain {
-
         public TerrainType TerrainId;
         public GameObject[] Prefab;
-
     }
 
     [Obsolete]
     public enum TerrainType {
-
         Area1,
         Area2,
         Area3,
@@ -84,7 +78,5 @@ namespace EugeneC.Obsolete {
         DestroyCube3,
         DestroyCube4,
         DestroyCube5
-
     }
-
 }

@@ -3,9 +3,7 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
-    
     internal static partial class EditorCollection {
-
         internal static readonly Color HierarchyLightColor = new(0.7843f, 0.7843f, 0.7843f);
         internal static readonly Color HierarchyDarkColor = new(0.2196f, 0.2196f, 0.2196f);
 
@@ -33,6 +31,5 @@ namespace ChoyUtilities.Editor {
 
             return EditorGUIUtility.isProSkin ? HierarchyDarkColor : HierarchyLightColor;
         }
-
     }
 }

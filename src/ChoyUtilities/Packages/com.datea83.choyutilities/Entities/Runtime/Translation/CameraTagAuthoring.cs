@@ -4,20 +4,15 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class CameraTagAuthoring : MonoBehaviour {
-
         private class CameraTagBaker : Baker<CameraTagAuthoring> {
-
             public override void Bake(CameraTagAuthoring authoring) {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent<CameraISingletonTag>(entity);
                 AddComponent<InitializeCameraTargetITag>(entity);
             }
-
         }
-
     }
 
     public struct CameraISingletonTag : IComponentData { }
@@ -32,10 +27,7 @@ namespace ChoyUtilities.Entities {
     /// </summary>
     [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct InitializeCameraTargetISystem : ISystem {
-
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<InitializeCameraTargetITag>();
-        }
+        public void OnCreate(ref SystemState state) { state.RequireForUpdate<InitializeCameraTargetITag>(); }
 
         public void OnUpdate(ref SystemState state) {
             if (CameraController.Instance is null || Camera.main is null) return;
@@ -58,7 +50,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

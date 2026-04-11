@@ -1,22 +1,22 @@
 {
-    "name": "ChoyUtilities.Entities.Editor",
-    "rootNamespace": "ChoyUtilities.Entities.Editor",
-    "references": [
-        "GUID:42c848d8e5a85f64ba051842c99cf864",
-        "GUID:6d79f2d740eb2424986896076a81f62c",
-        "GUID:d8b63aba1907145bea998dd612889d6b",
-        "GUID:2665a8d13d1b3f18800f46e256720795",
-        "GUID:e0cd26848372d4e5c891c569017e11f1"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "ChoyUtilities.Entities.Editor",
+  "rootNamespace": "ChoyUtilities.Entities.Editor",
+  "references": [
+    "GUID:42c848d8e5a85f64ba051842c99cf864",
+    "GUID:6d79f2d740eb2424986896076a81f62c",
+    "GUID:d8b63aba1907145bea998dd612889d6b",
+    "GUID:2665a8d13d1b3f18800f46e256720795",
+    "GUID:e0cd26848372d4e5c891c569017e11f1"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

@@ -1,11 +1,9 @@
 ﻿using Unity.Entities;
 
 namespace ChoyUtilities.Entities {
-
     //TODO
     [UpdateInGroup(typeof(EuCEffectSystemGroup))]
     public partial class UiHandleSystemBase : SystemBase {
-
         // public event Action<byte, byte> OnUiEnterHover;
         // public event Action<byte, byte> OnUiExitHover;
         // public event Action<byte, byte> OnUiClicked;
@@ -13,7 +11,5 @@ namespace ChoyUtilities.Entities {
         protected override void OnCreate() { }
 
         protected override void OnUpdate() { }
-
     }
-
 }

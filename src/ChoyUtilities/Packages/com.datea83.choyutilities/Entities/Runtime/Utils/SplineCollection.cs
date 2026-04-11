@@ -3,9 +3,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 
 namespace ChoyUtilities {
-
     public static partial class EntitiesCollection {
-
         /// <summary>
         ///     Bake the spline using Barry–Goldman algorithm
         ///     Or formula of centripetal Catmull–Rom spline
@@ -55,9 +53,11 @@ namespace ChoyUtilities {
                 return points[index];
             }
         }
-        
-        public static float3 GetClosestPointInSplineSegment(float3 lineStart, float3 lineEnd,
-            float3 point, out float t) {
+
+        public static float3 GetClosestPointInSplineSegment(float3 lineStart,
+            float3 lineEnd,
+            float3 point,
+            out float t) {
             t = 0f;
             var vec = lineEnd - lineStart;
             var lenSq = math.lengthsq(vec);
@@ -69,8 +69,10 @@ namespace ChoyUtilities {
             return lineStart + vec * t;
         }
 
-        public static void SampleAtDistance(ref SplineVectorBlob spline, float targetDist,
-            out float3 position, out quaternion rotation) {
+        public static void SampleAtDistance(ref SplineVectorBlob spline,
+            float targetDist,
+            out float3 position,
+            out quaternion rotation) {
             ref var posArr = ref spline.Position;
             ref var dstArr = ref spline.Distance;
             ref var rotArr = ref spline.Rotation;
@@ -108,18 +110,12 @@ namespace ChoyUtilities {
             var r1 = rotArr[idx + 1];
             rotation = math.slerp(r0, r1, t);
         }
-
     }
 
     public struct SplineVectorBlob {
-
         public BlobArray<float3> Position;
         public BlobArray<float> Distance;
         public BlobArray<quaternion> Rotation;
         public BlobArray<float3> Tangent;
-
     }
-
-    
-
 }

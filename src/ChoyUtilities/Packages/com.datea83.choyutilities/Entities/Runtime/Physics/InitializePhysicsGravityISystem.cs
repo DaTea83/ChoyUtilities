@@ -3,11 +3,9 @@ using Unity.Entities;
 using Unity.Physics;
 
 namespace ChoyUtilities.Entities {
-
     [UpdateInGroup(typeof(EuCManagedComponentSystem), OrderFirst = true)]
     [UpdateBefore(typeof(InitializeRandomISystem))]
     public partial struct InitializePhysicsGravityISystem : ISystem {
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -21,7 +19,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

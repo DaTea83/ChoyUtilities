@@ -4,9 +4,7 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities {
-
     public static partial class HelperCollection {
-
         public static Transform FloatsSerializeToTransform(this Transform obj, Floater data) {
             if (data.values.Length < 9) return obj;
             var euler = new Vector3(data.values[3], data.values[4], data.values[5]);
@@ -96,7 +94,8 @@ namespace ChoyUtilities {
             return target;
         }
 
-        public static GameObject FindNearestObjectInRange(this Transform ob, in List<GameObject> obList, float maxRange) {
+        public static GameObject
+            FindNearestObjectInRange(this Transform ob, in List<GameObject> obList, float maxRange) {
             GameObject nearest = null;
             float distanceToNearest = 0;
 
@@ -113,7 +112,7 @@ namespace ChoyUtilities {
 
             return nearest;
         }
-        
+
         public static bool GetDistanceAndDot(this LocalTransform player,
             LocalTransform target,
             out float distanceSqr,
@@ -157,7 +156,5 @@ namespace ChoyUtilities {
 
             return dot >= 0f;
         }
-
     }
-
 }

@@ -4,26 +4,20 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace ChoyUtilities {
-
     //TODO
     [RequireComponent(typeof(UIDocument))]
     public abstract class GenericOverlayUIManager<TMono, TObj> : GenericSingleton<TMono>
         where TMono : MonoBehaviour
         where TObj : ScriptableObject {
-
         [SerializeField] protected TObj scriptableObject;
         [SerializeField] protected UIDocument overlayUI;
         [SerializeField] protected BindingSerializable[] bindings;
 
         protected VisualElement root => overlayUI?.rootVisualElement;
 
-        private void OnEnable() {
-            TryBindAll();
-        }
+        private void OnEnable() { TryBindAll(); }
 
-        protected virtual void OnValidate() {
-            overlayUI = GetComponent<UIDocument>();
-        }
+        protected virtual void OnValidate() { overlayUI = GetComponent<UIDocument>(); }
 
         protected virtual void TryBindAll() {
             if (scriptableObject is null) {
@@ -80,12 +74,8 @@ namespace ChoyUtilities {
 
         [Serializable]
         public struct BindingSerializable {
-
             public EVisualElements bindType;
             public string bindName;
-
         }
-
     }
-
 }

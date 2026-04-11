@@ -2,15 +2,12 @@
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     [RequireComponent(typeof(DestroyAuthoring))]
     public class GameObjectAuthoring : MonoBehaviour {
-
         public GameObject prefab;
 
         private class GameObjectAuthoringBaker : Baker<GameObjectAuthoring> {
-
             public override void Bake(GameObjectAuthoring authoring) {
                 if (authoring.prefab is null) return;
                 var e = GetEntity(TransformUsageFlags.Dynamic);
@@ -21,15 +18,10 @@ namespace ChoyUtilities.Entities {
                     }
                 });
             }
-
         }
-
     }
 
     public struct GameObjectIData : IComponentData {
-
         public UnityObjectRef<GameObject> Prefab;
-
     }
-
 }

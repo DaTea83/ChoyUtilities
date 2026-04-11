@@ -5,12 +5,10 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [RequireComponent(typeof(MoveNodeAuthoring))]
     [RequireComponent(typeof(GroupTagAuthoring))]
     [DisallowMultipleComponent]
     public class SpawnNodeAuthoring : MonoBehaviour {
-
         //Prefabs must have the DestroyIData component
         [SerializeField] private AgentStatsAuthoring[] spawnPrefabs;
         [SerializeField] private bool spawnOnce;
@@ -18,7 +16,6 @@ namespace ChoyUtilities.Entities {
         [SerializeField] [Min(0.01f)] private float delay = 1f;
 
         private class Baker : Baker<SpawnNodeAuthoring> {
-
             public override void Bake(SpawnNodeAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.Renderable);
 
@@ -40,18 +37,13 @@ namespace ChoyUtilities.Entities {
                 if (authoring.disabledOnStart)
                     SetComponentEnabled<SpawnNodeIEnableable>(e, false);
             }
-
         }
-
     }
 
     [BurstCompile]
     [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
     public partial struct AgentSpawnISystem : ISystem {
-
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<AgentISingleton>();
-        }
+        public void OnCreate(ref SystemState state) { state.RequireForUpdate<AgentISingleton>(); }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -93,7 +85,5 @@ namespace ChoyUtilities.Entities {
 
             SystemAPI.SetSingleton(singleton);
         }
-
     }
-
 }

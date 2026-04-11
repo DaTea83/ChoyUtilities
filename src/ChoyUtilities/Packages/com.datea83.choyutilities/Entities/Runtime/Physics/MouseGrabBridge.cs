@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class MouseGrabBridge : MonoBehaviour {
-
         [SerializeField] private InputActionAsset inputAction;
         [SerializeField] private InputActionReference mouseGrabAction;
         [SerializeField] private InputActionReference mousePositionAction;
@@ -75,8 +73,6 @@ namespace ChoyUtilities.Entities {
             };
             _entityManager.SetComponentData(_entity, input);
         }
-
     }
-
 }
 #endif

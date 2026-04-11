@@ -2,10 +2,8 @@ using UnityEngine;
 using UnityEngine.Splines;
 
 namespace ChoyUtilities.Misc {
-
     [AddComponentMenu("Eugene/Simple Spline Mover")]
     public class SimpleSplineMover : MonoBehaviour {
-
         [SerializeField] private SplineContainer container;
         [SerializeField] [Min(0f)] private float speed = 1f; // meters per second
         private float _distance; // traveled distance along the path
@@ -40,9 +38,7 @@ namespace ChoyUtilities.Misc {
             Spline.Changed += OnSplineChanged;
         }
 
-        private void OnDisable() {
-            Spline.Changed -= OnSplineChanged;
-        }
+        private void OnDisable() { Spline.Changed -= OnSplineChanged; }
 
         private void OnSplineChanged(Spline spline, int knotIndex, SplineModification modification) {
             BuildPath();
@@ -59,7 +55,5 @@ namespace ChoyUtilities.Misc {
                 _length = 0f;
             }
         }
-
     }
-
 }

@@ -4,11 +4,9 @@ using ChoyUtilities;
 using UnityEngine;
 
 namespace EugeneC.Obsolete {
-
     [Obsolete]
     public abstract class GenericUIManager<T> : GenericSingleton<GenericUIManager<T>>
         where T : Enum {
-
         public Canvas canvasPrefab;
         public UISerialize<T>[] uiPrefab;
         private readonly List<GameObject> _openedUI = new();
@@ -57,16 +55,12 @@ namespace EugeneC.Obsolete {
             foreach (var prefab in _openedUI.ToArray())
                 Close(prefab);
         }
-
     }
 
     [Serializable]
     public struct UISerialize<T>
         where T : Enum {
-
         public T uiId;
         public GameObject prefab;
-
     }
-
 }

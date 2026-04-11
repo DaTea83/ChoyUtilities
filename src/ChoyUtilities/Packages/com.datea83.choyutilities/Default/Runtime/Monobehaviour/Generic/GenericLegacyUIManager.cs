@@ -5,11 +5,9 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
-    
     public abstract class GenericLegacyUIManager<TEnum, TMono> : GenericPoolingManager<TEnum, UiHelper, TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
-
         [SerializeField] protected Canvas canvasRef;
 
         private List<UiHelper> _openedUi;
@@ -28,6 +26,7 @@ namespace ChoyUtilities {
                             "Canvas Reference is not set, please set it in the inspector or add it to the scene"
                         );
                 }
+
                 Pools = new ObjectPool<UiHelper>[poolAttributes.poolPrefabs.Length];
                 RuntimePools = new RuntimePoolSerialize[poolAttributes.poolPrefabs.Length];
 
@@ -54,9 +53,7 @@ namespace ChoyUtilities {
             }
         }
 
-        protected virtual void OnEnable() {
-            _openedUi = ListPool<UiHelper>.Get();
-        }
+        protected virtual void OnEnable() { _openedUi = ListPool<UiHelper>.Get(); }
 
         protected override async void OnDisable() {
             try {
@@ -157,7 +154,5 @@ namespace ChoyUtilities {
 
             return true;
         }
-
     }
-
 }

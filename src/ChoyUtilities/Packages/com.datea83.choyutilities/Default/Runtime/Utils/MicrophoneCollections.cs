@@ -1,19 +1,15 @@
 using Unity.Mathematics;
 
 namespace ChoyUtilities {
-
     public struct AudioChunk {
-
         public float[] Data;
         public int Frequency;
         public int Channels;
         public float Length;
         public bool IsVoiceDetected;
-
     }
 
     public static partial class HelperCollection {
-
         public static bool SimpleVad(float[] data, int sampleRate, float lastSec, float vadThd, float freqThd) {
             // https://github.com/ggerganov/whisper.cpp/blob/a792c4079ce61358134da4c9bc589c15a03b04ad/examples/common.cpp#L697
             var nSamples = data.Length;
@@ -58,7 +54,5 @@ namespace ChoyUtilities {
                 data[i] = y;
             }
         }
-
     }
-
 }

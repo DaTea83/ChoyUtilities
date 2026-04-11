@@ -8,10 +8,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChoyUtilities {
-
     [AddComponentMenu("Eugene/Microphone Recorder")]
     public sealed class MicrophoneRecorder : MonoBehaviour {
-
         public MicrophoneAttributes settings;
         public float chunksLengthSec = 0.5f;
         public bool replay;
@@ -318,7 +316,5 @@ namespace ChoyUtilities {
             // circular buffer case
             return ClipSamples - prevPos + newPos;
         }
-
     }
-
 }

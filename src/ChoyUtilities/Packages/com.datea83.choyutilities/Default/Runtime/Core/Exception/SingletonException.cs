@@ -1,9 +1,5 @@
 ﻿namespace ChoyUtilities {
-    
     public class SingletonException : System.Exception {
-        
-        public SingletonException(string message) : base(message) {
-            
-        }
+        public SingletonException(string message) : base(message) { }
     }
 }

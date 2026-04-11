@@ -6,9 +6,7 @@ using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 namespace ChoyUtilities {
-
     public static partial class HelperCollection {
-        
         // Time-constant style smoothing
         // -DeltaTime divide timeConstant, math.max just to avoid timeConstant is 0
         // More consistent interpolation with different frame rates
@@ -31,13 +29,9 @@ namespace ChoyUtilities {
         /// <summary>
         ///     Different with normal remainder (x % y), this one will always return positive value
         /// </summary>
-        public static float Modulo(float x, float y) {
-            return (x % y + y) % y;
-        }
+        public static float Modulo(float x, float y) { return (x % y + y) % y; }
 
-        public static int Modulo(int x, int y) {
-            return (x % y + y) % y;
-        }
+        public static int Modulo(int x, int y) { return (x % y + y) % y; }
 
         public static float RandomValue(this Component obj) {
             var ran = Random.CreateFromIndex((uint)obj.GetInstanceID() + (uint)Environment.TickCount +
@@ -73,7 +67,5 @@ namespace ChoyUtilities {
 
             return ran.NextFloat3();
         }
-
     }
-
 }

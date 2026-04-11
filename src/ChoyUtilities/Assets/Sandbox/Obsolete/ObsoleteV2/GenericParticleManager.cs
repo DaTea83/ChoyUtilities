@@ -5,12 +5,10 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace EugeneC.ObsoleteV2 {
-
     [Obsolete]
     public abstract class GenericParticleManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : Enum
         where TMono : MonoBehaviour {
-
         [SerializeField] protected ParticleSerialize[] particleEffects;
 
         [Tooltip("The pool count meant each particle serialize, meaning total = poolCount * particleEffects.Length")]
@@ -87,21 +85,15 @@ namespace EugeneC.ObsoleteV2 {
 
         [Serializable]
         public struct ParticleSerialize {
-
             public ParticleSystem particle;
             public TEnum id;
-
         }
 
         [Serializable]
         protected struct SystemSerialize {
-
             public ParticleSystem[] particles;
             public int currentIndex;
             public int previousIndex;
-
         }
-
     }
-
 }

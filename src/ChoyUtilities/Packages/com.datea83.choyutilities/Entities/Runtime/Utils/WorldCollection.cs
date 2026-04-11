@@ -3,30 +3,28 @@ using Unity.Entities;
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
     public static partial class EntitiesCollection {
-        
         private const ushort MAX_FRAME = 200;
 
         public static async Awaitable<World> TryGetWorld(this CancellationToken token, ushort maxAllowed = MAX_FRAME) {
             var frame = 0;
-            
+
             while (frame < maxAllowed) {
                 var world = World.DefaultGameObjectInjectionWorld;
-                
-                if (world is not null) 
+
+                if (world is not null)
                     return world;
                 frame++;
                 await Awaitable.NextFrameAsync(token);
             }
-            
+
             return null;
         }
-        
-        public static async Awaitable<TComponent> GetSingletonEntity<TComponent>(this CancellationToken token, 
-            World world, ushort maxAllowed = MAX_FRAME)
+
+        public static async Awaitable<TComponent> GetSingletonEntity<TComponent>(this CancellationToken token,
+            World world,
+            ushort maxAllowed = MAX_FRAME)
             where TComponent : unmanaged, IComponentData {
-            
             var query = world.EntityManager.CreateEntityQuery(
                 ComponentType.ReadOnly<TComponent>());
 
@@ -45,11 +43,11 @@ namespace ChoyUtilities {
 
             return !validSingleton ? throw new System.Exception("Singleton not found") : singleton;
         }
-        
-        public static async Awaitable<DynamicBuffer<TBuffer>> GetSingletonBuffer<TBuffer>(this CancellationToken token, 
-            World world, ushort maxAllowed = MAX_FRAME)
+
+        public static async Awaitable<DynamicBuffer<TBuffer>> GetSingletonBuffer<TBuffer>(this CancellationToken token,
+            World world,
+            ushort maxAllowed = MAX_FRAME)
             where TBuffer : unmanaged, IBufferElementData {
-            
             var query = world.EntityManager.CreateEntityQuery(
                 ComponentType.ReadOnly<TBuffer>());
 

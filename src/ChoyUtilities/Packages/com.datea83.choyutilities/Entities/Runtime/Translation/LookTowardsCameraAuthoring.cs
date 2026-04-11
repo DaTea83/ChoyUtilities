@@ -5,26 +5,20 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class LookTowardsCameraAuthoring : MonoBehaviour {
-
         public class Baker : Baker<LookTowardsCameraAuthoring> {
-
             public override void Bake(LookTowardsCameraAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent<LookTowardsCameraITag>(e);
             }
-
         }
-
     }
 
     public struct LookTowardsCameraITag : IComponentData { }
 
     [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
     public partial struct LookTowardsCameraISystem : ISystem {
-
         public void OnUpdate(ref SystemState state) {
             if (CameraController.Instance is null || Camera.main is null) return;
             var camTargetTransform = CameraController.Instance.transform;
@@ -36,7 +30,5 @@ namespace ChoyUtilities.Entities {
                 lt.ValueRW.Rotation = quaternion.LookRotationSafe(fwd, up);
             }
         }
-
     }
-
 }

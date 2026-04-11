@@ -1,35 +1,27 @@
 namespace ChoyUtilities {
-
     public enum ELanguage : byte {
-
         NotDefined = 0,
         English = 1,
         SimplifiedChinese = 2,
         TraditionalChinese = 3,
         Malay = 4,
-
     }
 
     public enum ETwoAxis : byte {
-
         XY = 0,
         XZ = 1 << 0,
         YZ = 1 << 1
-
     }
 
     public enum EControlSchemeEnum : byte {
-
         Keyboard,
         Gamepad,
         Touchscreen,
         XR,
         NotDefined = byte.MaxValue
-
     }
 
     public enum EVisualElements {
-
         Button,
         DoubleField,
         DropdownField,
@@ -59,7 +51,5 @@ namespace ChoyUtilities {
         Vector3Field,
         Vector3IntField,
         Vector4Field
-
     }
-
 }

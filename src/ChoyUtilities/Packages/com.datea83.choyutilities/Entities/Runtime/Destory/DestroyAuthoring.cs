@@ -3,20 +3,15 @@ using Unity.Entities;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class DestroyAuthoring : MonoBehaviour {
-
         private class DestroyBaker : Baker<DestroyAuthoring> {
-
             public override void Bake(DestroyAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent<DestroyIEnableableTag>(e);
                 SetComponentEnabled<DestroyIEnableableTag>(e, false);
             }
-
         }
-
     }
 
     public struct DestroyIEnableableTag : IComponentData, IEnableableComponent { }
@@ -24,7 +19,6 @@ namespace ChoyUtilities.Entities {
     [UpdateInGroup(typeof(EuCDestroySystemGroup), OrderLast = true)]
     [BurstCompile]
     public partial struct DestroyEntityISystem : ISystem {
-
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
         }
@@ -39,7 +33,5 @@ namespace ChoyUtilities.Entities {
                          .WithAll<DestroyIEnableableTag>().WithEntityAccess())
                 endFrameECB.DestroyEntity(entity);
         }
-
     }
-
 }

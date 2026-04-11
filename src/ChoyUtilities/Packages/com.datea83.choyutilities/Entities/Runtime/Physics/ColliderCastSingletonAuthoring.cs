@@ -10,10 +10,8 @@ using static Unity.Physics.Math;
 
 // Revised version of the MousePickAuthoring script from the Unity Physics Samples repository
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class ColliderCastSingletonAuthoring : MonoBehaviour {
-
         [SerializeField] private bool ignoreTriggers = true;
         [SerializeField] private bool ignoreStatic = true;
         [SerializeField] private bool deleteAllEntityOnClick;
@@ -28,7 +26,6 @@ namespace ChoyUtilities.Entities {
         }
 
         public class Baker : Baker<ColliderCastSingletonAuthoring> {
-
             public override void Bake(ColliderCastSingletonAuthoring singletonAuthoring) {
                 var e = GetEntity(TransformUsageFlags.None);
 
@@ -39,23 +36,18 @@ namespace ChoyUtilities.Entities {
                     DeleteTagEntityOnClick = singletonAuthoring.deleteTagEntityOnClick
                 });
             }
-
         }
-
     }
 
     public struct ColliderCastISingleton : IComponentData {
-
         public bool IgnoreTriggers;
         public bool IgnoreStatic;
         public bool DeleteEntityOnClick;
         public bool DeleteTagEntityOnClick;
-
     }
 
     [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
     public partial class MouseGrabInputSystemBase : SystemBase {
-
         private const float MaxDistance = 100.0f;
         public JobHandle? PickJobHandle;
         public NativeReference<SpringData> SpringDataRef;
@@ -114,15 +106,11 @@ namespace ChoyUtilities.Entities {
             }
         }
 
-        protected override void OnDestroy() {
-            SpringDataRef.Dispose();
-        }
-
+        protected override void OnDestroy() { SpringDataRef.Dispose(); }
     }
 
     [UpdateInGroup(typeof(BeforePhysicsSystemGroup))]
     public partial class MouseGrabFollowISystem : SystemBase {
-
         private MouseGrabInputSystemBase _grabSystemBase;
 
         protected override void OnCreate() {
@@ -247,7 +235,5 @@ namespace ChoyUtilities.Entities {
 
             SystemAPI.SetComponent(entity, vel);
         }
-
     }
-
 }

@@ -5,12 +5,10 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace EugeneC.ObsoleteV2 {
-
     [Obsolete]
     public abstract class GenericUiManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : Enum
         where TMono : MonoBehaviour {
-
         [SerializeField] protected Canvas canvasRef;
         [SerializeField] protected UiSerialize[] uiElements;
         protected readonly List<UiHelper> OpenedUi = new();
@@ -129,12 +127,8 @@ namespace EugeneC.ObsoleteV2 {
 
         [Serializable]
         public struct UiSerialize {
-
             public UiHelper prefab;
             public TEnum id;
-
         }
-
     }
-
 }

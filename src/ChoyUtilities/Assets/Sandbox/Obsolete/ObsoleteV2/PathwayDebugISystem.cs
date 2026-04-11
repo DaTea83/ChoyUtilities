@@ -5,12 +5,10 @@ using Unity.Entities;
 using UnityEngine;
 
 namespace EugeneC.ObsoleteV2 {
-
     [Obsolete]
     [DisableAutoCreation]
     [UpdateInGroup(typeof(EuCEditorSystemGroup))]
     public partial struct PathwayDebugISystem : ISystem {
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             foreach (var path
@@ -26,7 +24,5 @@ namespace EugeneC.ObsoleteV2 {
                         Color.red);
             }
         }
-
     }
-
 }

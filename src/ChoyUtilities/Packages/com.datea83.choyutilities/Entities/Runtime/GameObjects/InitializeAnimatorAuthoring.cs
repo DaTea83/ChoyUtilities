@@ -2,11 +2,9 @@
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     [RequireComponent(typeof(GameObjectAuthoring))]
     public class InitializeAnimatorAuthoring : MonoBehaviour {
-
         private void OnValidate() {
             var author = GetComponent<GameObjectAuthoring>();
 
@@ -21,28 +19,20 @@ namespace ChoyUtilities.Entities {
         }
 
         private class InitializeAnimatorAuthoringBaker : Baker<InitializeAnimatorAuthoring> {
-
             public override void Bake(InitializeAnimatorAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent<InitializeAnimatorITag>(e);
             }
-
         }
-
     }
 
     public struct AnimatorIData : IComponentData {
-
         public UnityObjectRef<Animator> Animator;
-
     }
 
     public struct AnimatorICleanup : ICleanupComponentData {
-
         public UnityObjectRef<Animator> Animator;
-
     }
 
     public struct InitializeAnimatorITag : IComponentData { }
-
 }

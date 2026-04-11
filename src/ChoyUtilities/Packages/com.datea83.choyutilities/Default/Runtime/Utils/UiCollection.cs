@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace ChoyUtilities {
-
     public static partial class HelperCollection {
-
         public static void ActivateDisplay() {
             for (var i = 1; i < Display.displays.Length; i++) Display.displays[i].Activate();
         }
@@ -31,9 +29,7 @@ namespace ChoyUtilities {
 
             return (2f * wMax, 2f * hMax);
 
-            float2 Rotate(float2 rel) {
-                return new float2(cos * rel.x - sin * rel.y, sin * rel.x + cos * rel.y);
-            }
+            float2 Rotate(float2 rel) { return new float2(cos * rel.x - sin * rel.y, sin * rel.x + cos * rel.y); }
         }
 
         public static string GetLocaleCode(this ELanguage language) {
@@ -84,7 +80,5 @@ namespace ChoyUtilities {
                     "This enum value is runtime-only or unsupported at editor.")
             };
         }
-
     }
-
 }

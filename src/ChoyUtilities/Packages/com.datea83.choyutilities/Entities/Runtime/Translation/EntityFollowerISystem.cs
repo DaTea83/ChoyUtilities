@@ -4,21 +4,17 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     /// <summary>
     ///     Entity follow gameObject transform
     /// </summary>
     public struct EntityTransformIData : IComponentData {
-
         public UnityObjectRef<Transform> Transform;
         public float3 Offset;
         public float SmoothFollowSpeed;
-
     }
 
     [UpdateInGroup(typeof(EuCPostTransformSystemGroup), OrderFirst = true)]
     public partial struct EntityFollowerISystem : ISystem {
-
         public void OnUpdate(ref SystemState state) {
             var dt = SystemAPI.Time.DeltaTime;
 
@@ -42,12 +38,10 @@ namespace ChoyUtilities.Entities {
                 lt.ValueRW.Rotation = math.slerp(lt.ValueRO.Rotation, obj.Value.rotation, factor);
             }
         }
-
     }
 
     [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct InitialDestroyFollowerISystem : ISystem {
-
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
@@ -59,7 +53,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

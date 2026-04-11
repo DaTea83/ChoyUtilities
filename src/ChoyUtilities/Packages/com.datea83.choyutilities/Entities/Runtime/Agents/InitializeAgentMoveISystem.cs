@@ -2,10 +2,8 @@
 using Unity.Entities;
 
 namespace ChoyUtilities.Entities {
-
     [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct InitializeAgentMoveISystem : ISystem {
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -30,7 +28,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

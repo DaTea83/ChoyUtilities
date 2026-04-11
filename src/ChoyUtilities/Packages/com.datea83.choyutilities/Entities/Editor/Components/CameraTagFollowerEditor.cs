@@ -4,10 +4,8 @@ using UnityEditor;
 // ReSharper disable CheckNamespace
 
 namespace ChoyUtilities.Editor {
-
     [CustomEditor(typeof(CameraTagAuthoring))]
     public class CameraTagFollowerEditor : UnityEditor.Editor {
-
         public override void OnInspectorGUI() {
             EditorGUILayout.HelpBox("Don't put this in the camera", MessageType.Warning);
             EditorGUILayout.HelpBox("For camera use CameraTrackerController", MessageType.Warning);
@@ -18,7 +16,5 @@ namespace ChoyUtilities.Editor {
             EditorGUILayout.HelpBox("Make sure only have a single entity have this component in any given runtime!!!",
                 MessageType.Warning);
         }
-
     }
-
 }

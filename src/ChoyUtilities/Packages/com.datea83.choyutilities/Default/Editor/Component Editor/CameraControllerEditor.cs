@@ -4,10 +4,8 @@ using UnityEditor;
 // ReSharper disable CheckNamespace
 
 namespace ChoyUtilities.Editor {
-
     [CustomEditor(typeof(CameraController))]
     public class CameraControllerEditor : UnityEditor.Editor {
-
         public override void OnInspectorGUI() {
             var instance = (CameraController)target;
 
@@ -26,7 +24,5 @@ namespace ChoyUtilities.Editor {
 
             base.OnInspectorGUI();
         }
-
     }
-
 }

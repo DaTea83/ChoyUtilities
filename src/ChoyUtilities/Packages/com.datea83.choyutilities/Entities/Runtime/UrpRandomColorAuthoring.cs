@@ -5,17 +5,14 @@ using Unity.Rendering;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     /// <summary>
     ///     Any entity with URP lit material will be randomized with a color
     /// </summary>
     [DisallowMultipleComponent]
     public class UrpRandomColorAuthoring : MonoBehaviour {
-
         [SerializeField] private Color[] colors;
 
         private class Baker : Baker<UrpRandomColorAuthoring> {
-
             public override void Bake(UrpRandomColorAuthoring authoring) {
                 if (authoring.colors is null || authoring.colors.Length == 0) return;
                 var e = GetEntity(TransformUsageFlags.None);
@@ -25,15 +22,11 @@ namespace ChoyUtilities.Entities {
                     buffer.Add(new UrpRandomColorISingletonBuffer
                         { Value = new float4(color.r, color.g, color.b, color.a) });
             }
-
         }
-
     }
 
     public struct UrpRandomColorISingletonBuffer : IBufferElementData {
-
         public float4 Value;
-
     }
 
     public struct UrpColorChangedITag : IComponentData { }
@@ -41,10 +34,7 @@ namespace ChoyUtilities.Entities {
     [BurstCompile]
     [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct UrpRandomColorISystem : ISystem {
-
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<UrpRandomColorISingletonBuffer>();
-        }
+        public void OnCreate(ref SystemState state) { state.RequireForUpdate<UrpRandomColorISingletonBuffer>(); }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -64,7 +54,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

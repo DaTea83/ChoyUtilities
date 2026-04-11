@@ -3,9 +3,7 @@ using System.Reflection;
 using UnityEngine;
 
 namespace ChoyUtilities {
-
     public static partial class HelperCollection {
-
         // Can be non-static but the use case is rare, usually do interface instead
         public static void CallStaticMethod(string className, string methodName) {
             var classType = Type.GetType(className);
@@ -87,7 +85,5 @@ namespace ChoyUtilities {
                 Debug.LogWarning($"Class '{instanceClassName}' not found or does not inherit from MonoBehaviour.");
             }
         }
-
     }
-
 }

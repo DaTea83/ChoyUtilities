@@ -5,16 +5,13 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class SpawnDelayEntityAuthoring : MonoBehaviour {
-
         [SerializeField] private float delay = 3f;
         [SerializeField] private GameObject prefab;
         [SerializeField] private float3 offset = new(0f, 2f, 0f);
 
         private class SpawnPlayerTimerAuthoringBaker : Baker<SpawnDelayEntityAuthoring> {
-
             public override void Bake(SpawnDelayEntityAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.Dynamic);
                 var prefab = GetEntity(authoring.prefab, TransformUsageFlags.Dynamic);
@@ -25,22 +22,17 @@ namespace ChoyUtilities.Entities {
                     Offset = authoring.offset
                 });
             }
-
         }
-
     }
 
     public struct SpawnDelayEntityIData : IComponentData {
-
         public float Time;
         public Entity Prefab;
         public float3 Offset;
-
     }
 
     [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
     public partial struct SpawnDelayEntityISystem : ISystem {
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -64,7 +56,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

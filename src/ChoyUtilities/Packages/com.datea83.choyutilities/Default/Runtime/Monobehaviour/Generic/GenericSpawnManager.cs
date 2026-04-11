@@ -6,16 +6,12 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
-
     public abstract class GenericSpawnManager<TEnum, TMono> : GenericPoolingManager<TEnum, Component, TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
-
         private List<(Component obj, TEnum id)> _spawnedObjects;
 
-        protected virtual void OnEnable() {
-            _spawnedObjects = ListPool<(Component, TEnum)>.Get();
-        }
+        protected virtual void OnEnable() { _spawnedObjects = ListPool<(Component, TEnum)>.Get(); }
 
         protected override void OnDisable() {
             DespawnAll();
@@ -36,14 +32,19 @@ namespace ChoyUtilities {
             return spawned;
         }
 
-        public virtual Component SpawnInRandomSphere(TEnum id, float radius, float3 location,
+        public virtual Component SpawnInRandomSphere(TEnum id,
+            float radius,
+            float3 location,
             quaternion rotation = default) {
             var dir = this.RandomValue3() * radius;
 
             return Spawn(id, location + dir, rotation);
         }
 
-        public virtual Component SpawnInRandomCircle(TEnum id, ETwoAxis axis, float radius, float3 location,
+        public virtual Component SpawnInRandomCircle(TEnum id,
+            ETwoAxis axis,
+            float radius,
+            float3 location,
             quaternion rotation = default) {
             var value = this.RandomValue2() * radius;
 
@@ -77,7 +78,5 @@ namespace ChoyUtilities {
 
             _spawnedObjects.Clear();
         }
-
     }
-
 }

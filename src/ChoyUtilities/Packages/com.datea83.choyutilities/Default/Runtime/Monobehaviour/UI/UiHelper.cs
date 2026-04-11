@@ -1,10 +1,8 @@
 using UnityEngine;
 
 namespace ChoyUtilities {
-
     [RequireComponent(typeof(RectTransform))]
     public abstract class UiHelper : MonoBehaviour {
-
         [SerializeField] [Min(0.01f)] protected float transitionTime;
 
         public abstract void OnSpawn();
@@ -16,7 +14,5 @@ namespace ChoyUtilities {
         public abstract float OnStartClose();
 
         public abstract void OnEndClose();
-
     }
-
 }

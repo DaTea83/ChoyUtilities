@@ -3,9 +3,7 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
-    
     internal static partial class FancyReplaceEditor {
-
         [MenuItem("Assets/Fancy Replace", false, 100)]
         private static void CustomModificationMenuItem() {
             if (!TryGetSelectedObjectType(out var path, out var type)) return;
@@ -23,20 +21,20 @@ namespace ChoyUtilities.Editor {
             path = string.Empty;
             if (Selection.assetGUIDs == null || Selection.assetGUIDs.Length == 0)
                 return false;
-            
+
             var selected = Selection.activeObject;
             if (selected is null) {
                 type = EReplaceType.None;
                 path = string.Empty;
                 return false;
             }
+
             path = AssetDatabase.GetAssetPath(selected);
-            if (string.IsNullOrEmpty(path)) 
-            {
+            if (string.IsNullOrEmpty(path)) {
                 path = string.Empty;
                 return false;
             }
-            
+
             // Put at most top, if click at project empty space it will return the current directory
             if (AssetDatabase.IsValidFolder(path)) {
                 type = EReplaceType.Folder;
@@ -63,11 +61,11 @@ namespace ChoyUtilities.Editor {
 
             // Definition for this is super board, also every single object can fall to this definition
             // If fail to return previously it will return for this
-            if (PrefabUtility.GetCorrespondingObjectFromOriginalSource(selected) is not null)
-            {
+            if (PrefabUtility.GetCorrespondingObjectFromOriginalSource(selected) is not null) {
                 type = EReplaceType.Prefab;
                 return true;
             }
+
             return false;
         }
     }

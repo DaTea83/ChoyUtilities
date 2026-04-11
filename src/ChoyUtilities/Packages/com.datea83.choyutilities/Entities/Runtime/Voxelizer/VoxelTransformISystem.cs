@@ -7,14 +7,10 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [BurstCompile(CompileSynchronously = true)]
     [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct VoxelTransformISystem : ISystem {
-
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<VoxelizerISingleton>();
-        }
+        public void OnCreate(ref SystemState state) { state.RequireForUpdate<VoxelizerISingleton>(); }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -29,7 +25,6 @@ namespace ChoyUtilities.Entities {
 
         [BurstCompile(CompileSynchronously = true)]
         private partial struct Job : IJobEntity {
-
             [NativeDisableParallelForRestriction] public BufferLookup<DestroyBufferEntryIBuffer> DestroyLookup;
             public VoxelizerISingleton Voxelizer;
             public float ElapsedTime;
@@ -62,9 +57,6 @@ namespace ChoyUtilities.Entities {
                 hue = math.frac(hue + ElapsedTime * Voxelizer.ColorSpeed);
                 urp.Value = (Vector4)Color.HSVToRGB(hue, 1, 1);
             }
-
         }
-
     }
-
 }

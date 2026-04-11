@@ -6,10 +6,8 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 namespace EugeneC.Obsolete {
-
     [Obsolete]
     public class AudioManager : GenericSingleton<AudioManager> {
-
         public AudioSource SourcePrefab;
         public AudioSfxOld[] Audiosfx;
 
@@ -54,23 +52,17 @@ namespace EugeneC.Obsolete {
             Source.Stop();
             PlayIgnorePauseClip(AudioId, Source);
         }
-
     }
 
     [Serializable]
     public class AudioSfxOld {
-
         public AudioType AudioID;
         public AudioClip[] AudioClips;
-
     }
 
     public enum AudioType {
-
         Bugeat,
         BugWalk,
         BugDead
-
     }
-
 }
