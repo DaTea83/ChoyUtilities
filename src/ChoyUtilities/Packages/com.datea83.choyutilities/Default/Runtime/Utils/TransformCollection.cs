@@ -7,21 +7,30 @@ namespace ChoyUtilities {
 
     public static partial class HelperCollection {
 
-        public static Quaternion RotateTowards(this Transform ob, float3 target, float speed) {
-            var dir = math.normalize(target - (float3)ob.position);
-            var lookTowards = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
-
-            return Quaternion.Slerp(ob.rotation, lookTowards, Time.deltaTime * speed);
+        public static Transform FloatsSerializeToTransform(this Transform obj, Floater data) {
+            if (data.values.Length < 9) return obj;
+            var euler = new Vector3(data.values[3], data.values[4], data.values[5]);
+            obj.position = new Vector3(data.values[0], data.values[1], data.values[2]);
+            obj.rotation = quaternion.Euler(euler);
+            obj.localScale = new Vector3(data.values[6], data.values[7], data.values[8]);
+            return obj;
         }
 
-        public static bool FinishRotate(this Transform ob, Vector3 target, float threshold = 5f) {
-            var dir = (target - ob.position).normalized;
-            var angle = Vector3.Angle(ob.forward, dir);
+        public static Quaternion RotateTowards(this Transform obj, float3 target, float speed) {
+            var dir = math.normalize(target - (float3)obj.position);
+            var lookTowards = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+
+            return Quaternion.Slerp(obj.rotation, lookTowards, Time.deltaTime * speed);
+        }
+
+        public static bool FinishRotate(this Transform obj, Vector3 target, float threshold = 5f) {
+            var dir = (target - obj.position).normalized;
+            var angle = Vector3.Angle(obj.forward, dir);
 
             return angle < threshold;
         }
 
-        public static Transform FindNearestTransform(this List<Transform> posList, Transform currentPosition) {
+        public static Transform FindNearestTransform(this List<Transform> posList, in Transform currentPosition) {
             if (posList is null || currentPosition is null) return null;
 
             Transform nearest = null;
@@ -41,8 +50,8 @@ namespace ChoyUtilities {
         }
 
         public static Transform FindNearestTransform(this List<Transform> posList,
-            Transform currentPosition,
-            List<Transform> prevPos) {
+            in Transform currentPosition,
+            in List<Transform> prevPos) {
             if (posList is null || currentPosition is null) return null;
 
             Transform nearest = null;
@@ -71,7 +80,7 @@ namespace ChoyUtilities {
             return !hitInfo.collider.CompareTag(tag);
         }
 
-        public static Transform FindNearestGameObject(this GameObject bot, List<GameObject> objectList) {
+        public static Transform FindNearestGameObject(this GameObject bot, in List<GameObject> objectList) {
             Transform target = null;
             var disToNearest = 0f;
 
@@ -87,7 +96,7 @@ namespace ChoyUtilities {
             return target;
         }
 
-        public static GameObject FindNearestObjectInRange(this Transform ob, List<GameObject> obList, float maxRange) {
+        public static GameObject FindNearestObjectInRange(this Transform ob, in List<GameObject> obList, float maxRange) {
             GameObject nearest = null;
             float distanceToNearest = 0;
 

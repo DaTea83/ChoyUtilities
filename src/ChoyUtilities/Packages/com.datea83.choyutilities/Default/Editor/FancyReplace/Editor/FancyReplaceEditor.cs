@@ -4,15 +4,18 @@ using System;
 
 namespace ChoyUtilities.Editor {
     
+    internal enum EReplaceType : byte {
+        None = 0,
+        Script,
+        Prefab,
+        Scene,
+        Folder,
+        ScriptableObject,
+        Materials,
+        TextAsset
+    }
+    
     internal static partial class FancyReplaceEditor {
-
-        internal enum EReplaceType {
-            Script,
-            Prefab,
-            Scene,
-            Folder,
-            ScriptableObject,
-        }
          
         internal const string DEFAULT_NAME = "FancyReplace";
         private const string TEXTURES = "Textures";
@@ -43,9 +46,11 @@ namespace ChoyUtilities.Editor {
             var name =  type switch {
                 EReplaceType.Script => "Scripts",
                 EReplaceType.ScriptableObject => "ScriptableObject",
-                EReplaceType.Prefab => "Prefabs",
+                EReplaceType.Prefab => "Prefab",
                 EReplaceType.Scene => "Scenes",
                 EReplaceType.Folder => "Folder",
+                EReplaceType.Materials => "Materials",
+                EReplaceType.TextAsset => "TextAsset",
                 _ => string.Empty
             };
             return FullTexturePath.Replace("All", name);

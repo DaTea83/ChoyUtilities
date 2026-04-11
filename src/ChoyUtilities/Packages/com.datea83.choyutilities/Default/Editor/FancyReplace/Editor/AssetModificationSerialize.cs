@@ -5,13 +5,14 @@ namespace ChoyUtilities.Editor {
     
     [Serializable]
     public struct AssetModificationSerialize {
-        public DoubleStringSerialize[] assetModified;
+        public MenuItemSerialize[] assetModified;
+        public Floater color;
     }
     
     [Serializable]
-    public struct DoubleStringSerialize {
+    public struct MenuItemSerialize {
+        public Floater idType;
         public string idPath;
         public string texturePath;
-        public byte idType;
     }
 }

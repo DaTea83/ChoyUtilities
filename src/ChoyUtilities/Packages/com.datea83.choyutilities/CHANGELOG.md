@@ -8,6 +8,7 @@ As much I like it, but most team projects I'm in don't use DOTS, for that sectio
 
 ## Added,
 * Added FancyReplace
+* Added Floater
 
 ## Changed
 * Directory split into 3, Default, Entities and Misc

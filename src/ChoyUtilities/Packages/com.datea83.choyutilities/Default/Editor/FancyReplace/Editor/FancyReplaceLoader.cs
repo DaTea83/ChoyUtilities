@@ -12,7 +12,8 @@ namespace ChoyUtilities.Editor {
         internal static AssetModificationSerialize Asset;
 
         private static AssetModificationSerialize DefaultAsset => new AssetModificationSerialize() {
-            assetModified = Array.Empty<DoubleStringSerialize>()
+            assetModified = Array.Empty<MenuItemSerialize>(),
+            color = new Floater(Color.white)
         };
         
         internal static async Task SaveData() {
@@ -46,7 +47,7 @@ namespace ChoyUtilities.Editor {
             if (removeIndex < 0 || removeIndex >= Asset.assetModified.Length)
                 throw new ArgumentOutOfRangeException(nameof(removeIndex));
 
-            var newArray = new DoubleStringSerialize[Asset.assetModified.Length - 1];
+            var newArray = new MenuItemSerialize[Asset.assetModified.Length - 1];
             var newIndex = 0;
 
             for (var i = 0; i < Asset.assetModified.Length; i++)
@@ -61,9 +62,9 @@ namespace ChoyUtilities.Editor {
             Asset.assetModified = newArray;
         }
 
-        internal static void AddNew(DoubleStringSerialize entry) {
-            Asset.assetModified ??= Array.Empty<DoubleStringSerialize>();
-            var newArray = new DoubleStringSerialize[Asset.assetModified.Length + 1];
+        internal static void AddNew(MenuItemSerialize entry) {
+            Asset.assetModified ??= Array.Empty<MenuItemSerialize>();
+            var newArray = new MenuItemSerialize[Asset.assetModified.Length + 1];
             Array.Copy(Asset.assetModified, newArray, Asset.assetModified.Length);
             newArray[^1] = entry;
             Asset.assetModified = newArray;
