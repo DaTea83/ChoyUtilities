@@ -1,0 +1,19 @@
+{
+    "name": "ChoyUtilities.Entities.Editor",
+    "rootNamespace": "ChoyUtilities.Entities.Editor",
+    "references": [
+        "GUID:6d79f2d740eb2424986896076a81f62c",
+        "GUID:d8b63aba1907145bea998dd612889d6b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

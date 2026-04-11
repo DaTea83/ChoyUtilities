@@ -3,7 +3,7 @@ using Unity.Physics;
 
 namespace ChoyUtilities {
 
-    public static partial class HelperCollection {
+    public static partial class EntitiesCollection {
 
         public static (Entity, Entity) GetSimulationEntities<T, TU>(this TriggerEvent triggerEvent,
             ComponentLookup<T> aLookup,

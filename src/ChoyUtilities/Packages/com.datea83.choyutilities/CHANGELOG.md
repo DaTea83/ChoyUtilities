@@ -1,10 +1,13 @@
 # Changelog
 
-## [1.0.0] - 2026-04-10
+## [1.0.0] - 2026-04-10/11
 
 After a while I finally uploaded this to Github, which from this point onwards version increment will not as frequent as before.
 But update in chnagelog will stays the same. Given will be download to plenty of projects, there are some issue needs to solve.
 As much I like it, but most team projects I'm in don't use DOTS, for that section needs to be seperated. This includes other Unity packages like: Localization and Spline, those need to separated into their own directory.
+
+## Added,
+* Added FancyReplace
 
 ## Changed
 * Directory split into 3, Default, Entities and Misc
@@ -16,6 +19,7 @@ As much I like it, but most team projects I'm in don't use DOTS, for that sectio
 * Removed Obsolete folder from the package, moved to Assets/Sandbox
 * Removed Entities/UI from the package, moved to Assets/Sandbox
 * Removed MultiInput from the package, moved to Assets/Sandbox
+* Deleted FolderColor, replace with FancyReplace
 * Deleted BasicAttributes
 * Deleted ParticleAttributes
 * Deleted DialogueAttributes

@@ -7,7 +7,7 @@ using UnityEngine;
 // ReSharper disable CheckNamespace
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
-namespace EugeneC.Editor {
+namespace ChoyUtilities.Editor {
 
     [AddComponentMenu("Eugene/Animation Recorder")]
     [RequireComponent(typeof(Animator))]

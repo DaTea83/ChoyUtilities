@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
 
 namespace EugeneC.Utilities {
 

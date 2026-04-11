@@ -1,10 +1,9 @@
-﻿using ChoyUtilities.Entities;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 // ReSharper disable CheckNamespace
 
-namespace ChoyUtilities.Editor {
+namespace ChoyUtilities.Entities.Editor {
 
     [CustomEditor(typeof(FlatPlaneAuthoring))]
     public class FLatPlaneEditor : UnityEditor.Editor {

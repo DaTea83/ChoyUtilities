@@ -1,11 +1,12 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
 
     internal static class RemoveMissingScriptsEditor {
 
-        [MenuItem(EditorUtils.UtilityWindow + "Missing Scripts/Find")]
+        [MenuItem(EditorCollection.UtilityWindow + "Missing Scripts/Find")]
         internal static void FindMissingScripts() {
 #if UNITY_2023_1_OR_NEWER
             foreach (var gameObject in Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include,
@@ -21,7 +22,7 @@ namespace ChoyUtilities.Editor {
             }
         }
 
-        [MenuItem(EditorUtils.UtilityWindow + "Missing Scripts/Remove")]
+        [MenuItem(EditorCollection.UtilityWindow + "Missing Scripts/Remove")]
         internal static void RemoveMissingScripts() {
 #if UNITY_2023_1_OR_NEWER
             foreach (var gameObject in Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include,

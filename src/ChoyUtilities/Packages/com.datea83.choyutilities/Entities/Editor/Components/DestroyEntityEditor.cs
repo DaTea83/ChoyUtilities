@@ -1,9 +1,8 @@
-using ChoyUtilities.Entities;
 using UnityEditor;
 
 // ReSharper disable CheckNamespace
 
-namespace ChoyUtilities.Editor {
+namespace ChoyUtilities.Entities.Editor {
 
 #if UNITY_EDITOR
 

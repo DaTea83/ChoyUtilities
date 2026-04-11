@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace ChoyUtilities {
 
-    public static partial class HelperCollection {
+    public static partial class EntitiesCollection {
 
         /// <summary>
         ///     Bake the spline using Barry–Goldman algorithm

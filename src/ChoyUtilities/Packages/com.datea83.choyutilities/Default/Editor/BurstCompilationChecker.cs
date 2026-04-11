@@ -3,7 +3,7 @@ using UnityEngine;
 
 // ReSharper disable CheckNamespace
 
-namespace EugeneC.Editor {
+namespace ChoyUtilities.Editor {
 
 #if UNITY_EDITOR
     /// <summary>

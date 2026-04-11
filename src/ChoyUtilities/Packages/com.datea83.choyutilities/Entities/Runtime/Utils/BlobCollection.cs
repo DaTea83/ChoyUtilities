@@ -6,7 +6,7 @@ using Unity.Entities;
 // Taken from: https://github.com/Unity-Technologies/EntityComponentSystemSamples
 namespace ChoyUtilities {
 
-    public static partial class UtilityCollection {
+    public static partial class EntitiesCollection {
 
         /// <summary>
         ///     A binary search helper for blob arrays.

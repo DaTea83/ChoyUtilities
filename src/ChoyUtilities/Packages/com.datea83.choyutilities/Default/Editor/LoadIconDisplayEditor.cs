@@ -74,7 +74,7 @@ namespace ChoyUtilities.Editor {
 #endif
             var isHovering = selectionRect.Contains(Event.current.mousePosition);
 
-            var color = EditorBackgroundColor.GetColor(isSelected, isHovering, _hierarchyHasFocus);
+            var color = EditorCollection.GetHierarchyColor(isSelected, isHovering, _hierarchyHasFocus);
             var background = selectionRect;
             background.width = 18.5f;
             EditorGUI.DrawRect(background, color);
