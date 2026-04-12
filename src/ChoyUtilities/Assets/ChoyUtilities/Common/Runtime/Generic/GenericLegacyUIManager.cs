@@ -91,7 +91,7 @@ namespace ChoyUtilities {
             return (newUi, true);
         }
 
-        public virtual async Awaitable<(UiHelper, bool)> Close(TEnum id, float time) {
+        public virtual async Awaitable<(UiHelper, bool)> Close(TEnum id, float time = 0f) {
             var index = GetPoolIndex(id);
 
             if (index == -1) return (null, false);

@@ -31,7 +31,7 @@ namespace ChoyUtilities {
         #region AsyncCancellation
 
         private CancellationTokenSource _cts = new();
-        protected CancellationToken Token => _cts.Token;
+        public CancellationToken Token => _cts.Token;
         protected event Action OnCancelTask;
 
         protected void CancelTask() {
