@@ -11,13 +11,12 @@ namespace ChoyUtilities {
     [Serializable]
     [BurstCompile]
     public partial struct Floater : IEquatable<Floater>,
-        IComparable, IComparable<Floater>, IFormattable, IEnumerable<Floater> {
+        IComparable, IComparable<Floater>, IFormattable, IEnumerable<float> {
         public float[] values;
 
         #region Constructors
 
         public Floater(float[] values) { this.values = values; }
-
         public Floater(int[] values) {
             var set = new float[values.Length];
             Array.Copy(values, set, values.Length);
@@ -206,9 +205,9 @@ namespace ChoyUtilities {
         #region IEquatable, IEnumerable
 
         public bool Equals(Floater other) { return Equals(values, other.values); }
-        public IEnumerator<Floater> GetEnumerator() {
-            //TODO
-            throw new NotImplementedException();
+        public IEnumerator<float> GetEnumerator() {
+            foreach (var t in values)
+                yield return t;
         }
         public override bool Equals(object obj) { return obj is Floater other && Equals(other); }
         public override int GetHashCode() { return values is not null ? values.GetHashCode() : 0; }

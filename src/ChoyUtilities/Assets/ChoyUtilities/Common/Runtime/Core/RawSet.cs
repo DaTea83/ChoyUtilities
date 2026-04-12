@@ -7,6 +7,7 @@ using Unity.Collections;
 namespace ChoyUtilities {
     
     [BurstCompile]
+    [Serializable]
     public partial struct RawSet<T> : IDisposable, 
         IEquatable<RawSet<T>>, IEnumerable<T>
     where T : unmanaged {
@@ -14,7 +15,7 @@ namespace ChoyUtilities {
         private NativeArray<T> _values;
         
         public RawSet(RawSet<T> other) { _values = other._values; }
-        public RawSet(NativeArray<T> values, Allocator allocator = Allocator.Persistent) { _values = values; }
+        public RawSet(NativeArray<T> values) { _values = values; }
         public RawSet(NativeList<T> values, Allocator allocator = Allocator.Persistent) : this (values.ToArray(allocator)){ }
         public RawSet(byte size, Allocator allocator = Allocator.Persistent) { _values = new NativeArray<T>(size, allocator); }
         public RawSet(ushort size, Allocator allocator = Allocator.Persistent) { _values = new NativeArray<T>(size, allocator); }
@@ -39,7 +40,8 @@ namespace ChoyUtilities {
         }
 
         public IEnumerator<T> GetEnumerator() {
-            return _values.GetEnumerator();
+            foreach (var t in _values)
+                yield return t;
         }
 
         public override bool Equals(object obj) {

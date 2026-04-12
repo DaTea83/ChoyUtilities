@@ -3,7 +3,7 @@ using Unity.Transforms;
 
 namespace ChoyUtilities.Entities {
     public static class EntitiesCollection {
-        public static Floater ToFloatsSerialize(this LocalTransform lt) {
+        public static Floater Floater(this LocalTransform lt) {
             var set = new float[7];
             var euler = math.Euler(lt.Rotation);
             set[0] = lt.Position.x;
