@@ -1,12 +1,7 @@
 using System;
 
 namespace ChoyUtilities {
-    public enum ETwoAxis : byte {
-        XY = 0,
-        XZ = 1 << 0,
-        YZ = 1 << 1
-    }
-
+    
     public static partial class HelperCollection {
         public static bool IsSingleFlag<T>(this T flag)
             where T : struct, Enum {

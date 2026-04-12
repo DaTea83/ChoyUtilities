@@ -6,6 +6,13 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
+    
+    public enum ETwoAxis : byte {
+        XY = 0,
+        XZ = 1 << 0,
+        YZ = 1 << 1
+    }
+
     public abstract class GenericSpawnManager<TEnum, TMono> : GenericPoolingManager<TEnum, Component, TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
