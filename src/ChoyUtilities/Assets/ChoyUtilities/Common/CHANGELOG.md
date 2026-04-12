@@ -8,7 +8,8 @@ From this point on changelog for Common and Entities will be seperated.
 * Added RawSet
 
 ### Changed
-* Floater is now partial and seperater to three files
+* Floater is now partial and seperated to three files
+* Floater removed consturctors and implicit operator for Enum, changed to use extension instead
 
 ## [1.0.0] - 2026-04-10/11
 

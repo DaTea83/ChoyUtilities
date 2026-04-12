@@ -78,7 +78,7 @@ namespace ChoyUtilities.Editor {
                             var newEntry = new MenuItemSerialize {
                                 idPath = _assetPath,
                                 texturePath = texPath,
-                                idType = new Floater(_replaceType)
+                                idType = _replaceType.Floater()
                             };
                             FancyReplaceEditor.AddNew(newEntry);
                             _ = FancyReplaceEditor.SaveData();

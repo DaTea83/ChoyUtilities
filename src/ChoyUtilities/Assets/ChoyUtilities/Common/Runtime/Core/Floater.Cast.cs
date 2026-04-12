@@ -22,18 +22,6 @@ namespace ChoyUtilities {
             return set;
         }
 
-        public static implicit operator Enum(Floater value) {
-            if (value.values == null || value.values.Length == 0) throw new FloaterException("Empty Floater found");
-            return (Enum)Enum.ToObject(typeof(Enum), value.values[0]);
-        }
-
-        public static implicit operator Enum[](Floater value) {
-            if (value.values == null || value.values.Length == 0) return Array.Empty<Enum>();
-            var set = new Enum[value.values.Length];
-            for (var i = 0; i < value.values.Length; i++) set[i] = (Enum)Enum.ToObject(typeof(Enum), value.values[i]);
-            return set;
-        }
-
         //public static implicit operator Array(FloatsSerialize value) => value.Values;
         public static implicit operator float2(Floater value) {
             if (value.values is null || value.values.Length < 2)

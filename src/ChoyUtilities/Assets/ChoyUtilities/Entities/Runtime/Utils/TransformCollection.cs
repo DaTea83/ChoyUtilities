@@ -26,7 +26,7 @@ namespace ChoyUtilities.Entities {
         }
         
         public static bool GetDistanceAndDot(this LocalTransform player,
-            LocalTransform target,
+            in LocalTransform target,
             out float distanceSqr,
             out float dot) {
             var dir = target.Position - player.Position;
@@ -37,7 +37,7 @@ namespace ChoyUtilities.Entities {
         }
 
         public static bool GetDistanceAndDot(this LocalToWorld player,
-            LocalToWorld target,
+            in LocalToWorld target,
             out float distanceSqr,
             out float dot) {
             var dir = target.Position - player.Position;
@@ -48,7 +48,7 @@ namespace ChoyUtilities.Entities {
         }
 
         public static bool GetDistanceAndDot(this LocalTransform player,
-            LocalToWorld target,
+            in LocalToWorld target,
             out float distanceSqr,
             out float dot) {
             var dir = target.Position - player.Position;
@@ -59,7 +59,7 @@ namespace ChoyUtilities.Entities {
         }
 
         public static bool GetDistanceAndDot(this LocalToWorld player,
-            LocalTransform target,
+            in LocalTransform target,
             out float distanceSqr,
             out float dot) {
             var dir = target.Position - player.Position;

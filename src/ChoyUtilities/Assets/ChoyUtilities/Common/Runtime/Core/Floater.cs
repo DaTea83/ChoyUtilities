@@ -10,8 +10,8 @@ namespace ChoyUtilities {
     
     [Serializable]
     [BurstCompile]
-    public partial struct Floater : IEquatable<Floater>,
-        IComparable, IComparable<Floater>, IFormattable, IEnumerable<float> {
+    public partial struct Floater : IEquatable<Floater>, IComparable, IComparable<Floater>,
+        IFormattable, IEnumerable<float> {
         
         public float[] values;
 
@@ -137,13 +137,6 @@ namespace ChoyUtilities {
             Array.Copy(value, set, value.Length);
             values = set;
         }
-        public Floater(Enum value) : this(new[] { (int)Convert.ToUInt32(value) }) { }
-        public Floater(Enum[] value) {
-            var set = new float[value.Length];
-            for (var i = 0; i < value.Length; i++) set[i] = (int)Convert.ToUInt32(value[i]);
-
-            values = set;
-        }
         public Floater(char value) : this(new[] { (float)value }) { }
         public Floater(char[] value) {
             var set = new float[value.Length];
@@ -159,7 +152,7 @@ namespace ChoyUtilities {
         /// </summary>
         /// <param name="value">
         ///     For Transform, it will convert quaternion to euler angles before storing.
-        ///     To convert FloatsSerialize back to Transform use <see cref="HelperCollection.Floater" />
+        ///     To convert FloatsSerialize back to Transform use <see cref="HelperCollection.FloatsSerializeToTransform" />
         ///     extension
         /// </param>
         public Floater(Transform value) {

@@ -14,7 +14,7 @@ namespace ChoyUtilities {
 
         protected List<UiHelper> OpenedUi;
 
-        public bool IsTransitioning { get; private set; }
+        public bool IsTransitioning { get; protected set; }
 
         protected override async void Start() {
             try {

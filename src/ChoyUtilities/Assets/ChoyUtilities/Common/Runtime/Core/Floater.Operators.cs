@@ -6,6 +6,8 @@ namespace ChoyUtilities {
     
     public partial struct Floater {
         
+        private const float EPSILON = 0.0001f;
+        
         #region Operators
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -45,6 +47,17 @@ namespace ChoyUtilities {
 
             return new Floater(set);
         }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int FirstMatch(float value) {
+            var index = -1;
+            for (var i = 0; i < values.Length; i++) {
+                if (!(math.abs(values[i] - value) < EPSILON)) continue;
+                index = i;
+                break;
+            }
+            return index;
+        }
 
         /// <summary>
         /// </summary>
@@ -59,13 +72,12 @@ namespace ChoyUtilities {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Floater Remove(float value, bool removeAllEqual = false) {
             if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
-            const float epsilon = 0.0001f;
 
             if (removeAllEqual) {
                 var keepCount = 0;
 
                 foreach (var t in values)
-                    if (math.abs(t - value) >= epsilon)
+                    if (math.abs(t - value) >= EPSILON)
                         keepCount++;
 
                 if (keepCount == values.Length) return this;
@@ -75,7 +87,7 @@ namespace ChoyUtilities {
                 var j = 0;
 
                 foreach (var t in values) {
-                    if (math.abs(t - value) < epsilon) continue;
+                    if (math.abs(t - value) < EPSILON) continue;
                     set[j] = t;
                     j++;
                 }
@@ -83,13 +95,7 @@ namespace ChoyUtilities {
                 return new Floater(set);
             }
             else {
-                var removeIndex = -1;
-
-                for (var i = 0; i < values.Length; i++) {
-                    if (!(math.abs(values[i] - value) < epsilon)) continue;
-                    removeIndex = i;
-                    break;
-                }
+                var removeIndex = FirstMatch(value);
 
                 if (removeIndex < 0) return this;
                 if (values.Length == 1) return new Floater(Array.Empty<float>());
@@ -138,8 +144,7 @@ namespace ChoyUtilities {
         private Floater RemoveFirstMatches(float[] valuesToRemove) {
             if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
             if (valuesToRemove == null || valuesToRemove.Length == 0) return this;
-
-            const float epsilon = 0.0001f;
+            
             var consumed = new bool[valuesToRemove.Length];
             var keepCount = 0;
 
@@ -149,7 +154,7 @@ namespace ChoyUtilities {
                 for (var j = 0; j < valuesToRemove.Length; j++) {
                     if (consumed[j]) continue;
 
-                    if (!(math.abs(t - valuesToRemove[j]) < epsilon)) continue;
+                    if (!(math.abs(t - valuesToRemove[j]) < EPSILON)) continue;
                     consumed[j] = true;
                     shouldRemove = true;
                     break;
@@ -171,7 +176,7 @@ namespace ChoyUtilities {
                 for (var j = 0; j < valuesToRemove.Length; j++) {
                     if (consumed[j]) continue;
 
-                    if (!(math.abs(t - valuesToRemove[j]) < epsilon)) continue;
+                    if (!(math.abs(t - valuesToRemove[j]) < EPSILON)) continue;
                     consumed[j] = true;
                     shouldRemove = true;
                     break;
@@ -190,13 +195,12 @@ namespace ChoyUtilities {
         private Floater RemoveAllMatches(float[] valuesToRemove) {
             if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
             if (valuesToRemove == null || valuesToRemove.Length == 0) return this;
-            const float epsilon = 0.0001f;
             var keepCount = 0;
 
             foreach (var t in values) {
                 var shouldRemove = false;
                 foreach (var t1 in valuesToRemove) {
-                    if (!(math.abs(t - t1) < epsilon)) continue;
+                    if (!(math.abs(t - t1) < EPSILON)) continue;
                     shouldRemove = true;
                     break;
                 }
@@ -213,7 +217,7 @@ namespace ChoyUtilities {
             foreach (var t in values) {
                 var shouldRemove = false;
                 foreach (var t1 in valuesToRemove) {
-                    if (!(math.abs(t - t1) < epsilon)) continue;
+                    if (!(math.abs(t - t1) < EPSILON)) continue;
                     shouldRemove = true;
                     break;
                 }
