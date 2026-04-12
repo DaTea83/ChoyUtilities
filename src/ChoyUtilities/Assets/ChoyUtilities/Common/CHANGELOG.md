@@ -1,22 +1,32 @@
 # Changelog
 
+## [1.0.1] - 2026-04-12
+
+From this point on changelog for Common and Entities will be seperated.
+
+### Added
+* Added RawSet
+
+### Changed
+* Floater is now partial and seperater to three files
+
 ## [1.0.0] - 2026-04-10/11
 
 After a while I finally uploaded this to Github, which from this point onwards version increment will not as frequent as before.
 But update in chnagelog will stays the same. Given will be download to plenty of projects, there are some issue needs to solve.
 As much I like it, but most team projects I'm in don't use DOTS, for that section needs to be seperated. This includes other Unity packages like: Localization and Spline, those need to separated into their own directory.
 
-## Added,
+### Added,
 * Added FancyReplace
 * Added Floater
 
-## Changed
+### Changed
 * Directory split into 3, Default, Entities and Misc
 * Each new directory will come in its own asmdef, where Entities and Misc need default package to work
 * All EugeneC namespace replaced with ChoyUtilities
 * FPSCounter reverted back to use normal string
 
-## Removed
+### Removed
 * Removed Obsolete folder from the package, moved to Assets/Sandbox
 * Removed Entities/UI from the package, moved to Assets/Sandbox
 * Removed MultiInput from the package, moved to Assets/Sandbox

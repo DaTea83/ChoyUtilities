@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace ChoyUtilities {
     public static partial class HelperCollection {
-        private const string TaskCancellationMessage = "Task was cancelled";
+        private const string TASK_CANCELLATION_MESSAGE = "Task was cancelled";
 
         public static async Awaitable AwaitableUntil(this CancellationToken cancellationToken, Func<bool> condition) {
             while (!condition()) await Awaitable.NextFrameAsync(cancellationToken);
@@ -45,7 +45,7 @@ namespace ChoyUtilities {
                 onDone?.Invoke();
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -74,7 +74,7 @@ namespace ChoyUtilities {
                 return true;
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -99,7 +99,7 @@ namespace ChoyUtilities {
                 onDone?.Invoke();
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -135,7 +135,7 @@ namespace ChoyUtilities {
                 onDone?.Invoke();
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -171,7 +171,7 @@ namespace ChoyUtilities {
                 onDone?.Invoke();
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -190,7 +190,7 @@ namespace ChoyUtilities {
                 }
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -212,7 +212,7 @@ namespace ChoyUtilities {
                 onDone?.Invoke();
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -246,7 +246,7 @@ namespace ChoyUtilities {
                 onDone?.Invoke();
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -281,7 +281,7 @@ namespace ChoyUtilities {
                 return true;
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -315,7 +315,7 @@ namespace ChoyUtilities {
                 return true;
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -348,7 +348,7 @@ namespace ChoyUtilities {
                 return true;
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -371,7 +371,7 @@ namespace ChoyUtilities {
                 return new Color(start.x, start.y, start.z, start.w);
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -397,7 +397,7 @@ namespace ChoyUtilities {
                 return new Color(newColor.x, newColor.y, newColor.z, newColor.w);
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -424,7 +424,7 @@ namespace ChoyUtilities {
                 return new Color(newColor.x, newColor.y, newColor.z, newColor.w);
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -458,7 +458,7 @@ namespace ChoyUtilities {
                 return true;
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -484,7 +484,7 @@ namespace ChoyUtilities {
                 return true;
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 
@@ -513,7 +513,7 @@ namespace ChoyUtilities {
                 return true;
             }
             catch {
-                throw new Exception(TaskCancellationMessage);
+                throw new Exception(TASK_CANCELLATION_MESSAGE);
             }
         }
 

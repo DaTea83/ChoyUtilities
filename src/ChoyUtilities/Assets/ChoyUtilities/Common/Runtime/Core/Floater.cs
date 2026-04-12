@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
 using Unity.Collections;
@@ -6,10 +7,11 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
+    
     [Serializable]
     [BurstCompile]
-    public struct Floater : IEquatable<Floater>,
-        IComparable, IComparable<Floater>, IFormattable {
+    public partial struct Floater : IEquatable<Floater>,
+        IComparable, IComparable<Floater>, IFormattable, IEnumerable<Floater> {
         public float[] values;
 
         #region Constructors
@@ -201,318 +203,13 @@ namespace ChoyUtilities {
 
         #endregion
 
-        #region Casting
-
-        public static implicit operator float(Floater value) { return value.values[0]; }
-
-        public static implicit operator float[](Floater value) { return value.values; }
-
-        public static implicit operator List<float>(Floater value) { return new List<float>(value.values); }
-
-        public static implicit operator int[](Floater value) {
-            if (value.values == null || value.values.Length == 0) throw new FloaterException("Empty Floater found");
-            var set = new int[value.values.Length];
-            Array.Copy(value.values, set, value.values.Length);
-            return set;
-        }
-
-        public static implicit operator Enum(Floater value) {
-            if (value.values == null || value.values.Length == 0) throw new FloaterException("Empty Floater found");
-            return (Enum)Enum.ToObject(typeof(Enum), value.values[0]);
-        }
-
-        public static implicit operator Enum[](Floater value) {
-            if (value.values == null || value.values.Length == 0) return Array.Empty<Enum>();
-            var set = new Enum[value.values.Length];
-            for (var i = 0; i < value.values.Length; i++) set[i] = (Enum)Enum.ToObject(typeof(Enum), value.values[i]);
-            return set;
-        }
-
-        //public static implicit operator Array(FloatsSerialize value) => value.Values;
-        public static implicit operator float2(Floater value) {
-            if (value.values is null || value.values.Length < 2)
-                throw new FloaterException("Value must be more than 2 floats");
-            var set = new float2(value.values[0], value.values[1]);
-            return set;
-        }
-
-        public static implicit operator float3(Floater value) {
-            if (value.values is null || value.values.Length < 3)
-                throw new FloaterException("Value must be more than 3 floats");
-            var set = new float3(value.values[0], value.values[1], value.values[2]);
-            return set;
-        }
-
-        public static implicit operator float4(Floater value) {
-            if (value.values is null || value.values.Length < 4)
-                throw new FloaterException("Value must be more than 4 floats");
-            var set = new float4(value.values[0], value.values[1], value.values[2], value.values[3]);
-            return set;
-        }
-
-        public static implicit operator Vector3(Floater value) {
-            if (value.values is null || value.values.Length < 3)
-                throw new FloaterException("Value must be more than 3 floats");
-            var set = new Vector3(value.values[0], value.values[1], value.values[2]);
-            return set;
-        }
-
-        public static implicit operator Quaternion(Floater value) {
-            if (value.values is null || value.values.Length < 4)
-                throw new FloaterException("Value must be more than 4 floats");
-            var set = new Quaternion(value.values[0], value.values[1], value.values[2], value.values[3]);
-            return set;
-        }
-
-        public static implicit operator quaternion(Floater value) {
-            if (value.values is null || value.values.Length < 4)
-                throw new FloaterException("Value must be more than 4 floats");
-            var set = new quaternion(value.values[0], value.values[1], value.values[2], value.values[3]);
-            return set;
-        }
-
-        public static implicit operator Color(Floater value) {
-            if (value.values is null || value.values.Length < 4) return Color.white;
-            var set = new Color(value.values[0], value.values[1], value.values[2], value.values[3]);
-            return set;
-        }
-
-        public static implicit operator char[](Floater value) {
-            if (value.values == null || value.values.Length == 0) return Array.Empty<char>();
-            var set = new char[value.values.Length];
-            for (var i = 0; i < value.values.Length; i++) {
-                var j = (char)value.values[i];
-                set[i] = j;
-            }
-
-            return set;
-        }
-
-        public static implicit operator NativeArray<float>(Floater value) {
-            return new NativeArray<float>(value.values, Allocator.Temp);
-        }
-
-        #endregion
-
-        #region Operators
-
-        public Floater Add(float value) {
-            var set = new float[values.Length + 1];
-            if (set == null) throw new FloaterException(nameof(set));
-            Array.Copy(values, set, values.Length);
-            set[^1] = value;
-
-            return new Floater(set);
-        }
-
-        public Floater Add(float[] extras) {
-            if (extras == null || extras == Array.Empty<float>()) return this;
-            var set = new float[values.Length + extras.Length];
-            if (set == null) throw new FloaterException(nameof(set));
-
-            for (var i = 0; i < values.Length; i++)
-                set[i] = values[i];
-            for (var i = 0; i < extras.Length; i++)
-                set[i + values.Length] = extras[i];
-
-            return new Floater(set);
-        }
-
-        public Floater Add(Floater extra) {
-            if (extra.values == null || extra.values == Array.Empty<float>()) return this;
-            var set = new float[values.Length + extra.values.Length];
-            if (set == null) throw new FloaterException(nameof(set));
-
-            for (var i = 0; i < values.Length; i++)
-                set[i] = values[i];
-            for (var i = 0; i < extra.values.Length; i++)
-                set[i + values.Length] = extra.values[i];
-
-            return new Floater(set);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="value">
-        ///     Value to remove.
-        /// </param>
-        /// <param name="removeAllEqual">
-        ///     If true, will remove all values that are equal to <paramref name="value" />,
-        ///     otherwise will remove only the first value that is equal to <paramref name="value" />.
-        /// </param>
-        /// <returns></returns>
-        public Floater Remove(float value, bool removeAllEqual = false) {
-            if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
-            const float epsilon = 0.0001f;
-
-            if (removeAllEqual) {
-                var keepCount = 0;
-
-                foreach (var t in values)
-                    if (math.abs(t - value) >= epsilon)
-                        keepCount++;
-
-                if (keepCount == values.Length) return this;
-                if (keepCount == 0) return new Floater(Array.Empty<float>());
-
-                var set = new float[keepCount];
-                var j = 0;
-
-                foreach (var t in values) {
-                    if (math.abs(t - value) < epsilon) continue;
-                    set[j] = t;
-                    j++;
-                }
-
-                return new Floater(set);
-            }
-            else {
-                var removeIndex = -1;
-
-                for (var i = 0; i < values.Length; i++) {
-                    if (!(math.abs(values[i] - value) < epsilon)) continue;
-                    removeIndex = i;
-                    break;
-                }
-
-                if (removeIndex < 0) return this;
-                if (values.Length == 1) return new Floater(Array.Empty<float>());
-                var set = new float[values.Length - 1];
-
-                if (removeIndex > 0)
-                    Array.Copy(values, 0, set, 0, removeIndex);
-                if (removeIndex < values.Length - 1)
-                    Array.Copy(values, removeIndex + 1, set, removeIndex, values.Length - removeIndex - 1);
-
-                return new Floater(set);
-            }
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="value">
-        ///     Value to remove.
-        /// </param>
-        /// <param name="removeAllEqual">
-        ///     If true, will remove all values that <paramref name="value" /> contains,
-        ///     otherwise will remove only the first value that in <paramref name="value" />.
-        /// </param>
-        /// <returns></returns>
-        public Floater Remove(float[] value, bool removeAllEqual = false) {
-            return removeAllEqual ? RemoveAllMatches(value) : RemoveFirstMatches(value);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="value">
-        ///     Value to remove.
-        /// </param>
-        /// <param name="removeAllEqual">
-        ///     If true, will remove all values that <paramref name="value" /> contains,
-        ///     otherwise will remove only the first value that in <paramref name="value" />.
-        /// </param>
-        /// <returns></returns>
-        public Floater Remove(Floater value, bool removeAllEqual = false) {
-            return removeAllEqual ? RemoveAllMatches(value.values) : RemoveFirstMatches(value.values);
-        }
-
-        private Floater RemoveFirstMatches(float[] valuesToRemove) {
-            if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
-            if (valuesToRemove == null || valuesToRemove.Length == 0) return this;
-
-            const float epsilon = 0.0001f;
-            var consumed = new bool[valuesToRemove.Length];
-            var keepCount = 0;
-
-            foreach (var t in values) {
-                var shouldRemove = false;
-
-                for (var j = 0; j < valuesToRemove.Length; j++) {
-                    if (consumed[j]) continue;
-
-                    if (!(math.abs(t - valuesToRemove[j]) < epsilon)) continue;
-                    consumed[j] = true;
-                    shouldRemove = true;
-                    break;
-                }
-
-                if (!shouldRemove) keepCount++;
-            }
-
-            if (keepCount == values.Length) return this;
-            if (keepCount == 0) return new Floater(Array.Empty<float>());
-
-            var set = new float[keepCount];
-            consumed = new bool[valuesToRemove.Length];
-            var index = 0;
-
-            foreach (var t in values) {
-                var shouldRemove = false;
-
-                for (var j = 0; j < valuesToRemove.Length; j++) {
-                    if (consumed[j]) continue;
-
-                    if (!(math.abs(t - valuesToRemove[j]) < epsilon)) continue;
-                    consumed[j] = true;
-                    shouldRemove = true;
-                    break;
-                }
-
-                if (shouldRemove) continue;
-
-                set[index] = t;
-                index++;
-            }
-
-            return new Floater(set);
-        }
-
-        private Floater RemoveAllMatches(float[] valuesToRemove) {
-            if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
-            if (valuesToRemove == null || valuesToRemove.Length == 0) return this;
-            const float epsilon = 0.0001f;
-            var keepCount = 0;
-
-            foreach (var t in values) {
-                var shouldRemove = false;
-                foreach (var t1 in valuesToRemove) {
-                    if (!(math.abs(t - t1) < epsilon)) continue;
-                    shouldRemove = true;
-                    break;
-                }
-
-                if (!shouldRemove) keepCount++;
-            }
-
-            if (keepCount == values.Length) return this;
-            if (keepCount == 0) return new Floater(Array.Empty<float>());
-
-            var set = new float[keepCount];
-            var index = 0;
-
-            foreach (var t in values) {
-                var shouldRemove = false;
-                foreach (var t1 in valuesToRemove) {
-                    if (!(math.abs(t - t1) < epsilon)) continue;
-                    shouldRemove = true;
-                    break;
-                }
-
-                if (shouldRemove)
-                    continue;
-
-                set[index] = t;
-                index++;
-            }
-
-            return new Floater(set);
-        }
-
-        #endregion
-
-        #region IEquatable
+        #region IEquatable, IEnumerable
 
         public bool Equals(Floater other) { return Equals(values, other.values); }
+        public IEnumerator<Floater> GetEnumerator() {
+            //TODO
+            throw new NotImplementedException();
+        }
         public override bool Equals(object obj) { return obj is Floater other && Equals(other); }
         public override int GetHashCode() { return values is not null ? values.GetHashCode() : 0; }
 
@@ -543,6 +240,10 @@ namespace ChoyUtilities {
             char[] set = new Floater(values);
             if (set == null || set == Array.Empty<char>()) return string.Empty;
             return set.ToString();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
         public string ToString(string format, IFormatProvider formatProvider) { return ToString(); }

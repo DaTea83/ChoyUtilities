@@ -10,7 +10,7 @@ namespace ChoyUtilities {
 
         public static async Awaitable<World> TryGetWorld(this CancellationToken token, ushort maxAllowed = MAX_FRAME) {
             var frame = 0;
-
+            
             while (frame < maxAllowed) {
                 var world = World.DefaultGameObjectInjectionWorld;
 
@@ -19,7 +19,6 @@ namespace ChoyUtilities {
                 frame++;
                 await Awaitable.NextFrameAsync(token);
             }
-
             return null;
         }
 
