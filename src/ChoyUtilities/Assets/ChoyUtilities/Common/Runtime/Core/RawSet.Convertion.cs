@@ -52,7 +52,7 @@ namespace ChoyUtilities {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RawSet<float> Color(Color value, Allocator allocator = Allocator.Persistent) {
-            var set = new float[] {
+            var set = new [] {
                 value.r, value.g, value.b, value.a
             };
             return new RawSet<float>(set, allocator);

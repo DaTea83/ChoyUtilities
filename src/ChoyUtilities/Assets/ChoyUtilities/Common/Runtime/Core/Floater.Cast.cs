@@ -9,11 +9,11 @@ namespace ChoyUtilities {
     public partial struct Floater {
         #region Casting
 
-        public static implicit operator float(Floater value) { return value.values[0]; }
+        public static implicit operator float(Floater value) => value.values[0];
 
-        public static implicit operator float[](Floater value) { return value.values; }
+        public static implicit operator float[](Floater value) => value.values;
 
-        public static implicit operator List<float>(Floater value) { return new List<float>(value.values); }
+        public static implicit operator List<float>(Floater value) => new (value.values);
 
         public static implicit operator int[](Floater value) {
             if (value.values == null || value.values.Length == 0) throw new FloaterException("Empty Floater found");

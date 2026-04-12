@@ -4,14 +4,6 @@ using UnityEngine;
 
 namespace ChoyUtilities {
     public static partial class HelperCollection {
-        public static Transform FloatsSerializeToTransform(this Transform obj, Floater data) {
-            if (data.values.Length < 9) return obj;
-            var euler = new Vector3(data.values[3], data.values[4], data.values[5]);
-            obj.position = new Vector3(data.values[0], data.values[1], data.values[2]);
-            obj.rotation = quaternion.Euler(euler);
-            obj.localScale = new Vector3(data.values[6], data.values[7], data.values[8]);
-            return obj;
-        }
 
         public static Quaternion RotateTowards(this Transform obj, float3 target, float speed) {
             var dir = math.normalize(target - (float3)obj.position);

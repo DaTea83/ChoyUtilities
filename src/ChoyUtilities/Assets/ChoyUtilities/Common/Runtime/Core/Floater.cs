@@ -12,6 +12,7 @@ namespace ChoyUtilities {
     [BurstCompile]
     public partial struct Floater : IEquatable<Floater>,
         IComparable, IComparable<Floater>, IFormattable, IEnumerable<float> {
+        
         public float[] values;
 
         #region Constructors
@@ -30,12 +31,10 @@ namespace ChoyUtilities {
         public Floater(float4 value) : this(new[] { value.x, value.y, value.z, value.w }) { }
         public Floater(Color value) : this(new[] { value.r, value.g, value.b, value.a }) { }
         public Floater(Quaternion value) : this(new[] { value.x, value.y, value.z, value.w }) { }
-
         public Floater(quaternion value) {
             var v = value.value;
             values = new[] { v.x, v.y, v.z, v.w };
         }
-
         public Floater(Vector2 value) : this(new[] { value.x, value.y }) { }
         public Floater(Vector3 value) : this(new[] { value.x, value.y, value.z }) { }
         public Floater(Vector4 value) : this(new[] { value.x, value.y, value.z, value.w }) { }
@@ -49,47 +48,37 @@ namespace ChoyUtilities {
         public Floater(NativeArray<float> value) : this(value.ToArray()) { }
         public Floater(NativeList<float> value) : this(value.ToArray(Allocator.Temp)) { }
         public Floater(byte value) : this(new int[] { value }) { }
-
         public Floater(byte[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
-
         public Floater(sbyte value) : this(new int[] { value }) { }
-
         public Floater(sbyte[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
-
         public Floater(ushort value) : this(new int[] { value }) { }
-
         public Floater(ushort[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
-
         public Floater(short value) : this(new int[] { value }) { }
-
         public Floater(short[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
-
         public Floater(bool value) { values = new[] { value ? 1f : 0f }; }
         public Floater(bool2 value) { values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f }; }
-
         public Floater(bool[] value) {
             var set = new float[value.Length];
             for (var i = 0; i < value.Length; i++) set[i] = value[i] ? 1f : 0f;
 
             values = set;
         }
-
         public Floater(float4x4 value) {
             values = new float[16];
             var c0 = value.c0;
@@ -113,7 +102,6 @@ namespace ChoyUtilities {
             values[14] = c3.z;
             values[15] = c3.w;
         }
-
         public Floater(Matrix4x4 value) {
             values = new float[16];
             var c0 = value.GetColumn(0);
@@ -137,34 +125,26 @@ namespace ChoyUtilities {
             values[14] = c3.z;
             values[15] = c3.w;
         }
-
         public Floater(double value) : this(new[] { (float)value }) { }
-
         public Floater(double[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
-
         public Floater(half value) : this(new[] { (float)value }) { }
-
         public Floater(half[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
-
         public Floater(Enum value) : this(new[] { (int)Convert.ToUInt32(value) }) { }
-
         public Floater(Enum[] value) {
             var set = new float[value.Length];
             for (var i = 0; i < value.Length; i++) set[i] = (int)Convert.ToUInt32(value[i]);
 
             values = set;
         }
-
         public Floater(char value) : this(new[] { (float)value }) { }
-
         public Floater(char[] value) {
             var set = new float[value.Length];
             if (set == null) throw new FloaterException(nameof(set));
@@ -172,17 +152,14 @@ namespace ChoyUtilities {
                 var j = (int)value[i];
                 set[i] = j;
             }
-
             values = set;
         }
-
         public Floater(string value) : this(value.ToCharArray()) { }
-
         /// <summary>
         /// </summary>
         /// <param name="value">
         ///     For Transform, it will convert quaternion to euler angles before storing.
-        ///     To convert FloatsSerialize back to Transform use <see cref="HelperCollection.FloatsSerializeToTransform" />
+        ///     To convert FloatsSerialize back to Transform use <see cref="HelperCollection.Floater" />
         ///     extension
         /// </param>
         public Floater(Transform value) {
