@@ -42,5 +42,31 @@ namespace ChoyUtilities {
             }
             return index;
         }
+        
+        public static (T[], bool) AddIfNotContain<T>(this T[] set, T value)
+            where T : struct, Enum {
+            foreach (var e in set) {
+                if (e.Equals(value)) 
+                    return (set, false);
+                break;
+            }
+            var newSet = new T[set.Length + 1];
+            set.CopyTo(newSet, 0);
+            newSet[^1] = value;
+            return (newSet, true);
+        }
+
+        public static (T[], bool) RemoveIfContain<T>(this T[] set, T value) 
+            where T : struct, Enum {
+            var removeIndex = set.FirstMatch(value);
+            if (removeIndex < -1) return (set, false);
+            var newArray = new T[set.Length - 1];
+            if(removeIndex > 0)
+                Array.Copy(set, 0, newArray, 0, removeIndex);
+            if (removeIndex < set.Length - 1)
+                Array.Copy(set, removeIndex + 1, newArray, removeIndex, set.Length - removeIndex - 1);
+            
+            return (newArray, true);
+        }
     }
 }
