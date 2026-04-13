@@ -4,7 +4,7 @@ namespace ChoyUtilities {
 
     public static partial class HelperCollection {
 
-        public static int FirstMatch<T>(this T[] set, T value)
+        public static int FirstValueMatch<T>(this T[] set, T value)
             where T : unmanaged{
             var index = -1;
             for (var i = 0; i < set.Length; i++) {
@@ -30,7 +30,7 @@ namespace ChoyUtilities {
 
         public static (T[], bool) RemoveIfContain<T>(this T[] set, T value) 
             where T : unmanaged {
-            var removeIndex = set.FirstMatch(value);
+            var removeIndex = set.FirstValueMatch(value);
             if (removeIndex < -1) return (set, false);
             var newArray = new T[set.Length - 1];
             if(removeIndex > 0)

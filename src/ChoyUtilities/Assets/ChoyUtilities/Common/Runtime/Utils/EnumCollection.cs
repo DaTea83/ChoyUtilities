@@ -31,5 +31,16 @@ namespace ChoyUtilities {
 
             return (T)Enum.ToObject(typeof(T), highestValue);
         }
+        
+        public static int FirstMatch<T>(this T[] set, T value)
+            where T : struct, Enum{
+            var index = -1;
+            for (var i = 0; i < set.Length; i++) {
+                if (!set[i].Equals(value)) continue;
+                index = i;
+                break;
+            }
+            return index;
+        }
     }
 }
