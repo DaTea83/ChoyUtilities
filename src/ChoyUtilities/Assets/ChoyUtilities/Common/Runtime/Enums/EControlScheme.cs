@@ -1,5 +1,6 @@
 namespace ChoyUtilities {
-    public enum EControlSchemeEnum : byte {
+    
+    public enum EControlScheme : byte {
         Keyboard,
         Gamepad,
         Touchscreen,

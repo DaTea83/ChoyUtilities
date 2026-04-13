@@ -38,27 +38,27 @@ namespace ChoyUtilities {
             }
         }
 
-        public static EControlSchemeEnum GetDeviceType(InputDevice device) {
-            var scheme = EControlSchemeEnum.Gamepad;
+        public static EControlScheme GetDeviceType(InputDevice device) {
+            var scheme = EControlScheme.Gamepad;
 
             if (device is Gamepad)
-                scheme = EControlSchemeEnum.Gamepad;
+                scheme = EControlScheme.Gamepad;
             else if (device is Keyboard)
-                scheme = EControlSchemeEnum.Keyboard;
+                scheme = EControlScheme.Keyboard;
 
             return scheme;
         }
 
-        public static string GetControlType(this EControlSchemeEnum eControl) {
+        public static string GetControlType(this EControlScheme eControl) {
             string mode = null;
 
             switch (eControl) {
-                case EControlSchemeEnum.Keyboard:
+                case EControlScheme.Keyboard:
 
                     mode = nameof(Keyboard);
 
                     break;
-                case EControlSchemeEnum.Gamepad:
+                case EControlScheme.Gamepad:
 
                     mode = nameof(Gamepad);
 

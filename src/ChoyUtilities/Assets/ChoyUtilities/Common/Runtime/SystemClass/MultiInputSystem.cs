@@ -15,7 +15,7 @@ namespace ChoyUtilities {
 
         public InputUser User;
 
-        public MultiInputSystem(InputDevice device, InputActionAsset asset, EControlSchemeEnum controltype) {
+        public MultiInputSystem(InputDevice device, InputActionAsset asset, EControlScheme controltype) {
             User = InputUser.PerformPairingWithDevice(device);
             Device = device;
             Asset = Object.Instantiate(asset);

@@ -3,6 +3,7 @@ using System;
 namespace ChoyUtilities {
     
     public static partial class HelperCollection {
+        
         public static bool IsSingleFlag<T>(this T flag)
             where T : struct, Enum {
             if (!typeof(T).IsDefined(typeof(FlagsAttribute), false))
