@@ -2,12 +2,24 @@
     "assetModified": [
         {
             "idType": {
-                "values": [
-                    4.0
-                ]
+                "values": []
             },
-            "idPath": "Assets/FancyReplace",
-            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_limited_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures",
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_data_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+        },
+        {
+            "idType": {
+                "values": []
+            },
+            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace",
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_data_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+        },
+        {
+            "idType": {
+                "values": []
+            },
+            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Save",
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_check_2_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         },
         {
             "idType": {
@@ -16,7 +28,7 @@
                 ]
             },
             "idPath": "Assets/FancyReplace/ChoyUtilities_Save.json",
-            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/All/docs_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/TextAsset/file_json_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         },
         {
             "idType": {
@@ -24,8 +36,8 @@
                     4.0
                 ]
             },
-            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures",
-            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_data_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+            "idPath": "Assets",
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         },
         {
             "idType": {
@@ -33,24 +45,15 @@
                     4.0
                 ]
             },
-            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace",
-            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_data_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
-        },
-        {
-            "idType": {
-                "values": [
-                    4.0
-                ]
-            },
-            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Save",
-            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_check_2_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+            "idPath": "Assets/FancyReplace",
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_off_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         }
     ],
     "color": {
         "values": [
-            0.17381629347801209,
-            0.4506385326385498,
-            0.5849056243896484,
+            0.21074743568897248,
+            0.2551388740539551,
+            0.5525606274604797,
             1.0
         ]
     }

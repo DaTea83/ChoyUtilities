@@ -66,7 +66,7 @@ namespace ChoyUtilities {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RawSet<float> Floater(Floater value, Allocator allocator = Allocator.Persistent) {
-            return new RawSet<float>(value.values, allocator);
+            return new RawSet<float>((float[])value, allocator);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

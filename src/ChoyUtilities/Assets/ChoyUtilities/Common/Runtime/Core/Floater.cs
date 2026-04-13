@@ -12,8 +12,12 @@ namespace ChoyUtilities {
     [BurstCompile]
     public partial struct Floater : IEquatable<Floater>, IComparable, IComparable<Floater>,
         IFormattable, IEnumerable<float> {
-        
+
         public float[] values;
+
+        public float this[int index] => values[index];
+        public int Length => values.Length;
+        public bool IsCreated => values is not null;
 
         #region Constructors
 
@@ -152,7 +156,7 @@ namespace ChoyUtilities {
         /// </summary>
         /// <param name="value">
         ///     For Transform, it will convert quaternion to euler angles before storing.
-        ///     To convert FloatsSerialize back to Transform use <see cref="HelperCollection.FloatsSerializeToTransform" />
+        ///     To convert FloatsSerialize back to Transform use <see cref="HelperCollection.Floater" />
         ///     extension
         /// </param>
         public Floater(Transform value) {
