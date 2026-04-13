@@ -7,7 +7,7 @@ namespace ChoyUtilities {
         
         protected RectTransform RectTransform;
 
-        protected virtual void OnValidate() {
+        protected virtual void OnEnable() {
             RectTransform = GetComponent<RectTransform>();
         }
         
