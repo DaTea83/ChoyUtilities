@@ -12,23 +12,23 @@ namespace ChoyUtilities {
     [BurstCompile]
     public partial struct Floater : IEquatable<Floater>, IComparable, IComparable<Floater>,
         IFormattable, IEnumerable<float> {
-        
-        private float[] _values;
-        
-        public float this[int index] => _values[index];
-        public int Length => _values.Length;
-        public bool IsCreated => _values is not null;
+
+        public float[] Values { get; }
+
+        public float this[int index] => Values[index];
+        public int Length => Values.Length;
+        public bool IsCreated => Values is not null;
 
         #region Constructors
 
-        public Floater(float[] values) { this._values = values; }
+        public Floater(float[] values) { this.Values = values; }
         public Floater(int[] values) {
             var set = new float[values.Length];
             Array.Copy(values, set, values.Length);
-            this._values = set;
+            this.Values = set;
         }
 
-        public Floater(Floater values) : this(values._values) { }
+        public Floater(Floater values) : this(values.Values) { }
         public Floater(float value) : this(new[] { value }) { }
         public Floater(float2 value) : this(new[] { value.x, value.y }) { }
         public Floater(float3 value) : this(new[] { value.x, value.y, value.z }) { }
@@ -37,7 +37,7 @@ namespace ChoyUtilities {
         public Floater(Quaternion value) : this(new[] { value.x, value.y, value.z, value.w }) { }
         public Floater(quaternion value) {
             var v = value.value;
-            _values = new[] { v.x, v.y, v.z, v.w };
+            Values = new[] { v.x, v.y, v.z, v.w };
         }
         public Floater(Vector2 value) : this(new[] { value.x, value.y }) { }
         public Floater(Vector3 value) : this(new[] { value.x, value.y, value.z }) { }
@@ -55,91 +55,91 @@ namespace ChoyUtilities {
         public Floater(byte[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
-            _values = set;
+            Values = set;
         }
         public Floater(sbyte value) : this(new int[] { value }) { }
         public Floater(sbyte[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
-            _values = set;
+            Values = set;
         }
         public Floater(ushort value) : this(new int[] { value }) { }
         public Floater(ushort[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
-            _values = set;
+            Values = set;
         }
         public Floater(short value) : this(new int[] { value }) { }
         public Floater(short[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
-            _values = set;
+            Values = set;
         }
-        public Floater(bool value) { _values = new[] { value ? 1f : 0f }; }
-        public Floater(bool2 value) { _values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f }; }
+        public Floater(bool value) { Values = new[] { value ? 1f : 0f }; }
+        public Floater(bool2 value) { Values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f }; }
         public Floater(bool[] value) {
             var set = new float[value.Length];
             for (var i = 0; i < value.Length; i++) set[i] = value[i] ? 1f : 0f;
 
-            _values = set;
+            Values = set;
         }
         public Floater(float4x4 value) {
-            _values = new float[16];
+            Values = new float[16];
             var c0 = value.c0;
             var c1 = value.c1;
             var c2 = value.c2;
             var c3 = value.c3;
-            _values[0] = c0.x;
-            _values[1] = c0.y;
-            _values[2] = c0.z;
-            _values[3] = c0.w;
-            _values[4] = c1.x;
-            _values[5] = c1.y;
-            _values[6] = c1.z;
-            _values[7] = c1.w;
-            _values[8] = c2.x;
-            _values[9] = c2.y;
-            _values[10] = c2.z;
-            _values[11] = c2.w;
-            _values[12] = c3.x;
-            _values[13] = c3.y;
-            _values[14] = c3.z;
-            _values[15] = c3.w;
+            Values[0] = c0.x;
+            Values[1] = c0.y;
+            Values[2] = c0.z;
+            Values[3] = c0.w;
+            Values[4] = c1.x;
+            Values[5] = c1.y;
+            Values[6] = c1.z;
+            Values[7] = c1.w;
+            Values[8] = c2.x;
+            Values[9] = c2.y;
+            Values[10] = c2.z;
+            Values[11] = c2.w;
+            Values[12] = c3.x;
+            Values[13] = c3.y;
+            Values[14] = c3.z;
+            Values[15] = c3.w;
         }
         public Floater(Matrix4x4 value) {
-            _values = new float[16];
+            Values = new float[16];
             var c0 = value.GetColumn(0);
             var c1 = value.GetColumn(1);
             var c2 = value.GetColumn(2);
             var c3 = value.GetColumn(3);
-            _values[0] = c0.x;
-            _values[1] = c0.y;
-            _values[2] = c0.z;
-            _values[3] = c0.w;
-            _values[4] = c1.x;
-            _values[5] = c1.y;
-            _values[6] = c1.z;
-            _values[7] = c1.w;
-            _values[8] = c2.x;
-            _values[9] = c2.y;
-            _values[10] = c2.z;
-            _values[11] = c2.w;
-            _values[12] = c3.x;
-            _values[13] = c3.y;
-            _values[14] = c3.z;
-            _values[15] = c3.w;
+            Values[0] = c0.x;
+            Values[1] = c0.y;
+            Values[2] = c0.z;
+            Values[3] = c0.w;
+            Values[4] = c1.x;
+            Values[5] = c1.y;
+            Values[6] = c1.z;
+            Values[7] = c1.w;
+            Values[8] = c2.x;
+            Values[9] = c2.y;
+            Values[10] = c2.z;
+            Values[11] = c2.w;
+            Values[12] = c3.x;
+            Values[13] = c3.y;
+            Values[14] = c3.z;
+            Values[15] = c3.w;
         }
         public Floater(double value) : this(new[] { (float)value }) { }
         public Floater(double[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
-            _values = set;
+            Values = set;
         }
         public Floater(half value) : this(new[] { (float)value }) { }
         public Floater(half[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
-            _values = set;
+            Values = set;
         }
         public Floater(char value) : this(new[] { (float)value }) { }
         public Floater(char[] value) {
@@ -149,7 +149,7 @@ namespace ChoyUtilities {
                 var j = (int)value[i];
                 set[i] = j;
             }
-            _values = set;
+            Values = set;
         }
         public Floater(string value) : this(value.ToCharArray()) { }
         /// <summary>
@@ -171,20 +171,20 @@ namespace ChoyUtilities {
             set[6] = value.localScale.x;
             set[7] = value.localScale.y;
             set[8] = value.localScale.z;
-            _values = set;
+            Values = set;
         }
 
         #endregion
 
         #region IEquatable, IEnumerable
 
-        public bool Equals(Floater other) { return Equals(_values, other._values); }
+        public bool Equals(Floater other) { return Equals(Values, other.Values); }
         public IEnumerator<float> GetEnumerator() {
-            foreach (var t in _values)
+            foreach (var t in Values)
                 yield return t;
         }
         public override bool Equals(object obj) { return obj is Floater other && Equals(other); }
-        public override int GetHashCode() { return _values is not null ? _values.GetHashCode() : 0; }
+        public override int GetHashCode() { return Values is not null ? Values.GetHashCode() : 0; }
 
         #endregion
 
@@ -193,9 +193,9 @@ namespace ChoyUtilities {
         public int CompareTo(Floater other) {
             float selfV = 0;
             float otherV = 0;
-            foreach (var f in _values) selfV += f;
+            foreach (var f in Values) selfV += f;
 
-            foreach (var f in other._values) otherV += f;
+            foreach (var f in other.Values) otherV += f;
 
             return selfV.CompareTo(otherV);
         }
@@ -210,7 +210,7 @@ namespace ChoyUtilities {
         #region IFormattable
 
         public override string ToString() {
-            char[] set = new Floater(_values);
+            char[] set = new Floater(Values);
             if (set == null || set == Array.Empty<char>()) return string.Empty;
             return set.ToString();
         }
