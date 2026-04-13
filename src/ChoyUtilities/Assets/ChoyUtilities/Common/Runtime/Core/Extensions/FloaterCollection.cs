@@ -6,6 +6,20 @@ namespace ChoyUtilities {
     
     public static partial class HelperCollection {
 
+        public static float3 PositionFromTransform(this Floater data) {
+            return data.values.Length < 9 ? float3.zero : new float3(data.values[0], data.values[1], data.values[2]);
+        }
+        
+        public static quaternion RotationFromTransform(this Floater data) {
+            if (data.values.Length < 9) return quaternion.identity;
+            var euler = new Vector3(data.values[3], data.values[4], data.values[5]);
+            return quaternion.Euler(euler);
+        }
+        
+        public static float3 ScaleFromTransform(this Floater data) {
+            return data.values.Length < 9 ? new float3(1, 1, 1) : new float3(data.values[6], data.values[7], data.values[8]);
+        }
+        
         public static Transform Floater(this Transform obj, Floater data) {
             if (data.values.Length < 9) return obj;
             var euler = new Vector3(data.values[3], data.values[4], data.values[5]);
