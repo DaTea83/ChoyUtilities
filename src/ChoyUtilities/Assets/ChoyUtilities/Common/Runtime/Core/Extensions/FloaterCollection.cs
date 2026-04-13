@@ -7,25 +7,25 @@ namespace ChoyUtilities {
     public static partial class HelperCollection {
 
         public static float3 PositionFromTransform(this Floater data) {
-            return data.values.Length < 9 ? float3.zero : new float3(data.values[0], data.values[1], data.values[2]);
+            return data.Length < 9 ? float3.zero : new float3(data[0], data[1], data[2]);
         }
         
         public static quaternion RotationFromTransform(this Floater data) {
-            if (data.values.Length < 9) return quaternion.identity;
-            var euler = new Vector3(data.values[3], data.values[4], data.values[5]);
+            if (data.Length < 9) return quaternion.identity;
+            var euler = new Vector3(data[3], data[4], data[5]);
             return quaternion.Euler(euler);
         }
         
         public static float3 ScaleFromTransform(this Floater data) {
-            return data.values.Length < 9 ? new float3(1, 1, 1) : new float3(data.values[6], data.values[7], data.values[8]);
+            return data.Length < 9 ? new float3(1, 1, 1) : new float3(data[6], data[7], data[8]);
         }
         
         public static Transform Floater(this Transform obj, Floater data) {
-            if (data.values.Length < 9) return obj;
-            var euler = new Vector3(data.values[3], data.values[4], data.values[5]);
-            obj.position = new Vector3(data.values[0], data.values[1], data.values[2]);
+            if (data.Length < 9) return obj;
+            var euler = new Vector3(data[3], data[4], data[5]);
+            obj.position = new Vector3(data[0], data[1], data[2]);
             obj.rotation = quaternion.Euler(euler);
-            obj.localScale = new Vector3(data.values[6], data.values[7], data.values[8]);
+            obj.localScale = new Vector3(data[6], data[7], data[8]);
             return obj;
         }
 
@@ -45,14 +45,14 @@ namespace ChoyUtilities {
         
         public static T GetEnum<T>(this Floater value) 
             where T : struct, Enum{
-            return (T)Convert.ChangeType((uint)value.values[0], typeof(T));
+            return (T)Convert.ChangeType((uint)value[0], typeof(T));
         }
 
         public static T[] GetEnums<T>(this Floater value) 
         where T : struct, Enum {
-            var ts = new T[value.values.Length];
-            for (var i = 0; i < value.values.Length; i++) {
-                ts[i] = (T)Convert.ChangeType((uint)value.values[i], typeof(T));
+            var ts = new T[value.Length];
+            for (var i = 0; i < value.Length; i++) {
+                ts[i] = (T)Convert.ChangeType((uint)value[i], typeof(T));
             }
             return ts;
         }
