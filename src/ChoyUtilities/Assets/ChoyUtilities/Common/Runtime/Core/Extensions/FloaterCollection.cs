@@ -31,7 +31,7 @@ namespace ChoyUtilities {
 
         public static Floater Floater<T>(this T value) 
             where T : struct, Enum{
-            var i = (Convert.ToUInt32(value));
+            var i = (Convert.ToSingle(value));
             return new Floater(i);
         }
         
@@ -39,22 +39,25 @@ namespace ChoyUtilities {
             where T : struct, Enum{
             var set = new float[value.Length];
             for (var i = 0; i < value.Length; i++) 
-                set[i] = Convert.ToUInt32(value[i]);
+                set[i] = Convert.ToSingle(value[i]);
             return new Floater(set);
         }
         
         public static T GetEnum<T>(this Floater value) 
             where T : struct, Enum{
-            return (T)Convert.ChangeType((uint)value[0], typeof(T));
+            return (T)Enum.ToObject(typeof(T), (uint)value[0]);
         }
 
         public static T[] GetEnums<T>(this Floater value) 
         where T : struct, Enum {
-            var ts = new T[value.Length];
+            if (!value.IsCreated)
+                throw new FloaterException("Floater is not created yet.");
+            
+            var results = new T[value.Length];
             for (var i = 0; i < value.Length; i++) {
-                ts[i] = (T)Convert.ChangeType((uint)value[i], typeof(T));
+                results[i] = (T)Enum.ToObject(typeof(T), (uint)value[i]);
             }
-            return ts;
+            return results;
         }
     }
 }

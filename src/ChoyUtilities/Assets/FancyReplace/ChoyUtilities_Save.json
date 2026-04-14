@@ -47,6 +47,15 @@
             },
             "idPath": "Assets/FancyReplace",
             "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_off_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+        },
+        {
+            "idType": {
+                "values": [
+                    4.0
+                ]
+            },
+            "idPath": "Assets/Sandbox",
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_info_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         }
     ],
     "color": {
