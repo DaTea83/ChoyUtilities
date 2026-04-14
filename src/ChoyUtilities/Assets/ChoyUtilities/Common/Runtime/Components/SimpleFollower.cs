@@ -2,8 +2,9 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
+    
     [DisallowMultipleComponent]
-    [AddComponentMenu("Eugene/Follower")]
+    [AddComponentMenu("Choy Utilities/Follower")]
     public class SimpleFollower : MonoBehaviour {
         [SerializeField] private Transform target;
         [SerializeField] private float3 offset;

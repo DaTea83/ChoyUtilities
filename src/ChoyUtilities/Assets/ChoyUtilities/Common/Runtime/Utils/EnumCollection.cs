@@ -33,14 +33,14 @@ namespace ChoyUtilities {
         }
         
         public static int FirstMatch<T>(this T[] set, T value)
-            where T : struct, Enum{
-            var index = -1;
+            where T : struct, Enum
+        {
             for (var i = 0; i < set.Length; i++) {
-                if (!set[i].Equals(value)) continue;
-                index = i;
-                break;
+                if (set[i].Equals(value)) {
+                    return i;
+                }
             }
-            return index;
+            return -1;
         }
         
         public static (T[], bool) AddIfNotContain<T>(this T[] set, T value)

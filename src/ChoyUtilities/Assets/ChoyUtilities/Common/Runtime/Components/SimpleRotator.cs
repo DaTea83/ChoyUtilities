@@ -2,7 +2,8 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-    [AddComponentMenu("Eugene/Simple Rotater")]
+    
+    [AddComponentMenu("Choy Utilities/Simple Rotator")]
     [DisallowMultipleComponent]
     public class SimpleRotator : MonoBehaviour {
         [SerializeField] private EAxis rotateAxis;

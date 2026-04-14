@@ -1,7 +1,8 @@
 using UnityEngine;
 
 namespace ChoyUtilities {
-    [RequireComponent(typeof(BoxCollider))]
+    
+    [RequireComponent(typeof(Collider))]
     public class TriggerMethod : MonoBehaviour {
         [SerializeField] private LayerMask layer;
         [SerializeField] private string objectTag;
@@ -10,11 +11,11 @@ namespace ChoyUtilities {
         [SerializeField] private string methodName;
         [SerializeField] private bool turnOffAfter;
 
-        private BoxCollider _collider;
+        private Collider _collider;
 
         // Start is called before the first frame update
         private void Start() {
-            _collider = GetComponent<BoxCollider>();
+            _collider = GetComponent<Collider>();
             _collider.isTrigger = true;
         }
 

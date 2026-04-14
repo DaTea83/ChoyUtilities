@@ -10,6 +10,7 @@ namespace ChoyUtilities {
     public abstract class GenericAudioManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
+        
         public enum EAudioPriority : byte {
             Highest = 0,
             UltraHigh = 1 << 0,
@@ -51,7 +52,7 @@ namespace ChoyUtilities {
             try {
                 await Awaitable.NextFrameAsync(Token);
 
-                if (audioSourcePrefab is null) throw new Exception("Audio Source Prefab is not set");
+                if (audioSourcePrefab is null) throw new SingletonException("Audio Source Prefab is not set");
                 AudioSources = new AudioSource[poolCount];
 
                 Pool = new ObjectPool<AudioSource>(
@@ -99,7 +100,7 @@ namespace ChoyUtilities {
         public virtual float PlayClipAtPos(TEnum id, float3 pos, byte audioPriority = (byte)EAudioPriority.Average) {
             var index = GetPoolIndex(id);
 
-            if (index == -1) throw new Exception("Audio Resource not found");
+            if (index == -1) throw new SingletonException("Audio Resource not found");
 
             var resource = poolAttributes.audioResource[index].audio;
 
@@ -133,7 +134,7 @@ namespace ChoyUtilities {
             byte audioPriority = (byte)EAudioPriority.Average) {
             var index = GetPoolIndex(id);
 
-            if (index == -1) throw new Exception("Audio Resource not found");
+            if (index == -1) throw new SingletonException("Audio Resource not found");
 
             var resource = poolAttributes.audioResource[index].audio;
 

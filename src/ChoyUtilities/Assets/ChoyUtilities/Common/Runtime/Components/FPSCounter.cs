@@ -1,8 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-namespace EugeneC.Utilities {
-    [AddComponentMenu("Eugene/FPS Counter")]
+namespace ChoyUtilities {
+    
+    [AddComponentMenu("Choy Utilities/FPS Counter")]
     [RequireComponent(typeof(TMP_Text))]
     public sealed class FPSCounter : MonoBehaviour {
         [SerializeField] private TMP_Text displayText;

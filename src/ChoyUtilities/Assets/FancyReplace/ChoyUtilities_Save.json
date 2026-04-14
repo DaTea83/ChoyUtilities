@@ -2,27 +2,6 @@
     "assetModified": [
         {
             "idType": {
-                "values": []
-            },
-            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures",
-            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_data_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
-        },
-        {
-            "idType": {
-                "values": []
-            },
-            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace",
-            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_data_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
-        },
-        {
-            "idType": {
-                "values": []
-            },
-            "idPath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Save",
-            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/Folder/folder_check_2_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
-        },
-        {
-            "idType": {
                 "values": [
                     7.0
                 ]

@@ -9,8 +9,7 @@ namespace ChoyUtilities {
         private const float EPSILON = 0.0001f;
         
         #region Operators
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public Floater Add(float value) {
             var set = new float[values.Length + 1];
             if (set == null) throw new FloaterException(nameof(set));
@@ -19,8 +18,7 @@ namespace ChoyUtilities {
 
             return new Floater(set);
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public Floater Add(float[] extras) {
             if (extras == null || extras == Array.Empty<float>()) return this;
             var set = new float[values.Length + extras.Length];
@@ -33,8 +31,7 @@ namespace ChoyUtilities {
 
             return new Floater(set);
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public Floater Add(Floater extra) {
             if (extra.values == null || extra.values == Array.Empty<float>()) return this;
             var set = new float[values.Length + extra.values.Length];
@@ -48,7 +45,6 @@ namespace ChoyUtilities {
             return new Floater(set);
         }
         
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int FirstMatch(float value) {
             var index = -1;
             for (var i = 0; i < values.Length; i++) {
@@ -69,7 +65,6 @@ namespace ChoyUtilities {
         ///     otherwise will remove only the first value that is equal to <paramref name="value" />.
         /// </param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Floater Remove(float value, bool removeAllEqual = false) {
             if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
 
@@ -120,7 +115,6 @@ namespace ChoyUtilities {
         ///     otherwise will remove only the first value that in <paramref name="value" />.
         /// </param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Floater Remove(float[] value, bool removeAllEqual = false) {
             return removeAllEqual ? RemoveAllMatches(value) : RemoveFirstMatches(value);
         }
@@ -135,12 +129,10 @@ namespace ChoyUtilities {
         ///     otherwise will remove only the first value that in <paramref name="value" />.
         /// </param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Floater Remove(Floater value, bool removeAllEqual = false) {
             return removeAllEqual ? RemoveAllMatches(value.values) : RemoveFirstMatches(value.values);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Floater RemoveFirstMatches(float[] valuesToRemove) {
             if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
             if (valuesToRemove == null || valuesToRemove.Length == 0) return this;
@@ -190,8 +182,7 @@ namespace ChoyUtilities {
 
             return new Floater(set);
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         private Floater RemoveAllMatches(float[] valuesToRemove) {
             if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
             if (valuesToRemove == null || valuesToRemove.Length == 0) return this;

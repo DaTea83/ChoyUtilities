@@ -8,7 +8,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChoyUtilities {
-    [AddComponentMenu("Eugene/Microphone Recorder")]
+    
+    [AddComponentMenu("Choy Utilities/Microphone Recorder")]
     public sealed class MicrophoneRecorder : MonoBehaviour {
         public MicrophoneAttributes settings;
         public float chunksLengthSec = 0.5f;
