@@ -1,9 +1,11 @@
 ﻿using System;
+using Unity.Burst;
 
 namespace ChoyUtilities {
 
     public static partial class HelperCollection {
 
+        [BurstCompile]
         public static int FirstMatchUnmanaged<T>(this T[] set, T value)
             where T : unmanaged{
             var index = -1;
@@ -15,6 +17,7 @@ namespace ChoyUtilities {
             return index;
         }
         
+        [BurstCompile]
         public static (T[], bool) AddIfNotContainUnmanaged<T>(this T[] set, T value)
             where T : unmanaged {
             foreach (var e in set) {
@@ -28,6 +31,7 @@ namespace ChoyUtilities {
             return (newSet, true);
         }
 
+        [BurstCompile]
         public static (T[], bool) RemoveIfContainUnmanaged<T>(this T[] set, T value) 
             where T : unmanaged {
             var removeIndex = set.FirstMatchUnmanaged(value);

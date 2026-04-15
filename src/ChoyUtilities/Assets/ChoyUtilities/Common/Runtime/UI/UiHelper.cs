@@ -1,6 +1,7 @@
 using UnityEngine;
 
 namespace ChoyUtilities {
+    
     [RequireComponent(typeof(RectTransform))]
     public abstract class UiHelper : MonoBehaviour {
         [SerializeField] [Min(0.01f)] protected float transitionTime;

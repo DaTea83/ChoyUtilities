@@ -7,18 +7,19 @@ using Object = UnityEngine.Object;
 
 namespace ChoyUtilities {
     public class MultiInputSystem {
+        
         private readonly string _controlScheme;
         private InputActionMap _actionMap;
         private IControlBinder _binder;
-        public InputActionAsset Asset;
-        public InputDevice Device;
+        public readonly InputDevice Device;
 
-        public InputUser User;
+        private readonly InputActionAsset _asset;
+        private InputUser _user;
 
         public MultiInputSystem(InputDevice device, InputActionAsset asset, EControlScheme controltype) {
-            User = InputUser.PerformPairingWithDevice(device);
+            _user = InputUser.PerformPairingWithDevice(device);
             Device = device;
-            Asset = Object.Instantiate(asset);
+            _asset = Object.Instantiate(asset);
             _controlScheme = controltype.GetControlType();
         }
 
@@ -29,27 +30,27 @@ namespace ChoyUtilities {
 
         public void DisableInput() { _actionMap.Disable(); }
 
-        public void BindObject<T>(T bindobject)
+        public void BindObject<T>(T bindObj)
             where T : IControlBinder {
             if (_binder != null)
                 UnbindObject();
 
-            _binder = bindobject;
+            _binder = bindObj;
             _binder.Registry = this;
 
-            var actionmapname =
-                HelperCollection.InterfaceToStringName(bindobject.InputInterface, "Actions", string.Empty);
-            Debug.Log($"Finding action map name of {actionmapname}");
-            _actionMap = Asset.FindActionMap(actionmapname);
+            var actionMapName =
+                HelperCollection.InterfaceToStringName(bindObj.InputInterface, "Actions", string.Empty);
+            Debug.Log($"Finding action map name of {actionMapName}");
+            _actionMap = _asset.FindActionMap(actionMapName);
 
             if (_actionMap == null) {
-                Debug.LogError($"InputActionMap '{actionmapname}' not found in the InputActionAsset.");
+                Debug.LogError($"InputActionMap '{actionMapName}' not found in the InputActionAsset.");
 
                 return;
             }
 
-            User.AssociateActionsWithUser(_actionMap);
-            User.ActivateControlScheme(_controlScheme);
+            _user.AssociateActionsWithUser(_actionMap);
+            _user.ActivateControlScheme(_controlScheme);
 
             HelperCollection.BindPlayerAction(_binder, _actionMap);
             EnableInput();

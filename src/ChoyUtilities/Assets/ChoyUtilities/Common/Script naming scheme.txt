@@ -24,6 +24,8 @@ Script naming scheme:
 // so the singleton here just means there will be only one entity with this component during runtime
 // any less or more than 1 will return an error
 
+(Suffix) -IJob          : Any struct that implements IJob, IJobParallelFor, IJobParallelForTransform, IJobEntity
+
 (Suffix) -SystemBase    : Class that inherits from SystemBase
 (Suffix) -ISystem       : Struct that inherits from ISystem
 (Suffix) -SystemGroup   : Class that inherits from ComponentSystemGroup
@@ -34,7 +36,7 @@ Script naming scheme:
 
 (Prefix) E-             : Enums
 
-(Suffix) -Serialize     : Any class/struct with [Serializable] attribute
+(Suffix) -Serialize     : Any class/struct with [Serializable] attribute (Excluding custom made data types)
 
 (Suffix) -Collection    : Usually a partial class of HelperCollection, 
                           is for a static class that holds a bunch of static methods and extensions 

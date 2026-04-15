@@ -10,7 +10,7 @@ namespace ChoyUtilities {
     
     [Serializable]
     [BurstCompile]
-    public partial struct Floater : IEquatable<Floater>, IComparable, IComparable<Floater>,
+    public partial struct Floater : IComparable, IComparable<Floater>,
         IFormattable, IEnumerable<float> {
 
         public float[] values;
@@ -173,18 +173,42 @@ namespace ChoyUtilities {
             set[8] = value.localScale.z;
             values = set;
         }
+        public Floater(float3 arg1, float3 arg2) {
+            var set = new float[9];
+            set[0] = arg1.x;
+            set[1] = arg1.y;
+            set[2] = arg1.z;
+            set[3] = arg2.x;
+            set[4] = arg2.y;
+            set[5] = arg2.z;
+            set[6] = 1;
+            set[7] = 1;
+            set[8] = 1;
+            values = set;
+        }
+        public Floater(float3 arg1, quaternion arg2) {
+            var set = new float[9];
+            var euler = math.Euler(arg2);
+            set[0] = arg1.x;
+            set[1] = arg1.y;
+            set[2] = arg1.z;
+            set[3] = euler.x;
+            set[4] = euler.y;
+            set[5] = euler.z;
+            set[6] = 1;
+            set[7] = 1;
+            set[8] = 1;
+            values = set;
+        }
 
         #endregion
 
-        #region IEquatable, IEnumerable
-
-        public bool Equals(Floater other) { return Equals(values, other.values); }
+        #region IEnumerable
+        
         public IEnumerator<float> GetEnumerator() {
             foreach (var t in values)
                 yield return t;
         }
-        public override bool Equals(object obj) { return obj is Floater other && Equals(other); }
-        public override int GetHashCode() { return values is not null ? values.GetHashCode() : 0; }
 
         #endregion
 
@@ -193,9 +217,11 @@ namespace ChoyUtilities {
         public int CompareTo(Floater other) {
             float selfV = 0;
             float otherV = 0;
-            foreach (var f in values) selfV += f;
+            foreach (var f in values) 
+                selfV += f;
 
-            foreach (var f in other.values) otherV += f;
+            foreach (var f in other.values) 
+                otherV += f;
 
             return selfV.CompareTo(otherV);
         }

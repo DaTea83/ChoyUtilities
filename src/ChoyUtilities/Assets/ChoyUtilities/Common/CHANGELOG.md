@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.2] - 2026-04-16
+
+### Added
+* Added EMotion
+* Added MotionUtils
+
+### Changed
+* Floater, removed IEquatable as its not compatible with Burst
+* Floater, added (float3, float3) and (float3, quaternion) constructors
+* All extension in UnmanagedCollections are now Burst Compiled
+
 ## [1.0.1] - 2026-04-12
 
 From this point on changelog for Common and Entities will be seperated.
