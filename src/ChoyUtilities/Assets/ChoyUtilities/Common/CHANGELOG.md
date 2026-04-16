@@ -16,6 +16,7 @@ Reduce the use of reflection.
 * All extension in UnmanagedCollections are now Burst Compiled
 * RawSet, removed IEquatable
 * Moved EnumCollection to Enum/Utils
+* AsyncCollection, all extensions now use EMotion
 
 ### Removed
 * Removed CallGenericInstanceMethod
