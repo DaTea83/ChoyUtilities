@@ -2,14 +2,21 @@
 
 ## [1.0.2] - 2026-04-16
 
+Reduce the use of reflection.
+
 ### Added
 * Added EMotion
 * Added MotionUtils
+* Added HelperCollection.Broadcaster
 
 ### Changed
 * Floater, removed IEquatable as its not compatible with Burst
 * Floater, added (float3, float3) and (float3, quaternion) constructors
 * All extension in UnmanagedCollections are now Burst Compiled
+* Moved EnumCollection to Enum/Utils
+
+### Removed
+* Removed CallGenericInstanceMethod
 
 ## [1.0.1] - 2026-04-12
 

@@ -22,7 +22,7 @@ namespace ChoyUtilities {
         private void OnTriggerEnter(Collider other) {
             if (other.gameObject.layer != layer && !other.gameObject.CompareTag(objectTag)) return;
 
-            HelperCollection.CallGenericInstanceMethod(instanceClassName, methodName);
+            HelperCollection.Broadcaster.Call(methodName);
 
             if (turnOffAfter)
                 gameObject.SetActive(false);

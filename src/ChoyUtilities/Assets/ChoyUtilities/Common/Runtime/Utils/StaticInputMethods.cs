@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 namespace ChoyUtilities {
     public static partial class HelperCollection {
-        public static string InterfaceToStringName(Type type, string replaced = null, string replacedwith = "") {
-            var Name = "";
+        public static string InterfaceToStringName(Type type, string replaced = null, string replaceWith = "") {
+            var name = "";
 
             if (replaced != null)
-                Name = type.Name.Replace(replaced, replacedwith);
+                name = type.Name.Replace(replaced, replaceWith);
 
-            return Name.Substring(1);
+            return name.Substring(1);
         }
 
         public static void BindPlayerAction<T>(T playerAction, InputActionMap map)

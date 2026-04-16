@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 
 namespace ChoyUtilities {
     
-    public static partial class HelperCollection {
+    public static partial class EnumCollection {
         
         public static bool IsSingleFlag<T>(this T flag)
             where T : struct, Enum {
@@ -18,6 +19,7 @@ namespace ChoyUtilities {
 
         public static T GetHighestFlag<T>(this T value)
             where T : struct, Enum {
+            
             var inputValue = Convert.ToUInt64(value);
             ulong highestValue = 0;
 
@@ -36,7 +38,7 @@ namespace ChoyUtilities {
             where T : struct, Enum
         {
             for (var i = 0; i < set.Length; i++) {
-                if (set[i].Equals(value)) {
+                if (EqualityComparer<T>.Default.Equals(set[i], value)) {
                     return i;
                 }
             }
@@ -46,7 +48,7 @@ namespace ChoyUtilities {
         public static (T[], bool) AddIfNotContain<T>(this T[] set, T value)
             where T : struct, Enum {
             foreach (var e in set) {
-                if (e.Equals(value)) 
+                if (EqualityComparer<T>.Default.Equals(e, value)) 
                     return (set, false);
                 break;
             }

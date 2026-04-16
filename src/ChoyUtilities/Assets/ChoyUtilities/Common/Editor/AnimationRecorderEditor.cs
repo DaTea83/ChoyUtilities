@@ -38,7 +38,7 @@ namespace ChoyUtilities.Editor {
         private void OnGUI() {
             if (!GUI.Button(new Rect(0, 0, 200, 40), "Start Record")) return;
             if (_canRecord) return;
-            HelperCollection.CallGenericInstanceMethod(className, methodName);
+            HelperCollection.Broadcaster.Call(methodName);
             _canRecord = true;
         }
 
