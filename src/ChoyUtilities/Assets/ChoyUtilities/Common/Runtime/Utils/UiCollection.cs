@@ -5,9 +5,6 @@ using UnityEngine.UIElements;
 
 namespace ChoyUtilities {
     public static partial class HelperCollection {
-        public static void ActivateDisplay() {
-            for (var i = 1; i < Display.displays.Length; i++) Display.displays[i].Activate();
-        }
 
         public static (float, float) GetBoundingBoxSize(this RectTransform rectTransform) {
             var rect = rectTransform.rect;

@@ -8,8 +8,7 @@ namespace ChoyUtilities {
     
     [BurstCompile]
     [Serializable]
-    public partial struct RawSet<T> : IDisposable, 
-        IEquatable<RawSet<T>>, IEnumerable<T>, IFormattable, 
+    public partial struct RawSet<T> : IDisposable, IEnumerable<T>, IFormattable, 
         IComparable, IComparable<RawSet<T>>
     where T : unmanaged {
         
@@ -36,10 +35,6 @@ namespace ChoyUtilities {
             _values.Dispose();
         }
 
-        public bool Equals(RawSet<T> other) {
-            return _values.Equals(other._values);
-        }
-
         public IEnumerator<T> GetEnumerator() {
             foreach (var t in _values)
                 yield return t;
@@ -48,11 +43,7 @@ namespace ChoyUtilities {
         public int CompareTo(RawSet<T> other) {
             return Length.CompareTo(other.Length);
         }
-
-        public override bool Equals(object obj) {
-            return obj is RawSet<T> other && Equals(other);
-        }
-
+        
         public override int GetHashCode() {
             return _values.GetHashCode();
         }

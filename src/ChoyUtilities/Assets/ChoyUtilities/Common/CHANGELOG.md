@@ -8,11 +8,13 @@ Reduce the use of reflection.
 * Added EMotion
 * Added MotionUtils
 * Added HelperCollection.Broadcaster
+* Added ActivateMultiDisplay
 
 ### Changed
 * Floater, removed IEquatable as its not compatible with Burst
 * Floater, added (float3, float3) and (float3, quaternion) constructors
 * All extension in UnmanagedCollections are now Burst Compiled
+* RawSet, removed IEquatable
 * Moved EnumCollection to Enum/Utils
 
 ### Removed

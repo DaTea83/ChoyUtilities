@@ -2,8 +2,16 @@
     
     public enum EMotion : byte{
         Linear,
-        EaseIn,
-        EaseOut,
-        EaseInOut
+        SqrEaseIn,
+        CubeEaseIn,
+        SqrEaseOut,
+        CubedEaseOut,
+        QuadraticEaseOut,
+        Parabola,
+        Triangle,
+        ElasticOut,
+        BounceOut,
+        SqrEaseInOut,
+        CubeEaseInOut
     }
 }

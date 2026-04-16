@@ -33,6 +33,12 @@ namespace ChoyUtilities {
             return obj;
         }
 
+        [BurstCompile]
+        public static Floater LogLerp(this Floater a, Floater b, float t, EMotion type) {
+            var e = math.lerp(math.log((float)a), math.log((float)b), type.Evaluate(t));
+            return new Floater(math.exp(e));
+        }
+
         public static Floater Floater<T>(this T value) 
             where T : struct, Enum{
             var i = (Convert.ToSingle(value));
