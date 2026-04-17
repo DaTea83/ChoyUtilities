@@ -14,7 +14,7 @@ namespace ChoyUtilities {
                 EMotion.Linear => t,
                 EMotion.SqrEaseIn => Sqr(t),
                 EMotion.CubeEaseIn => Cube(t),
-                EMotion.SqrEaseOut => SqrtOut(t),
+                EMotion.SqrtEaseOut => SqrtOut(t),
                 EMotion.CubedEaseOut => CubedOut(t),
                 EMotion.QuadraticEaseOut => QuadraticEaseInOut(t),
                 EMotion.Parabola => Parabola(t),
