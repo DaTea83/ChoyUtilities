@@ -3,9 +3,9 @@ using Unity.Burst;
 using Unity.Mathematics;
 
 namespace ChoyUtilities {
-    
+
     [BurstCompile]
-    public static partial class MotionCollection {
+    public static class MotionCollection {
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -26,57 +26,75 @@ namespace ChoyUtilities {
                 _ => t
             };
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float Sqr(float x) => x * x;
-        
+        private static float Sqr(float x) {
+            return x * x;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float Cube(float x) => x * x * x;
-        
+        private static float Cube(float x) {
+            return x * x * x;
+        }
+
         [BurstCompile]
-        private static float SqrtOut(float x) => math.sqrt(x);
-        
+        private static float SqrtOut(float x) {
+            return math.sqrt(x);
+        }
+
         [BurstCompile]
-        private static float CubedOut(float x) => math.pow(x, 1.0F / 3.0F);
-        
+        private static float CubedOut(float x) {
+            return math.pow(x, 1.0F / 3.0F);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float QuadraticEaseInOut(float t) => 1 - (1 - t) * (1 - t);
-        
+        private static float QuadraticEaseInOut(float t) {
+            return 1 - (1 - t) * (1 - t);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float Parabola(float t) => 4f * t * (1f - t);
-        
+        private static float Parabola(float t) {
+            return 4f * t * (1f - t);
+        }
+
         [BurstCompile]
-        private static float Triangle(float t) => 1f - 2f * math.abs(t - 0.5f);
+        private static float Triangle(float t) {
+            return 1f - 2f * math.abs(t - 0.5f);
+        }
 
         [BurstCompile]
         private static float ElasticOut(float t) {
             const float halfPi = 1.57079632679f;
+
             return math.sin(-13f * (t * 1f) * halfPi * math.pow(2f, 10f * t) + 1f);
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float BounceOut(float t) {
             const float n1 = 7.5625f;
             const float d1 = 2.75f;
 
             switch (t) {
-                
                 case < 1 / d1:
+
                     return n1 * t * t;
-                
+
                 case < 2 / d1:
+
                     t -= 1.5f / d1;
+
                     return n1 * t * t + 0.75f;
-                
+
                 default: {
                     if (t < 2.5 / d1) {
                         t -= 2.25f / d1;
+
                         return n1 * t * t + 0.9375f;
                     }
-                    else {
-                        t -= 2.625f / d1;
-                        return n1 * t * t + 0.984375f;
-                    }
+
+                    t -= 2.625f / d1;
+
+                    return n1 * t * t + 0.984375f;
                 }
             }
         }
@@ -85,6 +103,7 @@ namespace ChoyUtilities {
         private static float SqrEaseInOut(float t) {
             var t1 = Sqr(t);
             var t2 = SqrtOut(t);
+
             return math.lerp(t1, t2, t);
         }
 
@@ -92,7 +111,10 @@ namespace ChoyUtilities {
         private static float CubeEaseInOut(float t) {
             var t1 = Cube(t);
             var t2 = CubedOut(t);
+
             return math.lerp(t1, t2, t);
         }
+
     }
+
 }

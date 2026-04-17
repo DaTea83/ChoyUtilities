@@ -7,7 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
+
     [Serializable]
     [BurstCompile]
     public partial struct Floater : IComparable, IComparable<Floater>,
@@ -21,7 +21,10 @@ namespace ChoyUtilities {
 
         #region Constructors
 
-        public Floater(float[] values) { this.values = values; }
+        public Floater(float[] values) {
+            this.values = values;
+        }
+
         public Floater(int[] values) {
             var set = new float[values.Length];
             Array.Copy(values, set, values.Length);
@@ -35,10 +38,12 @@ namespace ChoyUtilities {
         public Floater(float4 value) : this(new[] { value.x, value.y, value.z, value.w }) { }
         public Floater(Color value) : this(new[] { value.r, value.g, value.b, value.a }) { }
         public Floater(Quaternion value) : this(new[] { value.x, value.y, value.z, value.w }) { }
+
         public Floater(quaternion value) {
             var v = value.value;
             values = new[] { v.x, v.y, v.z, v.w };
         }
+
         public Floater(Vector2 value) : this(new[] { value.x, value.y }) { }
         public Floater(Vector3 value) : this(new[] { value.x, value.y, value.z }) { }
         public Floater(Vector4 value) : this(new[] { value.x, value.y, value.z, value.w }) { }
@@ -52,37 +57,52 @@ namespace ChoyUtilities {
         public Floater(NativeArray<float> value) : this(value.ToArray()) { }
         public Floater(NativeList<float> value) : this(value.ToArray(Allocator.Temp)) { }
         public Floater(byte value) : this(new int[] { value }) { }
+
         public Floater(byte[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
+
         public Floater(sbyte value) : this(new int[] { value }) { }
+
         public Floater(sbyte[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
+
         public Floater(ushort value) : this(new int[] { value }) { }
+
         public Floater(ushort[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
+
         public Floater(short value) : this(new int[] { value }) { }
+
         public Floater(short[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
-        public Floater(bool value) { values = new[] { value ? 1f : 0f }; }
-        public Floater(bool2 value) { values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f }; }
+
+        public Floater(bool value) {
+            values = new[] { value ? 1f : 0f };
+        }
+
+        public Floater(bool2 value) {
+            values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f };
+        }
+
         public Floater(bool[] value) {
             var set = new float[value.Length];
             for (var i = 0; i < value.Length; i++) set[i] = value[i] ? 1f : 0f;
 
             values = set;
         }
+
         public Floater(float4x4 value) {
             values = new float[16];
             var c0 = value.c0;
@@ -106,6 +126,7 @@ namespace ChoyUtilities {
             values[14] = c3.z;
             values[15] = c3.w;
         }
+
         public Floater(Matrix4x4 value) {
             values = new float[16];
             var c0 = value.GetColumn(0);
@@ -129,29 +150,40 @@ namespace ChoyUtilities {
             values[14] = c3.z;
             values[15] = c3.w;
         }
+
         public Floater(double value) : this(new[] { (float)value }) { }
+
         public Floater(double[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
+
         public Floater(half value) : this(new[] { (float)value }) { }
+
         public Floater(half[] value) {
             var set = new float[value.Length];
             Array.Copy(value, set, value.Length);
             values = set;
         }
+
         public Floater(char value) : this(new[] { (float)value }) { }
+
         public Floater(char[] value) {
             var set = new float[value.Length];
+
             if (set == null) throw new FloaterException(nameof(set));
+
             for (var i = 0; i < value.Length; i++) {
                 var j = (int)value[i];
                 set[i] = j;
             }
+
             values = set;
         }
+
         public Floater(string value) : this(value.ToCharArray()) { }
+
         /// <summary>
         /// </summary>
         /// <param name="value">
@@ -173,6 +205,7 @@ namespace ChoyUtilities {
             set[8] = value.localScale.z;
             values = set;
         }
+
         public Floater(float3 arg1, float3 arg2) {
             var set = new float[9];
             set[0] = arg1.x;
@@ -186,6 +219,7 @@ namespace ChoyUtilities {
             set[8] = 1;
             values = set;
         }
+
         public Floater(float3 arg1, quaternion arg2) {
             var set = new float[9];
             var euler = math.Euler(arg2);
@@ -204,7 +238,7 @@ namespace ChoyUtilities {
         #endregion
 
         #region IEnumerable
-        
+
         public IEnumerator<float> GetEnumerator() {
             foreach (var t in values)
                 yield return t;
@@ -217,10 +251,11 @@ namespace ChoyUtilities {
         public int CompareTo(Floater other) {
             float selfV = 0;
             float otherV = 0;
-            foreach (var f in values) 
+
+            foreach (var f in values)
                 selfV += f;
 
-            foreach (var f in other.values) 
+            foreach (var f in other.values)
                 otherV += f;
 
             return selfV.CompareTo(otherV);
@@ -228,6 +263,7 @@ namespace ChoyUtilities {
 
         public int CompareTo(object obj) {
             if (obj is Floater other) return CompareTo(other);
+
             throw new FloaterException("Object is not a FloatsSerialize.");
         }
 
@@ -237,7 +273,9 @@ namespace ChoyUtilities {
 
         public override string ToString() {
             char[] set = new Floater(values);
+
             if (set == null || set == Array.Empty<char>()) return string.Empty;
+
             return set.ToString();
         }
 
@@ -245,8 +283,12 @@ namespace ChoyUtilities {
             return GetEnumerator();
         }
 
-        public string ToString(string format, IFormatProvider formatProvider) { return ToString(); }
+        public string ToString(string format, IFormatProvider formatProvider) {
+            return ToString();
+        }
 
         #endregion
+
     }
+
 }
