@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 
 namespace ChoyUtilities {
 
-    public abstract class GenericAudioManager<TEnum, TMono> : GenericSingleton<TMono>
+    public abstract class GenericSfxManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
 
@@ -41,10 +41,7 @@ namespace ChoyUtilities {
         [SerializeField] protected bool loop;
         [SerializeField] protected EAudioPriority priority = EAudioPriority.High;
 
-        [Header("Audio Mixer Groups")] [SerializeField]
-        protected AudioMixerSerialize masterAudioMixerGroup = new() { mixerName = "Master" };
-
-        [SerializeField] protected AudioMixerSerialize sfxMixerGroup, narrationMixerGroup, musicMixerGroup;
+        [SerializeField] protected AudioMixerGroup mixerGroup;
         private byte _currentIndex;
 
         private byte _previousIndex;
@@ -73,19 +70,13 @@ namespace ChoyUtilities {
                     var spawnAudio = Pool.Get();
                     spawnAudio.gameObject.transform.SetSiblingIndex(i);
                     spawnAudio.loop = loop;
-                    spawnAudio.outputAudioMixerGroup = masterAudioMixerGroup.mixer.outputAudioMixerGroup;
+                    spawnAudio.outputAudioMixerGroup = mixerGroup;
                     spawnAudio.priority = (int)priority;
                     AudioSources[i] = spawnAudio;
                 }
-
-                masterAudioMixerGroup.mixer.SetFloat(masterAudioMixerGroup.mixerName,
-                    masterAudioMixerGroup.defaultVolume);
-                sfxMixerGroup.mixer?.SetFloat(sfxMixerGroup.mixerName, sfxMixerGroup.defaultVolume);
-                narrationMixerGroup.mixer?.SetFloat(narrationMixerGroup.mixerName, narrationMixerGroup.defaultVolume);
-                musicMixerGroup.mixer?.SetFloat(musicMixerGroup.mixerName, musicMixerGroup.defaultVolume);
             }
-            catch (Exception e) {
-                Debug.LogError(e);
+            catch{
+                Destroy(this);
             }
         }
 
@@ -111,17 +102,15 @@ namespace ChoyUtilities {
 
             var resource = poolAttributes.audioResource[index].audio;
 
-            return PlayClipAtPos(resource, pos, masterAudioMixerGroup.mixer.outputAudioMixerGroup, audioPriority);
+            return PlayClipAtPos(resource, pos, audioPriority);
         }
 
         public virtual float PlayClipAtPos(AudioResource resource,
             float3 pos,
-            AudioMixerGroup channel = null,
             byte audioPriority = (byte)EAudioPriority.Average) {
             var currentSource = AudioSources[_currentIndex];
 
             currentSource.transform.localPosition = pos;
-            currentSource.outputAudioMixerGroup = channel;
             currentSource.resource = resource;
             currentSource.priority = audioPriority;
             currentSource.Play();
@@ -148,24 +137,13 @@ namespace ChoyUtilities {
             return PlayClipAtPos(resource, pos, mixerType, audioPriority);
         }
 
-        private AudioMixerSerialize GetMixerType(EMixerType mixerType) {
-            return mixerType switch {
-                EMixerType.Sfx => sfxMixerGroup,
-                EMixerType.Narration => narrationMixerGroup,
-                EMixerType.Music => musicMixerGroup,
-                _ => masterAudioMixerGroup
-            };
-        }
-
         public virtual float PlayClipAtPos(AudioResource resource,
             float3 pos,
             EMixerType mixerType,
             byte audioPriority = (byte)EAudioPriority.Average) {
-            var channel = GetMixerType(mixerType).mixer;
             var currentSource = AudioSources[_currentIndex];
 
             currentSource.transform.localPosition = pos;
-            currentSource.outputAudioMixerGroup = channel.outputAudioMixerGroup;
             currentSource.resource = resource;
             currentSource.priority = audioPriority;
             currentSource.Play();
@@ -179,48 +157,14 @@ namespace ChoyUtilities {
             return lengthSeconds;
         }
 
-        public virtual async Awaitable<float> PlayFocusClip(TEnum id,
-            float3 pos,
-            EMixerType mixerType,
-            byte audioPriority = (byte)EAudioPriority.Average) {
-            var index = GetPoolIndex(id);
-
-            if (index == -1) return 0f;
-
-            var resource = poolAttributes.audioResource[index].audio;
-            var delay = PlayClipAtPos(resource, pos, mixerType, audioPriority);
-            var curve = GetMixerType(mixerType).volumeCurve;
-            var c0 = GetMixerType(mixerType);
-
-            var time = 0f;
-
-            while (time < delay) {
-                time += Time.deltaTime;
-                c0.mixer?.SetFloat(c0.mixerName, curve.Evaluate(time / delay) * c0.focusedVolume);
-                await Awaitable.NextFrameAsync(Token);
-            }
-
-            c0.mixer?.SetFloat(c0.mixerName, c0.defaultVolume);
-
-            return delay;
-        }
-
         public virtual float PlayClip(TEnum id, byte audioPriority = (byte)EAudioPriority.Average) {
             return PlayClipAtPos(id, float3.zero, audioPriority);
         }
 
         public virtual float PlayClip(AudioResource resource, byte audioPriority = (byte)EAudioPriority.Average) {
-            return PlayClipAtPos(resource, float3.zero, masterAudioMixerGroup.mixer.outputAudioMixerGroup,
-                audioPriority);
+            return PlayClipAtPos(resource, float3.zero, audioPriority);
         }
-
-        public virtual async Awaitable<float> PlayClip(TEnum id,
-            float3 pos,
-            EMixerType mixerType,
-            byte audioPriority = (byte)EAudioPriority.Average) {
-            return await PlayFocusClip(id, pos, mixerType, audioPriority);
-        }
-
+        
         public virtual bool StopClip(int idx = -1) {
             idx = idx == -1 ? _previousIndex : idx;
             var source = AudioSources[idx];
@@ -278,9 +222,7 @@ namespace ChoyUtilities {
         public struct AudioMixerSerialize {
 
             public AudioMixer mixer;
-            public AnimationCurve volumeCurve;
-            public string mixerName;
-            [Range(-80f, 20f)] public float defaultVolume, focusedVolume, unfocusedVolume;
+            public EMotion motionCurve;
 
         }
 

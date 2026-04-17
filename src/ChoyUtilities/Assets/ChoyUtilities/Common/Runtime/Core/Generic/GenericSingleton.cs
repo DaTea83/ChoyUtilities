@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ChoyUtilities {
 
+    [DisallowMultipleComponent]
     public abstract class GenericSingleton<T> : MonoBehaviour
         where T : MonoBehaviour {
 

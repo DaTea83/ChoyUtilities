@@ -2,11 +2,23 @@
 
 ## [1.0.3] - 2026-04-17
 
+Added
+* Added GenericMixerManager
+
 Changed
 * AsyncCollection, optimize catch exception
+* GenericSingleton, added DisallowMultipleComponent attribute, one object one singleton thanks
 * AsyncCollection, moved to Motion/Legacy
 * CoroutineCollection, moved to Motion/Legacy
-* 
+* GenericAudioManager renamed to GenericSfxManager
+* GenericSfxManager, removed AudioMixerSerialize
+* GenericSingleton, moved to Core/Generic
+* GenericSpawnManager, moved to Spawn/
+* GenericPoolingManager, moved to Spawn/
+* GenericParticleManager, moved to Spawn/
+* GenericLegacyUIManager, moved to UI/Generic
+* GenericOverlayUIManager, moved to UI/Generic
+* GenericFSM, moved to StateMachine/
 
 Removed
 * Microphone Recorder, moved to Misc
