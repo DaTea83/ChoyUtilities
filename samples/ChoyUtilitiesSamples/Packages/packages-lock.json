@@ -1,5 +1,16 @@
 {
   "dependencies": {
+    "com.annulusgames.lit-motion": {
+      "version": "https://github.com/annulusgames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.burst": "1.6.0",
+        "com.unity.collections": "1.5.1",
+        "com.unity.mathematics": "1.0.1"
+      },
+      "hash": "6cae9f18a49de0259904268ca76cf12cb89d1fc5"
+    },
     "com.datea83.choyutilities.common": {
       "version": "https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyUtilities/Common",
       "depth": 0,
@@ -10,7 +21,7 @@
         "com.unity.mathematics": "1.3.2",
         "com.unity.inputsystem": "1.18.0"
       },
-      "hash": "7133b75c32cb334bf02a72aedae67d1177e962c5"
+      "hash": "0662a7914757a599e10282b85717eea0f72ff8df"
     },
     "com.datea83.choyutilities.entities": {
       "version": "https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyUtilities/Entities",
@@ -26,7 +37,7 @@
         "com.unity.inputsystem": "1.18.0",
         "com.datea83.choyutilities.common": "1.0.0"
       },
-      "hash": "3b810857ef8f8746b8f6678f4b7c968423e7b253"
+      "hash": "0662a7914757a599e10282b85717eea0f72ff8df"
     },
     "com.unity.burst": {
       "version": "1.8.27",
