@@ -1,8 +1,10 @@
 using UnityEngine;
 
 namespace ChoyUtilities {
+
     [RequireComponent(typeof(RectTransform))]
     public sealed class AutoResize : MonoBehaviour {
+
         [SerializeField] private EFitMode eFitMode;
         private RectTransform _parentRectTransform;
         private RectTransform _rectTransform;
@@ -35,10 +37,14 @@ namespace ChoyUtilities {
         }
 
         private enum EFitMode : byte {
+
             Expand = 0,
             Shrink = 1,
             FitWidth = 1 << 1,
             FitHeight = 1 << 2
+
         }
+
     }
+
 }

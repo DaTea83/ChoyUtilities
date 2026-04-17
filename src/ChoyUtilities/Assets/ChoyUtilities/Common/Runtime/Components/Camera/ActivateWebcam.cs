@@ -1,7 +1,7 @@
-﻿using System;
+﻿#if UNITY_2023_1_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Linq;
-#if UNITY_2023_1_OR_NEWER
 using System.Threading;
 using JetBrains.Annotations;
 using TMPro;
@@ -10,7 +10,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChoyUtilities {
+
     public class ActivateWebcam : MonoBehaviour {
+
         [SerializeField] private RawImage screen;
         [SerializeField] private int width = 1280;
         [SerializeField] private int height = 720;
@@ -84,6 +86,8 @@ namespace ChoyUtilities {
             screen.rectTransform.sizeDelta = new float2(width, height);
             screen.texture = _webCamTexture;
         }
+
     }
+
 }
 #endif

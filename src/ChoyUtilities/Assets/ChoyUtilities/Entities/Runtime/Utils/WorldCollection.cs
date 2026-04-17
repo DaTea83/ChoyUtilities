@@ -4,13 +4,15 @@ using Unity.Entities;
 using UnityEngine;
 
 namespace ChoyUtilities {
-#if UNITY_2023_1_OR_NEWER    
+
+#if UNITY_2023_1_OR_NEWER
     public static partial class EntitiesCollection {
+
         private const ushort MAX_FRAME = 200;
 
         public static async Awaitable<World> TryGetWorld(this CancellationToken token, ushort maxAllowed = MAX_FRAME) {
             var frame = 0;
-            
+
             while (frame < maxAllowed) {
                 var world = World.DefaultGameObjectInjectionWorld;
 
@@ -19,6 +21,7 @@ namespace ChoyUtilities {
                 frame++;
                 await Awaitable.NextFrameAsync(token);
             }
+
             return null;
         }
 
@@ -67,6 +70,8 @@ namespace ChoyUtilities {
 
             return !validSingleton ? throw new Exception("Buffer not found") : buffer;
         }
+
     }
-#endif    
+#endif
+
 }

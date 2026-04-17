@@ -2,11 +2,13 @@
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
+
     /// <summary>
     ///     If the entity is destroyed, destroy the animator
     /// </summary>
     [UpdateInGroup(typeof(EuCCleanupSystemGroup))]
     public partial struct CleanupAnimatorISystem : ISystem {
+
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
@@ -21,5 +23,7 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
+
     }
+
 }

@@ -1,17 +1,18 @@
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
+
     [RequireComponent(typeof(RectTransform))]
     public abstract class UiHelper : MonoBehaviour {
+
         [SerializeField] [Min(0.01f)] protected float transitionTime;
-        
+
         protected RectTransform RectTransform;
 
         protected virtual void OnEnable() {
             RectTransform = GetComponent<RectTransform>();
         }
-        
+
         public abstract void OnSpawn();
 
         public abstract float OnStartOpen();
@@ -21,5 +22,7 @@ namespace ChoyUtilities {
         public abstract float OnStartClose();
 
         public abstract void OnEndClose();
+
     }
+
 }

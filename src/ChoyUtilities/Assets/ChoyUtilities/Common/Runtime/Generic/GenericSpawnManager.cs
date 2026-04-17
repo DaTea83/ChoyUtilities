@@ -1,24 +1,29 @@
-﻿using System;
+﻿#if UNITY_2023_1_OR_NEWER
+using System;
 using System.Collections.Generic;
-#if UNITY_2023_1_OR_NEWER
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
-    
+
     public enum ETwoAxis : byte {
+
         XY = 0,
         XZ = 1 << 0,
         YZ = 1 << 1
+
     }
 
     public abstract class GenericSpawnManager<TEnum, TMono> : GenericPoolingManager<TEnum, Component, TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
+
         private List<(Component obj, TEnum id)> _spawnedObjects;
 
-        protected virtual void OnEnable() { _spawnedObjects = ListPool<(Component, TEnum)>.Get(); }
+        protected virtual void OnEnable() {
+            _spawnedObjects = ListPool<(Component, TEnum)>.Get();
+        }
 
         protected override void OnDisable() {
             DespawnAll();
@@ -85,6 +90,8 @@ namespace ChoyUtilities {
 
             _spawnedObjects.Clear();
         }
+
     }
+
 }
 #endif

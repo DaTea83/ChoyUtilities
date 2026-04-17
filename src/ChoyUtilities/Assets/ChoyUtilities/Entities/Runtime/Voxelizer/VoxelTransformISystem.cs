@@ -1,17 +1,18 @@
+#if UNITY_2023_1_OR_NEWER
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
-#if UNITY_2023_1_OR_NEWER
 using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-    
+
     [BurstCompile(CompileSynchronously = true)]
     [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct VoxelTransformISystem : ISystem {
+
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate<VoxelizerISingleton>();
         }
@@ -29,6 +30,7 @@ namespace ChoyUtilities.Entities {
 
         [BurstCompile(CompileSynchronously = true)]
         private partial struct Job : IJobEntity {
+
             [NativeDisableParallelForRestriction] public BufferLookup<DestroyBufferEntryIBuffer> DestroyLookup;
             public VoxelizerISingleton Voxelizer;
             public float ElapsedTime;
@@ -61,7 +63,10 @@ namespace ChoyUtilities.Entities {
                 hue = math.frac(hue + ElapsedTime * Voxelizer.ColorSpeed);
                 urp.Value = (Vector4)Color.HSVToRGB(hue, 1, 1);
             }
+
         }
+
     }
+
 }
 #endif

@@ -6,8 +6,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace EugeneC.Obsolete {
+
     [Obsolete]
     public class CoroutineManager : GenericSingleton<CoroutineManager> {
+
         public static IEnumerator FadeScreenCoroutine(bool isFadein,
             Image fadeImage,
             float LoadDuration,
@@ -197,5 +199,7 @@ namespace EugeneC.Obsolete {
 
             OnDone?.Invoke();
         }
+
     }
+
 }

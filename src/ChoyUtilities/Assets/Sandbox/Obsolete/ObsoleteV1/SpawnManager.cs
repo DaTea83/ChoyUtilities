@@ -4,8 +4,10 @@ using ChoyUtilities;
 using UnityEngine;
 
 namespace EugeneC.Obsolete {
+
     [Obsolete]
     public class SpawnManager : GenericSingleton<SpawnManager> {
+
         public SpawnObject[] spawnObject;
         public List<GameObject> SpawnedObjects = new();
         private readonly Dictionary<SpawnEnum, SpawnObject> SpawnDictionary = new();
@@ -34,13 +36,17 @@ namespace EugeneC.Obsolete {
         public void DeSpawnAll() {
             foreach (var objects in SpawnedObjects.ToArray()) DeSpawning(objects);
         }
+
     }
 
     [Serializable]
     public class SpawnObject {
+
         public SpawnEnum SpawnId;
         public GameObject Prefab;
+
     }
 
     public enum SpawnEnum { }
+
 }

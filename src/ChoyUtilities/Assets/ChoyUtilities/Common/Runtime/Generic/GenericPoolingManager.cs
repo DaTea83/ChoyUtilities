@@ -1,14 +1,16 @@
-﻿using System;
+﻿#if UNITY_2023_1_OR_NEWER
+using System;
 using System.Collections.Generic;
-#if UNITY_2023_1_OR_NEWER
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
+
     public abstract class GenericPoolingManager<TEnum, TObj, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TObj : Component
         where TMono : MonoBehaviour {
+
         [SerializeField] protected PoolingAttributes poolAttributes;
         [SerializeField] protected byte poolCount = 32;
         protected List<int> PauseIndexes;
@@ -93,21 +95,29 @@ namespace ChoyUtilities {
         }
 
         public abstract class PoolingAttributes : ScriptableObject {
+
             public InitialPoolSerialize[] poolPrefabs;
 
             [Serializable]
             public struct InitialPoolSerialize {
+
                 public TObj prefab;
                 public TEnum id;
+
             }
+
         }
 
         [Serializable]
         public struct RuntimePoolSerialize {
+
             public TObj[] spawn;
             public int currentIndex;
             public int previousIndex;
+
         }
+
     }
+
 }
 #endif

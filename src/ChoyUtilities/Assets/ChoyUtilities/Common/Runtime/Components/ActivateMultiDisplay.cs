@@ -12,6 +12,7 @@ namespace ChoyUtilities {
         private static void ActivateDisplay() {
             for (var i = 1; i < Display.displays.Length; i++) Display.displays[i].Activate();
         }
+
     }
 
 }

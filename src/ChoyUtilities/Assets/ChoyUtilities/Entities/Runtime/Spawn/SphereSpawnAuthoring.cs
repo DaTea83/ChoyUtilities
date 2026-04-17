@@ -5,9 +5,11 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
+
     [DisallowMultipleComponent]
     [RequireComponent(typeof(RandomAuthoring))]
     public class SphereSpawnAuthoring : MonoBehaviour {
+
         public GameObject prefab;
         public float radius = 10f;
         public byte amount = 10;
@@ -20,6 +22,7 @@ namespace ChoyUtilities.Entities {
         }
 
         public class Baker : Baker<SphereSpawnAuthoring> {
+
             public override void Bake(SphereSpawnAuthoring authoring) {
                 if (authoring.prefab is null || authoring.radius <= 0) return;
 
@@ -34,20 +37,25 @@ namespace ChoyUtilities.Entities {
                     Speed = authoring.speed
                 });
             }
+
         }
+
     }
 
     public struct SphereSpawnIData : IComponentData {
+
         public Entity Prefab;
         public float Radius;
         public byte Amount;
         public float Height;
         public float Speed;
+
     }
 
     [BurstCompile]
     [UpdateInGroup(typeof(EuCSpawnSystemGroup), OrderFirst = true)]
     public partial struct SpawnInSphereISystem : ISystem {
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -82,5 +90,7 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(em);
         }
+
     }
+
 }

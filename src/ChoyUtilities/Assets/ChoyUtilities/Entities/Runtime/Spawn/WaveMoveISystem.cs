@@ -4,9 +4,11 @@ using Unity.Entities;
 using Unity.Transforms;
 
 namespace ChoyUtilities.Entities {
+
     [BurstCompile]
     [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct WaveMoveISystem : ISystem {
+
         private const float NoiseScale = .2F;
         private const float DepthOffset = 1f;
 
@@ -19,6 +21,7 @@ namespace ChoyUtilities.Entities {
 
         [BurstCompile]
         public partial struct Job : IJobEntity {
+
             [ReadOnly] public float Time;
 
             [BurstCompile]
@@ -27,6 +30,9 @@ namespace ChoyUtilities.Entities {
                     data.Height, NoiseScale, DepthOffset);
                 lt.Position = pos;
             }
+
         }
+
     }
+
 }

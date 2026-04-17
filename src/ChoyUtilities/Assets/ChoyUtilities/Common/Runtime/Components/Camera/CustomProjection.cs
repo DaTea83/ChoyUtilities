@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
 namespace ChoyUtilities {
+
     //TODO
     [RequireComponent(typeof(Camera))]
     public class CustomProjection : MonoBehaviour {
+
         public float left = -0.2F;
         public float right = 0.2F;
         public float top = 0.2F;
@@ -50,5 +52,7 @@ namespace ChoyUtilities {
 
             return m;
         }
+
     }
+
 }

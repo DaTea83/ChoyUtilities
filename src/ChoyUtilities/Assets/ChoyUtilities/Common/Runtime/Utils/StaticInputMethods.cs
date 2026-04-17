@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace ChoyUtilities {
+
     public static partial class HelperCollection {
+
         public static string InterfaceToStringName(Type type, string replaced = null, string replaceWith = "") {
             var name = "";
 
@@ -67,7 +69,9 @@ namespace ChoyUtilities {
 
             return mode;
         }
+
     }
+
 }
 
 #endif

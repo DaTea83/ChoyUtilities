@@ -3,15 +3,23 @@ using System.Threading;
 using UnityEngine;
 
 namespace ChoyUtilities {
+
     public abstract class GenericSingleton<T> : MonoBehaviour
         where T : MonoBehaviour {
+
         public static T Instance { get; private set; }
 
-        protected virtual void Awake() { InitSingleton(); }
+        protected virtual void Awake() {
+            InitSingleton();
+        }
 
-        protected virtual void OnDisable() { CancelTask(); }
+        protected virtual void OnDisable() {
+            CancelTask();
+        }
 
-        protected virtual void OnDestroy() { UnInitSingleton(); }
+        protected virtual void OnDestroy() {
+            UnInitSingleton();
+        }
 
         protected virtual void InitSingleton() {
             if (Instance is not null && Instance != this) {
@@ -42,5 +50,7 @@ namespace ChoyUtilities {
         }
 
         #endregion
+
     }
+
 }

@@ -9,8 +9,10 @@ using static Unity.Physics.Math;
 using RaycastHit = Unity.Physics.RaycastHit;
 
 namespace ChoyUtilities.Entities {
+
     [BurstCompile]
     public struct PhysicsColliderICollector : ICollector<RaycastHit> {
+
         public PhysicsColliderICollector(int dynamicCount, float maxFraction = 1f) {
             Hit = default;
             IgnoreTriggers = true;
@@ -49,10 +51,12 @@ namespace ChoyUtilities.Entities {
 
             return true;
         }
+
     }
 
     [BurstCompile]
     public struct CastIJob : IJob {
+
         [ReadOnly] public CollisionWorld CollisionWorld;
         [ReadOnly] public bool IgnoreTriggers;
         [ReadOnly] public bool IgnoreStatic;
@@ -102,12 +106,16 @@ namespace ChoyUtilities.Entities {
                 };
             }
         }
+
     }
 
     public struct SpringData {
+
         public Entity Entity;
         public bool Picked;
         public float3 PointOnBody;
         public float Depth;
+
     }
+
 }

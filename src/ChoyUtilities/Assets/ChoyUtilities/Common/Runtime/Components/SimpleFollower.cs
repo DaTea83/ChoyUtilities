@@ -2,10 +2,11 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
+
     [DisallowMultipleComponent]
     [AddComponentMenu("Choy Utilities/Follower")]
     public class SimpleFollower : MonoBehaviour {
+
         [SerializeField] private Transform target;
         [SerializeField] private float3 offset;
         [SerializeField] [Range(0f, 30f)] private float smoothFollowSpeed;
@@ -27,5 +28,7 @@ namespace ChoyUtilities {
             offset = transform.position - target.position;
             _factor = smoothFollowSpeed > 0 ? smoothFollowSpeed : 1f;
         }
+
     }
+
 }

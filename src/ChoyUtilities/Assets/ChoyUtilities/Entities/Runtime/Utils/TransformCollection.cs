@@ -4,8 +4,9 @@ using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace ChoyUtilities.Entities {
+
     public static class EntitiesCollection {
-        
+
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Floater Floater(this LocalTransform lt) {
@@ -18,6 +19,7 @@ namespace ChoyUtilities.Entities {
             set[4] = euler.y;
             set[5] = euler.z;
             set[6] = lt.Scale;
+
             return new Floater(set);
         }
 
@@ -25,13 +27,14 @@ namespace ChoyUtilities.Entities {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static LocalTransform ToLocalTransform(this Floater fs) {
             if (fs.Length < 7) return default;
+
             return new LocalTransform {
                 Position = new float3(fs[0], fs[1], fs[2]),
                 Rotation = quaternion.Euler(fs[3], fs[4], fs[5]),
                 Scale = fs[6]
             };
         }
-        
+
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalTransform player,
@@ -83,5 +86,7 @@ namespace ChoyUtilities.Entities {
 
             return dot >= 0f;
         }
+
     }
+
 }

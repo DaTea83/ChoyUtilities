@@ -6,7 +6,9 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
+
     public class FlatPlaneAuthoring : MonoBehaviour {
+
         public GameObject planePrefab;
 
         [Tooltip("Scale up the prefab to value + 100")]
@@ -34,6 +36,7 @@ namespace ChoyUtilities.Entities {
         }
 
         private class FlatPlaneBaker : Baker<FlatPlaneAuthoring> {
+
             public override void Bake(FlatPlaneAuthoring authoring) {
                 if (authoring.planePrefab is null) return;
 
@@ -47,14 +50,18 @@ namespace ChoyUtilities.Entities {
                 });
                 AddComponent<RegenerateLevelIFlag>(entity);
             }
+
         }
+
     }
 
     public struct PlaneGenerationIData : IComponentData {
+
         public Entity PlanePrefab;
         public float PlaneSize;
         public float UnitsPerPlane;
         public float3 PlaneOffset;
+
     }
 
     /// <summary>
@@ -67,7 +74,9 @@ namespace ChoyUtilities.Entities {
     /// </summary>
     [MaterialProperty("_Tile_Scale")]
     public struct TilingOverrideIData : IComponentData {
+
         public float Value;
+
     }
 
     [BurstCompile]
@@ -75,6 +84,7 @@ namespace ChoyUtilities.Entities {
                        WorldSystemFilterFlags.Default)]
     [UpdateInGroup(typeof(InitializationSystemGroup))]
     public partial class PlaneGenerationSystemBase : SystemBase {
+
         [BurstCompile]
         protected override void OnUpdate() {
             var ecb = new EntityCommandBuffer(WorldUpdateAllocator);
@@ -98,5 +108,7 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(EntityManager);
         }
+
     }
+
 }

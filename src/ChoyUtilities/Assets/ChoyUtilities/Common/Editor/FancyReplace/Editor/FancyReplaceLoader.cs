@@ -6,7 +6,9 @@ using UnityEngine;
 
 // ReSharper disable CheckNamespace
 namespace ChoyUtilities.Editor {
+
     internal static partial class FancyReplaceEditor {
+
         internal static AssetModificationSerialize Asset;
 
         private static AssetModificationSerialize DefaultAsset => new() {
@@ -21,12 +23,12 @@ namespace ChoyUtilities.Editor {
         }
 
         private static async Task LoadOrCreate() {
-            if (!Directory.Exists(FullSavePath)) {
-                Directory.CreateDirectory($"Assets/{DEFAULT_NAME}");
-            }
+            if (!Directory.Exists(FullSavePath)) Directory.CreateDirectory($"Assets/{DEFAULT_NAME}");
+
             if (!File.Exists(FullSavePath)) {
                 Asset = DefaultAsset;
                 await SaveData();
+
                 return;
             }
 
@@ -69,5 +71,7 @@ namespace ChoyUtilities.Editor {
             newArray[^1] = entry;
             Asset.assetModified = newArray;
         }
+
     }
+
 }

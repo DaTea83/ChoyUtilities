@@ -5,10 +5,12 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace EugeneC.Obsolete {
+
     //TODO: Make a new version, mark this as deprecated 
     [Obsolete]
     public abstract class GenericSpawnManager<T> : GenericSingleton<GenericSpawnManager<T>>
         where T : Enum {
+
         public SpawnSerialize<T>[] serializedOb;
 
         public List<GameObject> spawnedObjects = new();
@@ -41,13 +43,17 @@ namespace EugeneC.Obsolete {
             foreach (var ob in spawnedObjects.ToArray())
                 DespawnObject(ob);
         }
+
     }
 
     [Obsolete]
     [Serializable]
     public struct SpawnSerialize<T>
         where T : Enum {
+
         public T spawnId;
         public GameObject[] prefab;
+
     }
+
 }

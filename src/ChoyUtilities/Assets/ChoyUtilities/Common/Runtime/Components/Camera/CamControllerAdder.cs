@@ -6,10 +6,11 @@ namespace ChoyUtilities {
 
         private void OnEnable() {
             var cam = Camera.main;
-            if(cam is null) return;
-            if(!cam.TryGetComponent<CameraController>(out var camController)) {
+
+            if (cam is null) return;
+
+            if (!cam.TryGetComponent<CameraController>(out var camController))
                 cam.gameObject.AddComponent<CameraController>();
-            }
         }
 
     }

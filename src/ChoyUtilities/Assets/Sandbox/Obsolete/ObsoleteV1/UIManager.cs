@@ -4,8 +4,10 @@ using ChoyUtilities;
 using UnityEngine;
 
 namespace EugeneC.Obsolete {
+
     [Obsolete]
     public class UIManager : GenericSingleton<UIManager> {
+
         public const float TimeOverChar = 0.075f;
         public UIObject[] uiObject;
         public Canvas MainCanvas;
@@ -52,7 +54,9 @@ namespace EugeneC.Obsolete {
         }
 
         //Open Persist
-        public GameObject OpenPersist(UIType UIPrefab) { return GeneratePrefab(UIPrefab, null); }
+        public GameObject OpenPersist(UIType UIPrefab) {
+            return GeneratePrefab(UIPrefab, null);
+        }
 
         //Close
         public void Close(GameObject UIPrefab) {
@@ -65,18 +69,24 @@ namespace EugeneC.Obsolete {
             foreach (var UIPrefab in OpenedUI.ToArray())
                 Close(UIPrefab);
         }
+
     }
 
     [Serializable]
     public class UIObject {
+
         public UIType UI_Id;
         public GameObject Prefab;
+
     }
 
     public enum UIType {
+
         Start,
         BlankDark,
         BlankWhite,
         Bedroom
+
     }
+
 }

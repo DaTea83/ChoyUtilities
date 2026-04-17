@@ -6,10 +6,11 @@ using UnityEngine;
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
 namespace ChoyUtilities.Editor {
-    
+
     [AddComponentMenu("Choy Utilities/Animation Recorder")]
     [RequireComponent(typeof(Animator))]
     public class AnimationRecorderEditor : MonoBehaviour {
+
         [SerializeField] private AnimationClip animationClip;
         [SerializeField] private float duration = 1.0f;
 
@@ -57,6 +58,8 @@ namespace ChoyUtilities.Editor {
                 _recorder.TakeSnapshot(Time.unscaledDeltaTime);
             }
         }
+
     }
+
 }
 #endif

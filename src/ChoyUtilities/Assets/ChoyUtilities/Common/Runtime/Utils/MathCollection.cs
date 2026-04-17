@@ -6,8 +6,9 @@ using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 namespace ChoyUtilities {
-    
+
     public static partial class HelperCollection {
+
         // Time-constant style smoothing
         // -DeltaTime divide timeConstant, math.max just to avoid timeConstant is 0
         // More consistent interpolation with different frame rates
@@ -32,39 +33,48 @@ namespace ChoyUtilities {
         /// </summary>
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Modulo(float x, float y) { return (x % y + y) % y; }
+        public static float Modulo(float x, float y) {
+            return (x % y + y) % y;
+        }
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Modulo(int x, int y) { return (x % y + y) % y; }
+        public static int Modulo(int x, int y) {
+            return (x % y + y) % y;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float RandomValue(this Component obj) {
             var ran = Random.CreateFromIndex(CreateSeed(obj));
+
             return ran.NextFloat();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float RandomValue(this Component obj, float min, float max) {
             var ran = Random.CreateFromIndex(CreateSeed(obj));
+
             return ran.NextFloat(min, max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RandomValue(this Component obj, int min, int max) {
             var ran = Random.CreateFromIndex(CreateSeed(obj));
+
             return ran.NextInt(min, max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2 RandomValue2(this Component obj) {
             var ran = Random.CreateFromIndex(CreateSeed(obj));
+
             return ran.NextFloat2();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 RandomValue3(this Component obj) {
             var ran = Random.CreateFromIndex(CreateSeed(obj));
+
             return ran.NextFloat3();
         }
 
@@ -77,12 +87,12 @@ namespace ChoyUtilities {
                 // Both random prime numbers
                 seed = seed * 2722380223u + 1137611711u;
 
-                if (seed == 0) {
-                    seed = 1;
-                }
+                if (seed == 0) seed = 1;
 
                 return seed;
             }
         }
+
     }
+
 }

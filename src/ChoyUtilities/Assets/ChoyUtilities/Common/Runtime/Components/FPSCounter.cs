@@ -2,10 +2,11 @@ using TMPro;
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
+
     [AddComponentMenu("Choy Utilities/FPS Counter")]
     [RequireComponent(typeof(TMP_Text))]
     public sealed class FPSCounter : MonoBehaviour {
+
         [SerializeField] private TMP_Text displayText;
 
         private float _frames;
@@ -29,11 +30,15 @@ namespace ChoyUtilities {
             _time = 0;
         }
 
-        private void OnValidate() { displayText ??= GetComponent<TMP_Text>(); }
+        private void OnValidate() {
+            displayText ??= GetComponent<TMP_Text>();
+        }
 
         private void UpdateText() {
             if (displayText is null) return;
             displayText.text = $"{FPS:F1}";
         }
+
     }
+
 }

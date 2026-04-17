@@ -6,9 +6,11 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 namespace EugeneC.Obsolete {
+
     [Obsolete]
     public abstract class GenericAudioManager<T> : GenericSingleton<GenericAudioManager<T>>
         where T : Enum {
+
         public AudioSource sourcePrefab;
         public AudioSfx<T>[] audiosfx;
 
@@ -55,12 +57,16 @@ namespace EugeneC.Obsolete {
             source.Stop();
             PlayIgnorePauseClip(audioId, source);
         }
+
     }
 
     [Serializable]
     public struct AudioSfx<T>
         where T : Enum {
+
         public T audioId;
         public AudioClip[] audioClip;
+
     }
+
 }

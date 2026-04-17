@@ -2,24 +2,32 @@ using Unity.Entities;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
+
     [RequireComponent(typeof(DestroyAuthoring))]
     [DisallowMultipleComponent]
     public class DestroyBufferEntryAuthoring : MonoBehaviour {
+
         public class Baker : Baker<DestroyBufferEntryAuthoring> {
+
             public override void Bake(DestroyBufferEntryAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.Dynamic);
                 AddBuffer<DestroyBufferEntryIBuffer>(e);
             }
+
         }
+
     }
 
     public struct DestroyBufferEntryIBuffer : IBufferElementData {
+
         public float Value;
+
     }
 
     [UpdateInGroup(typeof(EuCDestroySystemGroup))]
     [UpdateBefore(typeof(DestroyEntityISystem))]
     public partial struct DestroyBufferISystem : ISystem {
+
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
         }
@@ -31,5 +39,7 @@ namespace ChoyUtilities.Entities {
                 SystemAPI.SetComponentEnabled<DestroyIEnableableTag>(entity, true);
             }
         }
+
     }
+
 }

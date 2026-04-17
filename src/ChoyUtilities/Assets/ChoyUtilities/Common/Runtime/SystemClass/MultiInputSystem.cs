@@ -6,14 +6,15 @@ using UnityEngine.InputSystem.Users;
 using Object = UnityEngine.Object;
 
 namespace ChoyUtilities {
+
     public class MultiInputSystem {
-        
-        private readonly string _controlScheme;
-        private InputActionMap _actionMap;
-        private IControlBinder _binder;
-        public readonly InputDevice Device;
 
         private readonly InputActionAsset _asset;
+
+        private readonly string _controlScheme;
+        public readonly InputDevice Device;
+        private InputActionMap _actionMap;
+        private IControlBinder _binder;
         private InputUser _user;
 
         public MultiInputSystem(InputDevice device, InputActionAsset asset, EControlScheme controltype) {
@@ -26,9 +27,13 @@ namespace ChoyUtilities {
         public event Action<InputDevice, InputDeviceChange> OnBindObject;
         public event Action<InputDevice, InputDeviceChange> OnUnbindObject;
 
-        public void EnableInput() { _actionMap.Enable(); }
+        public void EnableInput() {
+            _actionMap.Enable();
+        }
 
-        public void DisableInput() { _actionMap.Disable(); }
+        public void DisableInput() {
+            _actionMap.Disable();
+        }
 
         public void BindObject<T>(T bindObj)
             where T : IControlBinder {
@@ -69,12 +74,16 @@ namespace ChoyUtilities {
             OnUnbindObject?.Invoke(Device, InputDeviceChange.Removed);
             DisableInput();
         }
+
     }
 
     public interface IControlBinder {
+
         public Type InputInterface { get; }
         MultiInputSystem Registry { get; set; }
         void OnBind();
+
     }
+
 }
 #endif

@@ -4,6 +4,7 @@ using Unity.Transforms;
 
 // Purpose of these is to help encapsulates custom define systems and organize them
 namespace ChoyUtilities.Entities {
+
     [UpdateInGroup(typeof(SimulationSystemGroup))]
     [UpdateAfter(typeof(TransformSystemGroup))]
     [WorldSystemFilter(WorldSystemFilterFlags.Editor, WorldSystemFilterFlags.Editor)]
@@ -63,4 +64,5 @@ namespace ChoyUtilities.Entities {
     [UpdateInGroup(typeof(EuCDestroySystemGroup), OrderLast = true)]
     [UpdateAfter(typeof(DestroyEntityISystem))]
     public partial class EuCCleanupSystemGroup : ComponentSystemGroup { }
+
 }

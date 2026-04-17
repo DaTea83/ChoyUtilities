@@ -4,8 +4,10 @@ using UnityEngine;
 
 // ReSharper disable CheckNamespace
 namespace ChoyUtilities.Editor {
+
     [InitializeOnLoad]
     internal static partial class FancyReplaceEditor {
+
         static FancyReplaceEditor() {
             _ = LoadOrCreate();
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemOnGUI;
@@ -16,9 +18,11 @@ namespace ChoyUtilities.Editor {
 
             if (Asset.assetModified is null || Asset.assetModified.Length == 0) return;
             var index = Array.FindIndex(Asset.assetModified, data => data.idPath == path);
+
             if (index == -1) return;
 
             var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(Asset.assetModified[index].texturePath);
+
             if (tex is null) return;
 
             var newRect = selectionRect.height <= 16
@@ -39,5 +43,7 @@ namespace ChoyUtilities.Editor {
             // Put new texture on top
             GUI.DrawTexture(newRect, tex);
         }
+
     }
+
 }

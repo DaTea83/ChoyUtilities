@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChoyUtilities {
+
     public abstract class GenericFsm<T, TEnum> : MonoBehaviour
         where T : GenericFsm<T, TEnum>
         where TEnum : Enum {
+
         public State currentState;
         [SerializeField] private State previousState;
 
@@ -23,7 +25,9 @@ namespace ChoyUtilities {
             currentState?.OnEnter();
         }
 
-        protected virtual void Update() { currentState?.Run(); }
+        protected virtual void Update() {
+            currentState?.Run();
+        }
 
         public void ChangeState(TEnum newStateID) {
             var newState = _allStates[newStateID];
@@ -41,6 +45,7 @@ namespace ChoyUtilities {
         }
 
         public abstract class State : MonoBehaviour {
+
             protected T StateMachine;
             public abstract TEnum StateEnum { get; }
 
@@ -52,7 +57,9 @@ namespace ChoyUtilities {
                 }
             }
 
-            public virtual void Init(T stateMachine) { StateMachine = stateMachine; }
+            public virtual void Init(T stateMachine) {
+                StateMachine = stateMachine;
+            }
 
             public virtual void OnEnter() { }
 
@@ -60,7 +67,12 @@ namespace ChoyUtilities {
 
             public virtual void Run() { }
 
-            public virtual bool CanTransitionTo(TEnum newStateID) { return true; }
+            public virtual bool CanTransitionTo(TEnum newStateID) {
+                return true;
+            }
+
         }
+
     }
+
 }

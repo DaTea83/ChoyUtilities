@@ -5,8 +5,10 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
+
     [DisallowMultipleComponent]
     public class WaveSpawnAuthoring : MonoBehaviour {
+
         public GameObject prefab;
         public int2 size = new(100, 100);
         public float2 spacing = new(10, 10);
@@ -14,6 +16,7 @@ namespace ChoyUtilities.Entities {
         [Range(0, 2f)] public float speed = .2f;
 
         public class Baker : Baker<WaveSpawnAuthoring> {
+
             public override void Bake(WaveSpawnAuthoring authoring) {
                 if (authoring.prefab is null) return;
 
@@ -28,26 +31,33 @@ namespace ChoyUtilities.Entities {
                     Speed = authoring.speed
                 });
             }
+
         }
+
     }
 
     public struct WaveSpawnIData : IComponentData {
+
         public Entity Prefab;
         public int2 Size;
         public float2 Spacing;
         public float Height;
         public float Speed;
+
     }
 
     public struct WaveMoveIData : IComponentData {
+
         public float YOffset;
         public float Height;
         public float Speed;
+
     }
 
     [BurstCompile]
     [UpdateInGroup(typeof(EuCSpawnSystemGroup), OrderFirst = true)]
     public partial struct WaveSpawnISystem : ISystem {
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -85,5 +95,7 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(em);
         }
+
     }
+
 }

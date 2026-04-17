@@ -5,8 +5,9 @@ using Unity.Entities;
 
 // Taken from: https://github.com/Unity-Technologies/EntityComponentSystemSamples
 namespace ChoyUtilities {
-    
+
     public static partial class EntitiesCollection {
+
         /// <summary>
         ///     A binary search helper for blob arrays.
         ///     It finds the segment in a sorted cumulative array (like arc lengths) where a given value belongs, returning the
@@ -49,5 +50,7 @@ namespace ChoyUtilities {
 
             return leftBound - 1;
         }
+
     }
+
 }

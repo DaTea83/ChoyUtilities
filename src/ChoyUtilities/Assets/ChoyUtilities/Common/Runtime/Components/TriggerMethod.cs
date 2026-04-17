@@ -1,9 +1,10 @@
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
+
     [RequireComponent(typeof(Collider))]
     public class TriggerMethod : MonoBehaviour {
+
         [SerializeField] private LayerMask layer;
         [SerializeField] private string objectTag;
 
@@ -27,5 +28,7 @@ namespace ChoyUtilities {
             if (turnOffAfter)
                 gameObject.SetActive(false);
         }
+
     }
+
 }

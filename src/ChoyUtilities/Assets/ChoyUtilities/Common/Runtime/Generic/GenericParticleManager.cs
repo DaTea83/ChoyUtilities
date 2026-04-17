@@ -1,13 +1,15 @@
-﻿using System;
-#if UNITY_2023_1_OR_NEWER
+﻿#if UNITY_2023_1_OR_NEWER
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
+
     public abstract class GenericParticleManager<TEnum, TMono> : GenericPoolingManager<TEnum, ParticleSystem, TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
+
         protected override void Awake() {
             base.Awake();
 
@@ -58,6 +60,8 @@ namespace ChoyUtilities {
 
             ListPool<int>.Release(PauseIndexes);
         }
+
     }
+
 }
 #endif

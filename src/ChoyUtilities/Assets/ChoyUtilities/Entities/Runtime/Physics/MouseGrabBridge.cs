@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace ChoyUtilities.Entities {
-    
+
     [DisallowMultipleComponent]
     public sealed class MouseGrabBridge : MonoBehaviour {
+
         [SerializeField] private InputActionAsset inputAction;
         [SerializeField] private InputActionReference mouseGrabAction;
         [SerializeField] private InputActionReference mousePositionAction;
@@ -17,7 +18,7 @@ namespace ChoyUtilities.Entities {
         private Entity _entity;
         private EntityManager _entityManager;
         private float _previousInput;
-        
+
 #if UNITY_2023_1_OR_NEWER
         private async void Start() {
             try {
@@ -33,7 +34,7 @@ namespace ChoyUtilities.Entities {
             }
         }
 #endif
-        
+
         private void OnEnable() {
             if (inputAction is null) return;
 
@@ -76,6 +77,8 @@ namespace ChoyUtilities.Entities {
             };
             _entityManager.SetComponentData(_entity, input);
         }
+
     }
+
 }
 #endif

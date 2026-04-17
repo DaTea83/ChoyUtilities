@@ -3,9 +3,9 @@ using Unity.Entities;
 using Unity.Physics;
 
 namespace ChoyUtilities {
-    
+
     public static partial class EntitiesCollection {
-        
+
         [BurstCompile]
         public static (Entity, Entity) GetSimulationEntities<TA, TB>(this TriggerEvent triggerEvent,
             ComponentLookup<TA> aLookup,
@@ -111,5 +111,7 @@ namespace ChoyUtilities {
 
             return (aEntity, bEntity, -1);
         }
+
     }
+
 }

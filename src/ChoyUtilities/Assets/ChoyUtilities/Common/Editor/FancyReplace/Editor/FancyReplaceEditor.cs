@@ -1,7 +1,9 @@
 // ReSharper disable once CheckNamespace
 
 namespace ChoyUtilities.Editor {
+
     internal enum EReplaceType : byte {
+
         None = 0,
         Script,
         Prefab,
@@ -10,9 +12,11 @@ namespace ChoyUtilities.Editor {
         ScriptableObject,
         Materials,
         TextAsset
+
     }
 
     internal static partial class FancyReplaceEditor {
+
         internal const string DEFAULT_NAME = "FancyReplace";
         private const string EDITOR = "Editor";
 
@@ -22,8 +26,9 @@ namespace ChoyUtilities.Editor {
         internal static string FullTexturePath {
             get {
                 var name = EditorCollection.FindPathByName(DEFAULT_NAME + EDITOR);
+
                 return name != string.Empty
-                    ? name.Replace(ScriptPath, $"Textures/All")
+                    ? name.Replace(ScriptPath, "Textures/All")
                     : string.Empty;
             }
         }
@@ -39,7 +44,10 @@ namespace ChoyUtilities.Editor {
                 EReplaceType.TextAsset => "TextAsset",
                 _ => string.Empty
             };
+
             return FullTexturePath.Replace("All", name);
         }
+
     }
+
 }

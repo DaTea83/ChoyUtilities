@@ -11,10 +11,12 @@ using UnityEngine;
 //After finish debugging uncomment back
 
 namespace ChoyUtilities.Editor {
+
 #if UNITY_EDITOR
 
     [InitializeOnLoad]
     internal static class LoadIconDisplayEditor {
+
         private static bool _hierarchyHasFocus;
         private static EditorWindow _window;
 
@@ -79,7 +81,9 @@ namespace ChoyUtilities.Editor {
 
             EditorGUI.LabelField(selectionRect, content);
         }
+
     }
 
 #endif
+
 }

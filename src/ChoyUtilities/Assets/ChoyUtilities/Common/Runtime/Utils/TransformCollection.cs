@@ -3,6 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
+
     public static partial class HelperCollection {
 
         public static Quaternion RotateTowards(this Transform obj, float3 target, float speed) {
@@ -39,8 +40,7 @@ namespace ChoyUtilities {
         }
 
         public static Transform FindNearestTransform(this List<Transform> posList,
-            in Transform currentPosition,
-            in List<Transform> prevPos) {
+            in Transform currentPosition, in List<Transform> prevPos) {
             if (posList is null || currentPosition is null) return null;
 
             Transform nearest = null;
@@ -103,5 +103,7 @@ namespace ChoyUtilities {
 
             return nearest;
         }
+
     }
+
 }

@@ -5,7 +5,9 @@ using Unity.Entities;
 using Unity.Mathematics;
 
 namespace ChoyUtilities {
+
     public static partial class EntitiesCollection {
+
         /// <summary>
         ///     Bake the spline using Barry–Goldman algorithm
         ///     Or formula of centripetal Catmull–Rom spline
@@ -116,12 +118,16 @@ namespace ChoyUtilities {
             var r1 = rotArr[idx + 1];
             rotation = math.slerp(r0, r1, t);
         }
+
     }
 
     public struct SplineVectorBlob {
+
         public BlobArray<float3> Position;
         public BlobArray<float> Distance;
         public BlobArray<quaternion> Rotation;
         public BlobArray<float3> Tangent;
+
     }
+
 }

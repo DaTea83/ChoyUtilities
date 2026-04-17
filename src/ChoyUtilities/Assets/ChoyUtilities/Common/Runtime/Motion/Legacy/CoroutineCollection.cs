@@ -6,7 +6,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChoyUtilities {
+
     public static partial class HelperCollection {
+
         public static IEnumerator FadeScreenCoroutine(this Image fadeImage,
             bool isFadein,
             float loadDuration,
@@ -196,5 +198,7 @@ namespace ChoyUtilities {
 
             onDone?.Invoke();
         }
+
     }
+
 }

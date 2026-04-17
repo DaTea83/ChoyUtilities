@@ -1,17 +1,19 @@
-﻿using System;
+﻿#if UNITY_2023_1_OR_NEWER
+using System;
 using System.Collections.Generic;
-#if UNITY_2023_1_OR_NEWER
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
+
     public abstract class GenericAudioManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
-        
+
         public enum EAudioPriority : byte {
+
             Highest = 0,
             UltraHigh = 1 << 0,
             VeryHigh = 1 << 1,
@@ -22,12 +24,15 @@ namespace ChoyUtilities {
             Low = 1 << 6,
             VeryLow = 1 << 7,
             Lowest = byte.MaxValue
+
         }
 
         public enum EMixerType : byte {
+
             Sfx = 1,
             Narration = 1 << 1,
             Music = 1 << 2
+
         }
 
         [SerializeField] protected PoolingAttributes poolAttributes;
@@ -84,7 +89,9 @@ namespace ChoyUtilities {
             }
         }
 
-        protected virtual void OnEnable() { PauseIndexes = ListPool<int>.Get(); }
+        protected virtual void OnEnable() {
+            PauseIndexes = ListPool<int>.Get();
+        }
 
         protected override void OnDisable() {
             ListPool<int>.Release(PauseIndexes);
@@ -254,22 +261,30 @@ namespace ChoyUtilities {
         }
 
         public abstract class PoolingAttributes : ScriptableObject {
+
             public AudioResourceSerialize[] audioResource;
 
             [Serializable]
             public struct AudioResourceSerialize {
+
                 public AudioResource audio;
                 public TEnum id;
+
             }
+
         }
 
         [Serializable]
         public struct AudioMixerSerialize {
+
             public AudioMixer mixer;
             public AnimationCurve volumeCurve;
             public string mixerName;
             [Range(-80f, 20f)] public float defaultVolume, focusedVolume, unfocusedVolume;
+
         }
+
     }
+
 }
 #endif

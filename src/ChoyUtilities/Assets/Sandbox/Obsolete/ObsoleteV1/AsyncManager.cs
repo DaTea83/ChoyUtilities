@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace EugeneC.Obsolete {
+
     /// <summary>
     ///     Duplicate of Coroutine Manager but in async version
     /// </summary>
@@ -14,6 +15,7 @@ namespace EugeneC.Obsolete {
     /// </remarks>
     [Obsolete]
     public class AsyncManager : GenericSingleton<AsyncManager> {
+
         // Start is called before the first frame update
 
         public static async Task FadeScreenAsync(bool isFadein,
@@ -200,5 +202,7 @@ namespace EugeneC.Obsolete {
 
             OnDone?.Invoke();
         }
+
     }
+
 }

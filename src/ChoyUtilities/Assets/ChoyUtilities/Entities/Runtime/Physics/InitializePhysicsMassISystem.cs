@@ -4,10 +4,12 @@ using Unity.Mathematics;
 using Unity.Physics;
 
 namespace ChoyUtilities.Entities {
+
     [BurstCompile]
     [UpdateInGroup(typeof(EuCManagedComponentSystem), OrderFirst = true)]
     [UpdateBefore(typeof(InitializeRandomISystem))]
     public partial struct InitializePhysicsMassISystem : ISystem {
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -24,6 +26,7 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
+
     }
 
     public struct InitializePhysicsMassDataITag : IComponentData { }
@@ -35,7 +38,10 @@ namespace ChoyUtilities.Entities {
     ///     The relationship between mass and inverse mass is : IM = 1 / (M * 100)
     /// </remarks>
     public struct PhysicsMassIData : IComponentData {
+
         public float InverseMass;
         public float3 InverseInertia;
+
     }
+
 }

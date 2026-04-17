@@ -6,11 +6,14 @@ using UnityEditor;
 #endif
 
 namespace ChoyUtilities.Entities {
+
     [DisallowMultipleComponent]
     public class MoveNodeAuthoring : MonoBehaviour {
+
         [SerializeField] private MoveNodeAuthoring[] connections;
 
         private class Baker : Baker<MoveNodeAuthoring> {
+
             public override void Bake(MoveNodeAuthoring authoring) {
                 if (authoring.connections is null || authoring.connections.Length == 0) return;
 
@@ -24,6 +27,7 @@ namespace ChoyUtilities.Entities {
                         { ConnectedNode = GetEntity(c, TransformUsageFlags.Renderable) });
                 }
             }
+
         }
 
 #if UNITY_EDITOR
@@ -63,5 +67,7 @@ namespace ChoyUtilities.Entities {
             }
         }
 #endif
+
     }
+
 }

@@ -4,12 +4,15 @@ using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 namespace ChoyUtilities.Entities {
+
     [DisallowMultipleComponent]
     public sealed class RandomAuthoring : MonoBehaviour {
+
         [SerializeField] private ERandomInitializationType initializationType = ERandomInitializationType.None;
         [SerializeField] private uint manualOverrideValue;
 
         public class Baker : Baker<RandomAuthoring> {
+
             public override void Bake(RandomAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.None);
 
@@ -36,10 +39,13 @@ namespace ChoyUtilities.Entities {
                         throw new ArgumentOutOfRangeException();
                 }
             }
+
         }
+
     }
 
     public enum ERandomInitializationType : byte {
+
         /// <summary>
         ///     None value generally should not be used. Will initialize <see cref="RandomIData" /> using index 0 during baking in
         ///     <see cref="RandomAuthoring.Baker.Bake" />.
@@ -58,16 +64,20 @@ namespace ChoyUtilities.Entities {
         ///     value at the time of initialization in the <see cref="InitializeRandomISystem" />
         /// </summary>
         SystemMilliseconds = 2
+
     }
 
     public struct InitializeRandomIEnableableTag : IComponentData, IEnableableComponent { }
 
     public struct RandomIData : IComponentData {
+
         public Random Value;
+
     }
 
     [UpdateInGroup(typeof(EuCManagedComponentSystem), OrderFirst = true)]
     public partial struct InitializeRandomISystem : ISystem {
+
         public void OnUpdate(ref SystemState state) {
             var systemMilliseconds = (uint)Environment.TickCount;
 
@@ -82,5 +92,7 @@ namespace ChoyUtilities.Entities {
                 initialize.ValueRW = false;
             }
         }
+
     }
+
 }

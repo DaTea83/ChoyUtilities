@@ -3,7 +3,9 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
+
     internal static class RemoveMissingScriptsEditor {
+
         [MenuItem(EditorCollection.UtilityWindow + "Missing Scripts/Find")]
         internal static void FindMissingScripts() {
 #if UNITY_2023_1_OR_NEWER
@@ -34,5 +36,7 @@ namespace ChoyUtilities.Editor {
                 Debug.Log($"Removing {gameObject.name}'s missing Script", gameObject);
             }
         }
+
     }
+
 }

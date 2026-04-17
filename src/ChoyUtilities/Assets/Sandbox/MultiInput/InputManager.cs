@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace ChoyUtilities {
+
 // For objects that already existed
     public class InputManager : GenericSingleton<InputManager> {
+
         [SerializeField] private InputActionAsset actionAsset;
         [SerializeField] private int playerLimitCount = 3;
         [SerializeField] private bool allowNewJoin = true;
@@ -14,7 +16,9 @@ namespace ChoyUtilities {
         private readonly Dictionary<InputDevice, MultiInputSystem> _deviceRegistry = new();
         private readonly Dictionary<MultiInputSystem, IControlBinder> _playerRegistry = new();
 
-        public bool GetAllowKeyboard() { return allowKeyboard; }
+        public bool GetAllowKeyboard() {
+            return allowKeyboard;
+        }
 
         public bool RegisterPlayer(IControlBinder playerObject, InputDevice device) {
             if (!allowNewJoin) {
@@ -77,6 +81,8 @@ namespace ChoyUtilities {
 
             Debug.Log("All players have been unregistered.");
         }
+
     }
+
 }
 #endif

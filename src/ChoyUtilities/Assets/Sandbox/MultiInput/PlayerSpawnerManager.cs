@@ -6,14 +6,18 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace ChoyUtilities {
+
 // Combination of input manager and spawn manager
 
 #pragma warning disable CS0612
     public class PlayerSpawnerManager : GenericSpawnManager<PlayerSpawnerManager.PlayerTypeEnum>
 #pragma warning restore CS0612
     {
+
         public enum PlayerTypeEnum : byte {
+
             PlayerType1
+
         }
 
         [SerializeField] private InputActionAsset actionAsset;
@@ -47,7 +51,9 @@ namespace ChoyUtilities {
             PlayerSpawnController.Instance.UnsubOnResetGame(ResetGame);
         }
 
-        private void OnAllowNewJoinChange(bool change) { allowNewJoin = change; }
+        private void OnAllowNewJoinChange(bool change) {
+            allowNewJoin = change;
+        }
 
         private void OnDeviceChange(InputDevice device, InputDeviceChange change) {
             if (change == InputDeviceChange.Added) {
@@ -183,5 +189,7 @@ namespace ChoyUtilities {
                     controlBinder.Registry.DisableInput();
             }
         }
+
     }
+
 }

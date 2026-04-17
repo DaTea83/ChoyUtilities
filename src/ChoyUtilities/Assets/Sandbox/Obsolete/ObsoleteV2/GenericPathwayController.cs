@@ -7,11 +7,13 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace EugeneC.ObsoleteV2 {
+
     [Obsolete]
     [DisallowMultipleComponent]
     public abstract class GenericPathwayController<T, TEnum> : MonoBehaviour
         where T : GenericPathwayController<T, TEnum>
         where TEnum : Enum {
+
         [SerializeField] [Range(1, byte.MaxValue)]
         protected byte subdivision = 48;
 
@@ -129,34 +131,46 @@ namespace EugeneC.ObsoleteV2 {
 
         [Serializable]
         public struct PathSerializable {
+
             public TEnum type;
             public PointSerializable[] paths;
+
         }
 
         [DisallowMultipleComponent]
         [RequireComponent(typeof(RandomAuthoring))]
         [RequireComponent(typeof(DestroyAuthoring))]
         public abstract class AgentMovementBase : MonoBehaviour {
+
             [SerializeField] protected AgentAttributes stats;
 
             private readonly T _pathwaysSingleton;
             public abstract TEnum AgentEnum { get; }
+
         }
+
     }
 
     public struct PathwayBlob {
+
         public BlobArray<byte> Id;
         public BlobArray<Color> Color;
         public BlobArray<float3> Origins;
         public BlobArray<SplineVectorBlob> Path;
+
     }
 
     public struct AgentPathwaysIData : IComponentData {
+
         public BlobAssetReference<BlobArray<PathwayBlob>> Pathways;
+
     }
 
     public struct AgentMovementIData : IComponentData {
+
         public byte PathwayId;
         public float Speed;
+
     }
+
 }

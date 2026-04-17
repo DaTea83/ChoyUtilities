@@ -4,15 +4,15 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
+
     public partial struct RawSet<T> {
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static RawSet<float> F2ToFloat(float2 value, Allocator allocator = Allocator.Persistent)
-        {
+        public static RawSet<float> F2ToFloat(float2 value, Allocator allocator = Allocator.Persistent) {
             var set = new RawSet<float>(2, allocator);
             set._values[0] = value.x;
             set._values[1] = value.y;
+
             return set;
         }
 
@@ -22,6 +22,7 @@ namespace ChoyUtilities {
             set._values[0] = value.x;
             set._values[1] = value.y;
             set._values[2] = value.z;
+
             return set;
         }
 
@@ -32,9 +33,10 @@ namespace ChoyUtilities {
             set._values[1] = value.y;
             set._values[2] = value.z;
             set._values[3] = value.w;
+
             return set;
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RawSet<int> Int4ToInt(int4 value, Allocator allocator = Allocator.Persistent) {
             var set = new RawSet<int>(4, allocator);
@@ -42,6 +44,7 @@ namespace ChoyUtilities {
             set._values[1] = value.y;
             set._values[2] = value.z;
             set._values[3] = value.w;
+
             return set;
         }
 
@@ -52,15 +55,17 @@ namespace ChoyUtilities {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RawSet<float> Color(Color value, Allocator allocator = Allocator.Persistent) {
-            var set = new [] {
+            var set = new[] {
                 value.r, value.g, value.b, value.a
             };
+
             return new RawSet<float>(set, allocator);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RawSet<char> FromString(string value, Allocator allocator = Allocator.Persistent) {
             var set = value.ToCharArray();
+
             return new RawSet<char>(set, allocator);
         }
 
@@ -75,8 +80,11 @@ namespace ChoyUtilities {
             var rot = math.Euler(value.rotation);
             float3 scale = value.lossyScale;
 
-            var set = new[] { pos, rot, scale};
+            var set = new[] { pos, rot, scale };
+
             return new RawSet<float3>(set, allocator);
         }
+
     }
+
 }

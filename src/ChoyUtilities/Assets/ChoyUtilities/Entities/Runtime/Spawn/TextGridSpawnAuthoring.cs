@@ -7,8 +7,10 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
+
     [DisallowMultipleComponent]
     public sealed class TextGridSpawnAuthoring : MonoBehaviour {
+
         [SerializeField] private GameObject[] prefabs;
         [SerializeField] private char[] identifiers;
         [SerializeField] private TextAsset textAsset;
@@ -17,6 +19,7 @@ namespace ChoyUtilities.Entities {
         [SerializeField] private float scale = 1f;
 
         private class TextGridSpawnAuthoringBaker : Baker<TextGridSpawnAuthoring> {
+
             public override void Bake(TextGridSpawnAuthoring authoring) {
                 DependsOn(authoring.textAsset);
                 var e = GetEntity(TransformUsageFlags.Dynamic);
@@ -69,23 +72,30 @@ namespace ChoyUtilities.Entities {
 
                 return builder.CreateBlobAssetReference<BlobArray<FixedList512Bytes<byte>>>(Allocator.Persistent);
             }
+
         }
+
     }
 
     public struct TextGridSpawnIData : IComponentData {
+
         public BlobAssetReference<BlobArray<FixedList512Bytes<byte>>> Pattern;
         public float2 Spacing;
         public float Scale;
         public int2 Total;
+
     }
 
     public struct TextGridIBuffer : IBufferElementData {
+
         public Entity Prefab;
+
     }
 
     [BurstCompile]
     [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
     public partial struct TextGridSpawnISystem : ISystem {
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -134,5 +144,7 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
+
     }
+
 }

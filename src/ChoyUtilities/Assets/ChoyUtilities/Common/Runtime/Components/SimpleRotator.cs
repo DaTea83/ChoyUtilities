@@ -2,10 +2,11 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-    
+
     [AddComponentMenu("Choy Utilities/Simple Rotator")]
     [DisallowMultipleComponent]
     public class SimpleRotator : MonoBehaviour {
+
         [SerializeField] private EAxis rotateAxis;
         [SerializeField] private float rotateSpeed;
 
@@ -25,6 +26,10 @@ namespace ChoyUtilities {
                 enabled = false;
         }
 
-        private void Update() { transform.Rotate(_rotateDirection * (rotateSpeed * Time.deltaTime)); }
+        private void Update() {
+            transform.Rotate(_rotateDirection * (rotateSpeed * Time.deltaTime));
+        }
+
     }
+
 }

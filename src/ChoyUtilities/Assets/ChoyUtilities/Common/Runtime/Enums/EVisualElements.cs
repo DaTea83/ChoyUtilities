@@ -1,5 +1,7 @@
 namespace ChoyUtilities {
+
     public enum EVisualElements {
+
         Button,
         DoubleField,
         DropdownField,
@@ -29,5 +31,7 @@ namespace ChoyUtilities {
         Vector3Field,
         Vector3IntField,
         Vector4Field
+
     }
+
 }

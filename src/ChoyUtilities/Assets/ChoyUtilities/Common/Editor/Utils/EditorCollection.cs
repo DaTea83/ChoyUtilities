@@ -5,7 +5,9 @@ using UnityEngine;
 // ReSharper disable once CheckNamespace
 
 namespace ChoyUtilities.Editor {
+
     internal static partial class EditorCollection {
+
         public const string UtilityWindow = "ChoyUtilities/";
 
         public static string ProjectFolderName => Directory.GetParent(Application.dataPath)?.Name;
@@ -18,5 +20,7 @@ namespace ChoyUtilities.Editor {
 
             return AssetDatabase.GUIDToAssetPath(guids[0]);
         }
+
     }
+
 }
