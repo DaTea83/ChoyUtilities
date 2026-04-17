@@ -5,9 +5,9 @@ using Unity.Transforms;
 
 namespace ChoyUtilities.Entities {
 
+    [BurstCompile]
     public static class EntitiesCollection {
-
-        [BurstCompile]
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Floater Floater(this LocalTransform lt) {
             var set = new float[7];
@@ -23,7 +23,6 @@ namespace ChoyUtilities.Entities {
             return new Floater(set);
         }
 
-        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static LocalTransform ToLocalTransform(this Floater fs) {
             if (fs.Length < 7) return default;
@@ -34,8 +33,7 @@ namespace ChoyUtilities.Entities {
                 Scale = fs[6]
             };
         }
-
-        [BurstCompile]
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalTransform player,
             in LocalTransform target,
@@ -47,8 +45,7 @@ namespace ChoyUtilities.Entities {
 
             return dot >= 0f;
         }
-
-        [BurstCompile]
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalToWorld player,
             in LocalToWorld target,
@@ -61,7 +58,6 @@ namespace ChoyUtilities.Entities {
             return dot >= 0f;
         }
 
-        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalTransform player,
             in LocalToWorld target,
@@ -74,7 +70,6 @@ namespace ChoyUtilities.Entities {
             return dot >= 0f;
         }
 
-        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalToWorld player,
             in LocalTransform target,

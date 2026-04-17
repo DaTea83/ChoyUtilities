@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Unity.Burst;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
 
+    [BurstCompile]
     public static partial class HelperCollection {
 
-        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 PositionFromTransform(this Floater data) {
             return data.Length < 9 ? float3.zero : new float3(data[0], data[1], data[2]);
         }
 
-        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static quaternion RotationFromTransform(this Floater data) {
             if (data.Length < 9) return quaternion.identity;
             var euler = new float3(data[3], data[4], data[5]);
@@ -20,7 +22,7 @@ namespace ChoyUtilities {
             return quaternion.Euler(euler);
         }
 
-        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 ScaleFromTransform(this Floater data) {
             return data.Length < 9 ? new float3(1, 1, 1) : new float3(data[6], data[7], data[8]);
         }
@@ -35,7 +37,7 @@ namespace ChoyUtilities {
             return obj;
         }
 
-        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Floater LogLerp(this Floater a, Floater b, float t, EMotion type) {
             var e = math.lerp(math.log((float)a), math.log((float)b), type.Evaluate(t));
 

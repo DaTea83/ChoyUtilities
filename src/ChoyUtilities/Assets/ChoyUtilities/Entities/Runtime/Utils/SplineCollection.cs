@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -15,7 +14,6 @@ namespace ChoyUtilities {
         /// <remarks>
         ///     https://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline
         /// </remarks>
-        [BurstCompile]
         public static NativeList<float3> BakePoints(this Allocator allocator,
             NativeArray<float3> points,
             byte subdivisions = 100) {
@@ -58,8 +56,7 @@ namespace ChoyUtilities {
                 return points[index];
             }
         }
-
-        [BurstCompile]
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 GetClosestPointInSplineSegment(float3 lineStart,
             float3 lineEnd, float3 point,
@@ -75,7 +72,6 @@ namespace ChoyUtilities {
             return lineStart + vec * t;
         }
 
-        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SampleAtDistance(ref SplineVectorBlob spline,
             float targetDist,
