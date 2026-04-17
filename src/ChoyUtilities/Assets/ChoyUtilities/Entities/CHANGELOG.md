@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1] - 2026-04-17
+
+### Changed
+* EntitiesCollection are now BurstCompiled
+* RandomValue and all overloads are now AggressiveInlining
+
 ## [1.0.0] - 2026-04-10/11
 
 After a while I finally uploaded this to Github, which from this point onwards version increment will not as frequent as before.

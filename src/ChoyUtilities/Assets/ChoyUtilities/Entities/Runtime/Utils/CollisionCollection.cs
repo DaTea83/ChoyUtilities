@@ -1,8 +1,12 @@
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Physics;
 
 namespace ChoyUtilities {
+    
     public static partial class EntitiesCollection {
+        
+        [BurstCompile]
         public static (Entity, Entity) GetSimulationEntities<TA, TB>(this TriggerEvent triggerEvent,
             ComponentLookup<TA> aLookup,
             ComponentLookup<TB> bLookup)
@@ -32,6 +36,7 @@ namespace ChoyUtilities {
             return (aEntity, bEntity);
         }
 
+        [BurstCompile]
         public static (Entity, Entity, int) GetSimulationEntities<TA, TB, TC>(this TriggerEvent triggerEvent,
             ComponentLookup<TA> aLookup,
             ComponentLookup<TB> bLookup,
@@ -54,6 +59,7 @@ namespace ChoyUtilities {
             return (aEntity, bEntity, -1);
         }
 
+        [BurstCompile]
         public static (Entity, Entity) GetSimulationEntities<TA, TB>(this CollisionEvent collisionEvent,
             ComponentLookup<TB> aLookup,
             ComponentLookup<TA> bLookup)
@@ -83,6 +89,7 @@ namespace ChoyUtilities {
             return (aEntity, bEntity);
         }
 
+        [BurstCompile]
         public static (Entity, Entity, int) GetSimulationEntities<TA, TB, TC>(this CollisionEvent collisionEvent,
             ComponentLookup<TA> aLookup,
             ComponentLookup<TB> bLookup,

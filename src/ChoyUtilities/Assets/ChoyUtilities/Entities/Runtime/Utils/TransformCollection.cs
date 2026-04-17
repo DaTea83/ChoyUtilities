@@ -1,8 +1,13 @@
-﻿using Unity.Mathematics;
+﻿using System.Runtime.CompilerServices;
+using Unity.Burst;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace ChoyUtilities.Entities {
     public static class EntitiesCollection {
+        
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Floater Floater(this LocalTransform lt) {
             var set = new float[7];
             var euler = math.Euler(lt.Rotation);
@@ -16,8 +21,10 @@ namespace ChoyUtilities.Entities {
             return new Floater(set);
         }
 
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static LocalTransform ToLocalTransform(this Floater fs) {
-            if (fs.Length < 7) throw new FloaterException("Value must be more than 7 floats");
+            if (fs.Length < 7) return default;
             return new LocalTransform {
                 Position = new float3(fs[0], fs[1], fs[2]),
                 Rotation = quaternion.Euler(fs[3], fs[4], fs[5]),
@@ -25,6 +32,8 @@ namespace ChoyUtilities.Entities {
             };
         }
         
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalTransform player,
             in LocalTransform target,
             out float distanceSqr,
@@ -36,6 +45,8 @@ namespace ChoyUtilities.Entities {
             return dot >= 0f;
         }
 
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalToWorld player,
             in LocalToWorld target,
             out float distanceSqr,
@@ -47,6 +58,8 @@ namespace ChoyUtilities.Entities {
             return dot >= 0f;
         }
 
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalTransform player,
             in LocalToWorld target,
             out float distanceSqr,
@@ -58,6 +71,8 @@ namespace ChoyUtilities.Entities {
             return dot >= 0f;
         }
 
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetDistanceAndDot(this LocalToWorld player,
             in LocalTransform target,
             out float distanceSqr,
