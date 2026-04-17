@@ -43,13 +43,10 @@ namespace ChoyUtilities.Test {
             
             int[] floater = new Floater(input);
             Assert.AreEqual(expected, floater);
-        }
-
-        [Test]
-        public void Floater_CastIntArrayTest_Exception() {
-            Assert.That(() => {
-                int[] floater = new Floater(Array.Empty<float>());
-            }, Throws.TypeOf<FloaterException>());
+            
+            Assert.Throws<FloaterException>(() => {
+                int[] floater2 = new Floater(Array.Empty<float>());
+            });
         }
 
         [Test]
@@ -59,15 +56,12 @@ namespace ChoyUtilities.Test {
             
             float2 floater = new Floater(input);
             Assert.AreEqual(expected, floater);
-        }
-        
-        [Test]
-        public void Floater_CastFloat2Test_Exception() {
-            var input = new []{ 1.23456789f };
             
-            Assert.That(() => {
-                float2 floater = new Floater(input);
-            }, Throws.TypeOf<FloaterException>());
+            
+            var input2 = new []{ 1.23456789f };
+            Assert.Throws<FloaterException>(() => {
+                float2 floater2 = new Floater(input2);
+            });
         }
     }
 }

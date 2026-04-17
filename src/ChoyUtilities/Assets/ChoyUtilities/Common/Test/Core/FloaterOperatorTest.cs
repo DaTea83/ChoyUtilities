@@ -31,5 +31,15 @@ namespace ChoyUtilities.Test {
             var floater = input.Add(new Floater(new [] { 3.59024689f, 4.70135799f }));
             Assert.AreEqual(expected, floater);
         }
+        
+        [Test]
+        public void Floater_FirstMatchTest() {
+            var input = new Floater(new [] { 1.23456789f, 2.3456789f, 3.59024689f, 4.70135799f });
+            var result = input.FirstMatch(2.3456789f);
+            Assert.AreEqual(1, result);
+            
+            var result2 = input.FirstMatch(2f);
+            Assert.AreEqual(-1, result2);
+        }
     }
 }
