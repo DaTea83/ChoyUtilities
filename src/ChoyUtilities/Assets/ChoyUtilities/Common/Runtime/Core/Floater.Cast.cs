@@ -25,8 +25,9 @@ namespace ChoyUtilities {
         public static implicit operator int[](Floater value) {
             if (value.values == null || value.values.Length == 0) throw new FloaterException("Empty Floater found");
             var set = new int[value.values.Length];
-            Array.Copy(value.values, set, value.values.Length);
-
+            for (var i = 0; i < value.values.Length; i++) 
+                set[i] = (int)value.values[i]; 
+            
             return set;
         }
 

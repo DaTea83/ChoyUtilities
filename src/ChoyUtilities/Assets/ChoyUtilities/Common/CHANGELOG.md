@@ -4,6 +4,7 @@
 
 Added
 * Added GenericMixerManager
+* Added unit testing for Floater
 
 Changed
 * AsyncCollection, optimize catch exception

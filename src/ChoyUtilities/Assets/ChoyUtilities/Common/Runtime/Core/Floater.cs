@@ -287,11 +287,7 @@ namespace ChoyUtilities {
         #region IFormattable
 
         public override string ToString() {
-            char[] set = new Floater(values);
-
-            if (set == null || set == Array.Empty<char>()) return string.Empty;
-
-            return set.ToString();
+            return values.ToString();
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
