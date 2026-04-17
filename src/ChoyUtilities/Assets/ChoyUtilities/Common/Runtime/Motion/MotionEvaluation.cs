@@ -5,7 +5,7 @@ using Unity.Mathematics;
 namespace ChoyUtilities {
 
     [BurstCompile]
-    public static class MotionCollection {
+    public static class MotionEvaluation {
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
