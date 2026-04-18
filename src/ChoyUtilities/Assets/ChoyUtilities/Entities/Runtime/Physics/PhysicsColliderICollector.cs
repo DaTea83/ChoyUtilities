@@ -1,4 +1,18 @@
-﻿using Unity.Assertions;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using Unity.Assertions;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -9,10 +23,8 @@ using static Unity.Physics.Math;
 using RaycastHit = Unity.Physics.RaycastHit;
 
 namespace ChoyUtilities.Entities {
-
     [BurstCompile]
     public struct PhysicsColliderICollector : ICollector<RaycastHit> {
-
         public PhysicsColliderICollector(int dynamicCount, float maxFraction = 1f) {
             Hit = default;
             IgnoreTriggers = true;
@@ -51,12 +63,10 @@ namespace ChoyUtilities.Entities {
 
             return true;
         }
-
     }
 
     [BurstCompile]
     public struct CastIJob : IJob {
-
         [ReadOnly] public CollisionWorld CollisionWorld;
         [ReadOnly] public bool IgnoreTriggers;
         [ReadOnly] public bool IgnoreStatic;
@@ -106,16 +116,12 @@ namespace ChoyUtilities.Entities {
                 };
             }
         }
-
     }
 
     public struct SpringData {
-
         public Entity Entity;
         public bool Picked;
         public float3 PointOnBody;
         public float Depth;
-
     }
-
 }

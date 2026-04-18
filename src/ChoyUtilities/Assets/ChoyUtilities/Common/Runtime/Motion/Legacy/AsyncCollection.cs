@@ -1,3 +1,17 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #if UNITY_2023_1_OR_NEWER
 using System;
 using System.Collections.Generic;
@@ -7,9 +21,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChoyUtilities {
-
     public static partial class HelperCollection {
-
         public static async Awaitable AwaitableUntil(this CancellationToken cancellationToken, Func<bool> condition) {
             while (!condition()) await Awaitable.NextFrameAsync(cancellationToken);
         }
@@ -24,12 +36,18 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable RotateObjectAsync(this CancellationToken token,
-            GameObject obj, float3 rotateTo, float duration, EMotion motion = EMotion.Linear) {
+            GameObject obj,
+            float3 rotateTo,
+            float duration,
+            EMotion motion = EMotion.Linear) {
             await token.RotateObjectAsync(obj.transform, rotateTo, duration, motion);
         }
 
         public static async Awaitable<bool> RotateObjectAsync(this CancellationToken token,
-            Transform obj, float3 rotateTo, float duration, EMotion motion = EMotion.Linear) {
+            Transform obj,
+            float3 rotateTo,
+            float duration,
+            EMotion motion = EMotion.Linear) {
             if (obj is null) return false;
             var endRot = quaternion.Euler(rotateTo);
             var time = 0f;
@@ -56,7 +74,10 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable ScaleObjectAsync(this CancellationToken token,
-            GameObject obj, Vector3 scaleTo, float scalingDuration, EMotion motion = EMotion.Linear,
+            GameObject obj,
+            Vector3 scaleTo,
+            float scalingDuration,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             if (obj is null) return;
             var time = 0f;
@@ -65,7 +86,8 @@ namespace ChoyUtilities {
             try {
                 while (time <= scalingDuration) {
                     time += Time.unscaledDeltaTime;
-                    obj.transform.localScale = Vector3.Lerp(startScale, scaleTo, motion.Evaluate(time / scalingDuration));
+                    obj.transform.localScale =
+                        Vector3.Lerp(startScale, scaleTo, motion.Evaluate(time / scalingDuration));
                     await Awaitable.EndOfFrameAsync(token);
                 }
 
@@ -78,15 +100,21 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable DialogueAsync(this CancellationToken token,
-            List<string> dialogueList, float dialogueDuration,
-            Action<string> displayTo, float timePerChar, Action onDone = null) {
+            List<string> dialogueList,
+            float dialogueDuration,
+            Action<string> displayTo,
+            float timePerChar,
+            Action onDone = null) {
             await token.DialogueAsync(dialogueList.ToArray(),
                 dialogueDuration, displayTo, timePerChar, onDone);
         }
 
         public static async Awaitable DialogueAsync(this CancellationToken token,
-            string[] dialogueList, float dialogueDuration, Action<string> displayTo,
-            float timePerChar = 0.05f, Action onDone = null) {
+            string[] dialogueList,
+            float dialogueDuration,
+            Action<string> displayTo,
+            float timePerChar = 0.05f,
+            Action onDone = null) {
             if (dialogueList is null || dialogueList.Length == 0) return;
 
             try {
@@ -119,7 +147,10 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable RollRightAngleAsync(this CancellationToken token,
-            Transform ob, float rollSpeed, float3 dir, float rollCooldown = 0.1f) {
+            Transform ob,
+            float rollSpeed,
+            float3 dir,
+            float rollCooldown = 0.1f) {
             var anchor = (float3)ob.position + (new float3(0, -1f, 0) + dir) * 0.5f;
             var axis = math.cross(new float3(0, 1f, 0), dir);
 
@@ -133,7 +164,9 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable TimeScaleAsync(this CancellationToken token,
-            float targetScale, float loadDuration = 2f, EMotion motion = EMotion.Linear,
+            float targetScale,
+            float loadDuration = 2f,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             var currentScale = Time.timeScale;
             float unscaledTimer = 0;
@@ -156,21 +189,26 @@ namespace ChoyUtilities {
         #region Fade Screen Async
 
         public enum EFadeType : byte {
-
             FadeIn = 0,
             FadeOut = 1
-
         }
 
         public static async Awaitable FadeScreenAsync(this CancellationToken token,
-            Image image, bool isFadein, float duration, EMotion motion = EMotion.Linear,
+            Image image,
+            bool isFadein,
+            float duration,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             await token.FadeScreenAsync(image, isFadein ? EFadeType.FadeIn : EFadeType.FadeOut,
                 duration, Time.unscaledDeltaTime, motion, onDone);
         }
 
         public static async Awaitable<bool> FadeScreenAsync(this CancellationToken token,
-            Image image, EFadeType fadeType, float duration, float dt, EMotion motion = EMotion.Linear,
+            Image image,
+            EFadeType fadeType,
+            float duration,
+            float dt,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             if (image is null) return false;
 
@@ -205,7 +243,11 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable<bool> FadeScreenAsync(this CancellationToken token,
-            CanvasGroup cg, EFadeType fadeType, float duration, float dt, EMotion motion = EMotion.Linear,
+            CanvasGroup cg,
+            EFadeType fadeType,
+            float duration,
+            float dt,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             if (cg is null) return false;
 
@@ -244,7 +286,10 @@ namespace ChoyUtilities {
         #region Change Color Async
 
         public static async Awaitable<Color> ChangeColorAsync(this CancellationToken token,
-            float4 start, float4 target, float duration, EMotion motion = EMotion.Linear,
+            float4 start,
+            float4 target,
+            float duration,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             try {
                 float time = 0;
@@ -267,13 +312,20 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable<Color> ChangeColorAsync(this CancellationToken token,
-            Color start, Color target, float duration, EMotion motion = EMotion.Linear,
+            Color start,
+            Color target,
+            float duration,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             return await token.ChangeColorAsync(start, target, duration, Time.unscaledDeltaTime, motion, onDone);
         }
 
         public static async Awaitable<Color> ChangeColorAsync(this CancellationToken token,
-            Color start, Color target, float duration, float dt, EMotion motion = EMotion.Linear,
+            Color start,
+            Color target,
+            float duration,
+            float dt,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             float time = 0;
             var startColor = new float4(start.r, start.g, start.b, start.a);
@@ -303,13 +355,19 @@ namespace ChoyUtilities {
         #region Move Transform Async
 
         public static async Awaitable<bool> MoveAsync(this CancellationToken token,
-            GameObject obj, Transform targetPos, float duration, EMotion motion = EMotion.Linear,
+            GameObject obj,
+            Transform targetPos,
+            float duration,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             return await token.MoveAsync(obj, targetPos.position, duration, motion, onDone);
         }
 
         public static async Awaitable<bool> MoveAsync(this CancellationToken token,
-            RectTransform obj, float3 target, float duration, EMotion motion = EMotion.Linear,
+            RectTransform obj,
+            float3 target,
+            float duration,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             if (obj is null) return false;
             var time = 0f;
@@ -334,7 +392,10 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable<bool> MoveAsync(this CancellationToken token,
-            GameObject obj, float3 targetPos, float duration, EMotion motion = EMotion.Linear,
+            GameObject obj,
+            float3 targetPos,
+            float duration,
+            EMotion motion = EMotion.Linear,
             Action onDone = null) {
             if (obj is null) return false;
             float time = 0;
@@ -362,8 +423,6 @@ namespace ChoyUtilities {
         }
 
         #endregion
-
     }
-
 }
 #endif

@@ -15,15 +15,6 @@
                     4.0
                 ]
             },
-            "idPath": "Assets/Scenes",
-            "texturePath": "Packages/com.datea83.choyutilities.common/Editor/FancyReplace/Textures/All/rocket_launch_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
-        },
-        {
-            "idType": {
-                "values": [
-                    4.0
-                ]
-            },
             "idPath": "Assets",
             "texturePath": "Packages/com.datea83.choyutilities.common/Editor/FancyReplace/Textures/Folder/folder_shared_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         },
@@ -35,6 +26,15 @@
             },
             "idPath": "Packages/com.datea83.choyutilities.common",
             "texturePath": "Packages/com.datea83.choyutilities.common/Editor/FancyReplace/Textures/Folder/folder_data_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+        },
+        {
+            "idType": {
+                "values": [
+                    4.0
+                ]
+            },
+            "idPath": "Assets/Samples",
+            "texturePath": "Packages/com.datea83.choyutilities.common/Editor/FancyReplace/Textures/All/kid_star_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         }
     ],
     "color": {

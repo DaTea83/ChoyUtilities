@@ -1,3 +1,17 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
@@ -10,10 +24,8 @@ using static Unity.Physics.Math;
 
 // Revised version of the MousePickAuthoring script from the Unity Physics Samples repository
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class ColliderCastSingletonAuthoring : MonoBehaviour {
-
         [SerializeField] private bool ignoreTriggers = true;
         [SerializeField] private bool ignoreStatic = true;
         [SerializeField] private bool deleteAllEntityOnClick;
@@ -28,7 +40,6 @@ namespace ChoyUtilities.Entities {
         }
 
         public class Baker : Baker<ColliderCastSingletonAuthoring> {
-
             public override void Bake(ColliderCastSingletonAuthoring singletonAuthoring) {
                 var e = GetEntity(TransformUsageFlags.None);
 
@@ -39,23 +50,18 @@ namespace ChoyUtilities.Entities {
                     DeleteTagEntityOnClick = singletonAuthoring.deleteTagEntityOnClick
                 });
             }
-
         }
-
     }
 
     public struct ColliderCastISingleton : IComponentData {
-
         public bool IgnoreTriggers;
         public bool IgnoreStatic;
         public bool DeleteEntityOnClick;
         public bool DeleteTagEntityOnClick;
-
     }
 
     [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
     public partial class MouseGrabInputSystemBase : SystemBase {
-
         private const float MaxDistance = 100.0f;
         public JobHandle? PickJobHandle;
         public NativeReference<SpringData> SpringDataRef;
@@ -114,15 +120,11 @@ namespace ChoyUtilities.Entities {
             }
         }
 
-        protected override void OnDestroy() {
-            SpringDataRef.Dispose();
-        }
-
+        protected override void OnDestroy() { SpringDataRef.Dispose(); }
     }
 
     [UpdateInGroup(typeof(BeforePhysicsSystemGroup))]
     public partial class MouseGrabFollowISystem : SystemBase {
-
         private MouseGrabInputSystemBase _grabSystemBase;
 
         protected override void OnCreate() {
@@ -247,7 +249,5 @@ namespace ChoyUtilities.Entities {
 
             SystemAPI.SetComponent(entity, vel);
         }
-
     }
-
 }

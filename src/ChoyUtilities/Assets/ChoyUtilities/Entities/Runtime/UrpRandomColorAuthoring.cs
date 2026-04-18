@@ -1,21 +1,32 @@
-﻿using Unity.Burst;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     /// <summary>
     ///     Any entity with URP lit material will be randomized with a color
     /// </summary>
     [DisallowMultipleComponent]
     public class UrpRandomColorAuthoring : MonoBehaviour {
-
         [SerializeField] private Color[] colors;
 
         private class Baker : Baker<UrpRandomColorAuthoring> {
-
             public override void Bake(UrpRandomColorAuthoring authoring) {
                 if (authoring.colors is null || authoring.colors.Length == 0) return;
                 var e = GetEntity(TransformUsageFlags.None);
@@ -25,15 +36,11 @@ namespace ChoyUtilities.Entities {
                     buffer.Add(new UrpRandomColorISingletonBuffer
                         { Value = new float4(color.r, color.g, color.b, color.a) });
             }
-
         }
-
     }
 
     public struct UrpRandomColorISingletonBuffer : IBufferElementData {
-
         public float4 Value;
-
     }
 
     public struct UrpColorChangedITag : IComponentData { }
@@ -41,10 +48,7 @@ namespace ChoyUtilities.Entities {
     [BurstCompile]
     [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct UrpRandomColorISystem : ISystem {
-
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<UrpRandomColorISingletonBuffer>();
-        }
+        public void OnCreate(ref SystemState state) { state.RequireForUpdate<UrpRandomColorISingletonBuffer>(); }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -64,7 +68,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

@@ -1,15 +1,27 @@
-﻿using Unity.Burst;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [RequireComponent(typeof(MoveNodeAuthoring))]
     [RequireComponent(typeof(GroupTagAuthoring))]
     [DisallowMultipleComponent]
     public class SpawnNodeAuthoring : MonoBehaviour {
-
         //Prefabs must have the DestroyIData component
         [SerializeField] private AgentStatsAuthoring[] spawnPrefabs;
         [SerializeField] private bool spawnOnce;
@@ -17,7 +29,6 @@ namespace ChoyUtilities.Entities {
         [SerializeField] [Min(0.01f)] private float delay = 1f;
 
         private class Baker : Baker<SpawnNodeAuthoring> {
-
             public override void Bake(SpawnNodeAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.Renderable);
 
@@ -39,18 +50,13 @@ namespace ChoyUtilities.Entities {
                 if (authoring.disabledOnStart)
                     SetComponentEnabled<SpawnNodeIEnableable>(e, false);
             }
-
         }
-
     }
 
     [BurstCompile]
     [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
     public partial struct AgentSpawnISystem : ISystem {
-
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<AgentISingleton>();
-        }
+        public void OnCreate(ref SystemState state) { state.RequireForUpdate<AgentISingleton>(); }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -92,7 +98,5 @@ namespace ChoyUtilities.Entities {
 
             SystemAPI.SetSingleton(singleton);
         }
-
     }
-
 }

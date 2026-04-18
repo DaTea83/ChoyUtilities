@@ -1,19 +1,29 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using Unity.Mathematics;
 
 namespace ChoyUtilities {
-
     public struct AudioChunk {
-
         public float[] Data;
         public int Frequency;
         public int Channels;
         public float Length;
         public bool IsVoiceDetected;
-
     }
 
     public static partial class HelperCollection {
-
         public static bool SimpleVad(float[] data, int sampleRate, float lastSec, float vadThd, float freqThd) {
             // https://github.com/ggerganov/whisper.cpp/blob/a792c4079ce61358134da4c9bc589c15a03b04ad/examples/common.cpp#L697
             var nSamples = data.Length;
@@ -58,7 +68,5 @@ namespace ChoyUtilities {
                 data[i] = y;
             }
         }
-
     }
-
 }

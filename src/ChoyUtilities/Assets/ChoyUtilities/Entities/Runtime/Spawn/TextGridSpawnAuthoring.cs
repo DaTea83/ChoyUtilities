@@ -1,4 +1,18 @@
-﻿using System;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -7,10 +21,8 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class TextGridSpawnAuthoring : MonoBehaviour {
-
         [SerializeField] private GameObject[] prefabs;
         [SerializeField] private char[] identifiers;
         [SerializeField] private TextAsset textAsset;
@@ -19,7 +31,6 @@ namespace ChoyUtilities.Entities {
         [SerializeField] private float scale = 1f;
 
         private class TextGridSpawnAuthoringBaker : Baker<TextGridSpawnAuthoring> {
-
             public override void Bake(TextGridSpawnAuthoring authoring) {
                 DependsOn(authoring.textAsset);
                 var e = GetEntity(TransformUsageFlags.Dynamic);
@@ -72,30 +83,23 @@ namespace ChoyUtilities.Entities {
 
                 return builder.CreateBlobAssetReference<BlobArray<FixedList512Bytes<byte>>>(Allocator.Persistent);
             }
-
         }
-
     }
 
     public struct TextGridSpawnIData : IComponentData {
-
         public BlobAssetReference<BlobArray<FixedList512Bytes<byte>>> Pattern;
         public float2 Spacing;
         public float Scale;
         public int2 Total;
-
     }
 
     public struct TextGridIBuffer : IBufferElementData {
-
         public Entity Prefab;
-
     }
 
     [BurstCompile]
     [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
     public partial struct TextGridSpawnISystem : ISystem {
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -144,7 +148,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

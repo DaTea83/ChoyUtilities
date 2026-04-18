@@ -1,4 +1,18 @@
-﻿using System;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
@@ -7,12 +21,10 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-
     [Serializable]
     [BurstCompile]
     public partial struct Floater : IComparable, IComparable<Floater>,
         IFormattable, IEnumerable<float> {
-
         public float[] values;
 
         public float this[int index] => values[index];
@@ -21,9 +33,7 @@ namespace ChoyUtilities {
 
         #region Constructors
 
-        public Floater(float[] values) {
-            this.values = values;
-        }
+        public Floater(float[] values) { this.values = values; }
 
         public Floater(int[] values) {
             var set = new float[values.Length];
@@ -88,13 +98,9 @@ namespace ChoyUtilities {
             values = set;
         }
 
-        public Floater(bool value) {
-            values = new[] { value ? 1f : 0f };
-        }
+        public Floater(bool value) { values = new[] { value ? 1f : 0f }; }
 
-        public Floater(bool2 value) {
-            values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f };
-        }
+        public Floater(bool2 value) { values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f }; }
 
         public Floater(bool[] value) {
             var set = new float[value.Length];
@@ -234,7 +240,7 @@ namespace ChoyUtilities {
             set[8] = 1;
             values = set;
         }
-        
+
         public Floater(float3 arg1, quaternion arg2, float3 arg3) {
             var set = new float[9];
             var euler = math.Euler(arg2);
@@ -253,11 +259,12 @@ namespace ChoyUtilities {
         public Floater(float3[] values) {
             var set = new float[values.Length * 3];
             var j = 0;
-            for (var i = 0; i < set.Length; i+= 3, j++) {
+            for (var i = 0; i < set.Length; i += 3, j++) {
                 set[i] = values[j].x;
                 set[i + 1] = values[j].y;
                 set[i + 2] = values[j].z;
             }
+
             this.values = set;
         }
 
@@ -302,25 +309,17 @@ namespace ChoyUtilities {
         ///     If want want true to string, use casts to string
         /// </summary>
         /// <returns></returns>
-        public override string ToString() {
-            return values.ToString();
-        }
+        public override string ToString() { return values.ToString(); }
 
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
         /// <summary>
         ///     This one just return the string representation of the float array
         ///     If want want true to string, use casts to string
         /// </summary>
         /// <returns></returns>
-        public string ToString(string format, IFormatProvider formatProvider) {
-            return ToString();
-        }
+        public string ToString(string format, IFormatProvider formatProvider) { return ToString(); }
 
         #endregion
-
     }
-
 }

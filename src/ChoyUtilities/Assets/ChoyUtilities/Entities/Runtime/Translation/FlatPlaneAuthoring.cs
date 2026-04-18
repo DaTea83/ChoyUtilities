@@ -1,4 +1,18 @@
-﻿using Unity.Burst;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
@@ -6,9 +20,7 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     public class FlatPlaneAuthoring : MonoBehaviour {
-
         public GameObject planePrefab;
 
         [Tooltip("Scale up the prefab to value + 100")]
@@ -36,7 +48,6 @@ namespace ChoyUtilities.Entities {
         }
 
         private class FlatPlaneBaker : Baker<FlatPlaneAuthoring> {
-
             public override void Bake(FlatPlaneAuthoring authoring) {
                 if (authoring.planePrefab is null) return;
 
@@ -50,18 +61,14 @@ namespace ChoyUtilities.Entities {
                 });
                 AddComponent<RegenerateLevelIFlag>(entity);
             }
-
         }
-
     }
 
     public struct PlaneGenerationIData : IComponentData {
-
         public Entity PlanePrefab;
         public float PlaneSize;
         public float UnitsPerPlane;
         public float3 PlaneOffset;
-
     }
 
     /// <summary>
@@ -74,9 +81,7 @@ namespace ChoyUtilities.Entities {
     /// </summary>
     [MaterialProperty("_Tile_Scale")]
     public struct TilingOverrideIData : IComponentData {
-
         public float Value;
-
     }
 
     [BurstCompile]
@@ -84,7 +89,6 @@ namespace ChoyUtilities.Entities {
                        WorldSystemFilterFlags.Default)]
     [UpdateInGroup(typeof(InitializationSystemGroup))]
     public partial class PlaneGenerationSystemBase : SystemBase {
-
         [BurstCompile]
         protected override void OnUpdate() {
             var ecb = new EntityCommandBuffer(WorldUpdateAllocator);
@@ -108,7 +112,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(EntityManager);
         }
-
     }
-
 }

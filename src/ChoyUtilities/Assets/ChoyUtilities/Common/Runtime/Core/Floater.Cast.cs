@@ -1,33 +1,39 @@
-﻿using System;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
 using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-
     public partial struct Floater {
-
         #region Casting
 
-        public static implicit operator float(Floater value) {
-            return value.values[0];
-        }
+        public static implicit operator float(Floater value) { return value.values[0]; }
 
-        public static implicit operator float[](Floater value) {
-            return value.values;
-        }
+        public static implicit operator float[](Floater value) { return value.values; }
 
-        public static implicit operator List<float>(Floater value) {
-            return new List<float>(value.values);
-        }
+        public static implicit operator List<float>(Floater value) { return new List<float>(value.values); }
 
         public static implicit operator int[](Floater value) {
             if (value.values == null || value.values.Length == 0) throw new FloaterException("Empty Floater found");
             var set = new int[value.values.Length];
-            for (var i = 0; i < value.values.Length; i++) 
-                set[i] = (int)value.values[i]; 
-            
+            for (var i = 0; i < value.values.Length; i++)
+                set[i] = (int)value.values[i];
+
             return set;
         }
 
@@ -87,10 +93,7 @@ namespace ChoyUtilities {
             char[] set = value;
             var s = string.Empty;
 
-            for (var i = 0; i < set.Length && set[i] != 0; i++)
-            {
-                s += set[i];
-            }
+            for (var i = 0; i < set.Length && set[i] != 0; i++) s += set[i];
 
             return s;
         }
@@ -104,7 +107,5 @@ namespace ChoyUtilities {
         }
 
         #endregion
-
     }
-
 }

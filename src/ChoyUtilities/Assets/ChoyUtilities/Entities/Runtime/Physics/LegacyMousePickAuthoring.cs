@@ -1,3 +1,17 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -12,11 +26,9 @@ using static Unity.Physics.Math;
 // This script is taken from the Unity Physics Samples repository
 // Changes: Added pre process for old input system
 namespace Unity.Physics.Extensions {
-
     // A mouse pick collector which stores every hit. Based off the ClosestHitCollector
     [BurstCompile]
     public struct MousePickCollector : ICollector<RaycastHit> {
-
         public bool IgnoreTriggers;
         public bool IgnoreStatic;
         public int NumDynamicBodies;
@@ -57,28 +69,22 @@ namespace Unity.Physics.Extensions {
         }
 
         #endregion
-
     }
 
     public struct MousePick : IComponentData {
-
         public bool IgnoreTriggers;
         public bool IgnoreStatic;
         public bool DeleteEntityOnClick;
-
     }
 
     [DisallowMultipleComponent]
     public class LegacyMousePickAuthoring : MonoBehaviour {
-
         public bool IgnoreTriggers = true;
         public bool IgnoreStatic = true;
         public bool DeleteEntityOnClick;
-
     }
 
     internal class MousePickBaker : Baker<LegacyMousePickAuthoring> {
-
         public override void Bake(LegacyMousePickAuthoring authoring) {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
@@ -88,13 +94,11 @@ namespace Unity.Physics.Extensions {
                 DeleteEntityOnClick = authoring.DeleteEntityOnClick
             });
         }
-
     }
 
     // Attaches a virtual spring to the picked entity
     [UpdateInGroup(typeof(AfterPhysicsSystemGroup))]
     public partial class MousePickSystem : SystemBase {
-
         public const float k_MaxDistance = 100.0f;
         public JobHandle? PickJobHandle;
         public NativeReference<SpringData> SpringDataRef;
@@ -105,13 +109,9 @@ namespace Unity.Physics.Extensions {
             SpringDataRef.Value = new SpringData();
         }
 
-        protected override void OnCreate() {
-            RequireForUpdate<MousePick>();
-        }
+        protected override void OnCreate() { RequireForUpdate<MousePick>(); }
 
-        protected override void OnDestroy() {
-            SpringDataRef.Dispose();
-        }
+        protected override void OnDestroy() { SpringDataRef.Dispose(); }
 
         protected override void OnUpdate() {
 #if ENABLE_LEGACY_INPUT_MANAGER
@@ -150,17 +150,14 @@ namespace Unity.Physics.Extensions {
         }
 
         public struct SpringData {
-
             public Entity Entity;
             public bool Picked;
             public float3 PointOnBody;
             public float MouseDepth;
-
         }
 
         [BurstCompile]
         private struct Pick : IJob {
-
             [ReadOnly] public CollisionWorld CollisionWorld;
             public NativeReference<SpringData> SpringDataRef;
             public RaycastInput RayInput;
@@ -196,15 +193,12 @@ namespace Unity.Physics.Extensions {
                     };
                 }
             }
-
         }
-
     }
 
     // Applies any mouse spring as a change in velocity on the entity's motion component
     [UpdateInGroup(typeof(BeforePhysicsSystemGroup))]
     public partial class MouseSpringSystem : SystemBase {
-
         private MousePickSystem m_PickSystem;
 
         protected override void OnCreate() {
@@ -340,7 +334,5 @@ namespace Unity.Physics.Extensions {
                 Velocities[entity] = velocityComponent;
             }
         }
-
     }
-
 }

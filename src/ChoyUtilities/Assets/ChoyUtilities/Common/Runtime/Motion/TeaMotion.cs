@@ -1,13 +1,25 @@
-﻿using System;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
 using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
-
     public partial class TeaMotion : IDisposable {
-
         private readonly Transform[] _transforms;
 
         private readonly CancellationTokenSource _tokenSource = new();
@@ -15,7 +27,7 @@ namespace ChoyUtilities {
 
         private TransformAccessArray _transformAccessArray;
         private ETransformType _transformType = ETransformType.None;
-        
+
         private RawSet<float3> _startPos;
         private RawSet<float3> _endPos;
         private RawSet<quaternion> _startRot;
@@ -37,10 +49,11 @@ namespace ChoyUtilities {
                 _transforms[i] = r;
                 i++;
             }
+
             Init();
         }
 
-        public TeaMotion(RectTransform transform) : this(new[] { transform }){ }
+        public TeaMotion(RectTransform transform) : this(new[] { transform }) { }
 
         private void Init() {
             _transformAccessArray = new TransformAccessArray(_transforms);
@@ -51,10 +64,8 @@ namespace ChoyUtilities {
             _startScale = new RawSet<float3>(_transforms.Length);
             _endScale = new RawSet<float3>(_transforms.Length);
         }
-        
-        ~TeaMotion() {
-            Dispose(false);
-        }
+
+        ~TeaMotion() { Dispose(false); }
 
         private void ReleaseUnmanagedResources() {
             if (_transformAccessArray.isCreated) _transformAccessArray.Dispose();
@@ -67,6 +78,7 @@ namespace ChoyUtilities {
         }
 
         private bool _isDisposed;
+
         private void Dispose(bool disposing) {
             if (_isDisposed) return;
             ReleaseUnmanagedResources();
@@ -74,6 +86,7 @@ namespace ChoyUtilities {
                 _tokenSource.Cancel();
                 _tokenSource.Dispose();
             }
+
             _isDisposed = true;
         }
 
@@ -82,7 +95,5 @@ namespace ChoyUtilities {
             // Tell GC don't call deconstructor
             GC.SuppressFinalize(this);
         }
-
     }
-
 }
