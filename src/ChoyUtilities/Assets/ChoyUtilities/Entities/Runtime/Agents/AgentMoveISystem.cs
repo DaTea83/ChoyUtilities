@@ -10,8 +10,8 @@ namespace ChoyUtilities.Entities {
     [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct AgentMoveISystem : ISystem {
 
-        private const float DistanceThreshold = 0.1f;
-        private const float DotThreshold = 0.95f;
+        private const float DISTANCE_THRESHOLD = 0.1f;
+        private const float DOT_THRESHOLD = 0.95f;
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -37,10 +37,10 @@ namespace ChoyUtilities.Entities {
                 var target = LtwLookup[move.CurrentNode];
                 lt.GetDistanceAndDot(target, out var distanceSqr, out var dot);
 
-                if (distanceSqr > DistanceThreshold) {
+                if (distanceSqr > DISTANCE_THRESHOLD) {
                     var direction = math.normalize(target.Position - lt.Position);
 
-                    if (dot < DotThreshold)
+                    if (dot < DOT_THRESHOLD)
                         lt.Rotation = math.slerp(lt.Rotation,
                             quaternion.LookRotationSafe(direction, lt.Up()), Time * stats.RotationSpeed);
                     else
