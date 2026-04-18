@@ -1,6 +1,6 @@
 {
   "name": "com.datea83.choyutilities.entities",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "ChoyUtilities.Entities",
   "unity": "2022.3",
   "unityRelease": "1f1",
@@ -14,7 +14,8 @@
     "com.unity.physics": "1.4.5",
     "com.unity.inputsystem": "1.18.0",
     "com.datea83.choyutilities.common": "1.0.0",
-    "com.unity.test-framework": "1.6.0"
+    "com.unity.test-framework": "1.6.0",
+    "com.unity.render-pipelines.universal": "17.0.4"
   },
   "keywords": [
     "DOTS",

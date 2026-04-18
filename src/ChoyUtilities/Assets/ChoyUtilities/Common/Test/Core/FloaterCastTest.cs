@@ -57,10 +57,37 @@ namespace ChoyUtilities.Test {
             float2 floater = new Floater(input);
             Assert.AreEqual(expected, floater);
             
-            
             var input2 = new []{ 1.23456789f };
             Assert.Throws<FloaterException>(() => {
                 float2 _ = new Floater(input2);
+            });
+        }
+
+        [Test]
+        public void Floater_CastFloat3Test() {
+            var input = new []{ 1.23456789f, 2.3456789f, 3.456789f };
+            var expected = new float3(1.23456789f, 2.3456789f, 3.456789f);
+            
+            float3 floater = new Floater(input);
+            Assert.AreEqual(expected, floater);
+            
+            var input2 = new []{ 1.23456789f };
+            Assert.Throws<FloaterException>(() => {
+                float3 _ = new Floater(input2);
+            });
+        }
+        
+        [Test]
+        public void Floater_CastFloat4Test() {
+            var input = new []{ 1.23456789f, 2.3456789f, 3.456789f, 4.56789f };
+            var expected = new float4(1.23456789f, 2.3456789f, 3.456789f, 4.56789f);
+            
+            float4 floater = new Floater(input);
+            Assert.AreEqual(expected, floater);
+            
+            var input2 = new []{ 1.23456789f };
+            Assert.Throws<FloaterException>(() => {
+                float4 _ = new Floater(input2);
             });
         }
     }

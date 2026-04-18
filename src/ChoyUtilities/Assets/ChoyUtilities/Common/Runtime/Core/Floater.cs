@@ -250,6 +250,17 @@ namespace ChoyUtilities {
             values = set;
         }
 
+        public Floater(float3[] values) {
+            var set = new float[values.Length * 3];
+            var j = 0;
+            for (var i = 0; i < set.Length; i+= 3, j++) {
+                set[i] = values[j].x;
+                set[i + 1] = values[j].y;
+                set[i + 2] = values[j].z;
+            }
+            this.values = set;
+        }
+
         #endregion
 
         #region IEnumerable
@@ -286,6 +297,11 @@ namespace ChoyUtilities {
 
         #region IFormattable
 
+        /// <summary>
+        ///     This one just return the string representation of the float array
+        ///     If want want true to string, use casts to string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() {
             return values.ToString();
         }
@@ -294,6 +310,11 @@ namespace ChoyUtilities {
             return GetEnumerator();
         }
 
+        /// <summary>
+        ///     This one just return the string representation of the float array
+        ///     If want want true to string, use casts to string
+        /// </summary>
+        /// <returns></returns>
         public string ToString(string format, IFormatProvider formatProvider) {
             return ToString();
         }

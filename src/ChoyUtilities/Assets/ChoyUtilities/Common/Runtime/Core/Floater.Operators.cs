@@ -73,7 +73,7 @@ namespace ChoyUtilities {
         /// </param>
         /// <returns></returns>
         public Floater Remove(float value, bool removeAllEqual = false) {
-            if (values == null || values.Length == 0) return new Floater(Array.Empty<float>());
+            if (values == null || values.Length == 0) return new Floater(values);
 
             if (removeAllEqual) {
                 var keepCount = 0;

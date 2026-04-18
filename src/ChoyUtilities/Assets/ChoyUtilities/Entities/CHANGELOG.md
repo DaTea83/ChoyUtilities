@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.2] - 2026-04-18
+
+### Fixed
+* Added URP package as a requirement
+* Removed preprocess for URPRandomColorAuthoring and VoxelTransformISystem
+
 ## [1.0.1] - 2026-04-17
 
 ### Changed

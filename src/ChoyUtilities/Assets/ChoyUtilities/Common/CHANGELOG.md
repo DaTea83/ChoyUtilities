@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.4] - 2026-04-18
+
+
+
 ## [1.0.3] - 2026-04-17
 
 Added
@@ -24,6 +28,7 @@ Changed
 Removed
 * Microphone Recorder, moved to Misc
 * Microphone Attribute, moved to Misc
+* Quaternion cast from Floater
 
 ## [1.0.2] - 2026-04-16
 

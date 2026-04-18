@@ -64,22 +64,6 @@ namespace ChoyUtilities {
             return set;
         }
 
-        public static implicit operator Quaternion(Floater value) {
-            if (value.values is null || value.values.Length < 4)
-                throw new FloaterException("Value must be more than 4 floats");
-            var set = new Quaternion(value.values[0], value.values[1], value.values[2], value.values[3]);
-
-            return set;
-        }
-
-        public static implicit operator quaternion(Floater value) {
-            if (value.values is null || value.values.Length < 4)
-                throw new FloaterException("Value must be more than 4 floats");
-            var set = new quaternion(value.values[0], value.values[1], value.values[2], value.values[3]);
-
-            return set;
-        }
-
         public static implicit operator Color(Floater value) {
             if (value.values is null || value.values.Length < 4) return Color.white;
             var set = new Color(value.values[0], value.values[1], value.values[2], value.values[3]);
@@ -97,6 +81,18 @@ namespace ChoyUtilities {
             }
 
             return set;
+        }
+
+        public static implicit operator string(Floater value) {
+            char[] set = value;
+            var s = string.Empty;
+
+            for (var i = 0; i < set.Length && set[i] != 0; i++)
+            {
+                s += set[i];
+            }
+
+            return s;
         }
 
         public static implicit operator NativeArray<float>.ReadOnly(Floater value) {
