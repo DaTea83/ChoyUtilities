@@ -1,19 +1,48 @@
 # ChoyUtilities
 
-Just a person's Unity Library
+A personal Unity Utility Library, mainly covers extension for math, coroutines, async/await and collections.  
+It also provides generic template for Singletons, Pooling, Spawn Managers, Audio managers and UI Managers.  
+
+On top of this it also provides component templates for Unity DOTS, 
+ranging from:  
+* Entity Spawning  
+* Entity Translation  
+* Entity Destruction  
+* Entity Physics  
+* GameObject bridging
+* Simple Entity Path Movement
+
+This is mainly used by myself for every Unity project, if you stumble across this repo and took interest in it, feel free to use it.   
+I be continuously updating it to fit more features, mainly to solve issues I met during development
+
+## Glossary
+
+[Requirements](#requirements)  
+\
+[Installation](#installation)  
+\
+[Features](#features)  
+* [Base Package](#base-package)
 
 ## Requirements
 
-* Ideally Unity 6 and above
+* Ideally Unity 6000.0 LTS and above
+* Minimum Unity 2023.1
+* Package:
+  * "com.unity.burst": "1.8.27"
+  * "com.unity.collections": "2.6.5"
+  * "com.unity.mathematics": "1.3.2"
 
 ## Installation
 
-```
-
-Open Unity > Window > Package Management > Package Manager
-> Top Left Plus Icon > Install package from git URL > Copy Paste the link below
-
-```
+> [!Note]
+> 1. Open Unity  
+> 2. Window (Top middle left of editor)  
+> 3. Package Management  
+> 4. Package Manager  
+> 5. Top Left Plus Icon
+> 6. Install package from git URL
+> 7. Copy Paste the link below  
 
 For the base package
 
