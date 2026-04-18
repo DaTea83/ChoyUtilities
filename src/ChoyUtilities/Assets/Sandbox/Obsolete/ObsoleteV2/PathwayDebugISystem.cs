@@ -8,7 +8,7 @@ namespace EugeneC.ObsoleteV2 {
 
     [Obsolete]
     [DisableAutoCreation]
-    [UpdateInGroup(typeof(EuCEditorSystemGroup))]
+    [UpdateInGroup(typeof(TeaEditorSystemGroup))]
     public partial struct PathwayDebugISystem : ISystem {
 
         [BurstCompile]

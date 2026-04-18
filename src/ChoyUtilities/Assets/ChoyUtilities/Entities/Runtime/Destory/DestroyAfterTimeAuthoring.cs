@@ -33,7 +33,7 @@ namespace ChoyUtilities.Entities {
         public float Value;
     }
 
-    [UpdateInGroup(typeof(EuCDestroySystemGroup))]
+    [UpdateInGroup(typeof(TeaDestroySystemGroup))]
     [UpdateBefore(typeof(DestroyEntityISystem))]
     [BurstCompile]
     public partial struct DestroyAfterTimeISystem : ISystem {

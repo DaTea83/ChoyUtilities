@@ -60,7 +60,7 @@ namespace ChoyUtilities.Entities {
         public bool DeleteTagEntityOnClick;
     }
 
-    [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
+    [UpdateInGroup(typeof(TeaPostTransformSystemGroup))]
     public partial class MouseGrabInputSystemBase : SystemBase {
         private const float MaxDistance = 100.0f;
         public JobHandle? PickJobHandle;

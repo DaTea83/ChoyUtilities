@@ -45,7 +45,7 @@ namespace ChoyUtilities.Entities {
         public float3 Offset;
     }
 
-    [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
+    [UpdateInGroup(typeof(TeaSpawnSystemGroup))]
     public partial struct SpawnDelayEntityISystem : ISystem {
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {

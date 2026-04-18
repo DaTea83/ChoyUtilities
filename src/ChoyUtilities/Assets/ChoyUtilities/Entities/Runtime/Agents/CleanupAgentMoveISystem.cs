@@ -18,7 +18,7 @@ namespace ChoyUtilities.Entities {
     /// <summary>
     ///     Notify singleton that the entity is destroyed
     /// </summary>
-    [UpdateInGroup(typeof(EuCCleanupSystemGroup))]
+    [UpdateInGroup(typeof(TeaCleanupSystemGroup))]
     public partial struct CleanupAgentMoveISystem : ISystem {
         public void OnCreate(ref SystemState state) { state.RequireForUpdate<AgentISingleton>(); }
 

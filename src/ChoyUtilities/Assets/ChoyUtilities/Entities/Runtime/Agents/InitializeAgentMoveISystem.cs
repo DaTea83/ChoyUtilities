@@ -16,7 +16,7 @@ using Unity.Burst;
 using Unity.Entities;
 
 namespace ChoyUtilities.Entities {
-    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
+    [UpdateInGroup(typeof(TeaManagedComponentSystem))]
     public partial struct InitializeAgentMoveISystem : ISystem {
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {

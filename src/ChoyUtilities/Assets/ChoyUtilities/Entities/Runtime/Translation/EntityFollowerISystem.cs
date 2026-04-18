@@ -27,7 +27,7 @@ namespace ChoyUtilities.Entities {
         public float SmoothFollowSpeed;
     }
 
-    [UpdateInGroup(typeof(EuCPostTransformSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(TeaPostTransformSystemGroup), OrderFirst = true)]
     public partial struct EntityFollowerISystem : ISystem {
         public void OnUpdate(ref SystemState state) {
             var dt = SystemAPI.Time.DeltaTime;
@@ -54,7 +54,7 @@ namespace ChoyUtilities.Entities {
         }
     }
 
-    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
+    [UpdateInGroup(typeof(TeaManagedComponentSystem))]
     public partial struct InitialDestroyFollowerISystem : ISystem {
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);

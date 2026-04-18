@@ -21,8 +21,9 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-    [BurstCompile(CompileSynchronously = true)]
-    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
+    
+    [BurstCompile]
+    [UpdateInGroup(typeof(TeaPreTransformSystemGroup))]
     public partial struct VoxelTransformISystem : ISystem {
         public void OnCreate(ref SystemState state) { state.RequireForUpdate<VoxelizerISingleton>(); }
 
@@ -37,13 +38,14 @@ namespace ChoyUtilities.Entities {
             job.ScheduleParallel();
         }
 
-        [BurstCompile(CompileSynchronously = true)]
+        [BurstCompile]
         private partial struct Job : IJobEntity {
             [NativeDisableParallelForRestriction] public BufferLookup<DestroyBufferEntryIBuffer> DestroyLookup;
             public VoxelizerISingleton Voxelizer;
             public float ElapsedTime;
             public float DeltaTime;
 
+            [BurstCompile]
             private void Execute(Entity entity,
                 ref LocalTransform lt,
                 ref BoxIData box,

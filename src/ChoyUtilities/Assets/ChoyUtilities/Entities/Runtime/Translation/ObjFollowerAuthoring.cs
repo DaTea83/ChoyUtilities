@@ -49,7 +49,7 @@ namespace ChoyUtilities.Entities {
         public float SmoothFollowSpeed;
     }
 
-    [UpdateInGroup(typeof(EuCPostTransformSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(TeaPostTransformSystemGroup), OrderFirst = true)]
     public partial struct ObjFollowerISystem : ISystem {
         public void OnUpdate(ref SystemState state) {
             var dt = SystemAPI.Time.DeltaTime;

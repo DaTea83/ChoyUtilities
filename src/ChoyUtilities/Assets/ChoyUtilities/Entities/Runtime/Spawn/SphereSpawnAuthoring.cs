@@ -60,7 +60,7 @@ namespace ChoyUtilities.Entities {
     }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(EuCSpawnSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(TeaSpawnSystemGroup), OrderFirst = true)]
     public partial struct SpawnInSphereISystem : ISystem {
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {

@@ -46,7 +46,7 @@ namespace ChoyUtilities.Entities {
         }
     }
 
-    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
+    [UpdateInGroup(typeof(TeaPreTransformSystemGroup))]
     [BurstCompile]
     public partial struct RotatorISystem : ISystem {
         [BurstCompile]

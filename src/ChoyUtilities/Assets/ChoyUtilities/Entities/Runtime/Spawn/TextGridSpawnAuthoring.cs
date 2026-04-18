@@ -98,7 +98,7 @@ namespace ChoyUtilities.Entities {
     }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
+    [UpdateInGroup(typeof(TeaSpawnSystemGroup))]
     public partial struct TextGridSpawnISystem : ISystem {
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {

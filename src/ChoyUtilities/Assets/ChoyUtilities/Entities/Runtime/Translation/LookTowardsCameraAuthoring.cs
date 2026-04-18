@@ -30,7 +30,7 @@ namespace ChoyUtilities.Entities {
 
     public struct LookTowardsCameraITag : IComponentData { }
 
-    [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
+    [UpdateInGroup(typeof(TeaPostTransformSystemGroup))]
     public partial struct LookTowardsCameraISystem : ISystem {
         public void OnUpdate(ref SystemState state) {
             if (CameraController.Instance is null || Camera.main is null) return;

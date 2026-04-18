@@ -19,7 +19,7 @@ using Unity.Transforms;
 
 namespace ChoyUtilities.Entities {
     [BurstCompile]
-    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
+    [UpdateInGroup(typeof(TeaPreTransformSystemGroup))]
     public partial struct WaveMoveISystem : ISystem {
         private const float NoiseScale = .2F;
         private const float DepthOffset = 1f;

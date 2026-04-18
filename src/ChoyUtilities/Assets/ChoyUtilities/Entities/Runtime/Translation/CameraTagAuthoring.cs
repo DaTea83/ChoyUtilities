@@ -38,7 +38,7 @@ namespace ChoyUtilities.Entities {
     ///     Set the transform reference of main camera to IData
     ///     Remove the InitializeTag
     /// </summary>
-    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
+    [UpdateInGroup(typeof(TeaManagedComponentSystem))]
     public partial struct InitializeCameraTargetISystem : ISystem {
         public void OnCreate(ref SystemState state) { state.RequireForUpdate<InitializeCameraTargetITag>(); }
 

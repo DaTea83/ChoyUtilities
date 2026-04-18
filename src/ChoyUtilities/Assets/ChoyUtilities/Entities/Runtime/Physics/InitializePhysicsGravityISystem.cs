@@ -17,7 +17,7 @@ using Unity.Entities;
 using Unity.Physics;
 
 namespace ChoyUtilities.Entities {
-    [UpdateInGroup(typeof(EuCManagedComponentSystem), OrderFirst = true)]
+    [UpdateInGroup(typeof(TeaManagedComponentSystem), OrderFirst = true)]
     [UpdateBefore(typeof(InitializeRandomISystem))]
     public partial struct InitializePhysicsGravityISystem : ISystem {
         [BurstCompile]

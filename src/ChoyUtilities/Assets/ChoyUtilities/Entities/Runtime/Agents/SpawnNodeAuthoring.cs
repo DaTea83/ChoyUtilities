@@ -54,7 +54,7 @@ namespace ChoyUtilities.Entities {
     }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
+    [UpdateInGroup(typeof(TeaSpawnSystemGroup))]
     public partial struct AgentSpawnISystem : ISystem {
         public void OnCreate(ref SystemState state) { state.RequireForUpdate<AgentISingleton>(); }
 

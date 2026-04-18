@@ -51,7 +51,7 @@ namespace ChoyUtilities.Entities {
     }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(EuCSpawnSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(TeaSpawnSystemGroup), OrderFirst = true)]
     public partial struct SpawnGridISystem : ISystem {
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {

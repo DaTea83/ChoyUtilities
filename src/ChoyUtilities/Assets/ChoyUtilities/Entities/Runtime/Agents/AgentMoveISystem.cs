@@ -20,7 +20,7 @@ using Unity.Transforms;
 
 namespace ChoyUtilities.Entities {
     [BurstCompile]
-    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
+    [UpdateInGroup(typeof(TeaPreTransformSystemGroup))]
     public partial struct AgentMoveISystem : ISystem {
         private const float DISTANCE_THRESHOLD = 0.1f;
         private const float DOT_THRESHOLD = 0.95f;

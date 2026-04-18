@@ -31,7 +31,7 @@ namespace ChoyUtilities.Entities {
         public float Value;
     }
 
-    [UpdateInGroup(typeof(EuCDestroySystemGroup))]
+    [UpdateInGroup(typeof(TeaDestroySystemGroup))]
     [UpdateBefore(typeof(DestroyEntityISystem))]
     public partial struct DestroyBufferISystem : ISystem {
         public void OnCreate(ref SystemState state) {

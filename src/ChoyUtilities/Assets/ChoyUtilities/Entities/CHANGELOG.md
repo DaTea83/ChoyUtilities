@@ -2,6 +2,9 @@
 
 ## [1.0.2] - 2026-04-18
 
+Changed
+* Full code cleanup, with added header and renames
+
 ### Fixed
 * Added URP package as a requirement
 * Removed preprocess for URPRandomColorAuthoring and VoxelTransformISystem

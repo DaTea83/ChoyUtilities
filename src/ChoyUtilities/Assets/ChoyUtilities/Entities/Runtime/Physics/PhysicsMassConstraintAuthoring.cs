@@ -46,7 +46,7 @@ namespace ChoyUtilities.Entities {
         public bool Z;
     }
 
-    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
+    [UpdateInGroup(typeof(TeaManagedComponentSystem))]
     [UpdateAfter(typeof(InitializePhysicsMassISystem))]
     public partial struct InitializeLockRotationISystem : ISystem {
         [BurstCompile]

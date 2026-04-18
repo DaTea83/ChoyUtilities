@@ -30,7 +30,7 @@ namespace ChoyUtilities.Entities {
 
     public struct DestroyIEnableableTag : IComponentData, IEnableableComponent { }
 
-    [UpdateInGroup(typeof(EuCDestroySystemGroup), OrderLast = true)]
+    [UpdateInGroup(typeof(TeaDestroySystemGroup), OrderLast = true)]
     [BurstCompile]
     public partial struct DestroyEntityISystem : ISystem {
         public void OnCreate(ref SystemState state) {

@@ -46,7 +46,7 @@ namespace ChoyUtilities.Entities {
     public struct UrpColorChangedITag : IComponentData { }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
+    [UpdateInGroup(typeof(TeaManagedComponentSystem))]
     public partial struct UrpRandomColorISystem : ISystem {
         public void OnCreate(ref SystemState state) { state.RequireForUpdate<UrpRandomColorISingletonBuffer>(); }
 

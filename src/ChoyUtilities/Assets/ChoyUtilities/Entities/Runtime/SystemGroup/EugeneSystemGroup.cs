@@ -21,7 +21,7 @@ namespace ChoyUtilities.Entities {
     [UpdateInGroup(typeof(SimulationSystemGroup))]
     [UpdateAfter(typeof(TransformSystemGroup))]
     [WorldSystemFilter(WorldSystemFilterFlags.Editor, WorldSystemFilterFlags.Editor)]
-    public partial class EuCEditorSystemGroup : ComponentSystemGroup { }
+    public partial class TeaEditorSystemGroup : ComponentSystemGroup { }
 
     /// <summary>
     ///     System group containing systems related to initialization logic that should be executed towards the beginning of
@@ -29,13 +29,13 @@ namespace ChoyUtilities.Entities {
     /// </summary>
     [UpdateInGroup(typeof(InitializationSystemGroup), OrderLast = true)]
     [UpdateBefore(typeof(EndInitializationEntityCommandBufferSystem))]
-    internal partial class EuCInitializationSystemGroup : ComponentSystemGroup { }
+    internal partial class TeaInitializationSystemGroup : ComponentSystemGroup { }
 
-    [UpdateInGroup(typeof(EuCInitializationSystemGroup))]
-    public partial class EuCSpawnSystemGroup : ComponentSystemGroup { }
+    [UpdateInGroup(typeof(TeaInitializationSystemGroup))]
+    public partial class TeaSpawnSystemGroup : ComponentSystemGroup { }
 
-    [UpdateInGroup(typeof(EuCInitializationSystemGroup), OrderFirst = true)]
-    public partial class EuCManagedComponentSystem : ComponentSystemGroup { }
+    [UpdateInGroup(typeof(TeaInitializationSystemGroup), OrderFirst = true)]
+    public partial class TeaManagedComponentSystem : ComponentSystemGroup { }
 
     /// <summary>
     ///     System group containing systems that deal with physics such as scheduling collision/trigger event jobs and
@@ -44,37 +44,37 @@ namespace ChoyUtilities.Entities {
     [UpdateInGroup(typeof(PhysicsSystemGroup))]
     [UpdateAfter(typeof(PhysicsSimulationGroup))]
     [UpdateBefore(typeof(AfterPhysicsSystemGroup))]
-    public partial class EuCPhysicsSystemGroup : ComponentSystemGroup { }
+    public partial class TeaPhysicsSystemGroup : ComponentSystemGroup { }
 
     /// <summary>
     ///     System group containing systems that deal with moving entities via their LocalTransform component.
     /// </summary>
     [UpdateInGroup(typeof(SimulationSystemGroup))]
     [UpdateBefore(typeof(TransformSystemGroup))]
-    public partial class EuCPreTransformSystemGroup : ComponentSystemGroup { }
+    public partial class TeaPreTransformSystemGroup : ComponentSystemGroup { }
 
     /// <summary>
     ///     System group containing systems related to entity interactions
     /// </summary>
     [UpdateInGroup(typeof(SimulationSystemGroup))]
     [UpdateAfter(typeof(TransformSystemGroup))]
-    public partial class EuCPostTransformSystemGroup : ComponentSystemGroup { }
+    public partial class TeaPostTransformSystemGroup : ComponentSystemGroup { }
 
     /// <summary>
     ///     System group containing systems that deal with triggering visual and audio effects.
     /// </summary>
     [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
-    [UpdateBefore(typeof(EuCDestroySystemGroup))]
-    public partial class EuCEffectSystemGroup : ComponentSystemGroup { }
+    [UpdateBefore(typeof(TeaDestroySystemGroup))]
+    public partial class TeaEffectSystemGroup : ComponentSystemGroup { }
 
     /// <summary>
     ///     System group containing systems related to entity destruction.
     /// </summary>
     [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
     [UpdateBefore(typeof(EndSimulationEntityCommandBufferSystem))]
-    public partial class EuCDestroySystemGroup : ComponentSystemGroup { }
+    public partial class TeaDestroySystemGroup : ComponentSystemGroup { }
 
-    [UpdateInGroup(typeof(EuCDestroySystemGroup), OrderLast = true)]
+    [UpdateInGroup(typeof(TeaDestroySystemGroup), OrderLast = true)]
     [UpdateAfter(typeof(DestroyEntityISystem))]
-    public partial class EuCCleanupSystemGroup : ComponentSystemGroup { }
+    public partial class TeaCleanupSystemGroup : ComponentSystemGroup { }
 }

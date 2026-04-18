@@ -2,7 +2,8 @@
 
 ## [1.0.4] - 2026-04-18
 
-
+Changed
+* Full code cleanup, with added header and renames
 
 ## [1.0.3] - 2026-04-17
 

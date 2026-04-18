@@ -80,7 +80,7 @@ namespace ChoyUtilities.Entities {
         public Random Value;
     }
 
-    [UpdateInGroup(typeof(EuCManagedComponentSystem), OrderFirst = true)]
+    [UpdateInGroup(typeof(TeaManagedComponentSystem), OrderFirst = true)]
     public partial struct InitializeRandomISystem : ISystem {
         public void OnUpdate(ref SystemState state) {
             var systemMilliseconds = (uint)Environment.TickCount;
