@@ -7,6 +7,10 @@ namespace ChoyUtilities.Test {
     [TestFixture]
     public class FloaterExtensionTest {
 
+        private enum ETest : byte {
+            A, B, C, D
+        }
+
         [Test]
         public void Floater_PositionFromTransformTest() {
             var insert1 = new Floater(new [] { 1.23456789f, 2.3456789f, 3.456789f, -90, 90, 45, 1, 1, 1 });
@@ -47,6 +51,20 @@ namespace ChoyUtilities.Test {
             
             Assert.AreEqual(expected, result1);
             Assert.AreEqual(new float3(1, 1, 1), result2);
+        }
+        
+        [Test]
+        public void Floater_EnumTest() {
+            const ETest insert = ETest.A;
+            var result = insert.Floater();
+            Assert.AreEqual(insert, result.GetEnum<ETest>());
+        }
+
+        [Test]
+        public void Floater_EnumArrayTest() {
+            var insert = new [] { ETest.A, ETest.B, ETest.C };
+            var result = insert.Floater();
+            Assert.AreEqual(insert, result.GetEnums<ETest>());
         }
     }
 }

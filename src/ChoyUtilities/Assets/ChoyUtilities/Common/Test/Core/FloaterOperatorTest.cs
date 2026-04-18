@@ -41,5 +41,16 @@ namespace ChoyUtilities.Test {
             var result2 = input.FirstMatch(2f);
             Assert.AreEqual(-1, result2);
         }
+
+        [Test]
+        public void Floater_RemoveTest() {
+            var input = new Floater(new [] { 1.23456789f, 2.3456789f, 3.59024689f, 4.70135799f });
+            var expected = new Floater(new [] { 1.23456789f, 3.59024689f, 4.70135799f });
+            
+            var result = input.Remove(2.3456789f);
+            var result2 = input.Remove(2f);
+            Assert.AreEqual(expected, result);
+            Assert.AreEqual(input, result2);
+        }
     }
 }
