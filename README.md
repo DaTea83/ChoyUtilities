@@ -1,7 +1,12 @@
 # ChoyUtilities
 
-A personal Unity Utility Library, mainly covers extension for math, coroutines, async/await and collections.  
-It also provides generic template for Singletons, Pooling, Spawn Managers, Audio managers and UI Managers.  
+A personal Unity Utility Library, mainly covers editor tools and extension for math, coroutines, async/await and collections.  
+It also provides generic template for:  
+* Singletons  
+* Pooling  
+* Spawn Managers  
+* Audio managers  
+* UI Managers.  
 
 On top of this it also provides component templates for Unity DOTS, 
 ranging from:  
@@ -10,7 +15,7 @@ ranging from:
 * Entity Destruction  
 * Entity Physics  
 * GameObject bridging
-* Simple Entity Path Movement
+* Simple Entity Path Movement  
 
 This is mainly used by myself for every Unity project, if you stumble across this repo and took interest in it, feel free to use it.   
 I be continuously updating it to fit more features, mainly to solve issues I met during development
