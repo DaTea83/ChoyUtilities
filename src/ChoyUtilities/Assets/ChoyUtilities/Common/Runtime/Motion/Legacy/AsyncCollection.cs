@@ -56,9 +56,7 @@ namespace ChoyUtilities {
         }
 
         public static async Awaitable ScaleObjectAsync(this CancellationToken token,
-            GameObject obj,
-            Vector3 scaleTo,
-            float scalingDuration,
+            GameObject obj, Vector3 scaleTo, float scalingDuration, EMotion motion = EMotion.Linear,
             Action onDone = null) {
             if (obj is null) return;
             var time = 0f;
@@ -67,7 +65,7 @@ namespace ChoyUtilities {
             try {
                 while (time <= scalingDuration) {
                     time += Time.unscaledDeltaTime;
-                    obj.transform.localScale = Vector3.Lerp(startScale, scaleTo, time / scalingDuration);
+                    obj.transform.localScale = Vector3.Lerp(startScale, scaleTo, motion.Evaluate(time / scalingDuration));
                     await Awaitable.EndOfFrameAsync(token);
                 }
 

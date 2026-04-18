@@ -234,6 +234,21 @@ namespace ChoyUtilities {
             set[8] = 1;
             values = set;
         }
+        
+        public Floater(float3 arg1, quaternion arg2, float3 arg3) {
+            var set = new float[9];
+            var euler = math.Euler(arg2);
+            set[0] = arg1.x;
+            set[1] = arg1.y;
+            set[2] = arg1.z;
+            set[3] = euler.x;
+            set[4] = euler.y;
+            set[5] = euler.z;
+            set[6] = arg3.x;
+            set[7] = arg3.y;
+            set[8] = arg3.z;
+            values = set;
+        }
 
         #endregion
 
@@ -272,11 +287,7 @@ namespace ChoyUtilities {
         #region IFormattable
 
         public override string ToString() {
-            char[] set = new Floater(values);
-
-            if (set == null || set == Array.Empty<char>()) return string.Empty;
-
-            return set.ToString();
+            return values.ToString();
         }
 
         IEnumerator IEnumerable.GetEnumerator() {

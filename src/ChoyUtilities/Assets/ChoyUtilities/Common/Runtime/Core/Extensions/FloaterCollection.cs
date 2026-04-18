@@ -28,11 +28,10 @@ namespace ChoyUtilities {
         }
 
         public static Transform Floater(this Transform obj, Floater data) {
-            if (data.Length < 9) return obj;
-            var euler = new float3(data[3], data[4], data[5]);
-            obj.position = new Vector3(data[0], data[1], data[2]);
-            obj.rotation = quaternion.Euler(euler);
-            obj.localScale = new Vector3(data[6], data[7], data[8]);
+            
+            obj.position = data.PositionFromTransform();
+            obj.rotation = data.RotationFromTransform();
+            obj.localScale = data.ScaleFromTransform();
 
             return obj;
         }

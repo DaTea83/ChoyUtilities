@@ -13,7 +13,8 @@
     "com.unity.entities.graphics": "1.4.18",
     "com.unity.physics": "1.4.5",
     "com.unity.inputsystem": "1.18.0",
-    "com.datea83.choyutilities.common": "1.0.0"
+    "com.datea83.choyutilities.common": "1.0.0",
+    "com.unity.test-framework": "1.6.0"
   },
   "keywords": [
     "DOTS",

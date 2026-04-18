@@ -54,7 +54,11 @@ namespace ChoyUtilities {
         public RawSet(Queue<T> values, Allocator allocator = Allocator.Persistent) :
             this(values.ToArray(), allocator) { }
 
-        public readonly T this[int index] => _values[index];
+        public T this[int index] {
+            readonly get => _values[index];
+            set => _values[index] = value;
+        }
+
         public readonly int Length => _values.Length;
         public readonly bool IsCreated => _values.IsCreated;
 
