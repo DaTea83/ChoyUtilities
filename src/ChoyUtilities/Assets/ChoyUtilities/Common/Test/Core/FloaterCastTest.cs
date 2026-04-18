@@ -45,7 +45,7 @@ namespace ChoyUtilities.Test {
             Assert.AreEqual(expected, floater);
             
             Assert.Throws<FloaterException>(() => {
-                int[] floater2 = new Floater(Array.Empty<float>());
+                int[] _ = new Floater(Array.Empty<float>());
             });
         }
 
@@ -60,7 +60,7 @@ namespace ChoyUtilities.Test {
             
             var input2 = new []{ 1.23456789f };
             Assert.Throws<FloaterException>(() => {
-                float2 floater2 = new Floater(input2);
+                float2 _ = new Floater(input2);
             });
         }
     }
