@@ -33,6 +33,7 @@ I be continuously updating it to fit more features, mainly to solve issues I met
 
 * Ideally Unity 6000.0 LTS and above
 * Minimum Unity 2023.1
+* URP only
 * Package:
   * "com.unity.burst": "1.8.27"
   * "com.unity.collections": "2.6.5"
