@@ -12,18 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
-    public partial class TeaMotion {
+    
+    public partial class TeaTransformMotion {
         private bool _isBuild;
 
-        public TeaMotion Build(Floater value, ETransformType transformType = ETransformType.Transform) {
+        public TeaTransformMotion Build(Floater value, float duration, EMotion motion, ETransformType transformType = ETransformType.Transform) {
             if (_isBuild) return this;
             if (transformType == ETransformType.None)
                 transformType = ETransformType.Transform;
             _transformType = transformType;
+            _motion = motion;
+            if(duration <= 0) duration = 0.01f;
+            _duration = duration;
 
             for (var i = 0; i < _transforms.Length; i++) {
                 var start = _transforms[i].localPosition;
@@ -45,18 +52,36 @@ namespace ChoyUtilities {
 
         private bool _isRun;
 
-        public async Awaitable<TeaMotion> Run(EScheduleType scheduleType = EScheduleType.Schedule) {
+        public async Awaitable<TeaTransformMotion> Run(Action onDone = null) {
             if (!_isBuild) {
-                Build(new Floater(float3.zero, quaternion.identity));
+                Build(new Floater(float3.zero, quaternion.identity), 1f, EMotion.Linear);
                 await Awaitable.EndOfFrameAsync(Token);
             }
 
             if (_isRun) return this;
-
             _isRun = true;
 
+            var time = 0f;
             try {
-                switch (scheduleType) { }
+                while (time < _duration) {
+                    time += TIME_CONSTANT;
+                    
+                    var job = new TransformMotionIJob() {
+                        StartPos = _startPos,
+                        EndPos = _endPos,
+                        StartRot = _startRot,
+                        EndRot = _endRot,
+                        StartScale = _startScale,
+                        EndScale = _endScale,
+                        TransformType = _transformType,
+                        Motion = _motion,
+                        T = math.saturate(time/ _duration)
+                    };
+                    var handle = job.Schedule(_transformAccessArray);
+                    handle.Complete();
+
+                    await Awaitable.WaitForSecondsAsync(TIME_CONSTANT, Token);
+                }
 
                 return this;
             }

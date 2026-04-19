@@ -20,7 +20,10 @@ using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
     
-    public partial class TeaMotion : IDisposable {
+    public partial class TeaTransformMotion : IDisposable {
+        
+        private const float TIME_CONSTANT = 0.02f;
+        
         private readonly Transform[] _transforms;
 
         private readonly CancellationTokenSource _tokenSource = new();
@@ -28,6 +31,8 @@ namespace ChoyUtilities {
 
         private TransformAccessArray _transformAccessArray;
         private ETransformType _transformType = ETransformType.None;
+        private EMotion _motion = EMotion.Linear;
+        private float _duration;
 
         private RawSet<float3> _startPos;
         private RawSet<float3> _endPos;
@@ -36,14 +41,14 @@ namespace ChoyUtilities {
         private RawSet<float3> _startScale;
         private RawSet<float3> _endScale;
 
-        public TeaMotion(Transform[] transforms) {
+        public TeaTransformMotion(Transform[] transforms) {
             _transforms = transforms;
             Init();
         }
 
-        public TeaMotion(Transform transform) : this(new[] { transform }) { }
+        public TeaTransformMotion(Transform transform) : this(new[] { transform }) { }
 
-        public TeaMotion(RectTransform[] transforms) {
+        public TeaTransformMotion(RectTransform[] transforms) {
             _transforms = new Transform[transforms.Length];
             var i = 0;
             foreach (var r in transforms) {
@@ -54,7 +59,7 @@ namespace ChoyUtilities {
             Init();
         }
 
-        public TeaMotion(RectTransform transform) : this(new[] { transform }) { }
+        public TeaTransformMotion(RectTransform transform) : this(new[] { transform }) { }
 
         private void Init() {
             _transformAccessArray = new TransformAccessArray(_transforms);
@@ -66,7 +71,7 @@ namespace ChoyUtilities {
             _endScale = new RawSet<float3>(_transforms.Length);
         }
 
-        ~TeaMotion() { Dispose(false); }
+        ~TeaTransformMotion() { Dispose(false); }
 
         private void ReleaseUnmanagedResources() {
             if (_transformAccessArray.isCreated) _transformAccessArray.Dispose();

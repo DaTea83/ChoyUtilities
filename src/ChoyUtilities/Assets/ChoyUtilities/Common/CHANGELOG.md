@@ -7,6 +7,7 @@ Added
 
 Changed
 * Floater, added Burstdiscard to a new function where exception is thrown
+* Updated TeaMotion
 
 ## [1.0.4] - 2026-04-18
 

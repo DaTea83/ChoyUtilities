@@ -18,8 +18,9 @@ using Unity.Mathematics;
 using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
+    
     [BurstCompile]
-    public struct MotionIJob : IJobParallelForTransform {
+    public struct TransformMotionIJob : IJobParallelForTransform {
         [ReadOnly] public RawSet<float3> StartPos;
         [ReadOnly] public RawSet<float3> EndPos;
         [ReadOnly] public RawSet<quaternion> StartRot;
@@ -30,6 +31,7 @@ namespace ChoyUtilities {
         [ReadOnly] public ETransformType TransformType;
         [ReadOnly] public EMotion Motion;
 
+        [BurstCompile]
         public void Execute(int index, TransformAccess transform) {
             switch (TransformType) {
                 case ETransformType.Move:

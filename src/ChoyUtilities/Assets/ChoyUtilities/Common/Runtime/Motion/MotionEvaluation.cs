@@ -48,9 +48,11 @@ namespace ChoyUtilities {
         private static float Cube(float x) { return x * x * x; }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float SqrtOut(float x) { return math.sqrt(x); }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float CubedOut(float x) { return math.pow(x, 1.0F / 3.0F); }
 
         [BurstCompile]
@@ -62,9 +64,11 @@ namespace ChoyUtilities {
         private static float Parabola(float t) { return 4f * t * (1f - t); }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float Triangle(float t) { return 1f - 2f * math.abs(t - 0.5f); }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float ElasticOut(float t) {
             const float halfPi = 1.57079632679f;
 
@@ -103,6 +107,7 @@ namespace ChoyUtilities {
         }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float SqrEaseInOut(float t) {
             var t1 = Sqr(t);
             var t2 = SqrtOut(t);
@@ -111,6 +116,7 @@ namespace ChoyUtilities {
         }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float CubeEaseInOut(float t) {
             var t1 = Cube(t);
             var t2 = CubedOut(t);
