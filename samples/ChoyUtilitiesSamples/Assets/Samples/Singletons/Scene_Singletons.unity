@@ -199,7 +199,7 @@ MonoBehaviour:
   poolCount: 32
   loop: 0
   priority: 4
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 24300002, guid: f2728133a32d21745892814c65292e8f, type: 2}
 --- !u!1 &345771840
 GameObject:
   m_ObjectHideFlags: 0
