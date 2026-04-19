@@ -21,8 +21,8 @@ namespace ChoyUtilities.Entities {
     [BurstCompile]
     [UpdateInGroup(typeof(TeaPreTransformSystemGroup))]
     public partial struct WaveMoveISystem : ISystem {
-        private const float NoiseScale = .2F;
-        private const float DepthOffset = 1f;
+        private const float NOISE_SCALE = .2F;
+        private const float DEPTH_OFFSET = 1f;
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -38,7 +38,7 @@ namespace ChoyUtilities.Entities {
             [BurstCompile]
             private void Execute(WaveMoveIData data, ref LocalTransform lt) {
                 var pos = lt.Position.GetNoiseOffsetPos(data.YOffset, Time * data.Speed,
-                    data.Height, NoiseScale, DepthOffset);
+                    data.Height, NOISE_SCALE, DEPTH_OFFSET);
                 lt.Position = pos;
             }
         }

@@ -39,9 +39,11 @@ namespace ChoyUtilities {
             };
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float Sqr(float x) { return x * x; }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float Cube(float x) { return x * x * x; }
 
@@ -51,9 +53,11 @@ namespace ChoyUtilities {
         [BurstCompile]
         private static float CubedOut(float x) { return math.pow(x, 1.0F / 3.0F); }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float QuadraticEaseInOut(float t) { return 1 - (1 - t) * (1 - t); }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float Parabola(float t) { return 4f * t * (1f - t); }
 
@@ -67,6 +71,7 @@ namespace ChoyUtilities {
             return math.sin(-13f * (t * 1f) * halfPi * math.pow(2f, 10f * t) + 1f);
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float BounceOut(float t) {
             const float n1 = 7.5625f;

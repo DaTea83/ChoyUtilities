@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
+    
     public partial class TeaMotion : IDisposable {
         private readonly Transform[] _transforms;
 

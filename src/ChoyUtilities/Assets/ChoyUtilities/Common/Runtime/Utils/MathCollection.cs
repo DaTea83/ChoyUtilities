@@ -24,6 +24,7 @@ namespace ChoyUtilities {
         // Time-constant style smoothing
         // -DeltaTime divide timeConstant, math.max just to avoid timeConstant is 0
         // More consistent interpolation with different frame rates
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float SmoothFactor(this float deltaTime, float timeConstant = 0.02f) {
             return 1f - math.exp(-deltaTime / math.max(1e-4f, timeConstant));
