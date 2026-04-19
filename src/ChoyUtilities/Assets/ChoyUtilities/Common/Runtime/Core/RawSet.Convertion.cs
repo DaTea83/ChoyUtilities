@@ -19,6 +19,7 @@ using UnityEngine;
 
 namespace ChoyUtilities {
     public partial struct RawSet<T> {
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RawSet<float> F2ToFloat(float2 value, Allocator allocator = Allocator.Persistent) {
             var set = new RawSet<float>(2, allocator);

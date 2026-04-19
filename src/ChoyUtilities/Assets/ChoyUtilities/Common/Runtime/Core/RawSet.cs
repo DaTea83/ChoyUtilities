@@ -25,6 +25,11 @@ namespace ChoyUtilities {
         IComparable, IComparable<RawSet<T>>
         where T : unmanaged {
         private NativeArray<T> _values;
+        
+        public T this[int index] { readonly get => _values[index]; set => _values[index] = value; }
+
+        public readonly int Length => _values.Length;
+        public readonly bool IsCreated => _values.IsCreated;
 
         public RawSet(RawSet<T> other) { _values = other._values; }
 
@@ -61,12 +66,7 @@ namespace ChoyUtilities {
 
         public RawSet(Queue<T> values, Allocator allocator = Allocator.Persistent) :
             this(values.ToArray(), allocator) { }
-
-        public T this[int index] { readonly get => _values[index]; set => _values[index] = value; }
-
-        public readonly int Length => _values.Length;
-        public readonly bool IsCreated => _values.IsCreated;
-
+        
         public void Dispose() {
             if (!IsCreated) return;
             _values.Dispose();

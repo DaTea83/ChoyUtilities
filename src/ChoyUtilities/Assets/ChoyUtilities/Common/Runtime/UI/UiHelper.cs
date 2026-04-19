@@ -15,8 +15,12 @@
 using UnityEngine;
 
 namespace ChoyUtilities {
+    
+    [Icon(ICON_PATH)]
     [RequireComponent(typeof(RectTransform))]
     public abstract class UiHelper : MonoBehaviour {
+        private const string ICON_PATH = "Packages/com.unity.modules.ui/.icon.png";
+        
         [SerializeField] [Min(0.01f)] protected float transitionTime;
 
         protected RectTransform RectTransform;

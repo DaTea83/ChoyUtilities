@@ -272,6 +272,7 @@ namespace ChoyUtilities {
 
         #region IEnumerable
 
+        [BurstCompile]
         public IEnumerator<float> GetEnumerator() {
             foreach (var t in values)
                 yield return t;
@@ -281,6 +282,7 @@ namespace ChoyUtilities {
 
         #region IComparable
 
+        [BurstCompile]
         public int CompareTo(Floater other) {
             float selfV = 0;
             float otherV = 0;

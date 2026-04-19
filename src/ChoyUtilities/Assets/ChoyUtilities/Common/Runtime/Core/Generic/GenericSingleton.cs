@@ -17,9 +17,14 @@ using System.Threading;
 using UnityEngine;
 
 namespace ChoyUtilities {
+    
+    [Icon(ICON_PATH)]
     [DisallowMultipleComponent]
     public abstract class GenericSingleton<T> : MonoBehaviour
         where T : MonoBehaviour {
+        
+        private const string ICON_PATH = "Packages/com.unity.inputsystem/InputSystem/Editor/Icons/d_Gamepad@4x.png";
+        
         public static T Instance { get; private set; }
 
         protected virtual void Awake() { InitSingleton(); }

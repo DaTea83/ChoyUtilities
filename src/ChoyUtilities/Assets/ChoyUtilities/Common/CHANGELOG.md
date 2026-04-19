@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.5] - 2026-04-29
+
+Added
+* Added EditorCollection.Address
+
+Changed
+* Floater, added Burstdiscard to a new function where exception is thrown
+
 ## [1.0.4] - 2026-04-18
 
 Changed

@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -29,7 +30,10 @@ namespace ChoyUtilities {
         public static implicit operator List<float>(Floater value) { return new List<float>(value.values); }
 
         public static implicit operator int[](Floater value) {
-            if (value.values == null || value.values.Length == 0) throw new FloaterException("Empty Floater found");
+            if (value.values == null || value.values.Length == 0) {
+                ThrowFloaterException("Empty Floater found");
+                return Array.Empty<int>();
+            }
             var set = new int[value.values.Length];
             for (var i = 0; i < value.values.Length; i++)
                 set[i] = (int)value.values[i];
@@ -39,32 +43,40 @@ namespace ChoyUtilities {
 
         //public static implicit operator Array(FloatsSerialize value) => value.Values;
         public static implicit operator float2(Floater value) {
-            if (value.values is null || value.values.Length < 2)
-                throw new FloaterException("Value must be more than 2 floats");
+            if (value.values is null || value.values.Length < 2) {
+                ThrowFloaterException("Value must be more than 2 floats");
+                return float2.zero;
+            }
             var set = new float2(value.values[0], value.values[1]);
 
             return set;
         }
 
         public static implicit operator float3(Floater value) {
-            if (value.values is null || value.values.Length < 3)
-                throw new FloaterException("Value must be more than 3 floats");
+            if (value.values is null || value.values.Length < 3) {
+                ThrowFloaterException("Value must be more than 3 floats");
+                return float3.zero;
+            }
             var set = new float3(value.values[0], value.values[1], value.values[2]);
 
             return set;
         }
 
         public static implicit operator float4(Floater value) {
-            if (value.values is null || value.values.Length < 4)
-                throw new FloaterException("Value must be more than 4 floats");
+            if (value.values is null || value.values.Length < 4) {
+                ThrowFloaterException("Value must be more than 4 floats");
+                return float4.zero;
+            }
             var set = new float4(value.values[0], value.values[1], value.values[2], value.values[3]);
 
             return set;
         }
 
         public static implicit operator Vector3(Floater value) {
-            if (value.values is null || value.values.Length < 3)
-                throw new FloaterException("Value must be more than 3 floats");
+            if (value.values is null || value.values.Length < 3) {
+                ThrowFloaterException("Value must be more than 3 floats");
+                return Vector3.zero;
+            }
             var set = new Vector3(value.values[0], value.values[1], value.values[2]);
 
             return set;
@@ -107,5 +119,10 @@ namespace ChoyUtilities {
         }
 
         #endregion
+        
+        [BurstDiscard]
+        private static void ThrowFloaterException(string message) {
+            throw new FloaterException(message);
+        }
     }
 }
