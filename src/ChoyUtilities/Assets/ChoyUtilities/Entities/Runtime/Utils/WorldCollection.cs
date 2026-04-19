@@ -1,13 +1,25 @@
-﻿using System;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
 using System.Threading;
 using Unity.Entities;
 using UnityEngine;
 
 namespace ChoyUtilities {
-
 #if UNITY_2023_1_OR_NEWER
     public static partial class EntitiesCollection {
-
         private const ushort MAX_FRAME = 200;
 
         public static async Awaitable<World> TryGetWorld(this CancellationToken token, ushort maxAllowed = MAX_FRAME) {
@@ -70,8 +82,6 @@ namespace ChoyUtilities {
 
             return !validSingleton ? throw new Exception("Buffer not found") : buffer;
         }
-
     }
 #endif
-
 }

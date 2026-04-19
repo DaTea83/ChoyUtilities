@@ -3,7 +3,7 @@
 namespace ChoyUtilities.Entities {
 
     //TODO
-    [UpdateInGroup(typeof(EuCEffectSystemGroup))]
+    [UpdateInGroup(typeof(TeaEffectSystemGroup))]
     public partial class UiHandleSystemBase : SystemBase {
 
         // public event Action<byte, byte> OnUiEnterHover;

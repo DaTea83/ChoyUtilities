@@ -1,8 +1,18 @@
 # Changelog
 
+## [1.0.5] - 2026-04-29
+
+Added
+* Added EditorCollection.Address
+
+Changed
+* Floater, added Burstdiscard to a new function where exception is thrown
+* Updated TeaMotion
+
 ## [1.0.4] - 2026-04-18
 
-
+Changed
+* Full code cleanup, with added header and renames
 
 ## [1.0.3] - 2026-04-17
 

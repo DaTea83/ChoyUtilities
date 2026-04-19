@@ -1,3 +1,17 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -5,9 +19,7 @@ using Unity.Entities;
 
 // Taken from: https://github.com/Unity-Technologies/EntityComponentSystemSamples
 namespace ChoyUtilities {
-
     public static partial class EntitiesCollection {
-
         /// <summary>
         ///     A binary search helper for blob arrays.
         ///     It finds the segment in a sorted cumulative array (like arc lengths) where a given value belongs, returning the
@@ -50,7 +62,5 @@ namespace ChoyUtilities {
 
             return leftBound - 1;
         }
-
     }
-
 }

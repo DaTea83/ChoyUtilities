@@ -1,26 +1,39 @@
-﻿using System;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
 using Unity.Collections;
 
 namespace ChoyUtilities {
-
     [BurstCompile]
     [Serializable]
     public partial struct RawSet<T> : IDisposable, IEnumerable<T>, IFormattable,
         IComparable, IComparable<RawSet<T>>
         where T : unmanaged {
-
         private NativeArray<T> _values;
+        
+        public T this[int index] { readonly get => _values[index]; set => _values[index] = value; }
 
-        public RawSet(RawSet<T> other) {
-            _values = other._values;
-        }
+        public readonly int Length => _values.Length;
+        public readonly bool IsCreated => _values.IsCreated;
 
-        public RawSet(NativeArray<T> values) {
-            _values = values;
-        }
+        public RawSet(RawSet<T> other) { _values = other._values; }
+
+        public RawSet(NativeArray<T> values) { _values = values; }
 
         public RawSet(NativeList<T> values, Allocator allocator = Allocator.Persistent) : this(
             values.ToArray(allocator)) { }
@@ -53,15 +66,7 @@ namespace ChoyUtilities {
 
         public RawSet(Queue<T> values, Allocator allocator = Allocator.Persistent) :
             this(values.ToArray(), allocator) { }
-
-        public T this[int index] {
-            readonly get => _values[index];
-            set => _values[index] = value;
-        }
-
-        public readonly int Length => _values.Length;
-        public readonly bool IsCreated => _values.IsCreated;
-
+        
         public void Dispose() {
             if (!IsCreated) return;
             _values.Dispose();
@@ -72,30 +77,18 @@ namespace ChoyUtilities {
                 yield return t;
         }
 
-        public int CompareTo(RawSet<T> other) {
-            return Length.CompareTo(other.Length);
-        }
+        public int CompareTo(RawSet<T> other) { return Length.CompareTo(other.Length); }
 
-        public override int GetHashCode() {
-            return _values.GetHashCode();
-        }
+        public override int GetHashCode() { return _values.GetHashCode(); }
 
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
         public override string ToString() {
             return $"{nameof(_values)}: {_values}, {nameof(Length)}: {Length}, {nameof(IsCreated)}: {IsCreated}";
         }
 
-        public int CompareTo(object obj) {
-            return obj is RawSet<T> other ? CompareTo(other) : -1;
-        }
+        public int CompareTo(object obj) { return obj is RawSet<T> other ? CompareTo(other) : -1; }
 
-        public string ToString(string format, IFormatProvider formatProvider) {
-            return ToString();
-        }
-
+        public string ToString(string format, IFormatProvider formatProvider) { return ToString(); }
     }
-
 }

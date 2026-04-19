@@ -1,12 +1,24 @@
-﻿using System.Runtime.CompilerServices;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System.Runtime.CompilerServices;
 using Unity.Burst;
 using Unity.Mathematics;
 
 namespace ChoyUtilities {
-
     [BurstCompile]
     public static class MotionEvaluation {
-
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Evaluate(this EMotion motion, float t) {
@@ -27,48 +39,43 @@ namespace ChoyUtilities {
             };
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float Sqr(float x) {
-            return x * x;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float Cube(float x) {
-            return x * x * x;
-        }
+        private static float Sqr(float x) { return x * x; }
 
         [BurstCompile]
-        private static float SqrtOut(float x) {
-            return math.sqrt(x);
-        }
-
-        [BurstCompile]
-        private static float CubedOut(float x) {
-            return math.pow(x, 1.0F / 3.0F);
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float QuadraticEaseInOut(float t) {
-            return 1 - (1 - t) * (1 - t);
-        }
+        private static float Cube(float x) { return x * x * x; }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float Parabola(float t) {
-            return 4f * t * (1f - t);
-        }
+        private static float SqrtOut(float x) { return math.sqrt(x); }
 
         [BurstCompile]
-        private static float Triangle(float t) {
-            return 1f - 2f * math.abs(t - 0.5f);
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static float CubedOut(float x) { return math.pow(x, 1.0F / 3.0F); }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static float QuadraticEaseInOut(float t) { return 1 - (1 - t) * (1 - t); }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static float Parabola(float t) { return 4f * t * (1f - t); }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static float Triangle(float t) { return 1f - 2f * math.abs(t - 0.5f); }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float ElasticOut(float t) {
             const float halfPi = 1.57079632679f;
 
             return math.sin(-13f * (t * 1f) * halfPi * math.pow(2f, 10f * t) + 1f);
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float BounceOut(float t) {
             const float n1 = 7.5625f;
@@ -100,6 +107,7 @@ namespace ChoyUtilities {
         }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float SqrEaseInOut(float t) {
             var t1 = Sqr(t);
             var t2 = SqrtOut(t);
@@ -108,13 +116,12 @@ namespace ChoyUtilities {
         }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float CubeEaseInOut(float t) {
             var t1 = Cube(t);
             var t2 = CubedOut(t);
 
             return math.lerp(t1, t2, t);
         }
-
     }
-
 }

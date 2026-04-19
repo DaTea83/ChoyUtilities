@@ -1,3 +1,17 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using System;
 using System.Runtime.CompilerServices;
 using Unity.Burst;
@@ -6,20 +20,23 @@ using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 namespace ChoyUtilities {
-
     public static partial class HelperCollection {
-
         // Time-constant style smoothing
         // -DeltaTime divide timeConstant, math.max just to avoid timeConstant is 0
         // More consistent interpolation with different frame rates
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float SmoothFactor(this float deltaTime, float timeConstant = 0.02f) {
             return 1f - math.exp(-deltaTime / math.max(1e-4f, timeConstant));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float3 GetNoiseOffsetPos(this float3 pos, float yOffset, float time, float height,
-            float noiseScale, float depthOffset) {
+        public static float3 GetNoiseOffsetPos(this float3 pos,
+            float yOffset,
+            float time,
+            float height,
+            float noiseScale,
+            float depthOffset) {
             pos.y = height * noise.snoise(new float2(pos.x * noiseScale + time,
                 pos.z * noiseScale + time)) + yOffset * depthOffset;
 
@@ -31,15 +48,11 @@ namespace ChoyUtilities {
         /// </summary>
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Modulo(float x, float y) {
-            return (x % y + y) % y;
-        }
+        public static float Modulo(float x, float y) { return (x % y + y) % y; }
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Modulo(int x, int y) {
-            return (x % y + y) % y;
-        }
+        public static int Modulo(int x, int y) { return (x % y + y) % y; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float RandomValue(this Component obj) {
@@ -90,7 +103,5 @@ namespace ChoyUtilities {
                 return seed;
             }
         }
-
     }
-
 }

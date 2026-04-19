@@ -1,18 +1,29 @@
-﻿using System;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
+using Unity.Burst;
 using Unity.Mathematics;
 
 namespace ChoyUtilities {
-
     public partial struct Floater {
-
         private const float EPSILON = 0.0001f;
 
         #region Operators
 
         public Floater Add(float value) {
             var set = new float[values.Length + 1];
-
-            if (set == null) throw new FloaterException(nameof(set));
             Array.Copy(values, set, values.Length);
             set[^1] = value;
 
@@ -22,8 +33,6 @@ namespace ChoyUtilities {
         public Floater Add(float[] extras) {
             if (extras == null || extras == Array.Empty<float>()) return this;
             var set = new float[values.Length + extras.Length];
-
-            if (set == null) throw new FloaterException(nameof(set));
 
             for (var i = 0; i < values.Length; i++)
                 set[i] = values[i];
@@ -38,8 +47,6 @@ namespace ChoyUtilities {
             if (extra.values == null || extra.values == Array.Empty<float>()) return this;
             var set = new float[values.Length + extra.values.Length];
 
-            if (set == null) throw new FloaterException(nameof(set));
-
             for (var i = 0; i < values.Length; i++)
                 set[i] = values[i];
 
@@ -48,7 +55,7 @@ namespace ChoyUtilities {
 
             return new Floater(set);
         }
-
+        
         public int FirstMatch(float value) {
             var index = -1;
 
@@ -238,7 +245,5 @@ namespace ChoyUtilities {
         }
 
         #endregion
-
     }
-
 }

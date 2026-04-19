@@ -1,22 +1,33 @@
-﻿using Unity.Burst;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(InitializePhysicsMassAuthoring))]
     public class PhysicsMassConstraintAuthoring : MonoBehaviour {
-
         [SerializeField] private bool lockX;
         [SerializeField] private bool lockY;
         [SerializeField] private bool lockZ;
 
         private class PhysicsMassConstraintAuthoringBaker : Baker<PhysicsMassConstraintAuthoring> {
-
             public override void Bake(PhysicsMassConstraintAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.Dynamic);
 
@@ -26,23 +37,18 @@ namespace ChoyUtilities.Entities {
                     Z = authoring.lockZ
                 });
             }
-
         }
-
     }
 
     public struct InitializeLockRotationIData : IComponentData {
-
         public bool X;
         public bool Y;
         public bool Z;
-
     }
 
-    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
+    [UpdateInGroup(typeof(TeaManagedComponentSystem))]
     [UpdateAfter(typeof(InitializePhysicsMassISystem))]
     public partial struct InitializeLockRotationISystem : ISystem {
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -62,7 +68,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(state.EntityManager);
         }
-
     }
-
 }

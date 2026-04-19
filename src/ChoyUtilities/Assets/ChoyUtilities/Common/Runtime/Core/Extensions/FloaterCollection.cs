@@ -1,14 +1,26 @@
-﻿using System;
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
 using System.Runtime.CompilerServices;
 using Unity.Burst;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
-
     [BurstCompile]
     public static partial class HelperCollection {
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 PositionFromTransform(this Floater data) {
             return data.Length < 9 ? float3.zero : new float3(data[0], data[1], data[2]);
@@ -28,7 +40,6 @@ namespace ChoyUtilities {
         }
 
         public static Transform Floater(this Transform obj, Floater data) {
-            
             obj.position = data.PositionFromTransform();
             obj.rotation = data.RotationFromTransform();
             obj.localScale = data.ScaleFromTransform();
@@ -38,7 +49,7 @@ namespace ChoyUtilities {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Floater LogLerp(this Floater a, Floater b, float t, EMotion type) {
-            var e = math.lerp(math.log((float)a), math.log((float)b), type.Evaluate(t));
+            var e = math.lerp(math.log(a), math.log(b), type.Evaluate(t));
 
             return new Floater(math.exp(e));
         }
@@ -75,7 +86,5 @@ namespace ChoyUtilities {
 
             return results;
         }
-
     }
-
 }

@@ -1,4 +1,18 @@
-﻿#if UNITY_2023_1_OR_NEWER
+﻿// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#if UNITY_2023_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -7,13 +21,10 @@ using UnityEngine.Audio;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
-
     public abstract class GenericSfxManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
-
         public enum EAudioPriority : byte {
-
             Highest = 0,
             UltraHigh = 1 << 0,
             VeryHigh = 1 << 1,
@@ -24,15 +35,12 @@ namespace ChoyUtilities {
             Low = 1 << 6,
             VeryLow = 1 << 7,
             Lowest = byte.MaxValue
-
         }
 
         public enum EMixerType : byte {
-
             Sfx = 1,
             Narration = 1 << 1,
             Music = 1 << 2
-
         }
 
         [SerializeField] protected PoolingAttributes poolAttributes;
@@ -75,14 +83,12 @@ namespace ChoyUtilities {
                     AudioSources[i] = spawnAudio;
                 }
             }
-            catch{
+            catch {
                 Destroy(this);
             }
         }
 
-        protected virtual void OnEnable() {
-            PauseIndexes = ListPool<int>.Get();
-        }
+        protected virtual void OnEnable() { PauseIndexes = ListPool<int>.Get(); }
 
         protected override void OnDisable() {
             ListPool<int>.Release(PauseIndexes);
@@ -164,7 +170,7 @@ namespace ChoyUtilities {
         public virtual float PlayClip(AudioResource resource, byte audioPriority = (byte)EAudioPriority.Average) {
             return PlayClipAtPos(resource, float3.zero, audioPriority);
         }
-        
+
         public virtual bool StopClip(int idx = -1) {
             idx = idx == -1 ? _previousIndex : idx;
             var source = AudioSources[idx];
@@ -205,28 +211,20 @@ namespace ChoyUtilities {
         }
 
         public abstract class PoolingAttributes : ScriptableObject {
-
             public AudioResourceSerialize[] audioResource;
 
             [Serializable]
             public struct AudioResourceSerialize {
-
                 public AudioResource audio;
                 public TEnum id;
-
             }
-
         }
 
         [Serializable]
         public struct AudioMixerSerialize {
-
             public AudioMixer mixer;
             public EMotion motionCurve;
-
         }
-
     }
-
 }
 #endif

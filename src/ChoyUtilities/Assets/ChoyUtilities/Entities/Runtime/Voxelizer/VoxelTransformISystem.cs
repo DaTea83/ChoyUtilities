@@ -1,3 +1,17 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -7,14 +21,11 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
-    [BurstCompile(CompileSynchronously = true)]
-    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
+    
+    [BurstCompile]
+    [UpdateInGroup(typeof(TeaPreTransformSystemGroup))]
     public partial struct VoxelTransformISystem : ISystem {
-
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<VoxelizerISingleton>();
-        }
+        public void OnCreate(ref SystemState state) { state.RequireForUpdate<VoxelizerISingleton>(); }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
@@ -27,14 +38,14 @@ namespace ChoyUtilities.Entities {
             job.ScheduleParallel();
         }
 
-        [BurstCompile(CompileSynchronously = true)]
+        [BurstCompile]
         private partial struct Job : IJobEntity {
-
             [NativeDisableParallelForRestriction] public BufferLookup<DestroyBufferEntryIBuffer> DestroyLookup;
             public VoxelizerISingleton Voxelizer;
             public float ElapsedTime;
             public float DeltaTime;
 
+            [BurstCompile]
             private void Execute(Entity entity,
                 ref LocalTransform lt,
                 ref BoxIData box,
@@ -62,9 +73,6 @@ namespace ChoyUtilities.Entities {
                 hue = math.frac(hue + ElapsedTime * Voxelizer.ColorSpeed);
                 urp.Value = (Vector4)Color.HSVToRGB(hue, 1, 1);
             }
-
         }
-
     }
-
 }

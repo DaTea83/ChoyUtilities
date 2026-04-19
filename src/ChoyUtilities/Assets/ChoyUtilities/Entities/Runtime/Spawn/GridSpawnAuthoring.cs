@@ -1,3 +1,17 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -5,17 +19,14 @@ using Unity.Transforms;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
-
     [DisallowMultipleComponent]
     public sealed class GridSpawnAuthoring : MonoBehaviour {
-
         [SerializeField] private GameObject prefab;
         [SerializeField] private int3 size = new(100, 1, 100);
         [SerializeField] private float3 spacing = 10;
         [SerializeField] [Min(0.001f)] private float scale = 1;
 
         public class Baker : Baker<GridSpawnAuthoring> {
-
             public override void Bake(GridSpawnAuthoring authoring) {
                 DependsOn(authoring.prefab);
 
@@ -29,24 +40,19 @@ namespace ChoyUtilities.Entities {
                     Scale = authoring.scale
                 });
             }
-
         }
-
     }
 
     public struct GridSpawnIData : IComponentData {
-
         public Entity Prefab;
         public int3 Size;
         public float3 Spacing;
         public float Scale;
-
     }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(EuCSpawnSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(TeaSpawnSystemGroup), OrderFirst = true)]
     public partial struct SpawnGridISystem : ISystem {
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -89,7 +95,5 @@ namespace ChoyUtilities.Entities {
 
             ecb.Playback(em);
         }
-
     }
-
 }

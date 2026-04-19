@@ -1,9 +1,21 @@
+// Copyright 2026 DaTea83
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using System;
 
 namespace ChoyUtilities {
-
     public class HealthSystem {
-
         public HealthSystem(int hp) {
             MaxHealth = hp;
             Health = MaxHealth;
@@ -19,53 +31,33 @@ namespace ChoyUtilities {
 
         private event Action<int> OnHealthChanged;
 
-        public void SubOnHealthChanged(Action<int> sub) {
-            OnHealthChanged += sub;
-        }
+        public void SubOnHealthChanged(Action<int> sub) { OnHealthChanged += sub; }
 
-        public void UnsubOnHealthChanged(Action<int> unsub) {
-            OnHealthChanged -= unsub;
-        }
+        public void UnsubOnHealthChanged(Action<int> unsub) { OnHealthChanged -= unsub; }
 
         private event Action<int> OnHealthMaxChanged;
 
-        public void SubOnHealthMaxChanged(Action<int> sub) {
-            OnHealthMaxChanged += sub;
-        }
+        public void SubOnHealthMaxChanged(Action<int> sub) { OnHealthMaxChanged += sub; }
 
-        public void UnsubOnHealthMaxChanged(Action<int> unsub) {
-            OnHealthMaxChanged -= unsub;
-        }
+        public void UnsubOnHealthMaxChanged(Action<int> unsub) { OnHealthMaxChanged -= unsub; }
 
         private event EventHandler OnDamaged;
 
-        public void SubOnDamaged(EventHandler sub) {
-            OnDamaged += sub;
-        }
+        public void SubOnDamaged(EventHandler sub) { OnDamaged += sub; }
 
-        public void UnsubOnDamaged(EventHandler unsub) {
-            OnDamaged -= unsub;
-        }
+        public void UnsubOnDamaged(EventHandler unsub) { OnDamaged -= unsub; }
 
         private event EventHandler OnHealed;
 
-        public void SubOnHealed(EventHandler sub) {
-            OnHealed += sub;
-        }
+        public void SubOnHealed(EventHandler sub) { OnHealed += sub; }
 
-        public void UnsubOnHealed(EventHandler unsub) {
-            OnHealed -= unsub;
-        }
+        public void UnsubOnHealed(EventHandler unsub) { OnHealed -= unsub; }
 
         private event EventHandler OnDead;
 
-        public void SubOnDead(EventHandler sub) {
-            OnDead += sub;
-        }
+        public void SubOnDead(EventHandler sub) { OnDead += sub; }
 
-        public void UnsubOnDead(EventHandler unsub) {
-            OnDead -= unsub;
-        }
+        public void UnsubOnDead(EventHandler unsub) { OnDead -= unsub; }
 
         public void Damage(int damageNumber) {
             Health -= damageNumber;
@@ -77,9 +69,7 @@ namespace ChoyUtilities {
             if (Health <= 0) Die();
         }
 
-        public void Die() {
-            OnDead?.Invoke(this, EventArgs.Empty);
-        }
+        public void Die() { OnDead?.Invoke(this, EventArgs.Empty); }
 
         public void Heal(int healAmount) {
             Health += healAmount;
@@ -93,20 +83,14 @@ namespace ChoyUtilities {
             if (MaxHealth < 0) MaxHealth = 1;
             OnHealthMaxChanged?.Invoke(hp);
         }
-
     }
 
     public interface IDamage {
-
         void Damaged(int tagTeam, int dmg);
-
     }
 
     public interface IHeal {
-
         bool CanInteract { get; }
         void Healed(int heal);
-
     }
-
 }
