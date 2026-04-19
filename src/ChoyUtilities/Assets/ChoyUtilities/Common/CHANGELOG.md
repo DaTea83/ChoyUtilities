@@ -4,10 +4,12 @@
 
 Added
 * Added EditorCollection.Address
+* Added SceneTemplateEditor
 
 Changed
 * Floater, added Burstdiscard to a new function where exception is thrown
 * Updated TeaMotion
+* Moved "RemovedMissingScriptsEditor" to Editor/MenuItem
 
 ## [1.0.4] - 2026-04-18
 
