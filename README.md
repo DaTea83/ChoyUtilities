@@ -31,9 +31,15 @@ I'll be continuously updating it to add more features, mainly to solve issues I 
 \
 [Features](#features)  
 * [Base Package](#base-package)
+	* [Editor](#editor)
+ 		* [Fancy Replace](#fancy-replace) 
+ 	* [Runtime](#runtime)
+  		* [Floater](#floater) 
 
 ## Requirements
 
+* Github desktop
+	* I'm getting reports of if you don't restart newly installed Unity and Github you will get a package error
 * Ideally Unity 6000.0 LTS and above
 * Minimum Unity 2023.1
 * URP only
@@ -72,6 +78,7 @@ https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyU
 ## Features
 
 ## Base Package
+## Editor
 ## Fancy Replace
 
 A Simple Editor Tool which allows you to replace the original icon with custom made.
@@ -93,6 +100,7 @@ After:
 
 PS. In a group project settings use it with caution as it confuses any unknowing person easily
 
+## Runtime
 ## Floater
 
 In a nutshell this is just a float array, but a very flexible one  
