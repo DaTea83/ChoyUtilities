@@ -15,7 +15,7 @@
 using ChoyUtilities;
 
 namespace Samples.Singletons {
-    public class SampleUIController : GenericLegacyUIManager<SampleUIController.EUiType, SampleUIController> {
+    public sealed class SampleUIController : GenericLegacyUIManager<SampleUIController.EUiType, SampleUIController> {
 
         public enum EUiType : byte {
             A,

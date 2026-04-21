@@ -15,7 +15,7 @@
 using ChoyUtilities;
 
 namespace Samples.Singletons {
-    public class SampleSfxController : GenericSfxManager<SampleSfxController.ESfxType,SampleSfxController> {
+    public sealed class SampleSfxController : GenericSfxManager<SampleSfxController.ESfxType,SampleSfxController> {
 
         public enum ESfxType : byte {
             A,

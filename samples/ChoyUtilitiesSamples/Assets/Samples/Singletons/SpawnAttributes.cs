@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace Samples.Singletons {
     [CreateAssetMenu(fileName = "SpawnAttributes", menuName = "ChoyUtilities Samples/Spawn Attributes")]
-    public class SpawnAttributes : SampleSpawnController.PoolingAttributes {
+    public sealed class SpawnAttributes : SampleSpawnController.PoolingAttributes {
         
     }
 }

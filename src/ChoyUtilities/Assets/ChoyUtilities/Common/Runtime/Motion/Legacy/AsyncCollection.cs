@@ -35,6 +35,7 @@ namespace ChoyUtilities {
             }
         }
 
+        [Obsolete("Use TeaTransformMotion instead.")]
         public static async Awaitable RotateObjectAsync(this CancellationToken token,
             GameObject obj,
             float3 rotateTo,
@@ -43,6 +44,7 @@ namespace ChoyUtilities {
             await token.RotateObjectAsync(obj.transform, rotateTo, duration, motion);
         }
 
+        [Obsolete("Use TeaTransformMotion instead.")]
         public static async Awaitable<bool> RotateObjectAsync(this CancellationToken token,
             Transform obj,
             float3 rotateTo,
@@ -73,6 +75,7 @@ namespace ChoyUtilities {
             }
         }
 
+        [Obsolete("Use TeaTransformMotion instead.")]
         public static async Awaitable ScaleObjectAsync(this CancellationToken token,
             GameObject obj,
             Vector3 scaleTo,
@@ -354,6 +357,7 @@ namespace ChoyUtilities {
 
         #region Move Transform Async
 
+        [Obsolete("Use TeaTransformMotion instead.")]
         public static async Awaitable<bool> MoveAsync(this CancellationToken token,
             GameObject obj,
             Transform targetPos,
@@ -363,6 +367,7 @@ namespace ChoyUtilities {
             return await token.MoveAsync(obj, targetPos.position, duration, motion, onDone);
         }
 
+        [Obsolete("Use TeaTransformMotion instead.")]
         public static async Awaitable<bool> MoveAsync(this CancellationToken token,
             RectTransform obj,
             float3 target,
@@ -391,6 +396,7 @@ namespace ChoyUtilities {
             }
         }
 
+        [Obsolete("Use TeaTransformMotion instead.")]
         public static async Awaitable<bool> MoveAsync(this CancellationToken token,
             GameObject obj,
             float3 targetPos,

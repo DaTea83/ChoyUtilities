@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace Samples.Singletons {
     [CreateAssetMenu(fileName = "UiAttributes", menuName = "ChoyUtilities Samples/UI Attributes")]
-    public class UiAttributes : SampleUIController.PoolingAttributes {
+    public sealed class UiAttributes : SampleUIController.PoolingAttributes {
         
     }
 }
