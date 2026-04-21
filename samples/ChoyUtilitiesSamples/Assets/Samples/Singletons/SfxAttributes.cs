@@ -15,8 +15,8 @@
 using UnityEngine;
 
 namespace Samples.Singletons {
-    [CreateAssetMenu(fileName = "SfxAttributes", menuName = "ChoyUtilities Samples/Sfx Attributes")]
-    public sealed class SfxAttributes : SampleSfxController.PoolingAttributes {
+    [CreateAssetMenu(fileName = "Audio Attributes", menuName = "ChoyUtilities Samples/Audio Attributes")]
+    public sealed class SfxAttributes : SampleAudioController.PoolingAttributes {
         
     }
 }
