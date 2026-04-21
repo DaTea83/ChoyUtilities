@@ -20,9 +20,17 @@ using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
     
+    /// <summary>
+    /// Schedule a burst transform job with async/await.  
+    /// How to use:
+    /// 1. Construct, insert transform that wanted to change
+    /// 2. Build(), insert what, where, how to change
+    /// 3. Run()
+    /// </summary>
     public partial class TeaTransformMotion : IDisposable {
         
-        private const float TIME_CONSTANT = 0.02f;
+        // around 1 / 120
+        private const float TIME_CONSTANT = 0.008333f;
         
         private readonly Transform[] _transforms;
 

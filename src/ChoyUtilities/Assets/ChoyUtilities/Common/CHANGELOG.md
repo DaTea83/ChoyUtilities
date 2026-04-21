@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.6] - 2026-04-21
+
+Fixed
+* Floater, fixed typo
+* RawSet, ToString same as Floater now returns the type of the container
+
+Changed
+* TeaTransformMotion, change time constant to 0.008333f
+* EnumCollection, added back extensions previously removed
+* AsyncCollection, marked RotateObjectAsync as obsolete
+* AsyncCollection, marked ScaleObjectAsync as obsolete
+* AsyncCollection, marked MoveAsync as obsolete
+
 ## [1.0.5] - 2026-04-29
 
 Added

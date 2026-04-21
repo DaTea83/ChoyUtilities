@@ -194,7 +194,7 @@ namespace ChoyUtilities {
         /// </summary>
         /// <param name="value">
         ///     For Transform, it will convert quaternion to euler angles before storing.
-        ///     To convert FloatsSerialize back to Transform use <see cref="HelperCollection.Floater" />
+        ///     To convert Floater back to Transform use <see cref="HelperCollection.Floater" />
         ///     extension
         /// </param>
         public Floater(Transform value) {

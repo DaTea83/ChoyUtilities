@@ -83,9 +83,7 @@ namespace ChoyUtilities {
 
         IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
-        public override string ToString() {
-            return $"{nameof(_values)}: {_values}, {nameof(Length)}: {Length}, {nameof(IsCreated)}: {IsCreated}";
-        }
+        public override string ToString() { return _values.ToString(); }
 
         public int CompareTo(object obj) { return obj is RawSet<T> other ? CompareTo(other) : -1; }
 

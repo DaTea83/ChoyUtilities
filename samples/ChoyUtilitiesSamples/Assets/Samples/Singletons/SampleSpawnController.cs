@@ -15,7 +15,7 @@
 using ChoyUtilities;
 
 namespace Samples.Singletons {
-    public class SampleSpawnController : GenericSpawnManager<SampleSpawnController.ESpawnType,SampleSpawnController> {
+    public sealed class SampleSpawnController : GenericSpawnManager<SampleSpawnController.ESpawnType,SampleSpawnController> {
 
         public enum ESpawnType : byte {
             A,
