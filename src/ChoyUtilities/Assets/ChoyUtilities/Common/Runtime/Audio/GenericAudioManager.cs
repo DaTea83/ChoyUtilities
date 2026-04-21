@@ -21,9 +21,10 @@ using UnityEngine.Audio;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
-    public abstract class GenericSfxManager<TEnum, TMono> : GenericSingleton<TMono>
+    public abstract class GenericAudioManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
+        
         public enum EAudioPriority : byte {
             Highest = 0,
             UltraHigh = 1 << 0,
@@ -35,12 +36,6 @@ namespace ChoyUtilities {
             Low = 1 << 6,
             VeryLow = 1 << 7,
             Lowest = byte.MaxValue
-        }
-
-        public enum EMixerType : byte {
-            Sfx = 1,
-            Narration = 1 << 1,
-            Music = 1 << 2
         }
 
         [SerializeField] protected PoolingAttributes poolAttributes;
@@ -97,7 +92,6 @@ namespace ChoyUtilities {
 
         protected virtual int GetPoolIndex(TEnum id) {
             if (!Enum.IsDefined(typeof(TEnum), id)) return -1;
-
             return Array.FindIndex(poolAttributes.audioResource, i => EqualityComparer<TEnum>.Default.Equals(i.id, id));
         }
 
@@ -113,39 +107,6 @@ namespace ChoyUtilities {
 
         public virtual float PlayClipAtPos(AudioResource resource,
             float3 pos,
-            byte audioPriority = (byte)EAudioPriority.Average) {
-            var currentSource = AudioSources[_currentIndex];
-
-            currentSource.transform.localPosition = pos;
-            currentSource.resource = resource;
-            currentSource.priority = audioPriority;
-            currentSource.Play();
-
-            var lengthSeconds = currentSource.clip?.length ?? 0f;
-
-            _previousIndex = _currentIndex;
-            _currentIndex++;
-            _currentIndex %= (byte)AudioSources.Length;
-
-            return lengthSeconds;
-        }
-
-        public virtual float PlayClipAtPos(TEnum id,
-            float3 pos,
-            EMixerType mixerType,
-            byte audioPriority = (byte)EAudioPriority.Average) {
-            var index = GetPoolIndex(id);
-
-            if (index == -1) throw new SingletonException("Audio Resource not found");
-
-            var resource = poolAttributes.audioResource[index].audio;
-
-            return PlayClipAtPos(resource, pos, mixerType, audioPriority);
-        }
-
-        public virtual float PlayClipAtPos(AudioResource resource,
-            float3 pos,
-            EMixerType mixerType,
             byte audioPriority = (byte)EAudioPriority.Average) {
             var currentSource = AudioSources[_currentIndex];
 
@@ -218,12 +179,6 @@ namespace ChoyUtilities {
                 public AudioResource audio;
                 public TEnum id;
             }
-        }
-
-        [Serializable]
-        public struct AudioMixerSerialize {
-            public AudioMixer mixer;
-            public EMotion motionCurve;
         }
     }
 }
