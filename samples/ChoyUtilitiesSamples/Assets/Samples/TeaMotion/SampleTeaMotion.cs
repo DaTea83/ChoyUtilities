@@ -19,13 +19,13 @@ namespace Samples.TeaMotion {
 
     public sealed class SampleTeaMotion : MonoBehaviour {
 
-        [SerializeField] private Transform targetTransform;
+        [SerializeField] private Transform[] targetTransforms;
         [SerializeField] private Transform endTransform;
         [SerializeField] private float duration = 1.0f;
 
         private async void Start() {
             try {
-                using var motion = new TeaTransformMotion(targetTransform).Build(new Floater(endTransform), duration, EMotion.SqrEaseIn, ETransformType.Move);
+                using var motion = new TeaTransformMotion(targetTransforms).Build(new Floater(endTransform), duration, EMotion.SqrEaseIn, ETransformType.Move);
                 await motion.Run();
             }
             catch {
