@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.7] - 2026-04-21
+
+Changed
+* GenericSfxManager, renamed back to GenericAudioManager
+* Updated GenericMixerManager
+
 ## [1.0.6] - 2026-04-21
 
 Fixed
