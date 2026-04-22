@@ -22,7 +22,7 @@
         "com.unity.inputsystem": "1.18.0",
         "com.unity.test-framework": "1.6.0"
       },
-      "hash": "639323749f2750c90e618fb9a5dcb65b7ee342af"
+      "hash": "2f3e962d978f17db44aa62b1eeae48d661f3e5ff"
     },
     "com.datea83.choyutilities.entities": {
       "version": "https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyUtilities/Entities",

@@ -15,7 +15,7 @@
 using ChoyUtilities;
 
 namespace Samples.Singletons {
-    public sealed class SampleSfxController : GenericSfxManager<SampleSfxController.ESfxType,SampleSfxController> {
+    public sealed class SampleAudioController : GenericAudioManager<SampleAudioController.ESfxType,SampleAudioController> {
 
         public enum ESfxType : byte {
             A,

@@ -35,6 +35,8 @@ namespace ChoyUtilities {
                 EMotion.BounceOut => BounceOut(t),
                 EMotion.SqrEaseInOut => SqrEaseInOut(t),
                 EMotion.CubeEaseInOut => CubeEaseInOut(t),
+                EMotion.SineWave => SineWave(t),
+                EMotion.CosWave => CosWave(t),
                 _ => t
             };
         }
@@ -72,7 +74,7 @@ namespace ChoyUtilities {
         private static float ElasticOut(float t) {
             const float halfPi = 1.57079632679f;
 
-            return math.sin(-13f * (t * 1f) * halfPi * math.pow(2f, 10f * t) + 1f);
+            return math.sin(-1f * (t * 1f) * halfPi * math.pow(2f, 5f * t) + 1f);
         }
 
         [BurstCompile]
@@ -123,5 +125,13 @@ namespace ChoyUtilities {
 
             return math.lerp(t1, t2, t);
         }
+        
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static float SineWave(float t) { return math.sin(t * math.PI * 2); }
+        
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static float CosWave(float t) { return math.cos(t * math.PI * 2) - 1f; }
     }
 }

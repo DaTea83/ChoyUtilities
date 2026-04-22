@@ -27,7 +27,7 @@ namespace ChoyUtilities {
     /// 2. Build(), insert what, where, how to change
     /// 3. Run()
     /// </summary>
-    public partial class TeaTransformMotion : IDisposable {
+    public partial class TeaMotion : IDisposable {
         
         // around 1 / 120
         private const float TIME_CONSTANT = 0.008333f;
@@ -35,7 +35,7 @@ namespace ChoyUtilities {
         private readonly Transform[] _transforms;
 
         private readonly CancellationTokenSource _tokenSource = new();
-        public CancellationToken Token => _tokenSource.Token;
+        private CancellationToken Token => _tokenSource.Token;
 
         private TransformAccessArray _transformAccessArray;
         private ETransformType _transformType = ETransformType.None;
@@ -49,14 +49,14 @@ namespace ChoyUtilities {
         private RawSet<float3> _startScale;
         private RawSet<float3> _endScale;
 
-        public TeaTransformMotion(Transform[] transforms) {
+        public TeaMotion(Transform[] transforms) {
             _transforms = transforms;
             Init();
         }
 
-        public TeaTransformMotion(Transform transform) : this(new[] { transform }) { }
+        public TeaMotion(Transform transform) : this(new[] { transform }) { }
 
-        public TeaTransformMotion(RectTransform[] transforms) {
+        public TeaMotion(RectTransform[] transforms) {
             _transforms = new Transform[transforms.Length];
             var i = 0;
             foreach (var r in transforms) {
@@ -67,7 +67,7 @@ namespace ChoyUtilities {
             Init();
         }
 
-        public TeaTransformMotion(RectTransform transform) : this(new[] { transform }) { }
+        public TeaMotion(RectTransform transform) : this(new[] { transform }) { }
 
         private void Init() {
             _transformAccessArray = new TransformAccessArray(_transforms);
@@ -79,7 +79,7 @@ namespace ChoyUtilities {
             _endScale = new RawSet<float3>(_transforms.Length);
         }
 
-        ~TeaTransformMotion() { Dispose(false); }
+        ~TeaMotion() { Dispose(false); }
 
         private void ReleaseUnmanagedResources() {
             if (_transformAccessArray.isCreated) _transformAccessArray.Dispose();
@@ -104,7 +104,12 @@ namespace ChoyUtilities {
             _isDisposed = true;
         }
 
+        private bool _isScheduledDispose;
         public void Dispose() {
+            if (_isRun) {
+                _isScheduledDispose = true;
+                return;
+            }
             Dispose(true);
             // Tell GC don't call deconstructor
             GC.SuppressFinalize(this);
