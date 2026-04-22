@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.8] - 2026-04-22
+
+Changed
+* Renamed TeaTranformMotion back to TeaMotion
+* TeaMotion, end transform now directly only use Floater value instead of incrementing it with start transform 
+* TeaMotion, prevent class disposal when motion still in progress
+* MotionEvaluation, added SineWave and CosWave motion
+* MotionEvaluation, lower the intensity of elastic out
+
 ## [1.0.7] - 2026-04-21
 
 Changed
@@ -19,7 +28,7 @@ Changed
 * AsyncCollection, marked ScaleObjectAsync as obsolete
 * AsyncCollection, marked MoveAsync as obsolete
 
-## [1.0.5] - 2026-04-29
+## [1.0.5] - 2026-04-19
 
 Added
 * Added EditorCollection.Address

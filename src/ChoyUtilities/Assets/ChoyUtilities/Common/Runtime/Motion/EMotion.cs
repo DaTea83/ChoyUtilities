@@ -84,6 +84,16 @@ namespace ChoyUtilities {
         ///     Motion that combines <see cref="CubeEaseIn"/> and <see cref="CubedEaseOut"/>,
         ///     with a cubic rate of change in the middle.
         /// </summary>
-        CubeEaseInOut
+        CubeEaseInOut,
+        
+        /// <summary>
+        ///     2D Sine Wave
+        /// </summary>
+        SineWave,
+        
+        /// <summary>
+        ///     2D Cosine Wave, but it starts from 0 instead of 1
+        /// </summary>
+        CosWave,
     }
 }

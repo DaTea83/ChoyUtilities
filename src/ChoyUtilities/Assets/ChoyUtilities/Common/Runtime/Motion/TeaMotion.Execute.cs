@@ -13,17 +13,16 @@
 // limitations under the License.
 
 using System;
-using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
     
-    public partial class TeaTransformMotion {
+    public partial class TeaMotion {
         private bool _isBuild;
 
-        public TeaTransformMotion Build(Floater value, float duration, EMotion motion, ETransformType transformType = ETransformType.Transform) {
+        public TeaMotion Build(Floater value, float duration, EMotion motion, ETransformType transformType = ETransformType.Transform) {
             if (_isBuild) return this;
             if (transformType == ETransformType.None)
                 transformType = ETransformType.Transform;
@@ -41,9 +40,9 @@ namespace ChoyUtilities {
                 _startRot[i] = rotation;
                 _startScale[i] = scale;
 
-                _endPos[i] = (float3)start + value.PositionFromTransform();
-                _endRot[i] = math.mul(rotation, value.RotationFromTransform());
-                _endScale[i] = scale * value.ScaleFromTransform();
+                _endPos[i] = value.PositionFromTransform();
+                _endRot[i] = value.RotationFromTransform();
+                _endScale[i] = value.ScaleFromTransform();
             }
 
             _isBuild = true;
@@ -52,7 +51,7 @@ namespace ChoyUtilities {
 
         private bool _isRun;
 
-        public async Awaitable<TeaTransformMotion> Run(Action onDone = null) {
+        public async Awaitable<TeaMotion> Run(Action onDone = null) {
             if (!_isBuild) {
                 Build(new Floater(float3.zero, quaternion.identity), 1f, EMotion.Linear);
                 await Awaitable.EndOfFrameAsync(Token);
@@ -87,6 +86,8 @@ namespace ChoyUtilities {
             }
             finally {
                 _isRun = false;
+                if(_isScheduledDispose)
+                    Dispose();
             }
         }
     }
