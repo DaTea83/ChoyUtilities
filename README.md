@@ -9,6 +9,8 @@ It also provides generic template for:
 * Audio managers  
 * UI Managers.  
 
+Other than that it also has a motion tween system driven using Burst Job + async/await  
+\
 On top of this it also provides component templates for Unity DOTS, 
 ranging from:  
 * Entity Spawning  
@@ -44,10 +46,17 @@ I'll be continuously updating it to add more features, mainly to solve issues I 
 * Minimum Unity 2023.1
 * URP only
 * Package:
+
   * "com.unity.burst": "1.8.27"
   * "com.unity.collections": "2.6.5"
-  * "com.unity.mathematics": "1.3.2"
+  * "com.unity.mathematics": "1.3.2"  
+* Extra requirements for DOTS:
 
+  * "com.unity.entities": "1.4.5"
+  * "com.unity.entities.graphics": "1.4.18"
+  * "com.unity.physics": "1.4.5"
+  * "com.unity.render-pipelines.universal": "17.0.4"  
+    
 ## Installation
 
 > [!Note]
