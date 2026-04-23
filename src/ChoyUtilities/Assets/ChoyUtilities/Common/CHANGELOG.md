@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.9] - 2026-04-23
+
+Changed
+* GenericAudioManager, now returns tuple values for all PlayClipAtPos and PlayClip
+* GenericParticleManager, now returns the said particle system for PlayEffectAtPosition
+
 ## [1.0.8] - 2026-04-22
 
 Changed

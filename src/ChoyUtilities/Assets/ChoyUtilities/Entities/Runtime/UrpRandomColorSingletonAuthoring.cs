@@ -23,16 +23,16 @@ namespace ChoyUtilities.Entities {
     ///     Any entity with URP lit material will be randomized with a color
     /// </summary>
     [DisallowMultipleComponent]
-    public class UrpRandomColorAuthoring : MonoBehaviour {
+    public sealed class UrpRandomColorSingletonAuthoring : MonoBehaviour {
         [SerializeField] private Color[] colors;
 
-        private class Baker : Baker<UrpRandomColorAuthoring> {
-            public override void Bake(UrpRandomColorAuthoring authoring) {
-                if (authoring.colors is null || authoring.colors.Length == 0) return;
+        private class Baker : Baker<UrpRandomColorSingletonAuthoring> {
+            public override void Bake(UrpRandomColorSingletonAuthoring singletonAuthoring) {
+                if (singletonAuthoring.colors is null || singletonAuthoring.colors.Length == 0) return;
                 var e = GetEntity(TransformUsageFlags.None);
                 var buffer = AddBuffer<UrpRandomColorISingletonBuffer>(e);
 
-                foreach (var color in authoring.colors)
+                foreach (var color in singletonAuthoring.colors)
                     buffer.Add(new UrpRandomColorISingletonBuffer
                         { Value = new float4(color.r, color.g, color.b, color.a) });
             }

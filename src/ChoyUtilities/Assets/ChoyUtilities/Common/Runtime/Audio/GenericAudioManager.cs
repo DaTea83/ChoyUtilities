@@ -21,6 +21,12 @@ using UnityEngine.Audio;
 using UnityEngine.Pool;
 
 namespace ChoyUtilities {
+    
+    /// <summary>
+    ///     PS. For audio randomization use Unity's Audio Random Container
+    /// </summary>
+    /// <typeparam name="TEnum"></typeparam>
+    /// <typeparam name="TMono"></typeparam>
     public abstract class GenericAudioManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
@@ -95,7 +101,7 @@ namespace ChoyUtilities {
             return Array.FindIndex(poolAttributes.audioResource, i => EqualityComparer<TEnum>.Default.Equals(i.id, id));
         }
 
-        public virtual float PlayClipAtPos(TEnum id, float3 pos, byte audioPriority = (byte)EAudioPriority.Average) {
+        public virtual (float, AudioSource) PlayClipAtPos(TEnum id, float3 pos, byte audioPriority = (byte)EAudioPriority.Average) {
             var index = GetPoolIndex(id);
 
             if (index == -1) throw new SingletonException("Audio Resource not found");
@@ -105,7 +111,7 @@ namespace ChoyUtilities {
             return PlayClipAtPos(resource, pos, audioPriority);
         }
 
-        public virtual float PlayClipAtPos(AudioResource resource,
+        public virtual (float, AudioSource) PlayClipAtPos(AudioResource resource,
             float3 pos,
             byte audioPriority = (byte)EAudioPriority.Average) {
             var currentSource = AudioSources[_currentIndex];
@@ -121,14 +127,14 @@ namespace ChoyUtilities {
             _currentIndex++;
             _currentIndex %= (byte)AudioSources.Length;
 
-            return lengthSeconds;
+            return (lengthSeconds, currentSource);
         }
 
-        public virtual float PlayClip(TEnum id, byte audioPriority = (byte)EAudioPriority.Average) {
+        public virtual (float, AudioSource) PlayClip(TEnum id, byte audioPriority = (byte)EAudioPriority.Average) {
             return PlayClipAtPos(id, float3.zero, audioPriority);
         }
 
-        public virtual float PlayClip(AudioResource resource, byte audioPriority = (byte)EAudioPriority.Average) {
+        public virtual (float, AudioSource) PlayClip(AudioResource resource, byte audioPriority = (byte)EAudioPriority.Average) {
             return PlayClipAtPos(resource, float3.zero, audioPriority);
         }
 
