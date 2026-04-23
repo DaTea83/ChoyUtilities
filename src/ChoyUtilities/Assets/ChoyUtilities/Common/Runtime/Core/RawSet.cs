@@ -50,8 +50,8 @@ namespace ChoyUtilities {
             _values = new NativeArray<T>(size, allocator);
         }
 
-        public RawSet(T value, int size = 1, Allocator allocator = Allocator.Persistent) {
-            _values = new NativeArray<T>(size, allocator) { [0] = value };
+        public RawSet(T value, Allocator allocator = Allocator.Persistent) {
+            _values = new NativeArray<T>(new []{ value }, allocator);
         }
 
         public RawSet(T[] values, Allocator allocator = Allocator.Persistent) {

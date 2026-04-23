@@ -33,23 +33,16 @@ namespace ChoyUtilities {
 
         [BurstCompile]
         public void Execute(int index, TransformAccess transform) {
-            switch (TransformType) {
-                case ETransformType.Move:
-                    Pos(StartPos, EndPos, Motion, T);
-                    break;
-                case ETransformType.Rotate:
-                    Rot(StartRot, EndRot, Motion, T);
-                    break;
-                case ETransformType.Scale:
-                    Scale(StartScale, EndScale, Motion, T);
-                    break;
-                case ETransformType.Transform:
-                    Pos(StartPos, EndPos, Motion, T);
-                    Rot(StartRot, EndRot, Motion, T);
-                    Scale(StartScale, EndScale, Motion, T);
-                    break;
-            }
-
+            
+            if ((TransformType & ETransformType.Move) != 0)
+                Pos(StartPos, EndPos, Motion, T);
+            
+            if ((TransformType & ETransformType.Rotate) != 0)
+                Rot(StartRot, EndRot, Motion, T);
+            
+            if ((TransformType & ETransformType.Scale) != 0)
+                Scale(StartScale, EndScale, Motion, T);
+            
             return;
 
             void Pos(RawSet<float3> start, RawSet<float3> end, EMotion motion, float t) {

@@ -16,12 +16,13 @@ using Unity.Entities;
 using UnityEngine;
 
 namespace ChoyUtilities.Entities {
+    
     [DisallowMultipleComponent]
-    public class AgentMoveSystemAuthoring : MonoBehaviour {
+    public class AgentMoveSingletonAuthoring : MonoBehaviour {
         [SerializeField] private ushort spawnLimit;
 
-        private class Baker : Baker<AgentMoveSystemAuthoring> {
-            public override void Bake(AgentMoveSystemAuthoring authoring) {
+        private class Baker : Baker<AgentMoveSingletonAuthoring> {
+            public override void Bake(AgentMoveSingletonAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.None);
 
                 AddComponent(e, new AgentISingleton {

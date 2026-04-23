@@ -25,7 +25,7 @@ namespace Samples.TeaMotion {
 
         private async void Start() {
             try {
-                using var motion = new TeaTransformMotion(targetTransforms).Build(new Floater(endTransform), duration, EMotion.SqrEaseIn, ETransformType.Move);
+                using var motion = new ChoyUtilities.TeaMotion(targetTransforms).Build(new Floater(endTransform), duration, EMotion.SqrEaseIn, ETransformType.Move);
                 await motion.Run();
             }
             catch {

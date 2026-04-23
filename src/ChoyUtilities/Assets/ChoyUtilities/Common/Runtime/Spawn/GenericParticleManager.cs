@@ -32,10 +32,10 @@ namespace ChoyUtilities {
             }
         }
 
-        public virtual void PlayEffectAtPosition(TEnum id, float3 position) {
+        public virtual ParticleSystem PlayEffectAtPosition(TEnum id, float3 position) {
             var index = GetPoolIndex(id);
 
-            if (index == -1) return;
+            if (index == -1) return null;
 
             var particle = RuntimePools[index].spawn[RuntimePools[index].currentIndex];
             particle.transform.position = position;
@@ -44,6 +44,7 @@ namespace ChoyUtilities {
             RuntimePools[index].previousIndex = RuntimePools[index].currentIndex;
             RuntimePools[index].currentIndex++;
             RuntimePools[index].currentIndex %= RuntimePools[index].spawn.Length;
+            return particle;
         }
 
         public virtual void PauseAllEffects() {

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.3] - 2026-04-23
+
+Changed
+* Renamed UrpRandomColorAuthoring to UrpRandomColorSingletonAuthoring
+* Renamed AgentMoveSystemAuthoring to AgentMoveSingletonAuthoring
+
 ## [1.0.2] - 2026-04-18
 
 Changed

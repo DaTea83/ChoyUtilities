@@ -12,33 +12,78 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Unity.Collections;
+using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
+    
     [DisallowMultipleComponent]
-    [AddComponentMenu("Choy Utilities/Follower")]
+    [AddComponentMenu("Choy Utilities/Simple Follower")]
     public class SimpleFollower : MonoBehaviour {
         [SerializeField] private Transform target;
         [SerializeField] private float3 offset;
         [SerializeField] [Range(0f, 30f)] private float smoothFollowSpeed;
 
         private float _factor;
-
-        private void Update() {
-            if (target is null) return;
-
-            transform.position =
-                math.lerp(transform.position, (float3)target.position + offset, _factor * Time.deltaTime);
-
-            transform.rotation =
-                math.slerp(transform.rotation, target.rotation, _factor * Time.deltaTime);
-        }
-
+        private TransformAccessArray _transforms;
+        
+        private RawSet<float3> _startPos;
+        private RawSet<float3> _endPos;
+        private RawSet<quaternion> _startRot;
+        private RawSet<quaternion> _endRot;
+        private RawSet<float3> _startScale;
+        private RawSet<float3> _endScale;
+        
         private void OnEnable() {
             if (target is null) return;
             offset = transform.position - target.position;
             _factor = smoothFollowSpeed > 0 ? smoothFollowSpeed : 1f;
+            _transforms = new TransformAccessArray(new [] { transform });
         }
+        
+        private JobHandle _handle;
+        private void Update() {
+            if (target is null) return;
+
+            _startPos = new RawSet<float3>(transform.position, Allocator.TempJob);
+            _endPos = new RawSet<float3>((float3)target.position + offset, Allocator.TempJob);
+            _startRot = new RawSet<quaternion>(transform.rotation, Allocator.TempJob);
+            _endRot = new RawSet<quaternion>(target.rotation, Allocator.TempJob);
+            _startScale = new RawSet<float3>(transform.localScale, Allocator.TempJob);
+            _endScale = new RawSet<float3>(transform.localScale, Allocator.TempJob);
+            
+            var job = new TransformMotionIJob() {
+                TransformType = ETransformType.Rotate | ETransformType.Move,
+                Motion = EMotion.Linear,
+                T = _factor * Time.deltaTime,
+                StartPos = _startPos,
+                EndPos = _endPos,
+                StartRot = _startRot,
+                EndRot = _endRot,
+                StartScale = _startScale,
+                EndScale = _endScale
+            };
+            
+            _handle = job.Schedule(_transforms);
+        }
+
+        private void LateUpdate() {
+            _handle.Complete();
+            
+            if (_startPos.IsCreated) _startPos.Dispose();
+            if (_endPos.IsCreated) _endPos.Dispose();
+            if (_startRot.IsCreated) _startRot.Dispose();
+            if (_endRot.IsCreated) _endRot.Dispose();
+            if (_startScale.IsCreated) _startScale.Dispose();
+            if (_endScale.IsCreated) _endScale.Dispose();
+        }
+
+        private void OnDisable() {
+            if (_transforms.isCreated) _transforms.Dispose();
+        }
+
     }
 }
