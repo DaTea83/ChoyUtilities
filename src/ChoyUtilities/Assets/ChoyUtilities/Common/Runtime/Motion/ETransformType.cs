@@ -13,6 +13,7 @@
 // limitations under the License.
 
 namespace ChoyUtilities {
+    [System.Flags]
     public enum ETransformType : byte {
         None = 0,
 

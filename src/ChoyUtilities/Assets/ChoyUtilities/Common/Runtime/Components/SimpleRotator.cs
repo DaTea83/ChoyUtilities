@@ -12,10 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Unity.Collections;
+using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 namespace ChoyUtilities {
+    
     [AddComponentMenu("Choy Utilities/Simple Rotator")]
     [DisallowMultipleComponent]
     public class SimpleRotator : MonoBehaviour {
@@ -23,8 +27,17 @@ namespace ChoyUtilities {
         [SerializeField] private float rotateSpeed;
 
         private float3 _rotateDirection;
+        private TransformAccessArray _transforms;
+        
+        private RawSet<float3> _startPos;
+        private RawSet<float3> _endPos;
+        private RawSet<quaternion> _startRot;
+        private RawSet<quaternion> _endRot;
+        private RawSet<float3> _startScale;
+        private RawSet<float3> _endScale;
 
-        private void Start() {
+        private void OnEnable() {
+            _transforms = new TransformAccessArray(new [] { transform });
             if ((rotateAxis & EAxis.X) != 0)
                 _rotateDirection.x = 1f;
 
@@ -38,6 +51,44 @@ namespace ChoyUtilities {
                 enabled = false;
         }
 
-        private void Update() { transform.Rotate(_rotateDirection * (rotateSpeed * Time.deltaTime)); }
+        private JobHandle _handle;
+        private void Update() {
+            _startPos = new RawSet<float3>(transform.position, Allocator.TempJob);
+            _endPos = new RawSet<float3>(transform.position, Allocator.TempJob);
+            _startRot = new RawSet<quaternion>(transform.rotation, Allocator.TempJob);
+            _endRot = new RawSet<quaternion>(math.mul(transform.rotation, quaternion.Euler(_rotateDirection)), Allocator.TempJob);
+            _startScale = new RawSet<float3>(transform.localScale, Allocator.TempJob);
+            _endScale = new RawSet<float3>(transform.localScale, Allocator.TempJob);
+            
+            var job = new TransformMotionIJob() {
+                TransformType = ETransformType.Rotate,
+                Motion = EMotion.Linear,
+                T = rotateSpeed * Time.deltaTime,
+                StartPos = _startPos,
+                EndPos = _endPos,
+                StartRot = _startRot,
+                EndRot = _endRot,
+                StartScale = _startScale,
+                EndScale = _endScale
+            };
+            
+            _handle = job.Schedule(_transforms);
+        }
+
+        private void LateUpdate() {
+            _handle.Complete();
+            
+            if (_startPos.IsCreated) _startPos.Dispose();
+            if (_endPos.IsCreated) _endPos.Dispose();
+            if (_startRot.IsCreated) _startRot.Dispose();
+            if (_endRot.IsCreated) _endRot.Dispose();
+            if (_startScale.IsCreated) _startScale.Dispose();
+            if (_endScale.IsCreated) _endScale.Dispose();
+        }
+
+        private void OnDisable() {
+            if (_transforms.isCreated) _transforms.Dispose();
+        }
+
     }
 }
