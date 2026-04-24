@@ -751,7 +751,7 @@ MonoBehaviour:
   - {fileID: 1098737950}
   target: {fileID: 698320246}
   duration: 3
-  motionType: 4
+  motionType: 10
 --- !u!4 &698320246
 Transform:
   m_ObjectHideFlags: 0

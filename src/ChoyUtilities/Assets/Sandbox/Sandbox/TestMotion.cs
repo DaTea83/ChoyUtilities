@@ -14,6 +14,7 @@
 
 using System;
 using ChoyUtilities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Sandbox.Sandbox {
@@ -26,16 +27,40 @@ namespace Sandbox.Sandbox {
         [SerializeField, Min(0.01f)] private float duration = 1f;
         [SerializeField] private EMotion motionType = EMotion.Parabola;
         
+        private float3[] _initialPos;
+        private TeaMotion _motion;
+        
         private async void Start() {
             try {
-                await Awaitable.WaitForSecondsAsync(.1f);
-                using var motion = new TeaMotion(sources)
-                    .Build(new Floater(target), duration, motionType, ETransformType.Move);
-                await motion.Run();
+                _initialPos = new float3[sources.Length];
+
+                for (var i = 0; i < sources.Length; i++) {
+                    _initialPos[i] = sources[i].position;
+                }
+
+                while (true) {
+                    await MotionTask();
+                    await Awaitable.NextFrameAsync();
+                    for (var i = 0; i < sources.Length; i++) {
+                        sources[i].position = _initialPos[i];
+                    }
+                }
             }
             catch {
                 Destroy(this);
             }
+        }
+
+        private async Awaitable MotionTask() {
+            await Awaitable.WaitForSecondsAsync(.1f);
+            _motion = new TeaMotion(sources)
+                .Build(new Floater(target), duration, motionType, ETransformType.Move);
+            await _motion.Run();
+            _motion.Dispose();
+        }
+
+        private void OnDestroy() {
+            _motion?.Dispose();
         }
 
     }

@@ -108,6 +108,8 @@ namespace ChoyUtilities {
         public void Dispose() {
             if (_isRun) {
                 _isScheduledDispose = true;
+                _tokenSource.Cancel();
+                ReleaseUnmanagedResources();
                 return;
             }
             Dispose(true);

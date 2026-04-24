@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.0.10] - 2026-04-24
+
+Fixed
+* MotionEvaluate, fixed incorrect equation for Coswave
+* MotionEvaluate, fixed incorrect equation for ElasticOut
+* MotionEvaluate, SqrEaseInOut use value check instead full lerp between two methods
+* MotionEvaluate, CubeEaseInOut use value check instead full lerp between two methods
+* TeaMotion, Run will be cancelled if Dispose is manually called
+
+Changed
+* MotionEvaluate, using "static Unity.Mathematics.math" instead of "Unity.Mathematics"
+* MotionEvaluate, added ElasticIn, BurstOut and BurstIn motion
+* MotionEvaluate, SqrEaseInOut renamed to SqrSnap
+* MotionEvaluate, CubeEaseInOut renamed to CubeSnap
+
 ## [1.0.9] - 2026-04-23
 
 Changed

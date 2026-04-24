@@ -68,6 +68,12 @@ namespace ChoyUtilities {
         ElasticOut,
 
         /// <summary>
+        ///     Elastic motion that starts with an oscillating effect
+        ///     and moves towards the target.
+        /// </summary>
+        ElasticIn,
+
+        /// <summary>
         ///     Represents a motion type that simulates a bouncing effect
         ///     as it eases out towards the target.
         /// </summary>
@@ -78,13 +84,13 @@ namespace ChoyUtilities {
         ///     creating a gradual acceleration at the beginning and a smooth deceleration
         ///     towards the end of the motion.
         /// </summary>
-        SqrEaseInOut,
+        SqrSnap,
 
         /// <summary>
         ///     Motion that combines <see cref="CubeEaseIn"/> and <see cref="CubedEaseOut"/>,
         ///     with a cubic rate of change in the middle.
         /// </summary>
-        CubeEaseInOut,
+        CubeSnap,
         
         /// <summary>
         ///     2D Sine Wave
@@ -95,5 +101,16 @@ namespace ChoyUtilities {
         ///     2D Cosine Wave, but it starts from 0 instead of 1
         /// </summary>
         CosWave,
+
+        /// <summary>
+        ///     Slow start and super fast end
+        /// </summary>
+        BurstOut,
+
+        /// <summary>
+        ///     Super fast start and slow end
+        /// </summary>
+        BurstIn,
+
     }
 }
