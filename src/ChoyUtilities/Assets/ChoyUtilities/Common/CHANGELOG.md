@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1]
+
+Added
+* Added new resources folder
+* Editor, added SortSceneObject
+
 ## [1.0.10] - 2026-04-24
 
 Fixed
