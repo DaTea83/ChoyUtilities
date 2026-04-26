@@ -113,6 +113,33 @@
     background-color: rgb(255, 253, 244);
 }
 
+.content-panel {
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.content-page {
+    display: none;
+    flex-grow: 1;
+}
+
+.content-active {
+    display: flex;
+}
+
+.content-page .unity-scroll-view__content-container {
+    display: flex;
+    flex-direction: column;
+    padding-right: 2px;
+}
+
+.content-page .unity-scroll-view__content-container * {
+    padding-right: 0;
+    margin-bottom: 12px;
+}
+
 .content-cards {
     background-color: rgb(19, 22, 29);
     border-top-width: 1px;

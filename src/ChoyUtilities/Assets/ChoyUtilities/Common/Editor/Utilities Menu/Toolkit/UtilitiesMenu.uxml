@@ -22,47 +22,19 @@
             <ui:Button text="Scene Config" name="Tab-SceneConfig" class="text tab-button"/>
             <ui:Button text="Scene Tools" name="Tab-SceneTools" class="text tab-button"/>
         </ui:VisualElement>
-        <ui:VisualElement name="Content" class="panel-cards" style="flex-grow: 1;">
-            <ui:VisualElement name="Content-Status" style="flex-grow: 1; display: none;">
-                <ui:ScrollView>
-                    <ui:VisualElement style="flex-grow: 1;"/>
-                </ui:ScrollView>
-            </ui:VisualElement>
-            <ui:VisualElement name="Content-Packages" style="flex-grow: 1; display: none;">
-                <ui:ScrollView>
-                    <ui:VisualElement style="flex-grow: 1;"/>
-                </ui:ScrollView>
-            </ui:VisualElement>
-            <ui:VisualElement name="Content-Config" style="flex-grow: 1; display: none;">
-                <ui:ScrollView>
-                    <ui:VisualElement style="flex-grow: 1;"/>
-                </ui:ScrollView>
-            </ui:VisualElement>
-            <ui:VisualElement name="Content-SceneTools" style="flex-grow: 1; display: none;">
-                <ui:ScrollView>
-                    <ui:VisualElement class="content-cards" style="flex-grow: 1;">
-                        <ui:VisualElement class="content-title" style="flex-grow: 1;">
-                            <ui:Label text="Label" class="text"/>
-                            <ui:Button text="Run" name="Run" class="tab-active text"/>
-                        </ui:VisualElement>
-                        <ui:Label text="Text&#10;" class="text content-details"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement class="content-cards" style="flex-grow: 1;">
-                        <ui:VisualElement class="content-title" style="flex-grow: 1;">
-                            <ui:Label text="Label" class="text"/>
-                            <ui:Button text="Run" name="Run" class="tab-active text"/>
-                        </ui:VisualElement>
-                        <ui:Label text="Label" class="text content-details"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement class="content-cards" style="flex-grow: 1;">
-                        <ui:VisualElement class="content-title" style="flex-grow: 1;">
-                            <ui:Label text="Label" class="text"/>
-                            <ui:Button text="Run" name="Run" class="tab-active text"/>
-                        </ui:VisualElement>
-                        <ui:Label text="Label" class="text content-details"/>
-                    </ui:VisualElement>
-                </ui:ScrollView>
-            </ui:VisualElement>
+        <ui:VisualElement name="Content" class="panel-cards content-panel" style="flex-grow: 1;">
+            <ui:ScrollView name="Content-Status" class="content-page content-active">
+                <ui:Image source="project://database/Assets/ChoyUtilities/Resources/Materials/Textures/abstract-wavy-smooth-lines-pattern-free-vector.jpg?fileID=2800000&amp;guid=9d3c50fc25c2edd46a8ce126e4d21951&amp;type=3#abstract-wavy-smooth-lines-pattern-free-vector"/>
+            </ui:ScrollView>
+            <ui:ScrollView name="Content-Packages" class="content-page">
+                <ui:Image source="project://database/Assets/ChoyUtilities/Resources/Skybox/Textures/Back_Tex.png?fileID=2800000&amp;guid=7f68f02c95f5a3c4e8232a5a2047a717&amp;type=3#Back_Tex"/>
+            </ui:ScrollView>
+            <ui:ScrollView name="Content-SceneConfig" class="content-page">
+                <ui:Image source="project://database/Assets/ChoyUtilities/Resources/Materials/Textures/LeadPlate.tif?fileID=2800000&amp;guid=3155d7b3bbd95f048b264d9e3a98c987&amp;type=3#LeadPlate"/>
+            </ui:ScrollView>
+            <ui:ScrollView name="Content-SceneTools" class="content-page">
+                <ui:Image source="project://database/Assets/ChoyUtilities/Resources/Materials/Textures/scratches.jpg?fileID=2800000&amp;guid=620967e28a6dab341a6f10d1b8be7128&amp;type=3#scratches"/>
+            </ui:ScrollView>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

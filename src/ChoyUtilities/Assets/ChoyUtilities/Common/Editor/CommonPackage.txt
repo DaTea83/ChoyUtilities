@@ -1,0 +1,4 @@
+README:
+
+In any scenario don't ever remove this file.
+It is used to help pinpoint the location of md and json files.
