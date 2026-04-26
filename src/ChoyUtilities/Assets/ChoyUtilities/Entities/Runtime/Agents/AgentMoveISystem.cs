@@ -41,9 +41,7 @@ namespace ChoyUtilities.Entities {
             public float Time;
 
             [BurstCompile]
-            private void Execute(ref AgentMoveIEnableable move,
-                ref AgentStatsIData stats,
-                ref RandomIData random,
+            private void Execute(ref AgentMoveIEnableable move, ref AgentStatsIData stats, ref RandomIData random,
                 ref LocalTransform lt) {
                 var target = LtwLookup[move.CurrentNode];
                 lt.GetDistanceAndDot(target, out var distanceSqr, out var dot);

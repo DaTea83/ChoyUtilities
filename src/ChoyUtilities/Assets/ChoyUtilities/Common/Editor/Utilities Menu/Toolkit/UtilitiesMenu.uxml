@@ -3,8 +3,8 @@
     <ui:VisualElement name="Root" class="window" style="flex-grow: 1; background-color: rgb(19, 22, 29);">
         <ui:VisualElement name="Top" class="panel-cards">
             <ui:VisualElement style="flex-grow: 1;">
-                <ui:Label text="Choy Utilities" class="text" style="padding-left: 4px;"/>
-                <ui:Label text="Control Menu" class="text top-title"/>
+                <ui:Label text="Choy Utilities" class="text" style="padding-left: 4px; margin-bottom: 0; margin-top: 8px; margin-right: 0; padding-top: 0; padding-bottom: 0;"/>
+                <ui:Label text="Control Menu" class="text top-title" style="padding-top: 0; padding-bottom: 0;"/>
                 <ui:VisualElement class="top-selections">
                     <ui:Button text="Github" name="Top-Github" class="text top-button tab-active"/>
                     <ui:Button text="CHANGELOG" name="Top-ChangeLog" class="text top-button"/>
@@ -17,10 +17,10 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Tabs" class="tab-panel" style="flex-grow: 0; margin-left: 8px; margin-right: 8px;">
-            <ui:Button text="Project Status" name="Tab-Status" class="tab tab-active text"/>
-            <ui:Button text="Packages" name="Tab-Packages" class="tab text"/>
-            <ui:Button text="Scene Config" name="Tab-SceneConfig" class="tab text"/>
-            <ui:Button text="Scene Tools" name="Tab-SceneTools" class="tab text"/>
+            <ui:Button text="Project Status" name="Tab-Status" class="tab-active text tab-button"/>
+            <ui:Button text="Packages" name="Tab-Packages" class="text tab-button"/>
+            <ui:Button text="Scene Config" name="Tab-SceneConfig" class="text tab-button"/>
+            <ui:Button text="Scene Tools" name="Tab-SceneTools" class="text tab-button"/>
         </ui:VisualElement>
         <ui:VisualElement name="Content" class="panel-cards" style="flex-grow: 1;">
             <ui:VisualElement name="Content-Status" style="flex-grow: 1; display: none;">
@@ -38,7 +38,7 @@
                     <ui:VisualElement style="flex-grow: 1;"/>
                 </ui:ScrollView>
             </ui:VisualElement>
-            <ui:VisualElement name="Content-Tools" style="flex-grow: 1; display: none;">
+            <ui:VisualElement name="Content-SceneTools" style="flex-grow: 1; display: none;">
                 <ui:ScrollView>
                     <ui:VisualElement class="content-cards" style="flex-grow: 1;">
                         <ui:VisualElement class="content-title" style="flex-grow: 1;">

@@ -12,25 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 // ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
     
-    public class UtilitiesMenuWindow : EditorWindow {
+    public sealed class UtilitiesMenuWindow : EditorWindow {
+        
+        private static readonly ToolkitData ToolkitData = new("UtilitiesMenu");
         
         [MenuItem(EditorCollection.UtilityWindow + "Menu", priority = 0)]
         private static void ShowWindow() {
             var window = GetWindow<UtilitiesMenuWindow>();
             window.titleContent = new GUIContent("Choy Utilities");
-            window.minSize = new Vector2(600, 800);
+            window.minSize = new Vector2(600, 600);
             window.Show();
         }
-
+ 
         private void OnEnable() {
-            
+            var root = InitializeRootVisualElement();
+        }
+
+        private VisualElement InitializeRootVisualElement() {
+            var root = this.rootVisualElement;
+            root.Clear();
+            ToolkitData.Clone(root);
+            root.dataSource = this;
+            return root;
         }
     }
 }

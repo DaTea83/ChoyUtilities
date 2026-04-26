@@ -26,9 +26,10 @@ namespace ChoyUtilities.Editor {
         private VisualTreeAsset Tree => AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(_uxmlPath);
         private StyleSheet Style => AssetDatabase.LoadAssetAtPath<StyleSheet>(_ussPath);
 
-        public ToolkitData(string path) {
-            this._uxmlPath = path + ".uxml";
-            this._ussPath = path + ".uss";
+        public ToolkitData(string name) {
+            var path = EditorCollection.FindPathByName(name, "VisualTreeAsset");
+            this._uxmlPath = path;
+            this._ussPath = path.Replace(".uxml", ".uss");
         }
         
         public VisualElement Clone(VisualElement root = null) {
