@@ -26,7 +26,7 @@ namespace ChoyUtilities.Editor {
         private const float HEAD_BUTTON_HEIGHT = 36f;
 
         private static string _assetPath;
-        private static EReplaceType _replaceType;
+        private static EAssetType _assetType;
 
         private static Vector2 _scrollPos;
 
@@ -60,7 +60,7 @@ namespace ChoyUtilities.Editor {
             GUILayout.Space(BUTTON_PADDING);
 
             // Display own type textures first before global
-            var typePath = FancyReplaceEditor.GetTypePath(_replaceType);
+            var typePath = FancyReplaceEditor.GetTypePath(_assetType);
             var fullPath = FancyReplaceEditor.FullTexturePath;
 
             var textures = AssetDatabase.FindAssets("t:Texture2D", new[] {
@@ -99,7 +99,7 @@ namespace ChoyUtilities.Editor {
                             var newEntry = new MenuItemSerialize {
                                 idPath = _assetPath,
                                 texturePath = texPath,
-                                idType = _replaceType.Floater()
+                                idType = _assetType.Floater()
                             };
                             FancyReplaceEditor.AddNew(newEntry);
                             _ = FancyReplaceEditor.SaveData();
@@ -118,10 +118,10 @@ namespace ChoyUtilities.Editor {
             EditorGUILayout.EndVertical();
         }
 
-        internal static void ShowWindow(string assetPath, EReplaceType type) {
+        internal static void ShowWindow(string assetPath, EAssetType type) {
             var window = GetWindow<FancyReplaceWindow>(FancyReplaceEditor.DEFAULT_NAME);
             _assetPath = assetPath;
-            _replaceType = type;
+            _assetType = type;
             window.Show();
         }
 

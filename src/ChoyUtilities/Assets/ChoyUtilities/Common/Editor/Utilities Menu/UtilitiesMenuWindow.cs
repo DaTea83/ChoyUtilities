@@ -12,24 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.IO;
+using System;
 using UnityEditor;
 using UnityEngine;
-
 
 // ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
     
-    internal static partial class EditorCollection {
-        public static string ProjectFolderName => Directory.GetParent(Application.dataPath)?.Name;
+    public class UtilitiesMenuWindow : EditorWindow {
+        
+        [MenuItem(EditorCollection.UtilityWindow + "Menu", priority = 0)]
+        private static void ShowWindow() {
+            var window = GetWindow<UtilitiesMenuWindow>();
+            window.titleContent = new GUIContent("Choy Utilities");
+            window.minSize = new Vector2(600, 800);
+            window.Show();
+        }
 
-        public static string FindPathByName(string name) {
-            var guids = AssetDatabase.FindAssets($"{name} t:script");
-
-            if (guids is null || guids.Length == 0)
-                return string.Empty;
-
-            return AssetDatabase.GUIDToAssetPath(guids[0]);
+        private void OnEnable() {
+            
         }
     }
 }

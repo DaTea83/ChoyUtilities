@@ -103,7 +103,6 @@ namespace ChoyUtilities.Editor {
                         instanceParent = obj;
                         break;
                 }
-                obj.name = obj.name.Trim();
             }
             camParent ??= new GameObject("==========< Settings & Camera >==============");
             lightParent ??= new GameObject("==========< Lighting >=======================");

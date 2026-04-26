@@ -1,0 +1,68 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/ChoyUtilities/Common/Editor/Utilities%20Menu/Toolkit/UtilitiesMenu.uss?fileID=7433441132597879392&amp;guid=023f6b89dc652f84bab2c88e9ac44096&amp;type=3#UtilitiesMenu"/>
+    <ui:VisualElement name="Root" class="window" style="flex-grow: 1; background-color: rgb(19, 22, 29);">
+        <ui:VisualElement name="Top" class="panel-cards">
+            <ui:VisualElement style="flex-grow: 1;">
+                <ui:Label text="Choy Utilities" class="text" style="padding-left: 4px;"/>
+                <ui:Label text="Control Menu" class="text top-title"/>
+                <ui:VisualElement class="top-selections">
+                    <ui:Button text="Github" name="Top-Github" class="text top-button tab-active"/>
+                    <ui:Button text="CHANGELOG" name="Top-ChangeLog" class="text top-button"/>
+                    <ui:Button text="DOC" name="Top-Doc" class="text top-button"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1;">
+                <ui:Label text="Package version" name="Top-Version" class="text top-status"/>
+                <ui:Label text="Project name" name="Top-ProjectName" class="text top-status"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Tabs" class="tab-panel" style="flex-grow: 0; margin-left: 8px; margin-right: 8px;">
+            <ui:Button text="Project Status" name="Tab-Status" class="tab tab-active text"/>
+            <ui:Button text="Packages" name="Tab-Packages" class="tab text"/>
+            <ui:Button text="Scene Config" name="Tab-SceneConfig" class="tab text"/>
+            <ui:Button text="Scene Tools" name="Tab-SceneTools" class="tab text"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="Content" class="panel-cards" style="flex-grow: 1;">
+            <ui:VisualElement name="Content-Status" style="flex-grow: 1; display: none;">
+                <ui:ScrollView>
+                    <ui:VisualElement style="flex-grow: 1;"/>
+                </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:VisualElement name="Content-Packages" style="flex-grow: 1; display: none;">
+                <ui:ScrollView>
+                    <ui:VisualElement style="flex-grow: 1;"/>
+                </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:VisualElement name="Content-Config" style="flex-grow: 1; display: none;">
+                <ui:ScrollView>
+                    <ui:VisualElement style="flex-grow: 1;"/>
+                </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:VisualElement name="Content-Tools" style="flex-grow: 1; display: none;">
+                <ui:ScrollView>
+                    <ui:VisualElement class="content-cards" style="flex-grow: 1;">
+                        <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                            <ui:Label text="Label" class="text"/>
+                            <ui:Button text="Run" name="Run" class="tab-active text"/>
+                        </ui:VisualElement>
+                        <ui:Label text="Text&#10;" class="text content-details"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="content-cards" style="flex-grow: 1;">
+                        <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                            <ui:Label text="Label" class="text"/>
+                            <ui:Button text="Run" name="Run" class="tab-active text"/>
+                        </ui:VisualElement>
+                        <ui:Label text="Label" class="text content-details"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="content-cards" style="flex-grow: 1;">
+                        <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                            <ui:Label text="Label" class="text"/>
+                            <ui:Button text="Run" name="Run" class="tab-active text"/>
+                        </ui:VisualElement>
+                        <ui:Label text="Label" class="text content-details"/>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

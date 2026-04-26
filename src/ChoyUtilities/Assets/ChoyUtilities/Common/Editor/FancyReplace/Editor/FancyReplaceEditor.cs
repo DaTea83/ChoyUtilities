@@ -15,7 +15,7 @@
 // ReSharper disable once CheckNamespace
 
 namespace ChoyUtilities.Editor {
-    internal enum EReplaceType : byte {
+    internal enum EAssetType : byte {
         None = 0,
         Script,
         Prefab,
@@ -43,15 +43,15 @@ namespace ChoyUtilities.Editor {
             }
         }
 
-        internal static string GetTypePath(EReplaceType type) {
+        internal static string GetTypePath(EAssetType type) {
             var name = type switch {
-                EReplaceType.Script => "Scripts",
-                EReplaceType.ScriptableObject => "ScriptableObject",
-                EReplaceType.Prefab => "Prefab",
-                EReplaceType.Scene => "Scenes",
-                EReplaceType.Folder => "Folder",
-                EReplaceType.Materials => "Materials",
-                EReplaceType.TextAsset => "TextAsset",
+                EAssetType.Script => "Scripts",
+                EAssetType.ScriptableObject => "ScriptableObject",
+                EAssetType.Prefab => "Prefab",
+                EAssetType.Scene => "Scenes",
+                EAssetType.Folder => "Folder",
+                EAssetType.Materials => "Materials",
+                EAssetType.TextAsset => "TextAsset",
                 _ => string.Empty
             };
 
