@@ -13,14 +13,17 @@
 // limitations under the License.
 
 using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 // ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
     public sealed class UtilitiesMenuWindow : EditorWindow {
         
+        private Scene _currentScene;
         private const string GIT_LINK = "https://github.com/DaTea83/ChoyUtilities";
         
         private static readonly string[] Tabs = { "Status", "Packages", "SceneConfig", "SceneTools" };
@@ -80,11 +83,41 @@ namespace ChoyUtilities.Editor {
             var gitButton = root.Q<Button>(GetName("Github"));
             gitButton.clicked += () => Application.OpenURL(GIT_LINK);
             
+            var logButton = root.Q<Button>(GetName("ChangeLog"));
+            var logPath = PackagePath("CHANGELOG.md");
+            var logMd = AssetDatabase.LoadAssetAtPath<TextAsset>(logPath);
+            logButton.clicked += () => TextAssetMenuWindow.Show(logMd, "ChangeLog");
+            
+            var versionText = root.Q<TextElement>(GetName("Version"));
+            var json = PackagePath("package.json");
+            var package = ContentText(json);
+            versionText.text = package;
+            
             var projectText = root.Q<TextElement>(GetName("ProjectName"));
             projectText.text = EditorCollection.ProjectFolderName;
+            
+            var sceneText = root.Q<TextElement>(GetName("SceneName"));
+            _currentScene = SceneManager.GetActiveScene();
+            sceneText.text = _currentScene.name;
 
             return;
             string GetName(string uiName) => "Top-" + uiName;
+
+            string PackagePath(string fileName) {
+                var path = EditorCollection.FindPathByName("CommonPackage", "TextAsset");
+                path = path.Replace("CommonPackage.txt", string.Empty);
+                return path + fileName;
+            }
+        }
+
+        // I give up using the JsonUtility way, let just brute force
+        private static string ContentText(string json) {
+            var package = AssetDatabase.LoadAssetAtPath<TextAsset>(json).ToString();
+            package = Array.Find(package.Split('\n'), l => l.TrimStart().StartsWith("\"version\""))
+                ?.Trim().TrimEnd(',') ?? string.Empty;
+            package = package.Replace("\"", string.Empty);
+            package = package.Replace("v", "V");
+            return package;
         }
     }
 }

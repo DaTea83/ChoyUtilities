@@ -18,10 +18,7 @@ using System;
 namespace ChoyUtilities.Editor {
     
     [Serializable]
-    public struct PackageSerialize {
-        public string name;
+    public class PackageSerialize {
         public string version;
-        public string displayName;
-        public string description;
     }
 }

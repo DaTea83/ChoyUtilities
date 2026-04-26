@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using UnityEditor;
 using UnityEngine.UIElements;
 
@@ -33,8 +34,8 @@ namespace ChoyUtilities.Editor {
         }
         
         public VisualElement Clone(VisualElement root = null) {
-            if (Tree is null) return null;
-            if (Style is null) return null;
+            if (Tree is null) throw new InvalidOperationException("VisualTreeAsset not found");
+            if (Style is null) throw new InvalidOperationException("StyleSheet not found");
 
             if (root == null) {
                 Tree.CloneTree();

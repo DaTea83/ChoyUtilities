@@ -14,6 +14,7 @@
             <ui:VisualElement style="flex-grow: 1;">
                 <ui:Label text="Package version" name="Top-Version" class="text top-status"/>
                 <ui:Label text="Project name" name="Top-ProjectName" class="text top-status"/>
+                <ui:Label text="Scene Name" name="Top-SceneName" class="text top-status"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Tabs" class="tab-panel" style="flex-grow: 0; margin-left: 8px; margin-right: 8px;">
