@@ -30,6 +30,14 @@ namespace ChoyUtilities {
         public Banker<T>[] Values => bank;
         public Banker<T> this[ushort id] => bank[id];
 
+        public Reserve(Banker<T>[] bank) {
+            this.bank = bank;
+        }
+
+        public Reserve(Banker<T> bank) {
+            this.bank = new[] { bank };
+        }
+
         public IEnumerator<Banker<T>> GetEnumerator() {
             foreach (var b in bank) {
                 yield return b;
