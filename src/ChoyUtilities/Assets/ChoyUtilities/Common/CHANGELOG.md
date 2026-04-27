@@ -14,7 +14,12 @@ Added
 
 Changed
 * RawSet, added Span consturctor
+* RawSet, added INativeList interface
 * Floater, added Span consturctor
+* UtilitiesMenuWindow, changed font to Jetbrains Mono
+* TextAssetMenuWindow, changed font to Jetbrains Mono
+
+
 
 ## [1.1] - 2026-04-27
 
@@ -23,6 +28,8 @@ Added
 * Added new resources folder
 * Editor, added SortSceneObject
 * Added Core/Bootloader series
+
+
 
 ## [1.0.10] - 2026-04-24
 
@@ -39,6 +46,8 @@ Changed
 * MotionEvaluate, SqrEaseInOut renamed to SqrSnap
 * MotionEvaluate, CubeEaseInOut renamed to CubeSnap
 
+
+
 ## [1.0.9] - 2026-04-23
 
 Changed
@@ -49,6 +58,8 @@ Changed
 * SimpleRotator, now uses TransformMotionIJob
 * SimpleFollower, now uses TransformMotionIJob
 
+
+
 ## [1.0.8] - 2026-04-22
 
 Changed
@@ -58,11 +69,15 @@ Changed
 * MotionEvaluation, added SineWave and CosWave motion
 * MotionEvaluation, lower the intensity of elastic out
 
+
+
 ## [1.0.7] - 2026-04-21
 
 Changed
 * GenericSfxManager, renamed back to GenericAudioManager
 * Updated GenericMixerManager
+
+
 
 ## [1.0.6] - 2026-04-21
 
@@ -77,6 +92,8 @@ Changed
 * AsyncCollection, marked ScaleObjectAsync as obsolete
 * AsyncCollection, marked MoveAsync as obsolete
 
+
+
 ## [1.0.5] - 2026-04-19
 
 Added
@@ -88,10 +105,14 @@ Changed
 * Updated TeaMotion
 * Moved "RemovedMissingScriptsEditor" to Editor/MenuItem
 
+
+
 ## [1.0.4] - 2026-04-18
 
 Changed
 * Full code cleanup, with added header and renames
+
+
 
 ## [1.0.3] - 2026-04-17
 
@@ -119,6 +140,8 @@ Removed
 * Microphone Attribute, moved to Misc
 * Quaternion cast from Floater
 
+
+
 ## [1.0.2] - 2026-04-16
 
 Reduce the use of reflection.
@@ -140,6 +163,8 @@ Reduce the use of reflection.
 ### Removed
 * Removed CallGenericInstanceMethod
 
+
+
 ## [1.0.1] - 2026-04-12
 
 From this point on changelog for Common and Entities will be seperated.
@@ -150,6 +175,8 @@ From this point on changelog for Common and Entities will be seperated.
 ### Changed
 * Floater is now partial and seperated to three files
 * Floater removed consturctors and implicit operator for Enum, changed to use extension instead
+
+
 
 ## [1.0.0] - 2026-04-10/11
 

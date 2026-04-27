@@ -13,12 +13,17 @@
 //    limitations under the License.
 
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace ChoyUtilities {
 
     [Serializable]
-    public struct Banker<T> {
+    public struct Banker<T> : 
+        IComparable<Banker<T>>, 
+        IComparable<Locker<ushort>>, 
+        IEquatable<Banker<T>>,
+        IEquatable<Locker<ushort>> {
 
         [SerializeField] private Locker<ushort> id;
         [SerializeField] private T value;
@@ -31,6 +36,32 @@ namespace ChoyUtilities {
             this.id = new Locker<ushort>(id);
             this.value = value;
         }
+
+        public Banker(string key, ushort id, T value) {
+            this.id = new Locker<ushort>(key, id);
+            this.value = value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int CompareTo(Banker<T> other) {
+            return id.CompareTo(other.id);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int CompareTo(Locker<ushort> other) {
+            return id.CompareTo(other);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(Banker<T> other) {
+            return id.Equals(other.id);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(Locker<ushort> other) {
+            return id.Equals(other);
+        }
+
     }
 
 }

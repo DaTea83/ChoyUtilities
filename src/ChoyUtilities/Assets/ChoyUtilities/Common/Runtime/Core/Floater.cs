@@ -24,7 +24,7 @@ using UnityEngine;
 namespace ChoyUtilities {
     [Serializable]
     [BurstCompile]
-    public partial struct Floater : IComparable, IComparable<Floater>,
+    public partial struct Floater : IComparable, IComparable<Floater>, IEquatable<Floater>,
         IFormattable, IEnumerable<float> {
         public float[] values;
 
@@ -327,5 +327,18 @@ namespace ChoyUtilities {
         public string ToString(string format, IFormatProvider formatProvider) { return ToString(); }
 
         #endregion
+
+        public bool Equals(Floater other) {
+            return Equals(values, other.values);
+        }
+
+        public override bool Equals(object obj) {
+            return obj is Floater other && Equals(other);
+        }
+
+        public override int GetHashCode() {
+            return (values != null ? values.GetHashCode() : 0);
+        }
+
     }
 }

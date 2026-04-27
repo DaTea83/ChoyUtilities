@@ -23,17 +23,15 @@ namespace ChoyUtilities {
 
     [Serializable]
     public partial struct Locker<T> : 
-        IComparable<T>, 
         IComparable<FixedString128Bytes>, 
         IComparable<string>, 
         IComparable<Locker<T>>, 
-        IEquatable<T>, 
         IEquatable<FixedString128Bytes>, 
         IEquatable<string>, 
         IEquatable<Locker<T>>, 
         IFormattable
         where T : IComparable, IComparable<T>, IEquatable<T>,
-        IFormattable, IConvertible {
+        IFormattable {
 
         [SerializeField] private FixedString128Bytes key;
         [SerializeField] private T value;
@@ -58,23 +56,11 @@ namespace ChoyUtilities {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int CompareTo(T other) {
-            var valueComparison = value.CompareTo(other);
-
-            return valueComparison;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int CompareTo(Locker<T> other) {
             var keyComparison = key.CompareTo(other.key);
             return keyComparison != 0 ? keyComparison : value.CompareTo(other.value);
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(T other) {
-            return value.Equals(other);
-        }
-
+        
         [BurstDiscard]
         public override string ToString() {
             return $"{nameof(key)}: {key}, {nameof(value)}: {value}, {nameof(Key)}: {Key}, {nameof(Value)}: {Value}";

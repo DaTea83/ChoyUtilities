@@ -43,7 +43,7 @@ namespace ChoyUtilities.Editor {
         private static void ShowWindow() {
             var window = GetWindow<UtilitiesMenuWindow>();
             window.titleContent = new GUIContent("Choy Utilities");
-            window.minSize = new Vector2(600, 600);
+            window.minSize = new Vector2(400, 600);
             window.Show();
         }
 

@@ -13,14 +13,40 @@
 //    limitations under the License.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChoyUtilities {
 
     [Serializable]
-    public struct Reserve<T> {
+    public struct Reserve<T> : 
+        IEnumerable<Banker<T>>, 
+        IComparable<Reserve<T>>, 
+        IEquatable<Reserve<T>> {
 
         [SerializeField] private Banker<T>[] bank;
+        
+        public Banker<T>[] Values => bank;
+        public Banker<T> this[ushort id] => bank[id];
+
+        public IEnumerator<Banker<T>> GetEnumerator() {
+            foreach (var b in bank) {
+                yield return b;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
+
+        public int CompareTo(Reserve<T> other) {
+            return Values.Length.CompareTo(other.Values.Length);
+        }
+
+        public bool Equals(Reserve<T> other) {
+            return Equals(Values, other.Values);
+        }
 
     }
 

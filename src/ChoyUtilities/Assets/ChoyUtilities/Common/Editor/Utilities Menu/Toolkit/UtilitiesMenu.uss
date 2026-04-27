@@ -1,10 +1,11 @@
 .text {
-    -unity-font-definition: resource("Text/Zen_Dots/ZenDots-Regular");
+    -unity-font-definition: resource("Text/JetBrains_Mono/static/JetBrainsMono-SemiBold");
     color: rgb(207, 201, 175);
     font-size: 16px;
     letter-spacing: 2px;
     -unity-text-auto-size: none;
     white-space: pre-wrap;
+    word-spacing: 4px;
 }
 
 .window {
@@ -193,6 +194,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
+    -unity-font-style: bold;
 }
 
 .content-details {
@@ -200,4 +202,5 @@
     font-size: 14px;
     -unity-text-align: middle-left;
     margin-top: 24px;
+    -unity-font-style: bold;
 }
