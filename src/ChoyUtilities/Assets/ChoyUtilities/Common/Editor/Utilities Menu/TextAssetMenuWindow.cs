@@ -22,28 +22,34 @@ using System.IO;
 namespace ChoyUtilities.Editor {
     
     public sealed class TextAssetMenuWindow : EditorWindow {
-        private TextAsset Content { get; set; }
+
+        private TextAsset _content;
+        private VisualElement _root;
         private static readonly ToolkitData ToolkitData = new("TextAssetMenu");
 
         public static void Show(string path, string fileName) {
             var window = GetWindow<TextAssetMenuWindow>();
-            //if (!asset) throw new ArgumentNullException(nameof(asset));
-            window.Content = Resources.Load<TextAsset>(path) 
+            Debug.Log("Trying to get file from: "+ path);
+            window._content = AssetDatabase.LoadAssetAtPath<TextAsset>(path) 
                              ?? throw new FileNotFoundException();
             window.titleContent = new GUIContent(fileName);
             window.minSize = new Vector2(300, 600);
+            window.UpdateContentText();
             window.Show();
         }
 
         private void OnEnable() {
-            var root = rootVisualElement;
-            root.Clear();
-            ToolkitData.Clone(root);
-            root.dataSource = this;
-
-            var contentText = root.Q<TextElement>("Content")
-                ?? throw new InvalidOperationException("Unable to find TextElement with name 'Content'.");
-            contentText.text = Content.text;
+            _root = rootVisualElement;
+            _root.Clear();
+            ToolkitData.Clone(_root);
+            _root.dataSource = this;
         }
+
+        private void UpdateContentText() {
+            var contentText = _root.Q<TextElement>("Content")
+                              ?? throw new InvalidOperationException("Unable to find TextElement with name 'Content'.");
+            contentText.text = _content.text;
+        }
+
     }
 }

@@ -84,8 +84,12 @@ namespace ChoyUtilities.Editor {
             gitButton.clicked += () => Application.OpenURL(GIT_LINK);
             
             var logButton = root.Q<Button>(GetName("ChangeLog"));
-            var logPath = PackagePath("test.md");
+            var logPath = PackagePath("CHANGELOG.md");
             logButton.clicked += () => TextAssetMenuWindow.Show(logPath, "ChangeLog");
+            
+            var docButton = root.Q<Button>(GetName("Doc"));
+            var docPath = PackagePath("DOCUMENTATION.md");
+            docButton.clicked += () => TextAssetMenuWindow.Show(docPath, "Documentation");
             
             var versionText = root.Q<TextElement>(GetName("Version"));
             var json = PackagePath("package.json");
@@ -97,7 +101,7 @@ namespace ChoyUtilities.Editor {
             
             var sceneText = root.Q<TextElement>(GetName("SceneName"));
             _currentScene = SceneManager.GetActiveScene();
-            sceneText.text = _currentScene.name;
+            sceneText.text = "Current Scene: " + _currentScene.name;
 
             return;
             string GetName(string uiName) => "Top-" + uiName;

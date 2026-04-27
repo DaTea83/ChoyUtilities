@@ -5,6 +5,7 @@
 Added
 * Added new resources folder
 * Editor, added SortSceneObject
+* Added UtilitiesMenu series
 
 ## [1.0.10] - 2026-04-24
 
@@ -136,7 +137,7 @@ From this point on changelog for Common and Entities will be seperated.
 ## [1.0.0] - 2026-04-10/11
 
 After a while I finally uploaded this to Github, which from this point onwards version increment will not as frequent as before.
-But update in chnagelog will stays the same. Given will be download to plenty of projects, there are some issue needs to solve.
+But update in changelog will stays the same. Given will be download to plenty of projects, there are some issue needs to solve.
 As much I like it, but most team projects I'm in don't use DOTS, for that section needs to be seperated. This includes other Unity packages like: Localization and Spline, those need to separated into their own directory.
 
 ### Added,
