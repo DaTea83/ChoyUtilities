@@ -25,7 +25,8 @@ namespace ChoyUtilities.Editor {
 
         private TextAsset _content;
         private VisualElement _root;
-        private static readonly ToolkitData ToolkitData = new("TextAssetMenu");
+        private static ToolkitData? _toolkitData;
+        private static ToolkitData ToolkitData => _toolkitData ??= new ToolkitData("TextAssetMenu");
 
         public static void Show(string path, string fileName) {
             var window = GetWindow<TextAssetMenuWindow>();

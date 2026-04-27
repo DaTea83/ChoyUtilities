@@ -129,10 +129,6 @@
     padding-bottom: 24px;
 }
 
-.content-active {
-    display: flex;
-}
-
 .content-page .unity-scroll-view__content-container {
     display: flex;
     flex-direction: column;
@@ -142,6 +138,10 @@
 .content-page .unity-scroll-view__content-container * {
     padding-right: 0;
     margin-bottom: 12px;
+}
+
+.content-active {
+    display: flex;
 }
 
 .content-cards {
@@ -162,6 +162,31 @@
     padding-top: 24px;
     padding-bottom: 24px;
     margin-bottom: 0;
+}
+
+.content-config {
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.content-refresh {
+    margin-left: 12px;
+    margin-top: 24px;
+    font-size: 16px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding-top: 24px;
+    padding-right: 24px;
+    padding-bottom: 24px;
+    padding-left: 24px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .content-title {

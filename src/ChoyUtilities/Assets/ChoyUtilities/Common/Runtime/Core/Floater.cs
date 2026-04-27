@@ -15,6 +15,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -62,8 +63,11 @@ namespace ChoyUtilities {
         public Floater(int3 value) : this(new[] { value.x, value.y, value.z }) { }
         public Floater(int4 value) : this(new[] { value.x, value.y, value.z, value.w }) { }
         public Floater(List<float> value) : this(value.ToArray()) { }
+        public Floater(IReadOnlyList<float> value) : this(value.ToArray()) { }
         public Floater(Stack<float> value) : this(value.ToArray()) { }
         public Floater(Queue<float> value) : this(value.ToArray()) { }
+        public Floater(Span<float> value) : this(value.ToArray()) { }
+        public Floater(ReadOnlySpan<float> value) : this(value.ToArray()) { }
         public Floater(NativeArray<float> value) : this(value.ToArray()) { }
         public Floater(NativeList<float> value) : this(value.ToArray(Allocator.Temp)) { }
         public Floater(byte value) : this(new int[] { value }) { }

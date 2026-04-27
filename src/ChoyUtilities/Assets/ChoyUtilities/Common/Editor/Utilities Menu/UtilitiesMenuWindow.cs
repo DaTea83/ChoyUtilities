@@ -23,17 +23,20 @@ using UnityEngine.UIElements;
 namespace ChoyUtilities.Editor {
     public sealed partial class UtilitiesMenuWindow : EditorWindow {
         
+        private VisualElement _root;
         private Scene _currentScene;
         private const string GIT_LINK = "https://github.com/DaTea83/ChoyUtilities";
         
         private static readonly string[] Tabs = { "Status", "Packages", "SceneConfig", "SceneTools" };
-        private static readonly ToolkitData ToolkitData = new("UtilitiesMenu");
+        // Lazy initialization of ToolkitData for domain reload
+        private static ToolkitData? _toolkitData;
+        private static ToolkitData ToolkitData => _toolkitData ??= new ToolkitData("UtilitiesMenu");
 
         private void OnEnable() {
-            var root = InitializeRootVisualElement();
-            SetupTabs(root);
-            SetupTitle(root);
-            SetupSceneTools(root);
+            _root = InitializeRootVisualElement();
+            SetupTabs(_root);
+            SetupTitle(_root);
+            SetupSceneTools(_root);
         }
 
         [MenuItem(EditorCollection.UtilityWindow + "Menu", priority = 0)]
@@ -100,9 +103,7 @@ namespace ChoyUtilities.Editor {
             var projectText = root.Q<TextElement>(GetName("ProjectName"));
             projectText.text = "Project: \n" + EditorCollection.ProjectFolderName;
             
-            var sceneText = root.Q<TextElement>(GetName("SceneName"));
-            _currentScene = SceneManager.GetActiveScene();
-            sceneText.text = "Current Scene: \n" + _currentScene.name;
+            UpdateSceneNameText(root);
 
             return;
             string GetName(string uiName) => "Top-" + uiName;
@@ -112,6 +113,12 @@ namespace ChoyUtilities.Editor {
                 path = path.Replace("CommonPackage.txt", string.Empty);
                 return path + fileName;
             }
+        }
+
+        private void UpdateSceneNameText(VisualElement root) {
+            var sceneText = root.Q<TextElement>("Top-SceneName");
+            _currentScene = SceneManager.GetActiveScene();
+            sceneText.text = "Current Scene: \n" + _currentScene.name;
         }
 
         // I give up using the JsonUtility way, let just brute force cut the string

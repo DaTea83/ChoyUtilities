@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.1.1] - 2026-04-27
+
+Fixed
+* UtilitiesMenuWindow, added lazy initialization
+* TextAssetMenuWindow, added lazy initialization
+
+Added
+* Added Locker
+* Added Vault
+* Added Banker
+* Added Reserve
+
+Changed
+* RawSet, added Span consturctor
+* Floater, added Span consturctor
+
 ## [1.1] - 2026-04-27
 
 Added

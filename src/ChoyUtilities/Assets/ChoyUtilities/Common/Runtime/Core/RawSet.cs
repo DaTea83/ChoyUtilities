@@ -22,40 +22,60 @@ namespace ChoyUtilities {
     [BurstCompile]
     [Serializable]
     public partial struct RawSet<T> : IDisposable, IEnumerable<T>, IFormattable,
-        IComparable, IComparable<RawSet<T>>
+        IComparable, IComparable<RawSet<T>>, IIndexable<T>
         where T : unmanaged {
         private NativeArray<T> _values;
         
         public T this[int index] { readonly get => _values[index]; set => _values[index] = value; }
 
-        public readonly int Length => _values.Length;
+        public int Length { get; set; }
+        public ref T ElementAt(int index) {
+            throw new NotImplementedException();
+        }
+        //public readonly int Length => _values.Length;
         public readonly bool IsCreated => _values.IsCreated;
 
-        public RawSet(RawSet<T> other) { _values = other._values; }
+        public RawSet(RawSet<T> other) {
+            _values = other._values; 
+            Length = other.Length;
+        }
 
-        public RawSet(NativeArray<T> values) { _values = values; }
+        public RawSet(NativeArray<T> values) {
+            _values = values; 
+            Length = values.Length;
+        }
 
         public RawSet(NativeList<T> values, Allocator allocator = Allocator.Persistent) : this(
             values.ToArray(allocator)) { }
 
         public RawSet(byte size, Allocator allocator = Allocator.Persistent) {
             _values = new NativeArray<T>(size, allocator);
+            Length = size;
         }
 
         public RawSet(ushort size, Allocator allocator = Allocator.Persistent) {
             _values = new NativeArray<T>(size, allocator);
+            Length = size;
         }
 
         public RawSet(int size, Allocator allocator = Allocator.Persistent) {
             _values = new NativeArray<T>(size, allocator);
+            Length = size;
         }
 
         public RawSet(T value, Allocator allocator = Allocator.Persistent) {
             _values = new NativeArray<T>(new []{ value }, allocator);
+            Length = 1;
         }
 
         public RawSet(T[] values, Allocator allocator = Allocator.Persistent) {
             _values = new NativeArray<T>(values, allocator);
+            Length = values.Length;
+        }
+        
+        public RawSet(Span<T> values, Allocator allocator = Allocator.Persistent) {
+            _values = new NativeArray<T>(values.ToArray(), allocator);
+            Length = values.Length;
         }
 
         public RawSet(List<T> values, Allocator allocator = Allocator.Persistent) :
@@ -88,5 +108,6 @@ namespace ChoyUtilities {
         public int CompareTo(object obj) { return obj is RawSet<T> other ? CompareTo(other) : -1; }
 
         public string ToString(string format, IFormatProvider formatProvider) { return ToString(); }
+
     }
 }

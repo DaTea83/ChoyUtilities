@@ -31,7 +31,14 @@
                 <ui:Label text="Packages&#10;&#10;Work in progress" class="text"/>
             </ui:ScrollView>
             <ui:ScrollView name="Content-SceneConfig" class="content-page">
-                <ui:Label text="Scene Config&#10;&#10;Work in progress" class="text"/>
+                <ui:VisualElement class="content-config" style="align-items: flex-start; flex-wrap: wrap; flex-grow: 0;">
+                    <ui:Button text="Refresh" name="Button-Refresh" class="text content-refresh"/>
+                    <ui:VisualElement class="content-cards" style="flex-grow: 1;">
+                        <ui:VisualElement style="flex-grow: 1;">
+                            <ui:Label text="Label" class="text"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
             </ui:ScrollView>
             <ui:ScrollView name="Content-SceneTools" class="content-page">
                 <ui:Label text="Warning, the following functions shown may cause irreversible changes to the scene.&#10;&#10;Handle with caution" class="text content-cards" style="color: rgb(207, 175, 175);"/>
