@@ -1,11 +1,12 @@
 # Changelog
 
-## [1.1]
+## [1.1] - 2026-04-27
 
 Added
+* Added UtilitiesMenu series, for now finished intergrate with SceneTools, rest will be added subsiquent version
 * Added new resources folder
 * Editor, added SortSceneObject
-* Added UtilitiesMenu series
+* Added Core/Bootloader series
 
 ## [1.0.10] - 2026-04-24
 

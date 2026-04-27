@@ -21,7 +21,7 @@ using UnityEngine.UIElements;
 
 // ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
-    public sealed class UtilitiesMenuWindow : EditorWindow {
+    public sealed partial class UtilitiesMenuWindow : EditorWindow {
         
         private Scene _currentScene;
         private const string GIT_LINK = "https://github.com/DaTea83/ChoyUtilities";
@@ -33,6 +33,7 @@ namespace ChoyUtilities.Editor {
             var root = InitializeRootVisualElement();
             SetupTabs(root);
             SetupTitle(root);
+            SetupSceneTools(root);
         }
 
         [MenuItem(EditorCollection.UtilityWindow + "Menu", priority = 0)]
@@ -97,11 +98,11 @@ namespace ChoyUtilities.Editor {
             versionText.text = package;
             
             var projectText = root.Q<TextElement>(GetName("ProjectName"));
-            projectText.text = EditorCollection.ProjectFolderName;
+            projectText.text = "Project: \n" + EditorCollection.ProjectFolderName;
             
             var sceneText = root.Q<TextElement>(GetName("SceneName"));
             _currentScene = SceneManager.GetActiveScene();
-            sceneText.text = "Current Scene: " + _currentScene.name;
+            sceneText.text = "Current Scene: \n" + _currentScene.name;
 
             return;
             string GetName(string uiName) => "Top-" + uiName;
@@ -113,7 +114,7 @@ namespace ChoyUtilities.Editor {
             }
         }
 
-        // I give up using the JsonUtility way, let just brute force
+        // I give up using the JsonUtility way, let just brute force cut the string
         private static string ContentText(string json) {
             var package = AssetDatabase.LoadAssetAtPath<TextAsset>(json).ToString();
             package = Array.Find(package.Split('\n'), l => l.TrimStart().StartsWith("\"version\""))
@@ -122,5 +123,6 @@ namespace ChoyUtilities.Editor {
             package = package.Replace("v", "V");
             return package;
         }
+
     }
 }

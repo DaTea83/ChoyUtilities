@@ -1,4 +1,4 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/ChoyUtilities/Common/Editor/Utilities%20Menu/Toolkit/UtilitiesMenu.uss?fileID=7433441132597879392&amp;guid=023f6b89dc652f84bab2c88e9ac44096&amp;type=3#UtilitiesMenu"/>
     <ui:VisualElement name="Root" class="window" style="flex-grow: 1; background-color: rgb(19, 22, 29);">
         <ui:VisualElement name="Top" class="panel-cards">
@@ -14,7 +14,7 @@
             <ui:VisualElement style="flex-grow: 1;">
                 <ui:Label text="Package version" name="Top-Version" class="text top-status"/>
                 <ui:Label text="Project name" name="Top-ProjectName" class="text top-status"/>
-                <ui:Label text="Scene Name" name="Top-SceneName" class="text top-status"/>
+                <ui:Label text="Scene Name Scene Name" name="Top-SceneName" class="text top-status"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Tabs" class="tab-panel" style="flex-grow: 0; margin-left: 8px; margin-right: 8px;">
@@ -25,16 +25,51 @@
         </ui:VisualElement>
         <ui:VisualElement name="Content" class="panel-cards content-panel" style="flex-grow: 1;">
             <ui:ScrollView name="Content-Status" class="content-page content-active">
-                <ui:Image source="project://database/Assets/ChoyUtilities/Resources/Materials/Textures/abstract-wavy-smooth-lines-pattern-free-vector.jpg?fileID=2800000&amp;guid=9d3c50fc25c2edd46a8ce126e4d21951&amp;type=3#abstract-wavy-smooth-lines-pattern-free-vector"/>
+                <ui:Label text="Project Status&#10;&#10;Work in progress" class="text"/>
             </ui:ScrollView>
             <ui:ScrollView name="Content-Packages" class="content-page">
-                <ui:Image source="project://database/Assets/ChoyUtilities/Resources/Skybox/Textures/Back_Tex.png?fileID=2800000&amp;guid=7f68f02c95f5a3c4e8232a5a2047a717&amp;type=3#Back_Tex"/>
+                <ui:Label text="Packages&#10;&#10;Work in progress" class="text"/>
             </ui:ScrollView>
             <ui:ScrollView name="Content-SceneConfig" class="content-page">
-                <ui:Image source="project://database/Assets/ChoyUtilities/Resources/Materials/Textures/LeadPlate.tif?fileID=2800000&amp;guid=3155d7b3bbd95f048b264d9e3a98c987&amp;type=3#LeadPlate"/>
+                <ui:Label text="Scene Config&#10;&#10;Work in progress" class="text"/>
             </ui:ScrollView>
             <ui:ScrollView name="Content-SceneTools" class="content-page">
-                <ui:Image source="project://database/Assets/ChoyUtilities/Resources/Materials/Textures/scratches.jpg?fileID=2800000&amp;guid=620967e28a6dab341a6f10d1b8be7128&amp;type=3#scratches"/>
+                <ui:Label text="Warning, the following functions shown may cause irreversible changes to the scene.&#10;&#10;Handle with caution" class="text content-cards" style="color: rgb(207, 175, 175);"/>
+                <ui:VisualElement name="Card-GenerateSceneStructure" class="content-cards" style="flex-grow: 1;">
+                    <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                        <ui:Label text="Generate Scene Structures" class="text"/>
+                        <ui:Button text="Execute" name="Button-GenerateSceneStructure" class="text tab-button"/>
+                    </ui:VisualElement>
+                    <ui:Label text="Spawn a group of empty objects to be used for classification" class="text content-details"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Card-SortSceneObjects" class="content-cards" style="flex-grow: 1;">
+                    <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                        <ui:Label text="Sort Scene Objects&#10;" class="text"/>
+                        <ui:Button text="Execute" name="Button-SortSceneObjects" class="text tab-button"/>
+                    </ui:VisualElement>
+                    <ui:Label text="Sort all objects in the scene and parent them into classification, doesn&apos;t affect children objects" class="text content-details"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Card-FindMissingScripts" class="content-cards" style="flex-grow: 1;">
+                    <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                        <ui:Label text="Find Missing Scripts" class="text"/>
+                        <ui:Button text="Execute" name="Button-FindMissingScripts" class="text tab-button"/>
+                    </ui:VisualElement>
+                    <ui:Label text="Search all scene objects and find any objects with missing script reference" class="text content-details"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Card-RemoveMissingScripts" class="content-cards" style="flex-grow: 1;">
+                    <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                        <ui:Label text="Remove Missing Scripts" class="text"/>
+                        <ui:Button text="Execute" name="Button-RemoveMissingScripts" class="text tab-button"/>
+                    </ui:VisualElement>
+                    <ui:Label text="Find and remove missing scripts for all scene objects" class="text content-details"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Card-Empty" class="content-cards" style="flex-grow: 1; display: none;">
+                    <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                        <ui:Label text="Label" class="text"/>
+                        <ui:Button text="Execute" class="text tab-button"/>
+                    </ui:VisualElement>
+                    <ui:Label text="Label" class="text content-details"/>
+                </ui:VisualElement>
             </ui:ScrollView>
         </ui:VisualElement>
     </ui:VisualElement>

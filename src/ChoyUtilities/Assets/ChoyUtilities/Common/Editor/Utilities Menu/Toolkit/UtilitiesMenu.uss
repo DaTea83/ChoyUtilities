@@ -2,6 +2,9 @@
     -unity-font-definition: resource("Text/Zen_Dots/ZenDots-Regular");
     color: rgb(207, 201, 175);
     font-size: 16px;
+    letter-spacing: 2px;
+    -unity-text-auto-size: none;
+    white-space: pre-wrap;
 }
 
 .window {
@@ -42,7 +45,7 @@
     white-space: pre-wrap;
     -unity-text-align: upper-right;
     margin-bottom: 0;
-    margin-top: 8px;
+    margin-top: 16px;
 }
 
 .top-selections {
@@ -123,6 +126,7 @@
 .content-page {
     display: none;
     flex-grow: 1;
+    padding-bottom: 24px;
 }
 
 .content-active {
@@ -152,19 +156,23 @@
     border-bottom-left-radius: 8px;
     margin-left: 12px;
     margin-right: 12px;
-    margin-top: 6px;
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    margin-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .content-title {
     flex-direction: row;
     justify-content: space-between;
+    align-items: stretch;
 }
 
 .content-details {
     white-space: pre-wrap;
-    font-size: 12px;
+    font-size: 14px;
+    -unity-text-align: middle-left;
+    margin-top: 24px;
 }

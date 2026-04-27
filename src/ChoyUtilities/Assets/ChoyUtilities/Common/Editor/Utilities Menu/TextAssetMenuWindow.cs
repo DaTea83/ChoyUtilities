@@ -29,7 +29,6 @@ namespace ChoyUtilities.Editor {
 
         public static void Show(string path, string fileName) {
             var window = GetWindow<TextAssetMenuWindow>();
-            Debug.Log("Trying to get file from: "+ path);
             window._content = AssetDatabase.LoadAssetAtPath<TextAsset>(path) 
                              ?? throw new FileNotFoundException();
             window.titleContent = new GUIContent(fileName);
