@@ -1,0 +1,30 @@
+.text {
+    -unity-font-definition: resource("Text/Zen_Dots/ZenDots-Regular");
+    font-size: 12px;
+    color: rgb(207, 201, 175);
+    white-space: pre-wrap;
+    -unity-paragraph-spacing: 70px;
+}
+
+.background {
+    background-color: rgb(19, 22, 28);
+}
+
+.panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: rgb(34, 39, 51);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    margin-top: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    flex-grow: 1;
+}

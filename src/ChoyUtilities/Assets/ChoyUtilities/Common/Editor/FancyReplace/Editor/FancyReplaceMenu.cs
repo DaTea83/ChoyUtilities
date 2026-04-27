@@ -28,11 +28,11 @@ namespace ChoyUtilities.Editor {
         private static bool ValidateCustomModificationMenuItem() {
             if (!TryGetSelectedObjectType(out _, out var type)) return false;
 
-            return type != EReplaceType.None;
+            return type != EAssetType.None;
         }
 
-        private static bool TryGetSelectedObjectType(out string path, out EReplaceType type) {
-            type = EReplaceType.None;
+        private static bool TryGetSelectedObjectType(out string path, out EAssetType type) {
+            type = EAssetType.None;
             path = string.Empty;
 
             if (Selection.assetGUIDs == null || Selection.assetGUIDs.Length == 0)
@@ -41,7 +41,7 @@ namespace ChoyUtilities.Editor {
             var selected = Selection.activeObject;
 
             if (selected is null) {
-                type = EReplaceType.None;
+                type = EAssetType.None;
                 path = string.Empty;
 
                 return false;
@@ -57,7 +57,7 @@ namespace ChoyUtilities.Editor {
 
             // Put at most top, if click at project empty space it will return the current directory
             if (AssetDatabase.IsValidFolder(path)) {
-                type = EReplaceType.Folder;
+                type = EAssetType.Folder;
 
                 return true;
             }
@@ -65,27 +65,27 @@ namespace ChoyUtilities.Editor {
             switch (selected) {
                 case MonoScript:
 
-                    type = EReplaceType.Script;
+                    type = EAssetType.Script;
 
                     return true;
                 case ScriptableObject:
 
-                    type = EReplaceType.ScriptableObject;
+                    type = EAssetType.ScriptableObject;
 
                     return true;
                 case SceneAsset:
 
-                    type = EReplaceType.Scene;
+                    type = EAssetType.Scene;
 
                     return true;
                 case Material:
 
-                    type = EReplaceType.Materials;
+                    type = EAssetType.Materials;
 
                     return true;
                 case TextAsset:
 
-                    type = EReplaceType.TextAsset;
+                    type = EAssetType.TextAsset;
 
                     return true;
             }
@@ -93,7 +93,7 @@ namespace ChoyUtilities.Editor {
             // Definition for this is super board, also every single object can fall to this definition
             // If fail to return previously it will return for this
             if (PrefabUtility.GetCorrespondingObjectFromOriginalSource(selected) is not null) {
-                type = EReplaceType.Prefab;
+                type = EAssetType.Prefab;
 
                 return true;
             }
