@@ -15,47 +15,70 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.Burst;
+using Unity.Collections;
 using UnityEngine;
 
 namespace ChoyUtilities {
-
+    [BurstCompile]
     [Serializable]
-    public struct Reserve<T> : 
-        IEnumerable<Banker<T>>, 
-        IComparable<Reserve<T>>, 
-        IEquatable<Reserve<T>> {
-
-        [SerializeField] private Banker<T>[] bank;
+    public partial struct Reserve<T> :
+        IEnumerable<Vault<T>>,
+        IComparable<Reserve<T>>,
+        IEquatable<Reserve<T>>{
         
-        public Banker<T>[] Values => bank;
-        public Banker<T> this[ushort id] => bank[id];
+        [field: SerializeField] 
+        public Vault<T>[] Values { get; set; }
+        public Vault<T> this[ushort id] => Values[id];
+        public ushort Length => (ushort)Values.Length;
 
-        public Reserve(Banker<T>[] bank) {
-            this.bank = bank;
+        public Reserve(Reserve<T> other) : this(other.Values) { }
+        public Reserve(Vault<T>[] bank) { Values = bank; }
+        public Reserve(Vault<T> bank) { Values = new[] { bank }; }
+        public Reserve(string name, T content) { Values = new[] { new Vault<T>(name, 0, content) }; }
+
+        public Reserve(ushort id, T content) {
+            Values = new Vault<T>[id];
+            Values[id] = new Vault<T>(id, content);
         }
-
-        public Reserve(Banker<T> bank) {
-            this.bank = new[] { bank };
+        
+        public Reserve((string, T)[] values) {
+            Values = new Vault<T>[values.Length];
+            for (var i = 0; i < values.Length; i++) {
+                Values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
+            }
         }
-
-        public IEnumerator<Banker<T>> GetEnumerator() {
-            foreach (var b in bank) {
-                yield return b;
+        
+        public Reserve((FixedString128Bytes, T)[] values) {
+            Values = new Vault<T>[values.Length];
+            for (var i = 0; i < values.Length; i++) {
+                Values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
+        public Reserve(T[] values) {
+            Values = new Vault<T>[values.Length];
+            for (var i = 0; i < values.Length; i++) {
+                Values[i] = new Vault<T>(string.Empty, (ushort)i, values[i]);
+            }
         }
 
-        public int CompareTo(Reserve<T> other) {
-            return Values.Length.CompareTo(other.Values.Length);
+        [BurstCompile]
+        public IEnumerator<Vault<T>> GetEnumerator() {
+            foreach (var b in Values) 
+                yield return b;
         }
 
-        public bool Equals(Reserve<T> other) {
-            return Equals(Values, other.Values);
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int CompareTo(Reserve<T> other) { return Values.Length.CompareTo(other.Values.Length); }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(Reserve<T> other) { return Values.Equals(other.Values); }
     }
-
 }

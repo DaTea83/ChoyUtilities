@@ -13,13 +13,66 @@
 //    limitations under the License.
 
 using System;
+using System.Runtime.CompilerServices;
+using Unity.Burst;
+using Unity.Collections;
+using UnityEngine;
 
 namespace ChoyUtilities {
 
+    [BurstCompile]
     [Serializable]
-    public struct Vault {
+    public struct Vault<T> : 
+        IComparable<Vault<T>>, 
+        IComparable<Locker<ushort>>, 
+        IEquatable<Vault<T>>,
+        IEquatable<Locker<ushort>> {
 
+        [SerializeField] private Locker<ushort> locker;
+        public string Key { get => locker.Key.ToString(); set => locker.Key = value; }
+        public ushort Id { get => locker.Value; set => locker.Value = value; }
         
+        [field: SerializeField]
+        public T Value { get; set; }
+
+        public Vault(ushort id, T value) {
+            this.locker = new Locker<ushort>(id);
+            Value = value;
+        }
+
+        public Vault(string key, ushort id, T value) {
+            this.locker = new Locker<ushort>(key, id);
+            Value = value;
+        }
+        
+        public Vault(FixedString128Bytes key, ushort id, T value) {
+            this.locker = new Locker<ushort>(key, id);
+            Value = value;
+        }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int CompareTo(Vault<T> other) {
+            return locker.CompareTo(other.locker);
+        }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int CompareTo(Locker<ushort> other) {
+            return locker.CompareTo(other);
+        }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(Vault<T> other) {
+            return locker.Equals(other.locker);
+        }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(Locker<ushort> other) {
+            return locker.Equals(other);
+        }
 
     }
 

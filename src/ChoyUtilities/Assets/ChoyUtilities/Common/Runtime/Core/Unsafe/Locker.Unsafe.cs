@@ -19,7 +19,7 @@ namespace ChoyUtilities {
     public partial struct Locker<T> {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly unsafe byte* GetBytePtr() => key.GetUnsafePtr();
+        public readonly unsafe byte* GetBytePtr() => Key.GetUnsafePtr();
     }
 
 }

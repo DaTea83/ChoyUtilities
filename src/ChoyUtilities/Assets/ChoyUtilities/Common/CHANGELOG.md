@@ -9,7 +9,6 @@ Fixed
 Added
 * Added Locker
 * Added Vault
-* Added Banker
 * Added Reserve
 
 Changed

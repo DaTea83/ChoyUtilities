@@ -21,6 +21,7 @@ using UnityEngine;
 
 namespace ChoyUtilities {
 
+    [BurstCompile]
     [Serializable]
     public partial struct Locker<T> : 
         IComparable<FixedString128Bytes>, 
@@ -31,39 +32,36 @@ namespace ChoyUtilities {
         IEquatable<Locker<T>>, 
         IFormattable
         where T : IComparable, IComparable<T>, IEquatable<T>,
-        IFormattable {
+        IFormattable, IConvertible {
 
-        [SerializeField] private FixedString128Bytes key;
-        [SerializeField] private T value;
-
-        public FixedString128Bytes Key => key;
-        public T Value => value;
-        public bool IsKeyEmpty => key.IsEmpty;
+        [field: SerializeField]
+        public FixedString128Bytes Key { get ; set ;}
+        [field: SerializeField]
+        public T Value { get ; set ;}
+        public bool IsKeyEmpty => Key.IsEmpty;
 
         public Locker(FixedString128Bytes key, T value) {
-            this.key = key;
-            this.value = value;
+            Key = key;
+            Value = value;
         }
 
         public Locker(string key, T value) {
-            this.key = key;
-            this.value = value;
+            Key = key;
+            Value = value;
         }
 
         public Locker(T value) {
-            key = string.Empty;
-            this.value = value;
+            Key = string.Empty;
+            Value = value;
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int CompareTo(Locker<T> other) {
-            var keyComparison = key.CompareTo(other.key);
-            return keyComparison != 0 ? keyComparison : value.CompareTo(other.value);
-        }
+        public int CompareTo(Locker<T> other) => Key.CompareTo(other.Key);
         
         [BurstDiscard]
         public override string ToString() {
-            return $"{nameof(key)}: {key}, {nameof(value)}: {value}, {nameof(Key)}: {Key}, {nameof(Value)}: {Value}";
+            return $"{nameof(Key)}: {Key}, {nameof(Value)}: {Value}";
         }
 
         [BurstDiscard]
@@ -71,42 +69,43 @@ namespace ChoyUtilities {
             return ToString();
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Locker<T> other) {
-            return key.Equals(other.key) && EqualityComparer<T>.Default.Equals(value, other.value);
+            return Key.Equals(other.Key) && EqualityComparer<T>.Default.Equals(Value, other.Value);
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int CompareTo(FixedString128Bytes other) {
-            var keyComparison = key.CompareTo(other);
+            var keyComparison = Key.CompareTo(other);
 
             return keyComparison;
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(FixedString128Bytes other) {
-            return key.Equals(other);
+            return Key.Equals(other);
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int CompareTo(string other) {
-            var keyComparison = key.CompareTo(other);
+            var keyComparison = Key.CompareTo(other);
 
             return keyComparison;
         }
 
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(string other) {
-            return key.Equals(other);
+            return Key.Equals(other);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals(object obj) {
-            return obj is Locker<T> other && Equals(other);
-        }
-
+        [BurstCompile]
         public override int GetHashCode() {
-            return HashCode.Combine(key, value);
+            return HashCode.Combine(Key, Value);
         }
 
     }
