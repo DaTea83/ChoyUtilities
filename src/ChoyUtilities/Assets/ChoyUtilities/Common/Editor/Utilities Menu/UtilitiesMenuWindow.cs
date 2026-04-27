@@ -84,9 +84,8 @@ namespace ChoyUtilities.Editor {
             gitButton.clicked += () => Application.OpenURL(GIT_LINK);
             
             var logButton = root.Q<Button>(GetName("ChangeLog"));
-            var logPath = PackagePath("CHANGELOG.md");
-            var logMd = AssetDatabase.LoadAssetAtPath<TextAsset>(logPath);
-            logButton.clicked += () => TextAssetMenuWindow.Show(logMd, "ChangeLog");
+            var logPath = PackagePath("test.md");
+            logButton.clicked += () => TextAssetMenuWindow.Show(logPath, "ChangeLog");
             
             var versionText = root.Q<TextElement>(GetName("Version"));
             var json = PackagePath("package.json");

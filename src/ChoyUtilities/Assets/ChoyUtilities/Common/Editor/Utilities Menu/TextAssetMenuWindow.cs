@@ -25,10 +25,11 @@ namespace ChoyUtilities.Editor {
         private TextAsset Content { get; set; }
         private static readonly ToolkitData ToolkitData = new("TextAssetMenu");
 
-        public static void Show(TextAsset asset, string fileName) {
+        public static void Show(string path, string fileName) {
             var window = GetWindow<TextAssetMenuWindow>();
-            if (!asset) throw new ArgumentNullException(nameof(asset));
-            window.Content = asset;
+            //if (!asset) throw new ArgumentNullException(nameof(asset));
+            window.Content = Resources.Load<TextAsset>(path) 
+                             ?? throw new FileNotFoundException();
             window.titleContent = new GUIContent(fileName);
             window.minSize = new Vector2(300, 600);
             window.Show();
@@ -42,8 +43,7 @@ namespace ChoyUtilities.Editor {
 
             var contentText = root.Q<TextElement>("Content")
                 ?? throw new InvalidOperationException("Unable to find TextElement with name 'Content'.");
-            contentText.text = Content?.ToString();
-            
+            contentText.text = Content.text;
         }
     }
 }
