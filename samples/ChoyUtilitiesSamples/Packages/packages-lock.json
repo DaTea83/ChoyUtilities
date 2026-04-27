@@ -22,7 +22,7 @@
         "com.unity.inputsystem": "1.18.0",
         "com.unity.test-framework": "1.6.0"
       },
-      "hash": "ad1e06c90ccea8603659d007e1a5a08c72b70a8c"
+      "hash": "3dcd247ff0cf9a9ef0d771df0ed53a19065f0abf"
     },
     "com.datea83.choyutilities.entities": {
       "version": "https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyUtilities/Entities",
@@ -40,7 +40,7 @@
         "com.unity.test-framework": "1.6.0",
         "com.unity.render-pipelines.universal": "17.0.4"
       },
-      "hash": "ad1e06c90ccea8603659d007e1a5a08c72b70a8c"
+      "hash": "3dcd247ff0cf9a9ef0d771df0ed53a19065f0abf"
     },
     "com.unity.burst": {
       "version": "1.8.28",
