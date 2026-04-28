@@ -3,8 +3,7 @@
     color: rgb(207, 201, 175);
     font-size: 16px;
     letter-spacing: 2px;
-    -unity-text-auto-size: none;
-    white-space: pre-wrap;
+    white-space: normal;
     word-spacing: 4px;
 }
 
@@ -43,7 +42,7 @@
 }
 
 .top-status {
-    white-space: pre-wrap;
+    white-space: initial;
     -unity-text-align: upper-right;
     margin-bottom: 0;
     margin-top: 16px;
@@ -217,7 +216,7 @@
 }
 
 .content-details {
-    white-space: pre-wrap;
+    white-space: initial;
     font-size: 14px;
     -unity-text-align: middle-left;
     margin-top: 24px;
