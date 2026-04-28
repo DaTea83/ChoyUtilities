@@ -24,9 +24,11 @@ namespace ChoyUtilities.Editor {
         
         private VisualElement _root;
         private Scene _currentScene;
-        private const string GIT_LINK = "https://github.com/DaTea83/ChoyUtilities";
         
+        private const string GIT_LINK = "https://github.com/DaTea83/ChoyUtilities";
+        private string PrefabPath => $"Assets/{EditorCollection.ProjectFolderName}/{_currentScene.name}/";
         private static readonly string[] Tabs = { "Status", "Packages", "SceneConfig", "SceneTools" };
+        
         // Lazy initialization of ToolkitData for domain reload
         private static ToolkitData? _toolkitData;
         private static ToolkitData ToolkitData => _toolkitData ??= new ToolkitData("UtilitiesMenu");
@@ -36,6 +38,7 @@ namespace ChoyUtilities.Editor {
             SetupTabs(_root);
             SetupTitle(_root);
             SetupSceneTools(_root);
+            SetupSceneConfig(_root);
         }
 
         [MenuItem(EditorCollection.UtilityWindow + "Menu", priority = 0)]
@@ -54,12 +57,15 @@ namespace ChoyUtilities.Editor {
             return root;
         }
 
-        private static void SetupTabs(VisualElement root) {
+        private void SetupTabs(VisualElement root) {
             foreach (var tab in Tabs) {
                 var button = root.Q<Button>("Tab-" + tab)
                              ?? throw new InvalidOperationException(
                                  $"Unable to find button with name 'Tab-{tab}' in root element.");
-                button.clicked += () => SetActiveTab(root, tab);
+                button.clicked += () => {
+                    SetActiveTab(root, tab);
+                    RefreshConfig();
+                };
             }
             SetActiveTab(root, Tabs[0]);
         }

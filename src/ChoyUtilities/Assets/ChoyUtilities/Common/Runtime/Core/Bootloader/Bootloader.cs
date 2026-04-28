@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ChoyUtilities.Bootloader {
+namespace ChoyUtilities {
 
     [DefaultExecutionOrder(1)]
     [DisallowMultipleComponent]

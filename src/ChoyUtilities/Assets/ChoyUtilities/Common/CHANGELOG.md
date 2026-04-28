@@ -13,6 +13,7 @@ Added
 * Added ReservePoolingManager
 * Added ReserveParticleManager
 * Added ReserveAudioManager
+* Setup SceneConfig page for UtilitiesMenu
 
 Changed
 * RawSet, added Span consturctor
