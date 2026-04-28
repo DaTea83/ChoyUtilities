@@ -1,9 +1,11 @@
 .text {
-    -unity-font-definition: resource("Text/Zen_Dots/ZenDots-Regular");
+    -unity-font-definition: resource("Text/JetBrains_Mono/static/JetBrainsMono-SemiBold");
     font-size: 12px;
     color: rgb(207, 201, 175);
     white-space: pre-wrap;
-    -unity-paragraph-spacing: 70px;
+    letter-spacing: 2px;
+    word-spacing: 6px;
+    -unity-font-style: normal;
 }
 
 .background {

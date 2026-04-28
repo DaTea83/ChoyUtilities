@@ -1,4 +1,4 @@
 README:
 
-In any scenario don't ever remove this file.
+In any scenario DO NOT ever remove or rename this file.
 It is used to help pinpoint the location of md and json files.

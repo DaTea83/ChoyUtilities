@@ -13,11 +13,12 @@
 // limitations under the License.
 
 using System;
-using Unity.Burst;
 using Unity.Mathematics;
 
 namespace ChoyUtilities {
+
     public partial struct Floater {
+
         private const float EPSILON = 0.0001f;
 
         #region Operators
@@ -55,7 +56,7 @@ namespace ChoyUtilities {
 
             return new Floater(set);
         }
-        
+
         public int FirstMatch(float value) {
             var index = -1;
 
@@ -245,5 +246,7 @@ namespace ChoyUtilities {
         }
 
         #endregion
+
     }
+
 }

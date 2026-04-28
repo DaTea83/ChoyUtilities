@@ -15,16 +15,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
+
     [Serializable]
     [BurstCompile]
-    public partial struct Floater : IComparable, IComparable<Floater>,
+    public partial struct Floater : IComparable, IComparable<Floater>, IEquatable<Floater>,
         IFormattable, IEnumerable<float> {
+
         public float[] values;
 
         public float this[int index] => values[index];
@@ -33,7 +36,9 @@ namespace ChoyUtilities {
 
         #region Constructors
 
-        public Floater(float[] values) { this.values = values; }
+        public Floater(float[] values) {
+            this.values = values;
+        }
 
         public Floater(int[] values) {
             var set = new float[values.Length];
@@ -62,8 +67,11 @@ namespace ChoyUtilities {
         public Floater(int3 value) : this(new[] { value.x, value.y, value.z }) { }
         public Floater(int4 value) : this(new[] { value.x, value.y, value.z, value.w }) { }
         public Floater(List<float> value) : this(value.ToArray()) { }
+        public Floater(IReadOnlyList<float> value) : this(value.ToArray()) { }
         public Floater(Stack<float> value) : this(value.ToArray()) { }
         public Floater(Queue<float> value) : this(value.ToArray()) { }
+        public Floater(Span<float> value) : this(value.ToArray()) { }
+        public Floater(ReadOnlySpan<float> value) : this(value.ToArray()) { }
         public Floater(NativeArray<float> value) : this(value.ToArray()) { }
         public Floater(NativeList<float> value) : this(value.ToArray(Allocator.Temp)) { }
         public Floater(byte value) : this(new int[] { value }) { }
@@ -98,9 +106,13 @@ namespace ChoyUtilities {
             values = set;
         }
 
-        public Floater(bool value) { values = new[] { value ? 1f : 0f }; }
+        public Floater(bool value) {
+            values = new[] { value ? 1f : 0f };
+        }
 
-        public Floater(bool2 value) { values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f }; }
+        public Floater(bool2 value) {
+            values = new[] { value.x ? 1f : 0f, value.y ? 1f : 0f };
+        }
 
         public Floater(bool[] value) {
             var set = new float[value.Length];
@@ -259,6 +271,7 @@ namespace ChoyUtilities {
         public Floater(float3[] values) {
             var set = new float[values.Length * 3];
             var j = 0;
+
             for (var i = 0; i < set.Length; i += 3, j++) {
                 set[i] = values[j].x;
                 set[i + 1] = values[j].y;
@@ -311,17 +324,37 @@ namespace ChoyUtilities {
         ///     If want want true to string, use casts to string
         /// </summary>
         /// <returns></returns>
-        public override string ToString() { return values.ToString(); }
+        public override string ToString() {
+            return values.ToString();
+        }
 
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
 
         /// <summary>
         ///     This one just return the string representation of the float array
         ///     If want want true to string, use casts to string
         /// </summary>
         /// <returns></returns>
-        public string ToString(string format, IFormatProvider formatProvider) { return ToString(); }
+        public string ToString(string format, IFormatProvider formatProvider) {
+            return ToString();
+        }
 
         #endregion
+
+        public bool Equals(Floater other) {
+            return Equals(values, other.values);
+        }
+
+        public override bool Equals(object obj) {
+            return obj is Floater other && Equals(other);
+        }
+
+        public override int GetHashCode() {
+            return values != null ? values.GetHashCode() : 0;
+        }
+
     }
+
 }

@@ -19,8 +19,10 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace ChoyUtilities {
+
     [BurstCompile]
     public static partial class HelperCollection {
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 PositionFromTransform(this Floater data) {
             return data.Length < 9 ? float3.zero : new float3(data[0], data[1], data[2]);
@@ -86,5 +88,7 @@ namespace ChoyUtilities {
 
             return results;
         }
+
     }
+
 }

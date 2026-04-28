@@ -1,10 +1,11 @@
 .text {
-    -unity-font-definition: resource("Text/Zen_Dots/ZenDots-Regular");
+    -unity-font-definition: resource("Text/JetBrains_Mono/static/JetBrainsMono-SemiBold");
     color: rgb(207, 201, 175);
     font-size: 16px;
     letter-spacing: 2px;
     -unity-text-auto-size: none;
     white-space: pre-wrap;
+    word-spacing: 4px;
 }
 
 .window {
@@ -129,10 +130,6 @@
     padding-bottom: 24px;
 }
 
-.content-active {
-    display: flex;
-}
-
 .content-page .unity-scroll-view__content-container {
     display: flex;
     flex-direction: column;
@@ -142,6 +139,10 @@
 .content-page .unity-scroll-view__content-container * {
     padding-right: 0;
     margin-bottom: 12px;
+}
+
+.content-active {
+    display: flex;
 }
 
 .content-cards {
@@ -164,10 +165,55 @@
     margin-bottom: 0;
 }
 
+.content-foldout {
+    margin-bottom: 24px;
+    background-color: rgb(11, 13, 17);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding-bottom: 24px;
+    padding-top: 24px;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
+.content-config {
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.config-button {
+    margin-left: 12px;
+    margin-top: 24px;
+    font-size: 16px;
+    padding-top: 24px;
+    padding-right: 24px;
+    padding-bottom: 24px;
+    padding-left: 24px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    margin-right: 12px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    color: rgb(19, 22, 29);
+}
+
 .content-title {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
+    -unity-font-style: bold;
 }
 
 .content-details {
@@ -175,4 +221,5 @@
     font-size: 14px;
     -unity-text-align: middle-left;
     margin-top: 24px;
+    -unity-font-style: bold;
 }

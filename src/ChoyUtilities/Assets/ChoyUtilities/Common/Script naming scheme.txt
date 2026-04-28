@@ -36,9 +36,10 @@ Script naming scheme:
 
 (Prefix) E-             : Enums
 
-(Suffix) -Serialize     : Any class/struct with [Serializable] attribute (Excluding custom made data types)
+(Suffix) -Serialize     : Any class/struct with [Serializable] attribute (Exception for those in Core folder)
 
 (Suffix) -Collection    : Usually a partial class of HelperCollection, 
                           is for a static class that holds a bunch of static methods and extensions 
                           
-(Suffix) -Editor        : Editor class for customized view
+(Suffix) -Editor        : Editor class 
+(Suffix) -Window        : Editor window class

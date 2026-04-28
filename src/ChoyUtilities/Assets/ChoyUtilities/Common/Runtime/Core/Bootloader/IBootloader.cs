@@ -14,7 +14,7 @@
 
 using System.Threading.Tasks;
 
-namespace ChoyUtilities.Bootloader {
+namespace ChoyUtilities {
 
     public interface IBootloader {
 

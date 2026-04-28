@@ -13,7 +13,6 @@
 // limitations under the License.
 
 using System;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,24 +22,30 @@ using UnityEngine.UIElements;
 namespace ChoyUtilities.Editor {
     public sealed partial class UtilitiesMenuWindow : EditorWindow {
         
+        private VisualElement _root;
         private Scene _currentScene;
-        private const string GIT_LINK = "https://github.com/DaTea83/ChoyUtilities";
         
+        private const string GIT_LINK = "https://github.com/DaTea83/ChoyUtilities";
+        private string PrefabPath => $"Assets/{EditorCollection.ProjectFolderName}/{_currentScene.name}/";
         private static readonly string[] Tabs = { "Status", "Packages", "SceneConfig", "SceneTools" };
-        private static readonly ToolkitData ToolkitData = new("UtilitiesMenu");
+        
+        // Lazy initialization of ToolkitData for domain reload
+        private static ToolkitData? _toolkitData;
+        private static ToolkitData ToolkitData => _toolkitData ??= new ToolkitData("UtilitiesMenu");
 
         private void OnEnable() {
-            var root = InitializeRootVisualElement();
-            SetupTabs(root);
-            SetupTitle(root);
-            SetupSceneTools(root);
+            _root = InitializeRootVisualElement();
+            SetupTabs(_root);
+            SetupTitle(_root);
+            SetupSceneTools(_root);
+            SetupSceneConfig(_root);
         }
 
         [MenuItem(EditorCollection.UtilityWindow + "Menu", priority = 0)]
         private static void ShowWindow() {
             var window = GetWindow<UtilitiesMenuWindow>();
             window.titleContent = new GUIContent("Choy Utilities");
-            window.minSize = new Vector2(600, 600);
+            window.minSize = new Vector2(400, 600);
             window.Show();
         }
 
@@ -52,12 +57,15 @@ namespace ChoyUtilities.Editor {
             return root;
         }
 
-        private static void SetupTabs(VisualElement root) {
+        private void SetupTabs(VisualElement root) {
             foreach (var tab in Tabs) {
                 var button = root.Q<Button>("Tab-" + tab)
                              ?? throw new InvalidOperationException(
                                  $"Unable to find button with name 'Tab-{tab}' in root element.");
-                button.clicked += () => SetActiveTab(root, tab);
+                button.clicked += () => {
+                    SetActiveTab(root, tab);
+                    RefreshConfig();
+                };
             }
             SetActiveTab(root, Tabs[0]);
         }
@@ -100,9 +108,7 @@ namespace ChoyUtilities.Editor {
             var projectText = root.Q<TextElement>(GetName("ProjectName"));
             projectText.text = "Project: \n" + EditorCollection.ProjectFolderName;
             
-            var sceneText = root.Q<TextElement>(GetName("SceneName"));
-            _currentScene = SceneManager.GetActiveScene();
-            sceneText.text = "Current Scene: \n" + _currentScene.name;
+            UpdateSceneNameText(root);
 
             return;
             string GetName(string uiName) => "Top-" + uiName;
@@ -112,6 +118,12 @@ namespace ChoyUtilities.Editor {
                 path = path.Replace("CommonPackage.txt", string.Empty);
                 return path + fileName;
             }
+        }
+
+        private void UpdateSceneNameText(VisualElement root) {
+            var sceneText = root.Q<TextElement>("Top-SceneName");
+            _currentScene = SceneManager.GetActiveScene();
+            sceneText.text = "Current Scene: \n" + _currentScene.name;
         }
 
         // I give up using the JsonUtility way, let just brute force cut the string
