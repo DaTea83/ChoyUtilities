@@ -50,6 +50,20 @@ namespace ChoyUtilities {
             }
         }
         
+        public Reserve((FixedString32Bytes, T)[] values) {
+            Values = new Vault<T>[values.Length];
+            for (var i = 0; i < values.Length; i++) {
+                Values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
+            }
+        }
+        
+        public Reserve((FixedString64Bytes, T)[] values) {
+            Values = new Vault<T>[values.Length];
+            for (var i = 0; i < values.Length; i++) {
+                Values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
+            }
+        }
+        
         public Reserve((FixedString128Bytes, T)[] values) {
             Values = new Vault<T>[values.Length];
             for (var i = 0; i < values.Length; i++) {

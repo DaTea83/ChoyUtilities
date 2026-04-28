@@ -25,9 +25,13 @@ namespace ChoyUtilities {
     [Serializable]
     public partial struct Locker<T> : 
         IComparable<FixedString128Bytes>, 
+        IComparable<FixedString64Bytes>, 
+        IComparable<FixedString32Bytes>, 
         IComparable<string>, 
         IComparable<Locker<T>>, 
         IEquatable<FixedString128Bytes>, 
+        IEquatable<FixedString64Bytes>, 
+        IEquatable<FixedString32Bytes>, 
         IEquatable<string>, 
         IEquatable<Locker<T>>, 
         IFormattable
@@ -44,7 +48,17 @@ namespace ChoyUtilities {
             Key = key;
             Value = value;
         }
+        
+        public Locker(FixedString64Bytes key, T value) {
+            Key = key;
+            Value = value;
+        }
 
+        public Locker(FixedString32Bytes key, T value) {
+            Key = key;
+            Value = value;
+        }
+        
         public Locker(string key, T value) {
             Key = key;
             Value = value;
@@ -65,9 +79,8 @@ namespace ChoyUtilities {
         }
 
         [BurstDiscard]
-        public string ToString(string format, IFormatProvider formatProvider) {
-            return ToString();
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public string ToString(string format, IFormatProvider formatProvider) => ToString();
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -77,36 +90,38 @@ namespace ChoyUtilities {
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int CompareTo(FixedString128Bytes other) {
-            var keyComparison = Key.CompareTo(other);
-
-            return keyComparison;
-        }
+        public int CompareTo(FixedString128Bytes other) => Key.CompareTo(other);
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(FixedString128Bytes other) {
-            return Key.Equals(other);
-        }
+        public bool Equals(FixedString128Bytes other) => Key.Equals(other);
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int CompareTo(string other) {
-            var keyComparison = Key.CompareTo(other);
-
-            return keyComparison;
-        }
+        public int CompareTo(string other) => Key.CompareTo(other);
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(string other) {
-            return Key.Equals(other);
-        }
+        public bool Equals(string other) => Key.Equals(other);
 
         [BurstCompile]
-        public override int GetHashCode() {
-            return HashCode.Combine(Key, Value);
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int CompareTo(FixedString64Bytes other) => Key.CompareTo(other);
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(FixedString64Bytes other) => Key.Equals(other);
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int CompareTo(FixedString32Bytes other) => Key.CompareTo(other);
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(FixedString32Bytes other) => Key.Equals(other);
+
+        [BurstCompile]
+        public override int GetHashCode() => HashCode.Combine(Key, Value);
 
     }
 

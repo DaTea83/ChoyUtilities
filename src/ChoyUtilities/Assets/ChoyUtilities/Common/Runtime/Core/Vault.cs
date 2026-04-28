@@ -39,13 +39,23 @@ namespace ChoyUtilities {
             this.locker = new Locker<ushort>(id);
             Value = value;
         }
-
-        public Vault(string key, ushort id, T value) {
+        
+        public Vault(FixedString128Bytes key, ushort id, T value) {
             this.locker = new Locker<ushort>(key, id);
             Value = value;
         }
         
-        public Vault(FixedString128Bytes key, ushort id, T value) {
+        public Vault(FixedString64Bytes key, ushort id, T value) {
+            this.locker = new Locker<ushort>(key, id);
+            Value = value;
+        }
+        
+        public Vault(FixedString32Bytes key, ushort id, T value) {
+            this.locker = new Locker<ushort>(key, id);
+            Value = value;
+        }
+
+        public Vault(string key, ushort id, T value) {
             this.locker = new Locker<ushort>(key, id);
             Value = value;
         }

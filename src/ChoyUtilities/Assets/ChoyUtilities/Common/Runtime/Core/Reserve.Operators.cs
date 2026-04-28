@@ -12,8 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Unity.Collections;
+
 namespace ChoyUtilities {
     public partial struct Reserve<T> {
-        public T FromKey() { return default; }
+        public bool TryGet(string key, out T value) {
+            value = default;
+            foreach (var v in Values) {
+                if (v.Key != key) continue;
+                value = v.Value;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool TryGet(FixedString128Bytes key, out T value) {
+            value = default;
+            foreach (var v in Values) {
+                if (v.Key != key) continue;
+                value = v.Value;
+                return true;
+            }
+
+            return false;
+        }
     }
 }
