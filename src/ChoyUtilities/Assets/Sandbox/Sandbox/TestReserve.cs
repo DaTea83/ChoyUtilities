@@ -12,15 +12,22 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-using System.Runtime.CompilerServices;
+using System;
+using ChoyUtilities;
+using Unity.Collections;
+using UnityEngine;
+using UnityEngine.Audio;
 
-namespace ChoyUtilities {
+namespace Sandbox.Sandbox {
 
-    public partial struct Locker<T> {
+    public class TestReserve : MonoBehaviour {
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly unsafe byte* GetBytePtr() {
-            return Key.GetUnsafePtr();
+        [SerializeField] private Reserve<int>[] reserves;
+        [SerializeField] private Reserve<AudioResource> audioResources;
+        [SerializeField] private Reserve<GameObject> audioClips;
+
+        private void Start() {
+            FixedString128Bytes key = "test";
         }
 
     }

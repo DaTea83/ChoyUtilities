@@ -13,86 +13,95 @@
 //    limitations under the License.
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Burst;
 using Unity.Collections;
 using UnityEngine;
 
 namespace ChoyUtilities {
+
+    /// <summary>
+    ///     A dictionary-like structure that can store any type of data and uses string keys
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [BurstCompile]
     [Serializable]
     public partial struct Reserve<T> :
-        IEnumerable<Vault<T>>,
         IComparable<Reserve<T>>,
-        IEquatable<Reserve<T>>{
-        
-        [field: SerializeField] 
-        public Vault<T>[] Values { get; set; }
-        public Vault<T> this[ushort id] => Values[id];
-        public ushort Length => (ushort)Values.Length;
+        IEquatable<Reserve<T>> {
 
-        public Reserve(Reserve<T> other) : this(other.Values) { }
-        public Reserve(Vault<T>[] bank) { Values = bank; }
-        public Reserve(Vault<T> bank) { Values = new[] { bank }; }
-        public Reserve(string name, T content) { Values = new[] { new Vault<T>(name, 0, content) }; }
+        [SerializeField] private Vault<T>[] values;
+        public ushort Length => (ushort)values.Length;
+        public bool IsEmpty => values.Length == 0;
 
-        public Reserve(ushort id, T content) {
-            Values = new Vault<T>[id];
-            Values[id] = new Vault<T>(id, content);
+        public Reserve(Reserve<T> other) : this(other.values) { }
+
+        public Reserve(Vault<T>[] bank) {
+            values = bank;
         }
-        
-        public Reserve((string, T)[] values) {
-            Values = new Vault<T>[values.Length];
-            for (var i = 0; i < values.Length; i++) {
-                Values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
-            }
+
+        public Reserve(Vault<T> bank) {
+            values = new[] { bank };
         }
-        
-        public Reserve((FixedString32Bytes, T)[] values) {
-            Values = new Vault<T>[values.Length];
-            for (var i = 0; i < values.Length; i++) {
-                Values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
-            }
+
+        public Reserve(string name, T value) {
+            values = new[] { new Vault<T>(name, 0, value) };
         }
-        
-        public Reserve((FixedString64Bytes, T)[] values) {
-            Values = new Vault<T>[values.Length];
-            for (var i = 0; i < values.Length; i++) {
-                Values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
-            }
-        }
-        
-        public Reserve((FixedString128Bytes, T)[] values) {
-            Values = new Vault<T>[values.Length];
-            for (var i = 0; i < values.Length; i++) {
-                Values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
-            }
+
+        public Reserve(T value) {
+            values = new[] { new Vault<T>(string.Empty, 0, value) };
         }
 
         public Reserve(T[] values) {
-            Values = new Vault<T>[values.Length];
-            for (var i = 0; i < values.Length; i++) {
-                Values[i] = new Vault<T>(string.Empty, (ushort)i, values[i]);
-            }
+            this.values = new Vault<T>[values.Length];
+            for (var i = 0; i < values.Length; i++) this.values[i] = new Vault<T>(string.Empty, (ushort)i, values[i]);
+        }
+
+        public Reserve(ushort id, T value) {
+            values = new Vault<T>[id];
+            values[id] = new Vault<T>(id, value);
+        }
+
+        public Reserve((string, T)[] values) {
+            this.values = new Vault<T>[values.Length];
+
+            for (var i = 0; i < values.Length; i++)
+                this.values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
+        }
+
+        public Reserve((FixedString32Bytes, T)[] values) {
+            this.values = new Vault<T>[values.Length];
+
+            for (var i = 0; i < values.Length; i++)
+                this.values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
+        }
+
+        public Reserve((FixedString64Bytes, T)[] values) {
+            this.values = new Vault<T>[values.Length];
+
+            for (var i = 0; i < values.Length; i++)
+                this.values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
+        }
+
+        public Reserve((FixedString128Bytes, T)[] values) {
+            this.values = new Vault<T>[values.Length];
+
+            for (var i = 0; i < values.Length; i++)
+                this.values[i] = new Vault<T>(values[i].Item1, (ushort)i, values[i].Item2);
         }
 
         [BurstCompile]
-        public IEnumerator<Vault<T>> GetEnumerator() {
-            foreach (var b in Values) 
-                yield return b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int CompareTo(Reserve<T> other) {
+            return values.Length.CompareTo(other.values.Length);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
-
         [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int CompareTo(Reserve<T> other) { return Values.Length.CompareTo(other.Values.Length); }
+        public bool Equals(Reserve<T> other) {
+            return values.Equals(other.values);
+        }
 
-        [BurstCompile]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Reserve<T> other) { return Values.Equals(other.Values); }
     }
+
 }

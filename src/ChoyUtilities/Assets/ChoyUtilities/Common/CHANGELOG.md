@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.1] - 2026-04-27
+## [1.1.1] - 2026-04-28
 
 Fixed
 * UtilitiesMenuWindow, added lazy initialization

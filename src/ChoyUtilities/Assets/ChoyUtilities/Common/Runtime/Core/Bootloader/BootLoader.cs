@@ -22,19 +22,19 @@ namespace ChoyUtilities.Bootloader {
     [DefaultExecutionOrder(1)]
     [DisallowMultipleComponent]
     public sealed class BootLoader : GenericSingleton<BootLoader> {
-        
-        public string SceneName { get; set; } = "Default";
 
         [Tooltip("The higher the importance of that system the lower the index")]
         [field: SerializeField]
         public MonoBehaviour[] Loaders { get; set; }
+
+        public string SceneName { get; set; } = "Default";
 
         public bool IsInitialized { get; private set; }
 
         private async void OnEnable() {
             try {
                 if (SceneName == "Default" || SceneName == SceneManager.GetActiveScene().name) {
-                    await BootstrapSystem.InitSystems(Loaders);
+                    await BootLoaderSystem.InitSystems(Loaders);
                     IsInitialized = true;
                     Debug.Log("All loaders initialized");
                 }
@@ -48,23 +48,22 @@ namespace ChoyUtilities.Bootloader {
         }
 
         protected override void OnDisable() {
-            _ = BootstrapSystem.ShutdownSystems();
+            _ = BootLoaderSystem.ShutdownSystems();
             base.OnDisable();
         }
 
-        private static class BootstrapSystem {
+        private static class BootLoaderSystem {
 
             private static Stack<MonoBehaviour> _systems;
-            
+
             public static async Task InitSystems(MonoBehaviour[] loaders) {
                 _systems = new Stack<MonoBehaviour>();
                 _systems.Clear();
+
                 foreach (var loader in loaders) {
                     var newLoad = Instantiate(loader);
-                    
-                    if (newLoad.TryGetComponent(out IBootloader bootloader)) {
-                        await bootloader.Init();
-                    }
+
+                    if (newLoad.TryGetComponent(out IBootloader bootloader)) await bootloader.Init();
                     _systems.Push(newLoad);
                 }
             }
@@ -73,16 +72,17 @@ namespace ChoyUtilities.Bootloader {
             public static async Task ShutdownSystems() {
                 for (var i = _systems.Count - 1; i >= 0; i--) {
                     var system = _systems.Peek();
-                    if (system.TryGetComponent(out IBootloader bootloader)) {
-                        await bootloader.Shutdown();
-                    }
+                    if (system.TryGetComponent(out IBootloader bootloader)) await bootloader.Shutdown();
                     Destroy(system);
                     _systems.Pop();
                 }
+
                 _systems.Clear();
                 _systems = null;
             }
+
         }
+
     }
 
 }

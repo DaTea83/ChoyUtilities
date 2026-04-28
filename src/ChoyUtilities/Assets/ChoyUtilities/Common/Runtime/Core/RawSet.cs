@@ -19,29 +19,38 @@ using Unity.Burst;
 using Unity.Collections;
 
 namespace ChoyUtilities {
+
     [BurstCompile]
     [Serializable]
     public partial struct RawSet<T> : IDisposable, IEnumerable<T>, IFormattable,
         IComparable, IComparable<RawSet<T>>, INativeList<T>
         where T : unmanaged {
+
         private NativeArray<T> _values;
 
         public int Capacity { get; set; }
         public int Length { get; set; }
         public bool IsEmpty => Length == 0;
-        public T this[int index] { readonly get => _values[index]; set => _values[index] = value; }
-        public void Clear() => Dispose();
+
+        public T this[int index] {
+            readonly get => _values[index];
+            set => _values[index] = value;
+        }
+
+        public void Clear() {
+            Dispose();
+        }
 
         public readonly bool IsCreated => _values.IsCreated;
 
         public RawSet(RawSet<T> other) {
-            _values = other._values; 
+            _values = other._values;
             Length = other.Length;
             Capacity = other.Capacity;
         }
 
         public RawSet(NativeArray<T> values) {
-            _values = values; 
+            _values = values;
             Length = values.Length;
             Capacity = values.Length;
         }
@@ -68,7 +77,7 @@ namespace ChoyUtilities {
         }
 
         public RawSet(T value, Allocator allocator = Allocator.Persistent) {
-            _values = new NativeArray<T>(new []{ value }, allocator);
+            _values = new NativeArray<T>(new[] { value }, allocator);
             Length = 1;
             Capacity = 1;
         }
@@ -78,7 +87,7 @@ namespace ChoyUtilities {
             Length = values.Length;
             Capacity = values.Length;
         }
-        
+
         public RawSet(Span<T> values, Allocator allocator = Allocator.Persistent) {
             _values = new NativeArray<T>(values.ToArray(), allocator);
             Length = values.Length;
@@ -93,7 +102,7 @@ namespace ChoyUtilities {
 
         public RawSet(Queue<T> values, Allocator allocator = Allocator.Persistent) :
             this(values.ToArray(), allocator) { }
-        
+
         public void Dispose() {
             if (!IsCreated) return;
             _values.Dispose();
@@ -104,17 +113,30 @@ namespace ChoyUtilities {
                 yield return t;
         }
 
-        public int CompareTo(RawSet<T> other) { return Length.CompareTo(other.Length); }
+        public int CompareTo(RawSet<T> other) {
+            return Length.CompareTo(other.Length);
+        }
 
-        public override int GetHashCode() { return _values.GetHashCode(); }
+        public override int GetHashCode() {
+            return _values.GetHashCode();
+        }
 
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
 
-        public override string ToString() { return _values.ToString(); }
+        public override string ToString() {
+            return _values.ToString();
+        }
 
-        public int CompareTo(object obj) { return obj is RawSet<T> other ? CompareTo(other) : -1; }
+        public int CompareTo(object obj) {
+            return obj is RawSet<T> other ? CompareTo(other) : -1;
+        }
 
-        public string ToString(string format, IFormatProvider formatProvider) { return ToString(); }
+        public string ToString(string format, IFormatProvider formatProvider) {
+            return ToString();
+        }
 
     }
+
 }
