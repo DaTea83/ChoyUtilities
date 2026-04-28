@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Unity.Scenes;
+//using Unity.Scenes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -125,7 +125,7 @@ namespace ChoyUtilities.Editor {
                     case "==========< Instances & Subscenes >==========":
                         continue;
                 }
-                if (obj.TryGetComponent(out SubScene _)) continue;
+                //if (obj.TryGetComponent(out SubScene _)) continue;
                 
                 if (obj.isStatic) {
                     obj.transform.SetParent(staticParent.transform);
