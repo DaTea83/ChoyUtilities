@@ -10,6 +10,9 @@ Added
 * Added Locker
 * Added Vault
 * Added Reserve
+* Added ReservePoolingManager
+* Added ReserveParticleManager
+* Added ReserveAudioManager
 
 Changed
 * RawSet, added Span consturctor

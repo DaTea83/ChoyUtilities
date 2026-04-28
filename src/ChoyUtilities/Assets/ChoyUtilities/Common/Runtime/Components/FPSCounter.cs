@@ -46,7 +46,7 @@ namespace ChoyUtilities {
 
         private void UpdateText() {
             if (displayText is null) return;
-            displayText.text = $"{FPS:F1}";
+            displayText.text = $"FPS: {FPS:F1}";
         }
     }
 }

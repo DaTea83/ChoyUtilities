@@ -13,6 +13,8 @@
 //    limitations under the License.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Burst;
 using Unity.Collections;
@@ -27,12 +29,16 @@ namespace ChoyUtilities {
     [BurstCompile]
     [Serializable]
     public partial struct Reserve<T> :
+        IEnumerable<Vault<T>>,
         IComparable<Reserve<T>>,
         IEquatable<Reserve<T>> {
 
         [SerializeField] private Vault<T>[] values;
-        public ushort Length => (ushort)values.Length;
-        public bool IsEmpty => values.Length == 0;
+        public readonly Vault<T> this[byte index] => values[index];
+        public readonly Vault<T> this[ushort index] => values[index];
+        public readonly Vault<T> this[int index] => values[index];
+        public readonly ushort Length => (ushort)values.Length;
+        public readonly bool IsEmpty => values.Length == 0;
 
         public Reserve(Reserve<T> other) : this(other.values) { }
 
@@ -100,6 +106,16 @@ namespace ChoyUtilities {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Reserve<T> other) {
             return values.Equals(other.values);
+        }
+
+        [BurstCompile]
+        public IEnumerator<Vault<T>> GetEnumerator() {
+            foreach (var vault in values) 
+                yield return vault;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
     }

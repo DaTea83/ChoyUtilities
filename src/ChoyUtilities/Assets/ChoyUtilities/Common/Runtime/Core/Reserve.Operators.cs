@@ -32,9 +32,29 @@ namespace ChoyUtilities {
 
             return false;
         }
+        
+        public bool TryGet(FixedString128Bytes key, out ushort id, out T value) {
+            value = default;
+            id = ushort.MaxValue;
+
+            foreach (var v in values) {
+                if (v.IsKeyEmpty) continue;
+                if (v.Key != key) continue;
+                
+                value = v.Value;
+                id = v.Id;
+                return true;
+            }
+
+            return false;
+        }
 
         public bool TryGet(string key, out T value) {
             return TryGet((FixedString128Bytes)key, out value);
+        }
+
+        public bool TryGet(string key, out ushort id, out T value) {
+            return TryGet((FixedString128Bytes)key, out id, out value);
         }
 
         /// <summary>
