@@ -40,15 +40,21 @@
                         <ui:VisualElement class="content-cards">
                             <ui:Foldout text="Bootloader" name="Bootloader" class="text content-foldout">
                                 <ChoyUtilities.Editor.StatusElement description="Present in current scene" name="Bootloader-Scene" class="text"/>
-                                <ChoyUtilities.Editor.StatusElement description="Present in as prefab" name="Bootloader-Asset" class="text"/>
+                                <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Bootloader-Asset" class="text"/>
                             </ui:Foldout>
                             <ui:Foldout text="Audio Manager" name="AudioManager" class="text content-foldout">
-                                <ChoyUtilities.Editor.StatusElement description="Present in current scene" name="Audio-Scene" class="text"/>
-                                <ChoyUtilities.Editor.StatusElement description="Present in as prefab" name="Audio-Asset" class="text"/>
+                                <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Audio-Scene" class="text"/>
+                                <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Audio-Asset" class="text"/>
+                                <ui:VisualElement style="flex-grow: 1;">
+                                    <ui:Button text="Settings Window" name="Audio-Window" class="config-button"/>
+                                </ui:VisualElement>
                             </ui:Foldout>
                             <ui:Foldout text="Particle System Manager" name="ParticleManager" class="text content-foldout">
-                                <ChoyUtilities.Editor.StatusElement description="Present in current scene" name="Particle-Scene" class="text"/>
-                                <ChoyUtilities.Editor.StatusElement description="Present in as prefab" name="Particle-Asset" class="text"/>
+                                <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Particle-Scene" class="text"/>
+                                <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Particle-Asset" class="text"/>
+                                <ui:VisualElement style="flex-grow: 1;">
+                                    <ui:Button text="Settings Window" name="Particle-Window" class="config-button"/>
+                                </ui:VisualElement>
                             </ui:Foldout>
                         </ui:VisualElement>
                     </ui:VisualElement>

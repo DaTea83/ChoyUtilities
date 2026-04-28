@@ -20,6 +20,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
+// ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
 
     public sealed partial class UtilitiesMenuWindow {
@@ -36,6 +37,12 @@ namespace ChoyUtilities.Editor {
             UpdateSceneNameText(_root);
             _bootloaderSceneElement.SetStatus(IsBootloaderInScene(out _) ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
             _bootloaderAssetElement.SetStatus(IsBootloaderInAssets() ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
+        }
+
+        private void CreatePathIfAbsent() {
+            if (!AssetDatabase.IsValidFolder(PrefabPath.TrimEnd('/')))
+                Directory.CreateDirectory(PrefabPath);
+            AssetDatabase.Refresh();
         }
 
         private StatusElement _bootloaderSceneElement;
@@ -55,7 +62,7 @@ namespace ChoyUtilities.Editor {
                     PrefabUtility.InstantiatePrefab(prefab);
                 }
                 else {
-                    EnsurePrefabPathExists();
+                    CreatePathIfAbsent();
                     var obj = new GameObject($"{fileName}", typeof(BootLoader));
                     PrefabUtility.SaveAsPrefabAssetAndConnect(obj, PrefabPath + $"{fileName}.prefab",
                         InteractionMode.AutomatedAction);
@@ -76,19 +83,13 @@ namespace ChoyUtilities.Editor {
                     }
                 }
                 else {
-                    EnsurePrefabPathExists();
+                    CreatePathIfAbsent();
                     var obj = new GameObject($"{fileName}", typeof(BootLoader));
                     PrefabUtility.SaveAsPrefabAsset(obj, PrefabPath + $"{fileName}.prefab");
                     Object.DestroyImmediate(obj);
                 }
                 RefreshConfig();
             };
-            return;
-            void EnsurePrefabPathExists() {
-                if (!AssetDatabase.IsValidFolder(PrefabPath.TrimEnd('/')))
-                    Directory.CreateDirectory(PrefabPath);
-                AssetDatabase.Refresh();
-            }
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -100,6 +101,10 @@ namespace ChoyUtilities.Editor {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsBootloaderInAssets() {
             return File.Exists(PrefabPath + $"{_currentScene.name}_BootLoader.prefab");
+        }
+
+        private void SetupAudioManagerConfig(VisualElement root) {
+            
         }
     }
 

@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//using Unity.Scenes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,6 +19,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 // ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
@@ -125,7 +125,6 @@ namespace ChoyUtilities.Editor {
                     case "==========< Instances & Subscenes >==========":
                         continue;
                 }
-                //if (obj.TryGetComponent(out SubScene _)) continue;
                 
                 if (obj.isStatic) {
                     obj.transform.SetParent(staticParent.transform);
@@ -143,7 +142,7 @@ namespace ChoyUtilities.Editor {
                     continue;
                 }
                 
-                if (obj.TryGetComponent(out Canvas _)) {
+                if (obj.TryGetComponent(out Canvas _) || obj.TryGetComponent(out UIDocument _)) {
                     obj.transform.SetParent(uiParent.transform);
                     continue;
                 }
