@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2] - 2026-04-29
+
+Fixed
+* SceneTemplateEditor.SortSceneObjects, now includes UIDocuments to UI catergory during sorting
+* SceneTemplateEditor.SortSceneObjects, temporary remove sorting for subscenes
+* Bootloader, added OnValidate to check whether each object is a prefab
+* UtilitiesMenuWindow, optimize bootloader creation logic
+
 ## [1.1.1] - 2026-04-28
 
 Fixed
