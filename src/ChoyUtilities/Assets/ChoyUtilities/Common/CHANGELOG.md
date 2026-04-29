@@ -2,19 +2,25 @@
 
 ## [1.1.2] - 2026-04-29
 
-Fixed
+### Fixed
 * SceneTemplateEditor.SortSceneObjects, now includes UIDocuments to UI catergory during sorting
 * SceneTemplateEditor.SortSceneObjects, temporary remove sorting for subscenes
 * Bootloader, added OnValidate to check whether each object is a prefab
 * UtilitiesMenuWindow, optimize bootloader creation logic
+* RawSet, fix constructor where it will cause additional GC allocation
+
+### Floater, reworked. Floater now always allocates an array size of 16, no more, no less. 
+* Floater, changed any constructors that may cause double allocation
+* Floater.Cast, removed any length checks
+* Floater.Operators, deletes all Add and Remove functions
 
 ## [1.1.1] - 2026-04-28
 
-Fixed
+### Fixed
 * UtilitiesMenuWindow, added lazy initialization
 * TextAssetMenuWindow, added lazy initialization
 
-Added
+### Added
 * Added Locker
 * Added Vault
 * Added Reserve
@@ -23,7 +29,7 @@ Added
 * Added ReserveAudioManager
 * Setup SceneConfig page for UtilitiesMenu
 
-Changed
+### Changed
 * RawSet, added Span consturctor
 * RawSet, added INativeList interface
 * Floater, added Span consturctor
@@ -34,7 +40,7 @@ Changed
 
 ## [1.1] - 2026-04-27
 
-Added
+### Added
 * Added UtilitiesMenu series, for now finished intergrate with SceneTools, rest will be added subsiquent version
 * Added new resources folder
 * Editor, added SortSceneObject
@@ -44,14 +50,14 @@ Added
 
 ## [1.0.10] - 2026-04-24
 
-Fixed
+### Fixed
 * MotionEvaluate, fixed incorrect equation for Coswave
 * MotionEvaluate, fixed incorrect equation for ElasticOut
 * MotionEvaluate, SqrEaseInOut use value check instead full lerp between two methods
 * MotionEvaluate, CubeEaseInOut use value check instead full lerp between two methods
 * TeaMotion, Run will be cancelled if Dispose is manually called
 
-Changed
+### Changed
 * MotionEvaluate, using "static Unity.Mathematics.math" instead of "Unity.Mathematics"
 * MotionEvaluate, added ElasticIn, BurstOut and BurstIn motion
 * MotionEvaluate, SqrEaseInOut renamed to SqrSnap
@@ -61,7 +67,7 @@ Changed
 
 ## [1.0.9] - 2026-04-23
 
-Changed
+### Changed
 * GenericAudioManager, now returns tuple values for all PlayClipAtPos and PlayClip
 * GenericParticleManager, now returns the said particle system for PlayEffectAtPosition
 * ETransformType, added flags attribute
@@ -73,7 +79,7 @@ Changed
 
 ## [1.0.8] - 2026-04-22
 
-Changed
+### Changed
 * Renamed TeaTranformMotion back to TeaMotion
 * TeaMotion, end transform now directly only use Floater value instead of incrementing it with start transform 
 * TeaMotion, prevent class disposal when motion still in progress
@@ -84,7 +90,7 @@ Changed
 
 ## [1.0.7] - 2026-04-21
 
-Changed
+### Changed
 * GenericSfxManager, renamed back to GenericAudioManager
 * Updated GenericMixerManager
 
@@ -92,11 +98,11 @@ Changed
 
 ## [1.0.6] - 2026-04-21
 
-Fixed
+### Fixed
 * Floater, fixed typo
 * RawSet, ToString same as Floater now returns the type of the container
 
-Changed
+### Changed
 * TeaTransformMotion, change time constant to 0.008333f
 * EnumCollection, added back extensions previously removed
 * AsyncCollection, marked RotateObjectAsync as obsolete
@@ -107,11 +113,11 @@ Changed
 
 ## [1.0.5] - 2026-04-19
 
-Added
+### Added
 * Added EditorCollection.Address
 * Added SceneTemplateEditor
 
-Changed
+### Changed
 * Floater, added Burstdiscard to a new function where exception is thrown
 * Updated TeaMotion
 * Moved "RemovedMissingScriptsEditor" to Editor/MenuItem
@@ -120,18 +126,18 @@ Changed
 
 ## [1.0.4] - 2026-04-18
 
-Changed
+### Changed
 * Full code cleanup, with added header and renames
 
 
 
 ## [1.0.3] - 2026-04-17
 
-Added
+### Added
 * Added GenericMixerManager
 * Added unit testing for Floater
 
-Changed
+### Changed
 * AsyncCollection, optimize catch exception
 * GenericSingleton, added DisallowMultipleComponent attribute, one object one singleton thanks
 * AsyncCollection, moved to Motion/Legacy
@@ -146,7 +152,7 @@ Changed
 * GenericOverlayUIManager, moved to UI/Generic
 * GenericFSM, moved to StateMachine/
 
-Removed
+### Removed
 * Microphone Recorder, moved to Misc
 * Microphone Attribute, moved to Misc
 * Quaternion cast from Floater
