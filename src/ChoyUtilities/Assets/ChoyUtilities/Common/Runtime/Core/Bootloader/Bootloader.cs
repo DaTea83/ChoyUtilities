@@ -15,6 +15,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace ChoyUtilities {
 
@@ -27,6 +30,17 @@ namespace ChoyUtilities {
         public MonoBehaviour[] Loaders { get; set; }
 
         public bool IsInitialized { get; private set; }
+
+#if UNITY_EDITOR        
+        private void OnValidate() {
+            if (Loaders is null || Loaders.Length == 0) return;
+
+            foreach (var loader in Loaders) {
+                if(PrefabUtility.GetCorrespondingObjectFromOriginalSource(loader) is not null) continue;
+                Debug.LogError($"Loader {loader.name} is not a prefab");
+            }
+        }
+#endif
 
         private async void OnEnable() {
             try {

@@ -1472,7 +1472,7 @@ GameObject:
   - component: {fileID: 1140289202}
   - component: {fileID: 1140289201}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Test Reserve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1513,12 +1513,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140289200}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1287808210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1231177892
 GameObject:
@@ -1720,6 +1720,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 698320246}
+  - {fileID: 1140289202}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299895538
@@ -2376,4 +2377,3 @@ SceneRoots:
   - {fileID: 389122888}
   - {fileID: 1031700602}
   - {fileID: 619404364}
-  - {fileID: 1140289202}

@@ -15,6 +15,7 @@
 using System;
 using UnityEngine.UIElements;
 
+// ReSharper disable once CheckNamespace
 namespace ChoyUtilities.Editor {
 
     public sealed partial class UtilitiesMenuWindow {
