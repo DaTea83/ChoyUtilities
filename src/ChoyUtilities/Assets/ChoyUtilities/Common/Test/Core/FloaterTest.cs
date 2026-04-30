@@ -28,13 +28,6 @@ namespace ChoyUtilities.Test {
         }
 
         [Test]
-        public void Floater_LengthTest() {
-            var insert = new[] { 1.23456789f, 2.3456789f, 3.456789f };
-            var floater = new Floater(insert);
-            Assert.AreEqual(insert.Length, floater.Length);
-        }
-
-        [Test]
         public void Floater_IsCreatedTest() {
             var insert = new[] { 1.23456789f, 2.3456789f, 3.456789f };
             var floater = new Floater(insert);

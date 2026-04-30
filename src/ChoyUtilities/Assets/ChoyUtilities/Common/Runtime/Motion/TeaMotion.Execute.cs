@@ -22,7 +22,8 @@ namespace ChoyUtilities {
     public partial class TeaMotion {
         private bool _isBuild;
 
-        public TeaMotion Build(Floater value, float duration, EMotion motion, ETransformType transformType = ETransformType.Transform) {
+        public TeaMotion Build(Floater value, float duration, 
+            EMotion motion = EMotion.Linear, ETransformType transformType = ETransformType.Transform) {
             if (_isBuild) return this;
             if (transformType == ETransformType.None)
                 transformType = ETransformType.Transform;
@@ -48,12 +49,46 @@ namespace ChoyUtilities {
             _isBuild = true;
             return this;
         }
+        
+        public TeaMotion Build(in Transform value, float duration, 
+            EMotion motion = EMotion.Linear, ETransformType transformType = ETransformType.Transform) {
+            if (_isBuild) return this;
+            if (transformType == ETransformType.None)
+                transformType = ETransformType.Transform;
+            _transformType = transformType;
+            _motion = motion;
+            if(duration <= 0) duration = 0.01f;
+            _duration = duration;
+
+            for (var i = 0; i < _transforms.Length; i++) {
+                var start = _transforms[i].localPosition;
+                var rotation = _transforms[i].localRotation;
+                var scale = _transforms[i].localScale;
+
+                _startPos[i] = start;
+                _startRot[i] = rotation;
+                _startScale[i] = scale;
+
+                _endPos[i] = value.localPosition;
+                _endRot[i] = value.localRotation;
+                _endScale[i] = value.localScale;
+            }
+
+            _isBuild = true;
+            return this;
+        }
+
+        public TeaMotion Build(float3 arg1, quaternion arg2, float duration,
+            EMotion motion = EMotion.Linear, ETransformType transformType = ETransformType.Transform) {
+            var value = new Floater(arg1, arg2);
+            return Build(value, duration, motion, transformType);
+        }
 
         private bool _isRun;
 
         public async Awaitable<TeaMotion> Run(Action onDone = null) {
             if (!_isBuild) {
-                Build(new Floater(float3.zero, quaternion.identity), 1f, EMotion.Linear);
+                Build(new Floater(float3.zero, quaternion.identity), 1f);
                 await Awaitable.EndOfFrameAsync(Token);
             }
 

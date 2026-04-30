@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.3] - 2026-04-30
+
+### Added
+* Floater, adding more edge case consturctors cause why not
+* TeaMotion, added a few new Build() overload
+
+### Changed
+* Floater, unified how quaternion constructor works
+* Floater, inline most constructors
+* TeaMotion, greatly discouraged to use single object consturctor
+
 ## [1.1.2] - 2026-04-29
 
 ### Fixed
