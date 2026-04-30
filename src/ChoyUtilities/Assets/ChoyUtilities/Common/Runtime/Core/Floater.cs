@@ -35,13 +35,13 @@ namespace ChoyUtilities {
 
         public float this[int index] {
             get {
-                if ((byte)index < 15)
+                if ((byte)index <= 15)
                     return values[index];
                 
                 return 0;
             }
             set {
-                if ((byte)index < 15)
+                if ((byte)index <= 15)
                     values[index] = value;
             }
         }
@@ -393,8 +393,9 @@ namespace ChoyUtilities {
         }
         public Floater(in Queue<float> value) { 
             values = new float[16];
+            var v = value.ToArray();
             for (var i = 0; i < value.Count; i++) {
-                values[i] = value.Dequeue();
+                values[i] = v[i];
             }
         }
         public Floater(in Span<float> value) { 
@@ -528,7 +529,8 @@ namespace ChoyUtilities {
 
         public Floater(in double[] value) {
             values = new float[16];
-            Array.Copy(value, values, math.min(value.Length, 16));
+            for (var i = 0; i < math.min(value.Length, 16); i++)
+                values[i] = (float)value[i];
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -536,7 +538,8 @@ namespace ChoyUtilities {
 
         public Floater(in half[] value) {
             values = new float[16];
-            Array.Copy(value, values, math.min(value.Length, 16));
+            for (var i = 0; i < math.min(value.Length, 16); i++)
+                values[i] = (float)value[i];
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

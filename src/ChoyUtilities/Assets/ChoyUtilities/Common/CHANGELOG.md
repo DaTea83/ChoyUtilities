@@ -4,6 +4,7 @@
 
 ### Added
 * Floater, adding more edge case consturctors cause why not
+* Floater, added test cases for all consturctors
 * TeaMotion, added a few new Build() overload
 
 ### Changed
