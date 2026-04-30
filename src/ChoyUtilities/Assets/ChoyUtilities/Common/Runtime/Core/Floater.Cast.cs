@@ -38,9 +38,9 @@ namespace ChoyUtilities {
         }
 
         public static implicit operator int[](Floater value) {
-            var set = new int[32];
+            var set = new int[16];
 
-            for (var i = 0; i < 32; i++)
+            for (var i = 0; i < 16; i++)
                 set[i] = (int)value.values[i];
 
             return set;
@@ -58,9 +58,9 @@ namespace ChoyUtilities {
         public static implicit operator Color(Floater value) => new (value.values[0], value.values[1], value.values[2], value.values[3]);
 
         public static implicit operator char[](Floater value) {
-            var set = new char[32];
+            var set = new char[16];
 
-            for (var i = 0; i < 32; i++) {
+            for (var i = 0; i < 16; i++) {
                 var j = (char)value.values[i];
                 set[i] = j;
             }
@@ -70,7 +70,7 @@ namespace ChoyUtilities {
 
         public static implicit operator string(Floater value) {
             char[] set = value;
-            return set.ToString();
+            return new string(set);
         }
 
         public static implicit operator NativeArray<float>.ReadOnly(Floater value) => new NativeArray<float>(value.values, Allocator.Temp).AsReadOnly();

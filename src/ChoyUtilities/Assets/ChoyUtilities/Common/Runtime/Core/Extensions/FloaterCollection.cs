@@ -25,20 +25,18 @@ namespace ChoyUtilities {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 PositionFromTransform(this Floater data) {
-            return data.Length < 9 ? float3.zero : new float3(data[0], data[1], data[2]);
+            return new float3(data[0], data[1], data[2]);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static quaternion RotationFromTransform(this Floater data) {
-            if (data.Length < 9) return quaternion.identity;
             var euler = new float3(data[3], data[4], data[5]);
-
             return quaternion.Euler(euler);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 ScaleFromTransform(this Floater data) {
-            return data.Length < 9 ? new float3(1, 1, 1) : new float3(data[6], data[7], data[8]);
+            return new float3(data[6], data[7], data[8]);
         }
 
         public static Transform Floater(this Transform obj, Floater data) {
@@ -83,8 +81,8 @@ namespace ChoyUtilities {
             if (!value.IsCreated)
                 throw new FloaterException("Floater is not created yet.");
 
-            var results = new T[value.Length];
-            for (var i = 0; i < value.Length; i++) results[i] = (T)Enum.ToObject(typeof(T), (uint)value[i]);
+            var results = new T[16];
+            for (var i = 0; i < 16; i++) results[i] = (T)Enum.ToObject(typeof(T), (uint)value[i]);
 
             return results;
         }

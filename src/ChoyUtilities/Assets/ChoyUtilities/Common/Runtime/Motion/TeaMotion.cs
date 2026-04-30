@@ -49,14 +49,15 @@ namespace ChoyUtilities {
         private RawSet<float3> _startScale;
         private RawSet<float3> _endScale;
 
-        public TeaMotion(Transform[] transforms) {
+        public TeaMotion(in Transform[] transforms) {
             _transforms = transforms;
             Init();
         }
 
+        [Obsolete("Consider cache in a single sized array instead.")]
         public TeaMotion(Transform transform) : this(new[] { transform }) { }
 
-        public TeaMotion(RectTransform[] transforms) {
+        public TeaMotion(in RectTransform[] transforms) {
             _transforms = new Transform[transforms.Length];
             var i = 0;
             foreach (var r in transforms) {
@@ -67,6 +68,7 @@ namespace ChoyUtilities {
             Init();
         }
 
+        [Obsolete("Consider cache in a single sized array instead.")]
         public TeaMotion(RectTransform transform) : this(new[] { transform }) { }
 
         private void Init() {
