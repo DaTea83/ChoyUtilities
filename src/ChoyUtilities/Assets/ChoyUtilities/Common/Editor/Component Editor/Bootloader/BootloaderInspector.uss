@@ -1,0 +1,19 @@
+.root {
+}
+
+.foldout {
+}
+
+.text {
+    -unity-font-definition: resource("Text/JetBrains_Mono/static/JetBrainsMono-Regular");
+}
+
+.field {
+    padding-left: 6px;
+    padding-bottom: 6px;
+}
+
+.func {
+    flex-direction: row;
+    justify-content: flex-end;
+}

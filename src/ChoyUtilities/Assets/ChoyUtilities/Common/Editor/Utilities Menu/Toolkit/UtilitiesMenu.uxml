@@ -31,9 +31,10 @@
                 <ui:Label text="Packages&#10;&#10;Work in progress" class="text"/>
             </ui:ScrollView>
             <ui:VisualElement name="Content-SceneConfig" class="content-page" style="display: flex;">
-                <ui:VisualElement style="flex-direction: row;">
-                    <ui:Button text="Refresh" name="Config-Refresh" class="text config-button"/>
-                    <ui:VisualElement style="flex-grow: 1;"/>
+                <ui:VisualElement class="tab-panel">
+                    <ui:Button text="Bootloader" name="Config-Boot" class="tab-button text config-button"/>
+                    <ui:Button text="Audio Manager" name="Config-Audio" class="tab-button text config-button"/>
+                    <ui:Button text="Particle System Manager" name="Config-Particle" class="tab-button text config-button"/>
                 </ui:VisualElement>
                 <ui:ScrollView name="" style="display: flex; flex-grow: 1;">
                     <ui:VisualElement class="content-config">
@@ -41,6 +42,10 @@
                             <ui:Foldout text="Bootloader" name="Bootloader" class="text content-foldout">
                                 <ChoyUtilities.Editor.StatusElement description="Present in current scene" name="Bootloader-Scene" class="text"/>
                                 <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Bootloader-Asset" class="text"/>
+                                <ui:VisualElement name="Bootloader-Content" class="content-field">
+                                    <ui:Label text="Content"/>
+                                    <ui:Label text="" name="Bootloader-Content-Label"/>
+                                </ui:VisualElement>
                             </ui:Foldout>
                             <ui:Foldout text="Audio Manager" name="AudioManager" class="text content-foldout">
                                 <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Audio-Scene" class="text"/>
