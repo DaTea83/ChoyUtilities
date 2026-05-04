@@ -18,7 +18,7 @@ using UnityEngine.UIElements;
 namespace ChoyUtilities.Editor {
 
     [UxmlElement]
-    public partial class StatusElement : VisualElement {
+    public sealed partial class StatusElement : VisualElement {
 
         public enum EStatus : byte {
 
@@ -54,7 +54,7 @@ namespace ChoyUtilities.Editor {
             switch (status) {
                 case EStatus.Present:
                     _status.text = "Present";
-                    _button.text = "";
+                    _button.text = "Exists";
                     _button.SetEnabled(false);
                     break;
                 case EStatus.NotFound:

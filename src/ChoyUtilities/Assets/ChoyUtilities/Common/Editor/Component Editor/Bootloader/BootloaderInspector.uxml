@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Bootloader/BootloaderInspector.uss?fileID=7433441132597879392&amp;guid=0416e7560777e574ab0645f0f476eb58&amp;type=3#BootloaderInspector"/>
+    <ui:VisualElement name="root" class="root" style="flex-grow: 1;">
+        <ui:ListView reorder-mode="Animated" reorderable="true" item-template="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Bootloader/LoaderItem/LoaderItem.uxml?fileID=9197481963319205126&amp;guid=75af79d648c56e64182384d7dce90674&amp;type=3#LoaderItem" header-title="Loaders" name="content" class="text"/>
+        <ui:VisualElement class="func">
+            <ui:Button text="Add" name="add-btn" class="text"/>
+            <ui:Button text="Remove" name="remove-btn" class="text"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

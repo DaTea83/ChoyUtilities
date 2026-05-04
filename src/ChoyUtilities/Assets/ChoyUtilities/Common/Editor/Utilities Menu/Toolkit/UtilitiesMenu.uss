@@ -188,11 +188,11 @@
 
 .config-button {
     margin-left: 12px;
-    margin-top: 24px;
+    margin-top: 12px;
     font-size: 16px;
-    padding-top: 24px;
+    padding-top: 12px;
     padding-right: 24px;
-    padding-bottom: 24px;
+    padding-bottom: 12px;
     padding-left: 24px;
     border-top-width: 1px;
     border-right-width: 1px;
@@ -202,10 +202,10 @@
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
-    margin-right: 12px;
+    margin-right: 0;
     flex-wrap: wrap;
     flex-direction: row;
-    color: rgb(19, 22, 29);
+    background-color: rgb(19, 22, 29);
 }
 
 .content-title {
@@ -221,4 +221,13 @@
     -unity-text-align: middle-left;
     margin-top: 24px;
     -unity-font-style: bold;
+}
+
+.content-field {
+    margin-left: 4px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding-bottom: 12px;
+    justify-content: space-between;
 }

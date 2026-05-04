@@ -36,6 +36,7 @@ namespace ChoyUtilities {
             if (Loaders is null || Loaders.Length == 0) return;
 
             foreach (var loader in Loaders) {
+                if (loader is null) continue;
                 if(PrefabUtility.GetCorrespondingObjectFromOriginalSource(loader) is not null) continue;
                 Debug.LogError($"Loader {loader.name} is not a prefab");
             }

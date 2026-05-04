@@ -26,17 +26,17 @@ namespace ChoyUtilities.Editor {
     public sealed partial class UtilitiesMenuWindow {
         
         private void SetupSceneConfig(VisualElement root) {
-            var refreshButton = root.Q<Button>("Config-Refresh");
-            refreshButton.clicked += RefreshConfig;
-            
             SetupBootloaderConfig(root);
         }
         
         private void RefreshConfig() {
             AssetDatabase.Refresh();
             UpdateSceneNameText(_root);
-            _bootloaderSceneElement.SetStatus(IsBootloaderInScene(out _) ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
+            
+            var isLoaderInScene = IsBootloaderInScene(out _);
+            _bootloaderSceneElement.SetStatus(isLoaderInScene ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
             _bootloaderAssetElement.SetStatus(IsBootloaderInAssets() ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
+            _bootLoaderContentLabel.text = isLoaderInScene ? string.Empty : "Bootloader not found in scene";
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -48,17 +48,21 @@ namespace ChoyUtilities.Editor {
 
         private StatusElement _bootloaderSceneElement;
         private StatusElement _bootloaderAssetElement;
-        
+        private Label _bootLoaderContentLabel;
+
         private void SetupBootloaderConfig(VisualElement root) {
             var fileName = $"{_currentScene.name}_BootLoader";
             _bootloaderSceneElement = root.Q<StatusElement>("Bootloader-Scene")
                            ?? throw new InvalidOperationException($"StatusElement with name 'Bootloader-Scene' not found in the root VisualElement.");
-
-            _bootloaderSceneElement.SetStatus(IsBootloaderInScene(out _) ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
+            
+            var isLoaderInScene = IsBootloaderInScene(out var bootloader);
+            var isLoaderInAssets = IsBootloaderInAssets();
+            
+            _bootloaderSceneElement.SetStatus(isLoaderInScene ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
             _bootloaderSceneElement.OnClicked += () => {
-                if (IsBootloaderInScene(out _)) return;
+                if (isLoaderInScene) return;
 
-                if (IsBootloaderInAssets()) {
+                if (isLoaderInAssets) {
                     var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(PrefabPath + $"{fileName}.prefab");
                     PrefabUtility.InstantiatePrefab(prefab);
                 }
@@ -71,11 +75,11 @@ namespace ChoyUtilities.Editor {
             _bootloaderAssetElement = root.Q<StatusElement>("Bootloader-Asset")
                                       ?? throw new InvalidOperationException($"StatusElement with name 'Bootloader-Asset' not found in the root VisualElement.");
 
-            _bootloaderAssetElement.SetStatus(IsBootloaderInAssets() ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
+            _bootloaderAssetElement.SetStatus(isLoaderInAssets ? StatusElement.EStatus.Present : StatusElement.EStatus.NotFound);
             _bootloaderAssetElement.OnClicked += () => {
 
                 CreatePathIfAbsent();
-                if (IsBootloaderInScene(out var bootloader)) {
+                if (isLoaderInScene) {
                     PrefabUtility.SaveAsPrefabAssetAndConnect(bootloader.gameObject, PrefabPath + $"{fileName}.prefab",
                         InteractionMode.AutomatedAction);
                 }
@@ -86,6 +90,14 @@ namespace ChoyUtilities.Editor {
                 }
                 RefreshConfig();
             };
+            
+            _bootLoaderContentLabel = root.Q<Label>("Bootloader-Content-Label");
+            if (isLoaderInScene) {
+                _bootLoaderContentLabel.text = string.Empty;
+            }
+            else {
+                _bootLoaderContentLabel.text = "Bootloader not found in scene";
+            }
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

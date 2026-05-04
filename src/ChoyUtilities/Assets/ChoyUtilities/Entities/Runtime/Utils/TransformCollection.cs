@@ -22,26 +22,17 @@ namespace ChoyUtilities.Entities {
     public static class EntitiesCollection {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Floater Floater(this LocalTransform lt) {
-            var set = new float[7];
             var euler = math.Euler(lt.Rotation);
-            set[0] = lt.Position.x;
-            set[1] = lt.Position.y;
-            set[2] = lt.Position.z;
-            set[3] = euler.x;
-            set[4] = euler.y;
-            set[5] = euler.z;
-            set[6] = lt.Scale;
-
-            return new Floater(set);
+            return new Floater(lt.Position.x, lt.Position.y, lt.Position.z, euler.x, euler.y, euler.z, lt.Scale);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static LocalTransform ToLocalTransform(this Floater fs) {
+        public static LocalTransform ToLocalTransform(this Floater floater) {
 
             return new LocalTransform {
-                Position = new float3(fs[0], fs[1], fs[2]),
-                Rotation = quaternion.Euler(fs[3], fs[4], fs[5]),
-                Scale = fs[6]
+                Position = new float3(floater[0], floater[1], floater[2]),
+                Rotation = quaternion.Euler(floater[3], floater[4], floater[5]),
+                Scale = floater[6]
             };
         }
 
