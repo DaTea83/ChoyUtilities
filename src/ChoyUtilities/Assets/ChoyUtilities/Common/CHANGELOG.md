@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.4] - 2026-05-04
+
+### Added
+* UtilitiesMenuWindow, added RemoveSpecificComponent
+* Bootloader, added custom inspector
+
+### Changed
+* UtilitiesMenuWindow, reworking scene config page
+
 ## [1.1.3] - 2026-04-30
 
 ### Added

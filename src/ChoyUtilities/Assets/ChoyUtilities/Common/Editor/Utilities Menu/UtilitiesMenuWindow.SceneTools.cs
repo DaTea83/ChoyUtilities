@@ -13,6 +13,8 @@
 //    limitations under the License.
 
 using System;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 // ReSharper disable once CheckNamespace
@@ -20,7 +22,7 @@ namespace ChoyUtilities.Editor {
 
     public sealed partial class UtilitiesMenuWindow {
 
-        private static void SetupSceneTools(VisualElement root) {
+        private void SetupSceneTools(VisualElement root) {
             var generateButton = root.Q<Button>(GetName("GenerateSceneStructure"))
                 ?? throw new InvalidOperationException("GenerateSceneStructure button not found");
             generateButton.clicked += SceneTemplateEditor.GenerateSceneStructure;
@@ -37,10 +39,65 @@ namespace ChoyUtilities.Editor {
                 ?? throw new InvalidOperationException("RemoveMissingScripts button not found");
             removeMissingButton.clicked += RemoveMissingScriptsEditor.RemoveMissingScripts;
             
+            var removeComponentButton = root.Q<Button>(GetName("RemoveComponent"))
+                ?? throw new InvalidOperationException("RemoveComponent button not found");
+            removeComponentButton.clicked += RemoveSpecificComponent;
+            
+            _removeComponentText = root.Q<TextField>("TextField-RemoveComponent")
+                ?? throw new InvalidOperationException("RemoveComponentText field not found");
+            
             return;
             string GetName(string uiName) => "Button-"+ uiName;
         }
 
+        private TextField _removeComponentText;
+        private void RemoveSpecificComponent() {
+            var typeName = _removeComponentText.text;
+            switch (typeName) {
+                case "":
+                case "Transform" or "GameObject":
+                    return;
+            }
+
+            var type = FindTypeByName(typeName);
+            if (type is null) {
+                Debug.LogWarning($"Type '{typeName}' not found. Please enter a valid component type name.");
+                return;
+            }
+
+            if (!type.IsSubclassOf(typeof(Component))) {
+                Debug.LogWarning($"Type '{typeName}' is not a Component.");
+                return;
+            }
+
+#if UNITY_2023_1_OR_NEWER
+            var objects = FindObjectsByType(type, FindObjectsInactive.Include, FindObjectsSortMode.None);
+#else
+            var objects = Object.FindObjectsOfType(type, true);
+#endif
+            foreach (var obj in objects) {
+                if (obj is not Component component) continue;
+                var go = component.gameObject;
+                Undo.DestroyObjectImmediate(component);
+                Debug.Log($"Removed component '{typeName}' from GameObject '{go.name}'", go);
+            }
+        }
+
+        private static Type FindTypeByName(string typeName) {
+            var type = Type.GetType(typeName);
+            if (type != null) return type;
+
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
+                type = assembly.GetType(typeName);
+                if (type != null) return type;
+
+                foreach (var t in assembly.GetTypes()) {
+                    if (t.Name == typeName) return t;
+                }
+            }
+
+            return null;
+        }
     }
 
 }

@@ -30,7 +30,7 @@
             <ui:ScrollView name="Content-Packages" class="content-page">
                 <ui:Label text="Packages&#10;&#10;Work in progress" class="text"/>
             </ui:ScrollView>
-            <ui:VisualElement name="Content-SceneConfig" class="content-page" style="display: flex;">
+            <ui:VisualElement name="Content-SceneConfig" class="content-page">
                 <ui:VisualElement class="tab-panel">
                     <ui:Button text="Bootloader" name="Config-Boot" class="tab-button text config-button"/>
                     <ui:Button text="Audio Manager" name="Config-Audio" class="tab-button text config-button"/>
@@ -65,7 +65,7 @@
                     </ui:VisualElement>
                 </ui:ScrollView>
             </ui:VisualElement>
-            <ui:ScrollView name="Content-SceneTools" class="content-page">
+            <ui:ScrollView name="Content-SceneTools" class="content-page" style="display: flex;">
                 <ui:Label text="Warning, the following functions shown may cause irreversible changes to the scene.&#10;&#10;Handle with caution" class="text content-cards" style="color: rgb(207, 175, 175);"/>
                 <ui:VisualElement name="Card-GenerateSceneStructure" class="content-cards" style="flex-grow: 1;">
                     <ui:VisualElement class="content-title" style="flex-grow: 1;">
@@ -94,6 +94,14 @@
                         <ui:Button text="Execute" name="Button-RemoveMissingScripts" class="text tab-button"/>
                     </ui:VisualElement>
                     <ui:Label text="Find and remove missing scripts for all scene objects" class="text content-details"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Card-RemoveComponent" class="content-cards" style="flex-grow: 1;">
+                    <ui:VisualElement class="content-title" style="flex-grow: 1;">
+                        <ui:Label text="Remove Specific Component" class="text"/>
+                        <ui:Button text="Execute" name="Button-RemoveComponent" class="text tab-button"/>
+                    </ui:VisualElement>
+                    <ui:TextField label="Insert component name" placeholder-text="" name="TextField-RemoveComponent" class="text" style="-unity-text-generator: standard; margin-left: 0; flex-wrap: wrap;"/>
+                    <ui:Label text="Remove a specific component from all game objects (Except transform component)" class="text content-details"/>
                 </ui:VisualElement>
                 <ui:VisualElement name="Card-Empty" class="content-cards" style="flex-grow: 1; display: none;">
                     <ui:VisualElement class="content-title" style="flex-grow: 1;">

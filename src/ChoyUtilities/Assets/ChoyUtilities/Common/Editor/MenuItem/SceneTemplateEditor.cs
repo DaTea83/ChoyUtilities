@@ -191,7 +191,7 @@ namespace ChoyUtilities.Editor {
             instanceParent.transform.SetSiblingIndex(7);
             
             tempParent.transform.DetachChildren();
-            Object.DestroyImmediate(tempParent);
+            Undo.DestroyObjectImmediate(tempParent);
             Debug.Log("Scene objects sorted.");
         }
     }
