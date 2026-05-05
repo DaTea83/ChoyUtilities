@@ -22,13 +22,15 @@ namespace ChoyUtilities {
     
     [DisallowMultipleComponent]
     [AddComponentMenu("Choy Utilities/Simple Follower")]
-    public class SimpleFollower : MonoBehaviour {
+    public sealed class SimpleFollower : MonoBehaviour {
         [SerializeField] private Transform target;
         [SerializeField] private float3 offset;
         [SerializeField] [Range(0f, 30f)] private float smoothFollowSpeed;
+        [SerializeField] private bool followRotation;
 
         private float _factor;
         private TransformAccessArray _transforms;
+        private ETransformType _transformType = ETransformType.None;
         
         private RawSet<float3> _startPos;
         private RawSet<float3> _endPos;
@@ -42,6 +44,7 @@ namespace ChoyUtilities {
             offset = transform.position - target.position;
             _factor = smoothFollowSpeed > 0 ? smoothFollowSpeed : 1f;
             _transforms = new TransformAccessArray(new [] { transform });
+            _transformType = followRotation ? ETransformType.Move | ETransformType.Rotate : ETransformType.Move;
         }
         
         private JobHandle _handle;
@@ -56,7 +59,7 @@ namespace ChoyUtilities {
             _endScale = new RawSet<float3>(transform.localScale, Allocator.TempJob);
             
             var job = new TransformMotionIJob() {
-                TransformType = ETransformType.Rotate | ETransformType.Move,
+                TransformType = _transformType,
                 Motion = EMotion.Linear,
                 T = _factor * Time.deltaTime,
                 StartPos = _startPos,

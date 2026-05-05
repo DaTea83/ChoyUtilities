@@ -14,11 +14,13 @@
 
 using System;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 // ReSharper disable CheckNamespace
 namespace ChoyUtilities.Editor {
-    internal class FancyReplaceWindow : EditorWindow {
+    internal sealed class FancyReplaceWindow : EditorWindow {
         private const byte FONT_SIZE = 24;
         private const byte BUTTON_PER_ROW = 5;
         private const float BUTTON_PADDING = 10f;
@@ -27,99 +29,88 @@ namespace ChoyUtilities.Editor {
 
         private static string _assetPath;
         private static EAssetType _assetType;
+        
+        private static ToolkitData? _toolkitData;
+        private static ToolkitData ToolkitData => _toolkitData ??= new ToolkitData("FancyReplaceWindow");
 
-        private static Vector2 _scrollPos;
+        private void OnEnable() {
+            var root = rootVisualElement;
+            root.Clear();
+            ToolkitData.Clone(root);
+            root.dataSource = this;
+            SetColorField(root);
+            SetButtons(root);
+            SetTextures(root);
+        }
 
-        private void OnGUI() {
-            GUILayout.Space(BUTTON_PADDING);
+        private static void SetColorField(VisualElement root) {
+            var field = root.Q<ColorField>("tint");
+            field.RegisterValueChangedCallback(evt => {
+                FancyReplaceEditor.Asset.color = new Floater(evt.newValue);
+                _ = FancyReplaceEditor.SaveData();
+            });
+        }
 
-            var matColor = EditorGUILayout.ColorField("Global Tint Color", FancyReplaceEditor.Asset.color,
-                GUILayout.Width(position.width), GUILayout.Height(HEAD_BUTTON_HEIGHT));
-            GUILayout.Space(BUTTON_PADDING);
-            FancyReplaceEditor.Asset.color = new Floater(matColor);
+        private void SetButtons(VisualElement root) {
+            var btnColor = root.Q<Button>("btn-color");
 
-            var clearButtonStyle = new GUIStyle(GUI.skin.button) {
-                fontSize = FONT_SIZE,
-                alignment = TextAnchor.MiddleCenter
-            };
-
-            if (GUILayout.Button("Reset Color", clearButtonStyle, GUILayout.Height(HEAD_BUTTON_HEIGHT))) {
+            btnColor.clicked += () => {
                 FancyReplaceEditor.Asset.color = new Floater(Color.white);
                 _ = FancyReplaceEditor.SaveData();
                 Close();
-            }
+            };
+            var btnSelection = root.Q<Button>("btn-selection");
 
-            GUILayout.Space(BUTTON_PADDING);
-
-            if (GUILayout.Button("Reset Selection", clearButtonStyle, GUILayout.Height(HEAD_BUTTON_HEIGHT))) {
+            btnSelection.clicked += () => {
                 if (TryRemove())
                     _ = FancyReplaceEditor.SaveData();
                 Close();
-            }
+            };
+        }
 
-            GUILayout.Space(BUTTON_PADDING);
-
+        private void SetTextures(VisualElement root) {
+            
+            var content = root.Q<VisualElement>("content");
             // Display own type textures first before global
             var typePath = FancyReplaceEditor.GetTypePath(_assetType);
             var fullPath = FancyReplaceEditor.FullTexturePath;
-
+            
             var textures = AssetDatabase.FindAssets("t:Texture2D", new[] {
                 typePath,
                 fullPath
             });
-
+            
             if (textures is null || textures.Length == 0) return;
 
-            EditorGUILayout.BeginVertical();
-
-            _scrollPos =
-                EditorGUILayout.BeginScrollView(_scrollPos, GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
-
-            if (textures.Length > 0) {
-                var width = (position.width - BUTTON_PER_ROW * BUTTON_PADDING) / BUTTON_PER_ROW;
-
-                for (var i = 0; i < textures.Length; i += BUTTON_PER_ROW) {
-                    EditorGUILayout.BeginHorizontal();
-
-                    for (var j = 0; j < BUTTON_PER_ROW; j++) {
-                        var index = i + j;
-
-                        if (index >= textures.Length) {
-                            GUILayout.Space(width);
-
-                            continue;
-                        }
-
-                        var texPath = AssetDatabase.GUIDToAssetPath(textures[index]);
-                        var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(texPath);
-
-                        if (GUILayout.Button(tex, GUILayout.Width(width), GUILayout.Height(BUTTON_HEIGHT))) {
-                            TryRemove();
-
-                            var newEntry = new MenuItemSerialize {
-                                idPath = _assetPath,
-                                texturePath = texPath,
-                                idType = _assetType.Floater()
-                            };
-                            FancyReplaceEditor.AddNew(newEntry);
-                            _ = FancyReplaceEditor.SaveData();
-                            Close();
-                        }
-
-                        GUILayout.Space(BUTTON_PADDING);
-                    }
-
-                    EditorGUILayout.EndHorizontal();
-                    GUILayout.Space(BUTTON_PADDING);
-                }
+            foreach (var textureGuid in textures) {
+                var texPath = AssetDatabase.GUIDToAssetPath(textureGuid);
+                var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(texPath);
+                var button = new Button {
+                    text = string.Empty,
+                    iconImage = tex,
+                    
+                };
+                button.clicked += () => {
+                    TryRemove();
+                    
+                    var newEntry = new MenuItemSerialize {
+                        idPath = _assetPath,
+                        texturePath = texPath,
+                        idType = _assetType.Floater()
+                    };
+                    FancyReplaceEditor.AddNew(newEntry);
+                    _ = FancyReplaceEditor.SaveData();
+                    Close();
+                };
+                button.AddToClassList("selection");
+                content.Add(button);
             }
-
-            EditorGUILayout.EndScrollView();
-            EditorGUILayout.EndVertical();
         }
 
         internal static void ShowWindow(string assetPath, EAssetType type) {
             var window = GetWindow<FancyReplaceWindow>(FancyReplaceEditor.DEFAULT_NAME);
+            window.titleContent = new GUIContent("Fancy Replace");
+            window.minSize = new Vector2(300, 400);
             _assetPath = assetPath;
             _assetType = type;
             window.Show();

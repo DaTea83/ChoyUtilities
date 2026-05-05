@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ui:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ui="UnityEngine.UIElements"
-    xmlns:uie="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd"
->
-    
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/ChoyUtilities/Common/Editor/FancyReplace/Toolkit/FancyReplaceWindow.uss?fileID=7433441132597879392&amp;guid=ddafc0a54267c3c4b9feb12727182ab7&amp;type=3#FancyReplaceWindow"/>
+    <ui:VisualElement name="root" class="root text" style="flex-grow: 1;">
+        <ui:Label text="Fancy Replace" class="title"/>
+        <ui:VisualElement class="func">
+            <uie:ColorField label="Tint" value="rgb(255, 255, 255)" name="tint" class="func" style="margin-left: 4px; margin-bottom: 4px; margin-right: 4px; -unity-font-style: bold; padding-bottom: 0; padding-left: 0; padding-right: 0;"/>
+            <ui:Button text="Reset Color" name="btn-color" class="button"/>
+            <ui:Button text="Reset Selection" name="btn-selection" class="button"/>
+        </ui:VisualElement>
+        <ui:ScrollView name="content" mode="VerticalAndHorizontal" horizontal-page-size="1" horizontal-scroller-visibility="Hidden" class="scroll" style="align-items: stretch; justify-content: flex-start; align-self: stretch;"/>
+    </ui:VisualElement>
 </ui:UXML>
