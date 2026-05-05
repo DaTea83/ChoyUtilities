@@ -88,6 +88,10 @@ https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyU
 
 ## Base Package
 ## Editor
+## Utilities Menu  
+
+// TODO
+
 ## Fancy Replace
 
 A Simple Editor Tool which allows you to replace the original icon with custom made.
@@ -110,44 +114,6 @@ After:
 PS. In a group project settings use it with caution as it confuses any unknowing person easily
 
 ## Runtime
-## Floater
-
-In a nutshell this is just a float array, but a very flexible one  
-Its `Burst Compile` and `Serializable` supported  
-
-It's constructor supports almost any data types commonly found in Unity, like:
-
-```
-
-	new Floater(float)
-	new Floater(int)
-	new Floater(bool)
-	new Floater(string)
-	new Floater(Color)
-	new Floater(Transform)
-	new Floater(Quaternion)
-	new Floater(float2~4)
-	new Floater(Vector2~4)
-	new Floater(float4x4)
-	new Floater(Enum)
-	...etc
-
-```
-It also supports any type casting between these data types
-
-So someting like:  
-
-```
-
-	string value = new Floater(Color)
-	Transform value = new Floater(bool[9])
-	Quaternion value = new Floater(Enum[])
-	...and more
-
-```
-
-These types of convertion is now possible  
-Why? I do because I can
 
 ## Entities Package
 
