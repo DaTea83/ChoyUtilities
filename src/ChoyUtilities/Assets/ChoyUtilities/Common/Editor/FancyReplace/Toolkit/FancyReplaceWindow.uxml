@@ -7,6 +7,6 @@
             <ui:Button text="Reset Color" name="btn-color" class="button"/>
             <ui:Button text="Reset Selection" name="btn-selection" class="button"/>
         </ui:VisualElement>
-        <ui:ScrollView name="content" mode="VerticalAndHorizontal" horizontal-page-size="1" horizontal-scroller-visibility="Hidden" class="scroll" style="align-items: stretch; justify-content: flex-start; align-self: stretch;"/>
+        <ui:VisualElement name="content" class="scroll" style="flex-grow: 1;"/>
     </ui:VisualElement>
 </ui:UXML>
