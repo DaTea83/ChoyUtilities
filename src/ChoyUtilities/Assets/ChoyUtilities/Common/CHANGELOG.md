@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.5] - 2026-05-05
+
+### Changed
+* SimpleFollower, added followRotation option
+* FancyReplace, now driven using UI toolkit
+
 ## [1.1.4] - 2026-05-04
 
 ### Added
