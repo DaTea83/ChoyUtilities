@@ -1,9 +1,15 @@
 .text {
     -unity-font-definition: resource("Text/JetBrains_Mono/static/JetBrainsMono-Regular");
     -unity-font-style: bold;
+    font-size: 12px;
+    -unity-text-generator: standard;
 }
 
 .field {
     padding-left: 6px;
     padding-bottom: 6px;
+    -unity-text-generator: standard;
+    margin-top: 2px;
+    padding-top: 0;
+    margin-bottom: 4px;
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.6] - 2026-05-06
+
+### Changed
+* UtilitiesMenuWindow, config now driven with tabs
+* UtilitiesMenuWindow, bootloader list now can be modified from the window
+
 ## [1.1.5] - 2026-05-05
 
 ### Changed

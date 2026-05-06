@@ -27,6 +27,7 @@ namespace ChoyUtilities.Editor {
         
         private const string GIT_LINK = "https://github.com/DaTea83/ChoyUtilities";
         private string PrefabPath => $"Assets/{EditorCollection.ProjectFolderName}/{_currentScene.name}/";
+        private static readonly string[] ConfigTabs = { "Bootloader", "AudioManager", "ParticleManager"};
         private static readonly string[] Tabs = { "Status", "Packages", "SceneConfig", "SceneTools" };
         
         // Lazy initialization of ToolkitData for domain reload
