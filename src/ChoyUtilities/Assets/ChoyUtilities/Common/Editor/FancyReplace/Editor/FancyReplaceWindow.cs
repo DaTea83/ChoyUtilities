@@ -20,12 +20,8 @@ using UnityEngine.UIElements;
 
 // ReSharper disable CheckNamespace
 namespace ChoyUtilities.Editor {
+    
     internal sealed class FancyReplaceWindow : EditorWindow {
-        private const byte FONT_SIZE = 24;
-        private const byte BUTTON_PER_ROW = 5;
-        private const float BUTTON_PADDING = 10f;
-        private const float BUTTON_HEIGHT = 100f;
-        private const float HEAD_BUTTON_HEIGHT = 36f;
 
         private static string _assetPath;
         private static EAssetType _assetType;
@@ -45,6 +41,7 @@ namespace ChoyUtilities.Editor {
 
         private static void SetColorField(VisualElement root) {
             var field = root.Q<ColorField>("tint");
+            field.value = FancyReplaceEditor.Asset.color;
             field.RegisterValueChangedCallback(evt => {
                 FancyReplaceEditor.Asset.color = new Floater(evt.newValue);
                 _ = FancyReplaceEditor.SaveData();

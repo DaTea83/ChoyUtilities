@@ -30,42 +30,39 @@
             <ui:ScrollView name="Content-Packages" class="content-page">
                 <ui:Label text="Packages&#10;&#10;Work in progress" class="text"/>
             </ui:ScrollView>
-            <ui:VisualElement name="Content-SceneConfig" class="content-page">
+            <ui:VisualElement name="Content-SceneConfig" class="content-page" style="display: flex;">
                 <ui:VisualElement class="tab-panel">
-                    <ui:Button text="Bootloader" name="Config-Boot" class="tab-button text config-button"/>
-                    <ui:Button text="Audio Manager" name="Config-Audio" class="tab-button text config-button"/>
-                    <ui:Button text="Particle System Manager" name="Config-Particle" class="tab-button text config-button"/>
+                    <ui:Button text="Bootloader" name="Config-Bootloader" class="tab-button text config-button config-button-active"/>
+                    <ui:Button text="Audio Manager" name="Config-AudioManager" class="tab-button text config-button"/>
+                    <ui:Button text="Particle System Manager" name="Config-ParticleManager" class="tab-button text config-button"/>
                 </ui:VisualElement>
-                <ui:ScrollView name="" style="display: flex; flex-grow: 1;">
-                    <ui:VisualElement class="content-config">
-                        <ui:VisualElement class="content-cards">
-                            <ui:Foldout text="Bootloader" name="Bootloader" class="text content-foldout">
-                                <ChoyUtilities.Editor.StatusElement description="Present in current scene" name="Bootloader-Scene" class="text"/>
-                                <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Bootloader-Asset" class="text"/>
-                                <ui:VisualElement name="Bootloader-Content" class="content-field">
-                                    <ui:Label text="Content"/>
-                                    <ui:Label text="" name="Bootloader-Content-Label"/>
-                                </ui:VisualElement>
-                            </ui:Foldout>
-                            <ui:Foldout text="Audio Manager" name="AudioManager" class="text content-foldout">
-                                <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Audio-Scene" class="text"/>
-                                <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Audio-Asset" class="text"/>
-                                <ui:VisualElement style="flex-grow: 1;">
-                                    <ui:Button text="Settings Window" name="Audio-Window" class="config-button"/>
-                                </ui:VisualElement>
-                            </ui:Foldout>
-                            <ui:Foldout text="Particle System Manager" name="ParticleManager" class="text content-foldout">
-                                <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Particle-Scene" class="text"/>
-                                <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Particle-Asset" class="text"/>
-                                <ui:VisualElement style="flex-grow: 1;">
-                                    <ui:Button text="Settings Window" name="Particle-Window" class="config-button"/>
-                                </ui:VisualElement>
-                            </ui:Foldout>
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                </ui:ScrollView>
+                <ui:VisualElement class="content-cards" style="flex-grow: 1; -unity-text-generator: standard;">
+                    <ui:Foldout text="Bootloader" name="Bootloader" class="text content-foldout content-foldout-active">
+                        <ChoyUtilities.Editor.StatusElement description="Present in current scene" name="Bootloader-Scene" class="text"/>
+                        <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Bootloader-Asset" class="text"/>
+                        <ui:ScrollView style="padding-left: 4px; padding-top: 12px;">
+                            <ui:Label text="Content"/>
+                            <ui:Label text="" name="Bootloader-Content-Label"/>
+                            <ui:VisualElement style="flex-direction: row; justify-content: flex-end;">
+                                <ui:Button text="Add" name="Bootloader-Add" class="tab-button"/>
+                                <ui:Button text="Remove" name="Bootloader-Remove" class="tab-button"/>
+                            </ui:VisualElement>
+                            <ui:ListView name="Bootloader-Content-List" reorderable="true" item-template="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Bootloader/LoaderItem/LoaderItem.uxml?fileID=9197481963319205126&amp;guid=75af79d648c56e64182384d7dce90674&amp;type=3#LoaderItem" reorder-mode="Animated" virtualization-method="DynamicHeight" style="padding-left: 12px; padding-right: 12px;"/>
+                        </ui:ScrollView>
+                    </ui:Foldout>
+                    <ui:Foldout text="Audio Manager" name="AudioManager" class="text content-foldout">
+                        <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Audio-Scene" class="text"/>
+                        <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Audio-Asset" class="text"/>
+                        <ui:VisualElement style="flex-grow: 1;"/>
+                    </ui:Foldout>
+                    <ui:Foldout text="Particle System Manager" name="ParticleManager" class="text content-foldout">
+                        <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Particle-Scene" class="text"/>
+                        <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Particle-Asset" class="text"/>
+                        <ui:VisualElement style="flex-grow: 1;"/>
+                    </ui:Foldout>
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:ScrollView name="Content-SceneTools" class="content-page" style="display: flex;">
+            <ui:ScrollView name="Content-SceneTools" class="content-page">
                 <ui:Label text="Warning, the following functions shown may cause irreversible changes to the scene.&#10;&#10;Handle with caution" class="text content-cards" style="color: rgb(207, 175, 175);"/>
                 <ui:VisualElement name="Card-GenerateSceneStructure" class="content-cards" style="flex-grow: 1;">
                     <ui:VisualElement class="content-title" style="flex-grow: 1;">

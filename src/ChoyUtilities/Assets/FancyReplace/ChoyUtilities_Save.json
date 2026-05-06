@@ -119,13 +119,37 @@
             },
             "idPath": "Assets/Sandbox",
             "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/All/frame_bug_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+        },
+        {
+            "idType": {
+                "values": [
+                    4.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "idPath": "Assets/Samples",
+            "texturePath": "Assets/ChoyUtilities/Common/Editor/FancyReplace/Textures/All/delete_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
         }
     ],
     "color": {
         "values": [
-            0.22215335071086884,
-            0.16860155761241914,
-            0.6549863815307617,
+            0.2288016527891159,
+            0.39892691373825076,
+            0.6657681465148926,
             1.0,
             0.0,
             0.0,

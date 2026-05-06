@@ -51,6 +51,7 @@ namespace ChoyUtilities.Editor {
             };
 
             root.Q<Button>("remove-btn").clicked += () => {
+                if (loadersProp.arraySize == 0) return;
                 var index = content.selectedIndex;
                 if (index < 0 || index >= loadersProp.arraySize) {
                     loadersProp.arraySize--;
