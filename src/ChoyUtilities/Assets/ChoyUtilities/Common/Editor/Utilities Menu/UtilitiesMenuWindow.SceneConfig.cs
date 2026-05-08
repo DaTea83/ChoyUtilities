@@ -198,7 +198,15 @@ namespace ChoyUtilities.Editor {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsBootloaderInAssets() => File.Exists(PrefabPath + $"{_currentScene.name}_BootLoader.prefab");
 
+        private StatusElement _audioManagerSceneElement;
+        private StatusElement _audioManagerAssetElement;
+        private Label _audioManagerContentLabel;
+        
         private void SetupAudioManagerConfig(VisualElement root) {
+            var fileName = $"{_currentScene.name}_AudioManager";
+            _audioManagerSceneElement = root.Q<StatusElement>("AudioManager-Scene")
+                ?? throw new InvalidOperationException($"StatusElement with name 'AudioManager-Scene' not found in the root VisualElement.");
+            
             
         }
     }

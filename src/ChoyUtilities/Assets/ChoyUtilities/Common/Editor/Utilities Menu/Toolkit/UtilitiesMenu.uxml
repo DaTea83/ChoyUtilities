@@ -53,12 +53,28 @@
                     <ui:Foldout text="Audio Manager" name="AudioManager" class="text content-foldout">
                         <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Audio-Scene" class="text"/>
                         <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Audio-Asset" class="text"/>
-                        <ui:VisualElement style="flex-grow: 1;"/>
+                        <ui:ScrollView style="padding-left: 4px; padding-top: 12px;">
+                            <ui:Label text="Content"/>
+                            <ui:Label text="" name="AudioManager-Content-Label"/>
+                            <ui:VisualElement style="flex-direction: row; justify-content: flex-end;">
+                                <ui:Button text="Add" name="AudioManager-Add" class="tab-button"/>
+                                <ui:Button text="Remove" name="AudioManager-Remove" class="tab-button"/>
+                            </ui:VisualElement>
+                            <ui:ListView name="AudioManager-Content-List" reorderable="true" item-template="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Bootloader/LoaderItem/LoaderItem.uxml?fileID=9197481963319205126&amp;guid=75af79d648c56e64182384d7dce90674&amp;type=3#LoaderItem" reorder-mode="Animated" virtualization-method="DynamicHeight" style="padding-left: 12px; padding-right: 12px;"/>
+                        </ui:ScrollView>
                     </ui:Foldout>
                     <ui:Foldout text="Particle System Manager" name="ParticleManager" class="text content-foldout">
                         <ChoyUtilities.Editor.StatusElement description="Present in current Bootloader" name="Particle-Scene" class="text"/>
                         <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Particle-Asset" class="text"/>
-                        <ui:VisualElement style="flex-grow: 1;"/>
+                        <ui:ScrollView style="padding-left: 4px; padding-top: 12px;">
+                            <ui:Label text="Content"/>
+                            <ui:Label text="" name="ParticleManager-Content-Label"/>
+                            <ui:VisualElement style="flex-direction: row; justify-content: flex-end;">
+                                <ui:Button text="Add" name="ParticleManager-Add" class="tab-button"/>
+                                <ui:Button text="Remove" name="ParticleManager-Remove" class="tab-button"/>
+                            </ui:VisualElement>
+                            <ui:ListView name="ParticleManager-Content-List" reorderable="true" item-template="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Bootloader/LoaderItem/LoaderItem.uxml?fileID=9197481963319205126&amp;guid=75af79d648c56e64182384d7dce90674&amp;type=3#LoaderItem" reorder-mode="Animated" virtualization-method="DynamicHeight" style="padding-left: 12px; padding-right: 12px;"/>
+                        </ui:ScrollView>
                     </ui:Foldout>
                 </ui:VisualElement>
             </ui:VisualElement>
