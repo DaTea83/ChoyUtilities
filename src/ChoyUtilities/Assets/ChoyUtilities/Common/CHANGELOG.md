@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.7] - 2026-05-09
+
+### Changed 
+* Rawset, default allocation changed from Persistent to Domain
+
 ## [1.1.6] - 2026-05-06
 
 ### Changed

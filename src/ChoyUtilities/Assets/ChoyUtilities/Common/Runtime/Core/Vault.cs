@@ -20,6 +20,12 @@ using UnityEngine;
 
 namespace ChoyUtilities {
 
+    /// <summary>
+    ///     A basic unit for the <see cref="Reserve{T}"/>
+    /// </summary>
+    /// <typeparam name="T">
+    /// Object you want to store
+    /// </typeparam>
     [BurstCompile]
     [Serializable]
     public struct Vault<T> :
@@ -29,6 +35,7 @@ namespace ChoyUtilities {
         IEquatable<Locker<ushort>> {
 
         [SerializeField] private Locker<ushort> locker;
+        [field: SerializeField] public T Value { get; set; }
 
         public FixedString128Bytes Key {
             readonly get => locker.Key;
@@ -42,7 +49,6 @@ namespace ChoyUtilities {
 
         public bool IsKeyEmpty => locker.IsKeyEmpty;
 
-        [field: SerializeField] public T Value { get; set; }
 
         public Vault(ushort id, T value) {
             locker = new Locker<ushort>(id);

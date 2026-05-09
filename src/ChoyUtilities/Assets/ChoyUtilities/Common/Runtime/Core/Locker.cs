@@ -21,6 +21,13 @@ using UnityEngine;
 
 namespace ChoyUtilities {
 
+    /// <summary>
+    ///     In short its called Locker cause it uses as a lock.
+    ///     You got a string as the identifier and a T value, which T as the id for the identifier.
+    /// </summary>
+    /// <typeparam name="T">
+    ///     T must be a number type
+    /// </typeparam>
     [BurstCompile]
     [Serializable]
     public partial struct Locker<T> :
@@ -39,13 +46,13 @@ namespace ChoyUtilities {
         IFormattable, IConvertible {
 
         [SerializeField] private string key;
+        public T Value { readonly get; set; }
 
         public FixedString128Bytes Key {
             readonly get => key;
             set => key = value.ToString();
         }
 
-        public T Value { readonly get; set; }
         public bool IsKeyEmpty => Key.IsEmpty;
 
         public Locker(FixedString128Bytes key, T value) {

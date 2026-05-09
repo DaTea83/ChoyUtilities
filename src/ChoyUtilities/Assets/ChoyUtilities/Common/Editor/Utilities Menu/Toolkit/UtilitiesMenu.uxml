@@ -36,7 +36,7 @@
                     <ui:Button text="Audio Manager" name="Config-AudioManager" class="tab-button text config-button"/>
                     <ui:Button text="Particle System Manager" name="Config-ParticleManager" class="tab-button text config-button"/>
                 </ui:VisualElement>
-                <ui:VisualElement class="content-cards" style="flex-grow: 1; -unity-text-generator: standard;">
+                <ui:ScrollView class="content-cards">
                     <ui:Foldout text="Bootloader" name="Bootloader" class="text content-foldout content-foldout-active">
                         <ChoyUtilities.Editor.StatusElement description="Present in current scene" name="Bootloader-Scene" class="text"/>
                         <ChoyUtilities.Editor.StatusElement description="Present as prefab" name="Bootloader-Asset" class="text"/>
@@ -76,7 +76,7 @@
                             <ui:ListView name="ParticleManager-Content-List" reorderable="true" item-template="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Bootloader/LoaderItem/LoaderItem.uxml?fileID=9197481963319205126&amp;guid=75af79d648c56e64182384d7dce90674&amp;type=3#LoaderItem" reorder-mode="Animated" virtualization-method="DynamicHeight" style="padding-left: 12px; padding-right: 12px;"/>
                         </ui:ScrollView>
                     </ui:Foldout>
-                </ui:VisualElement>
+                </ui:ScrollView>
             </ui:VisualElement>
             <ui:ScrollView name="Content-SceneTools" class="content-page">
                 <ui:Label text="Warning, the following functions shown may cause irreversible changes to the scene.&#10;&#10;Handle with caution" class="text content-cards" style="color: rgb(207, 175, 175);"/>

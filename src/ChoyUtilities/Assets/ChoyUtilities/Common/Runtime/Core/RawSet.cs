@@ -20,6 +20,10 @@ using Unity.Collections;
 
 namespace ChoyUtilities {
 
+    /// <summary>
+    ///     Extended version of NativeArray
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [BurstCompile]
     [Serializable]
     public partial struct RawSet<T> : IDisposable, IEnumerable<T>, IFormattable,
@@ -55,53 +59,53 @@ namespace ChoyUtilities {
             Capacity = values.Length;
         }
 
-        public RawSet(NativeList<T> values, Allocator allocator = Allocator.Persistent) : this(
+        public RawSet(NativeList<T> values, Allocator allocator = Allocator.Domain) : this(
             values.ToArray(allocator)) { }
 
-        public RawSet(byte size, Allocator allocator = Allocator.Persistent) {
+        public RawSet(byte size, Allocator allocator = Allocator.Domain) {
             _values = new NativeArray<T>(size, allocator);
             Length = size;
             Capacity = size;
         }
 
-        public RawSet(ushort size, Allocator allocator = Allocator.Persistent) {
+        public RawSet(ushort size, Allocator allocator = Allocator.Domain) {
             _values = new NativeArray<T>(size, allocator);
             Length = size;
             Capacity = size;
         }
 
-        public RawSet(int size, Allocator allocator = Allocator.Persistent) {
+        public RawSet(int size, Allocator allocator = Allocator.Domain) {
             _values = new NativeArray<T>(size, allocator);
             Length = size;
             Capacity = size;
         }
 
-        public RawSet(T value, Allocator allocator = Allocator.Persistent) {
+        public RawSet(T value, Allocator allocator = Allocator.Domain) {
             _values = new NativeArray<T>(1, allocator);
             _values[0] = value;
             Length = 1;
             Capacity = 1;
         }
 
-        public RawSet(T[] values, Allocator allocator = Allocator.Persistent) {
+        public RawSet(T[] values, Allocator allocator = Allocator.Domain) {
             _values = new NativeArray<T>(values, allocator);
             Length = values.Length;
             Capacity = values.Length;
         }
 
-        public RawSet(Span<T> values, Allocator allocator = Allocator.Persistent) {
+        public RawSet(Span<T> values, Allocator allocator = Allocator.Domain) {
             _values = new NativeArray<T>(values.ToArray(), allocator);
             Length = values.Length;
             Capacity = values.Length;
         }
 
-        public RawSet(List<T> values, Allocator allocator = Allocator.Persistent) :
+        public RawSet(List<T> values, Allocator allocator = Allocator.Domain) :
             this(values.ToArray(), allocator) { }
 
-        public RawSet(Stack<T> values, Allocator allocator = Allocator.Persistent) :
+        public RawSet(Stack<T> values, Allocator allocator = Allocator.Domain) :
             this(values.ToArray(), allocator) { }
 
-        public RawSet(Queue<T> values, Allocator allocator = Allocator.Persistent) :
+        public RawSet(Queue<T> values, Allocator allocator = Allocator.Domain) :
             this(values.ToArray(), allocator) { }
 
         public void Dispose() {

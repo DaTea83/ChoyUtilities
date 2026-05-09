@@ -77,7 +77,7 @@ namespace ChoyUtilities.Editor {
             SetActiveConfigTab(root, ConfigTabs[0]);
         }
 
-        private void SetActiveConfigTab(VisualElement root, string newActive) {
+        private static void SetActiveConfigTab(VisualElement root, string newActive) {
             foreach (var tab in ConfigTabs) {
                 var button = root.Q<Button>("Config-" + tab)
                              ?? throw new InvalidOperationException($"Button with name '{tab}' not found in the root VisualElement.");
