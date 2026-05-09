@@ -30,7 +30,7 @@ I'll be continuously updating it to add more features, mainly to solve issues I 
 [Requirements](#requirements)  
 \
 [Installation](#installation)  
-\
+
 
 ## Requirements
 
