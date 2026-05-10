@@ -27,7 +27,8 @@ namespace ChoyUtilities {
         [SerializeField] private float rotateSpeed;
 
         private float3 _rotateDirection;
-        private TransformAccessArray _transforms;
+        private TransformAccessArray _transformAccess;
+        private readonly Transform[] _transforms = new Transform[1];
         
         private RawSet<float3> _startPos;
         private RawSet<float3> _endPos;
@@ -37,7 +38,8 @@ namespace ChoyUtilities {
         private RawSet<float3> _endScale;
 
         private void OnEnable() {
-            _transforms = new TransformAccessArray(new [] { transform });
+            _transforms[0] = transform;
+            _transformAccess = new TransformAccessArray(_transforms);
             if ((rotateAxis & EAxis.X) != 0)
                 _rotateDirection.x = 1f;
 
@@ -72,7 +74,7 @@ namespace ChoyUtilities {
                 EndScale = _endScale
             };
             
-            _handle = job.Schedule(_transforms);
+            _handle = job.Schedule(_transformAccess);
         }
 
         private void LateUpdate() {
@@ -87,7 +89,7 @@ namespace ChoyUtilities {
         }
 
         private void OnDisable() {
-            if (_transforms.isCreated) _transforms.Dispose();
+            if (_transformAccess.isCreated) _transformAccess.Dispose();
         }
 
     }

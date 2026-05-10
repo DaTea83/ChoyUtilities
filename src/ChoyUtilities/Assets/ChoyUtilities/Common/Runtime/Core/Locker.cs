@@ -88,7 +88,7 @@ namespace ChoyUtilities {
 
         [BurstDiscard]
         public override string ToString() {
-            return $"{nameof(Key)}: {Key}, {nameof(Value)}: {Value}";
+            return $"{nameof(Key)}: {Key.ToString()}, {nameof(Value)}: {Value.ToString()}";
         }
 
         [BurstDiscard]

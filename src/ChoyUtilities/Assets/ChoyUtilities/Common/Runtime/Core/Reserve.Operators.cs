@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using Unity.Collections;
 
 namespace ChoyUtilities {
@@ -121,29 +122,30 @@ namespace ChoyUtilities {
         }
 
         /// <summary>
-        ///     If finds the existing key and replaces the value,
-        ///     otherwise will add the new key-value pair
+        ///     Inserts a key-value pair into the first empty <see cref="Vault{T}"/> slot
+        ///     (both key empty and value is default/null). If no empty slot exists, doubles
+        ///     the underlying array size and inserts the new vault.
         /// </summary>
         public Reserve<T> Insert(FixedString128Bytes key, T value) {
-            foreach (var t in values) {
-                var v = t;
+            for (var i = 0; i < values.Length; i++) {
+                if (!values[i].IsKeyEmpty) continue;
+                if (!EqualityComparer<T>.Default.Equals(values[i].Value, default)) continue;
 
-                if (v.IsKeyEmpty) continue;
-                if (v.Key != key) continue;
-                v.Value = value;
-
+                values[i] = new Vault<T>(key, (ushort)i, value);
                 return this;
             }
 
-            var newReserve = new Vault<T>[values.Length + 1];
-            Array.Copy(values, newReserve, values.Length);
-            newReserve[values.Length] = new Vault<T>(key, (ushort)values.Length, value);
+            var oldLength = values.Length;
+            var newSize = oldLength == 0 ? 1 : oldLength << 1;
+            var newReserve = new Vault<T>[newSize];
+            Array.Copy(values, newReserve, oldLength);
+            newReserve[oldLength] = new Vault<T>(key, (ushort)oldLength, value);
             values = newReserve;
 
             return this;
         }
 
-        public Reserve<T> Insert(string key, T value) {
+        public Reserve<T> Insert(in string key, T value) {
             return Insert((FixedString128Bytes)key, value);
         }
 
