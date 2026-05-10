@@ -162,6 +162,7 @@
     padding-top: 24px;
     padding-bottom: 24px;
     margin-bottom: 0;
+    flex-grow: 1;
 }
 
 .content-config {

@@ -29,7 +29,8 @@ namespace ChoyUtilities {
         [SerializeField] private bool followRotation;
 
         private float _factor;
-        private TransformAccessArray _transforms;
+        private TransformAccessArray _transformAccess;
+        private readonly Transform[] _transforms = new Transform[1];
         private ETransformType _transformType = ETransformType.None;
         
         private RawSet<float3> _startPos;
@@ -41,9 +42,10 @@ namespace ChoyUtilities {
         
         private void OnEnable() {
             if (target is null) return;
+            _transforms[0] = transform;
             offset = transform.position - target.position;
             _factor = smoothFollowSpeed > 0 ? smoothFollowSpeed : 1f;
-            _transforms = new TransformAccessArray(new [] { transform });
+            _transformAccess = new TransformAccessArray(_transforms);
             _transformType = followRotation ? ETransformType.Move | ETransformType.Rotate : ETransformType.Move;
         }
         
@@ -70,7 +72,7 @@ namespace ChoyUtilities {
                 EndScale = _endScale
             };
             
-            _handle = job.Schedule(_transforms);
+            _handle = job.Schedule(_transformAccess);
         }
 
         private void LateUpdate() {
@@ -85,7 +87,7 @@ namespace ChoyUtilities {
         }
 
         private void OnDisable() {
-            if (_transforms.isCreated) _transforms.Dispose();
+            if (_transformAccess.isCreated) _transformAccess.Dispose();
         }
 
     }

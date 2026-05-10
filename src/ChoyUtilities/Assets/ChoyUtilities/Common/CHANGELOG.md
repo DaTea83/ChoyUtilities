@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.7] - 2026-05-10
+
+### Changed 
+* Rawset, default allocation changed from Persistent to Domain
+* SimpleFollower, optimize array allocation
+* SimpleRotator, optimize array allocation
+* Reserve, Insert() if there are no free slot it will double the size of the array instead of just increase by 1
+
 ## [1.1.6] - 2026-05-06
 
 ### Changed

@@ -5,7 +5,7 @@
             <ui:Label text="Label" name="Text" class="text"/>
             <ui:Label text="NAN" name="Status" class="text"/>
         </ui:VisualElement>
-        <ui:VisualElement class="button-align">
+        <ui:VisualElement class="button-align" style="padding-top: 8px;">
             <ui:VisualElement style="flex-grow: 1;"/>
             <ui:VisualElement style="flex-grow: 1;"/>
             <ui:Button text="Run" name="Execute" class="button" style="border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; flex-grow: 1;"/>
