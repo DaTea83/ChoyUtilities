@@ -1,5 +1,5 @@
 .text {
-    -unity-font-definition: resource("Text/JetBrains_Mono/static/JetBrainsMono-Regular");
+    -unity-font-definition: resource("Text/JetBrains_Mono/static/JetBrainsMono-ExtraBold");
     text-overflow: clip;
 }
 

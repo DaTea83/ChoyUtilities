@@ -12,6 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,6 +21,8 @@ namespace ChoyUtilities.Editor {
 
     [UxmlElement]
     public partial class FloatThreeElement : VisualElement {
+        
+        private const float EPSILON = 0.0001f;
 
         private static ToolkitData? _toolkitData;
         private static ToolkitData ToolkitData => _toolkitData ??= new ToolkitData("FloatThreeElement");
@@ -65,9 +68,9 @@ namespace ChoyUtilities.Editor {
             var prev = _previousValue;
             var next = vecEvent.newValue;
 
-            var dx = next.x - prev.x;
-            var dy = next.y - prev.y;
-            var dz = next.z - prev.z;
+            var dx = math.abs(next.x - prev.x) < EPSILON ? 0 : next.x - prev.x;
+            var dy = math.abs(next.y - prev.y) < EPSILON ? 0 : next.y - prev.y;
+            var dz = math.abs(next.z - prev.z) < EPSILON ? 0 : next.z - prev.z;
 
             float delta;
             if      (dx != 0 && dy == 0 && dz == 0) delta = dx;
