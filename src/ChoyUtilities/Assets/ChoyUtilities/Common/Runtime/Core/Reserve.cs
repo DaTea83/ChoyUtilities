@@ -46,6 +46,10 @@ namespace ChoyUtilities {
             values = bank;
         }
 
+        public Reserve(NativeArray<Vault<T>> bank) {
+            values = bank.ToArray();
+        }
+
         public Reserve(Vault<T> bank) {
             values = new[] { bank };
         }
@@ -60,7 +64,8 @@ namespace ChoyUtilities {
 
         public Reserve(T[] values) {
             this.values = new Vault<T>[values.Length];
-            for (var i = 0; i < values.Length; i++) this.values[i] = new Vault<T>(string.Empty, (ushort)i, values[i]);
+            for (var i = 0; i < values.Length; i++) 
+                this.values[i] = new Vault<T>(string.Empty, (ushort)i, values[i]);
         }
 
         public Reserve(ushort id, T value) {

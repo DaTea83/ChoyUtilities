@@ -1,5 +1,18 @@
 # Changelog
 
+//TODO: Complete ReserveAudioManager with mixer functionality
+
+## [1.1.8] - 2026-05-11
+
+### Added
+* Reserve, added NativeArray constructor
+* GenericMixerManager, added Raise()
+* Custom Inspector for Transform Component
+
+### Changed
+* ReserveAudioAttribute, moved outer scope
+* ReserveAudioManager, is now partial class
+
 ## [1.1.7] - 2026-05-10
 
 ### Changed 

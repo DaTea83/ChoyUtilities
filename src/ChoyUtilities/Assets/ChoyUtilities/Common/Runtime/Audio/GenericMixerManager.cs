@@ -44,12 +44,21 @@ namespace ChoyUtilities {
         public async Awaitable RaiseMixer(TEnum id, float value, float duration = 1f) {
             var index = GetMixers(id);
             var success= mixers[index].mixer.GetFloat(mixers[index].name, out var currentValue);
-            if (!success) throw new SingletonException("Mixer not found");
+            if (!success) 
+                throw new SingletonException("Mixer not found");
             var time = 0f;
             while (time < duration) {
                 mixers[index].mixer.SetFloat(mixers[index].name, math.lerp(value, currentValue, mixers[index].motionCurve.Evaluate(time / duration)));
                 time++;
                 await Awaitable.NextFrameAsync(Token);
+            }
+        }
+        
+        public void Raise(TEnum id, float value, float duration = 1f) {
+            foreach (var mixer in mixers) {
+                _ = EqualityComparer<TEnum>.Default.Equals(mixer.id, id) 
+                    ? RaiseMixer(mixer.id, 0, duration) 
+                    : RaiseMixer(id, value, duration);
             }
         }
     }

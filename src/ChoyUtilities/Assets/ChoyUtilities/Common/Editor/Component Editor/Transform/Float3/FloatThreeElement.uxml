@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Transform/Float3/FloatThreeElement.uss?fileID=7433441132597879392&amp;guid=d3e4d1806ac72ad4aa7105739ee632c8&amp;type=3#FloatThreeElement"/>
+    <ui:VisualElement class="root text">
+        <ui:Button text="" name="btn-sync" icon-image="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Transform/Float3/unmimic.png?fileID=2800000&amp;guid=c1f0d00c0a0e594409363f562f2cfe14&amp;type=3#unmimic" class="button"/>
+        <ui:Vector3Field label="Vec3 Field" name="field" class="field"/>
+        <ui:Button text="" name="btn-reset" icon-image="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Transform/Float3/refresh_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png?fileID=2800000&amp;guid=b2f44b272af227941b3ea0d913ed2fcb&amp;type=3#refresh_256dp_E3E3E3_FILL0_wght400_GRAD0_opsz48" class="button"/>
+    </ui:VisualElement>
+</ui:UXML>
