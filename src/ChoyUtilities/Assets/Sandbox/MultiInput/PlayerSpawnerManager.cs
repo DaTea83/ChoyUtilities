@@ -30,7 +30,7 @@ namespace ChoyUtilities {
         private readonly Dictionary<InputDevice, MultiInputSystem> _deviceRegistry = new();
         private readonly Dictionary<MultiInputSystem, IControlBinder> _playerRegistry = new();
 
-        private void OnEnable() {
+        protected override void Start() {
             InputSystem.onDeviceChange += OnDeviceChange;
             SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -41,10 +41,14 @@ namespace ChoyUtilities {
             CheckForExistingDevices();
         }
 
-        protected override void OnDisable() {
-            base.OnDisable();
+        protected override void OnDestroy() {
             InputSystem.onDeviceChange -= OnDeviceChange;
             SceneManager.sceneLoaded -= OnSceneLoaded;
+            base.OnDestroy();
+        }
+
+        protected override void OnDisable() {
+            base.OnDisable();
 
             PlayerSpawnController.Instance.UnsubOnAllowNewPlayers(OnAllowNewJoinChange);
             PlayerSpawnController.Instance.UnsubOnAbleControls(AllInputControl);
