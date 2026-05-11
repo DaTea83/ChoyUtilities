@@ -22,7 +22,7 @@ namespace ChoyUtilities {
     public sealed class ReserveAudioAttribute : ScriptableObject {
 
         public Reserve<AudioResource> pools;
-        public MixerSerialize mixers;
+        public MixerSerialize serialize;
 
         [Serializable]
         public struct MixerReserve {
@@ -33,7 +33,7 @@ namespace ChoyUtilities {
         
         [Serializable]
         public struct MixerSerialize {
-            public MixerReserve mixers;
+            public MixerReserve reserve;
             [Min(0.01f)]public float motionTime;
             public EMotion motionCurve;
         }

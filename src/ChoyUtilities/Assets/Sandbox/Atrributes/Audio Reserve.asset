@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: ChoyUtilities::ChoyUtilities.ReserveAudioAttribute
   pools:
     values: []
+  serialize:
+    reserve:
+      mixers:
+        values: []
+      mixerName: 
+    motionTime: 0
+    motionCurve: 0

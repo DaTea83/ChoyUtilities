@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/ChoyUtilities/Common/Editor/Component%20Editor/Transform/TransformInspector.uss?fileID=7433441132597879392&amp;guid=25298ce97b123a14088b7c696517bbbb&amp;type=3#TransformInspector"/>
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ChoyUtilities.Editor.FloatThreeElement name="position" label="Position"/>
+        <ChoyUtilities.Editor.FloatThreeElement label="Rotation" name="rotation"/>
+        <ChoyUtilities.Editor.FloatThreeElement name="scale" label="Scale"/>
+        <ui:VisualElement style="flex-grow: 0; height: 20px;"/>
+    </ui:VisualElement>
+</ui:UXML>

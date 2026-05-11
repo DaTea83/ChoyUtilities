@@ -1,0 +1,41 @@
+.text {
+    -unity-font-definition: resource("Text/JetBrains_Mono/static/JetBrainsMono-Regular");
+    text-overflow: clip;
+}
+
+.root {
+    flex-grow: 0;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding-top: 2px;
+    margin-top: 4px;
+    min-width: 400px;
+}
+
+.field {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-right: 4px;
+    min-width: 300px;
+    margin-left: 0;
+    justify-content: space-between;
+    align-content: stretch;
+    -unity-text-generator: standard;
+    white-space: pre-wrap;
+    flex-direction: row;
+}
+
+.button {
+    width: 10%;
+    height: 20px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    min-width: 20px;
+}

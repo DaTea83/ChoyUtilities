@@ -5,6 +5,7 @@
 ### Added
 * Reserve, added NativeArray constructor
 * GenericMixerManager, added Raise()
+* Custom Inspector for Transform Component
 
 ### Changed
 * ReserveAudioAttribute, moved outer scope
